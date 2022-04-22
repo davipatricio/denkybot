@@ -1,3 +1,4 @@
+import type { Awaitable } from 'discord.js';
 import type { DenkyClient } from '../types/Client';
 
 class Event {
@@ -7,8 +8,7 @@ class Event {
     this.eventName = '';
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  run(client: DenkyClient, ...rest: any[]): Promise<any> | any {
+  run(client: DenkyClient, ...rest: any[]): Awaitable<any> {
     return { client, rest };
   }
 }
