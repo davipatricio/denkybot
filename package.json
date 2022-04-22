@@ -1,0 +1,43 @@
+{
+  "name": "denky-rewrite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./build/sharding/shard.js",
+  "private": true,
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davipatricio/denky-rewrite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davipatricio/denky-rewrite/issues"
+  },
+  "scripts": {
+    "build": "npx tsc --project tsconfig.json",
+    "start": "cd ./build && node sharding/shard.js",
+    "lint": "npx eslint src",
+    "lint:fix": "npm run lint:prettier && tsc eslint src --fix",
+    "lint:prettier": "npx tsc prettier -w src",
+    "types:check": "npx tsc --noEmit --incremental false"
+  },
+  "keywords": [],
+  "author": "Davi Patricio",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^17.0.25",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "discord.js": "^14.0.0-dev.1650586180-61a44c5",
+    "dotenv": "^16.0.0",
+    "tslib": "^2.4.0"
+  }
+}
