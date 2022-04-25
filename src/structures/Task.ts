@@ -5,9 +5,9 @@ class Task {
   name: string;
   /** Run the task every X miliseconds. */
   delay: number;
-  constructor(options?: { name: string; delay: number }) {
-    this.name = options?.name ?? '';
-    this.delay = options?.delay ?? 0;
+  constructor() {
+    this.name = '';
+    this.delay = 0;
   }
 
   run(client: DenkyClient, interval: NodeJS.Timeout): Promise<any> | any {
