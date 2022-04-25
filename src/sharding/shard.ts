@@ -3,7 +3,7 @@ import env from 'dotenv';
 
 env.config({ path: '../.env' });
 
-const sharder = new ShardingManager('../bot/index.js', {
+const sharder = new ShardingManager('./bot/index.js', {
   totalShards: Number(process.env.SHARD_COUNT ?? 4),
   mode: 'process',
   token: process.env.BOT_TOKEN,
