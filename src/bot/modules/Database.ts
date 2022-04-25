@@ -1,5 +1,5 @@
 import type { DenkyClient } from '../../types/Client';
-import { DatabaseManager } from '../utils/DatabaseManager';
+import { DatabaseManager } from '../managers/DatabaseManager';
 
 export default class Database {
   client: DenkyClient;

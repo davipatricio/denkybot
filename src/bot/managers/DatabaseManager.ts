@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
@@ -46,16 +45,16 @@ class DatabaseManager {
   // Geral
   set(nome: string, valor: any) {
     this.conteudo[nome] = valor;
-    return this._escrever();
+    return this.#escrever();
   }
 
   delete(nome: string) {
     delete this.conteudo[nome];
-    return this._escrever();
+    return this.#escrever();
   }
 
   get(nome: string) {
-    return this._obter(nome);
+    return this.#obter(nome);
   }
 
   // Array
@@ -64,7 +63,7 @@ class DatabaseManager {
       throw new Error('O valor já definido não é uma array ou não foi definido.');
     }
     this.conteudo[nome].push(valor);
-    this._escrever();
+    this.#escrever();
   }
 
   pull(nome: string, valor: any) {
@@ -72,14 +71,14 @@ class DatabaseManager {
       throw new Error('O valor já definido não é uma array ou não foi definido.');
     }
     this.conteudo[nome] = this.conteudo[nome].filter((i: any) => i !== valor);
-    this._escrever();
+    this.#escrever();
   }
 
   includes(nome: string, valor: any) {
     if (!Array.isArray(this.conteudo[nome])) {
       throw new Error('O valor já definido não é uma array ou não foi definido.');
     }
-    return this._obter(nome).includes(valor);
+    return this.#obter(nome).includes(valor);
   }
 
   // Outros
@@ -92,14 +91,14 @@ class DatabaseManager {
 
   deleteAll() {
     this.conteudo = {};
-    this._escrever();
+    this.#escrever();
   }
 
-  _escrever() {
+  #escrever() {
     return writeFile(`./databases/${this.local}.json`, JSON.stringify(this.conteudo));
   }
 
-  _obter(nome: string) {
+  #obter(nome: string) {
     return this.conteudo[nome];
   }
 }
