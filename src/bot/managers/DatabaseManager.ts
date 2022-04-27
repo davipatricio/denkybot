@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
-class DatabaseManager {
+export class DatabaseManager {
   conteudo!: { [key: string]: any };
   local: string;
   constructor(local: string) {
@@ -102,5 +102,3 @@ class DatabaseManager {
     return this.conteudo[nome];
   }
 }
-
-export { DatabaseManager };
