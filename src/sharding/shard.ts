@@ -1,7 +1,7 @@
 import { ShardingManager } from 'discord.js';
-import env from 'dotenv';
+import { config } from 'dotenv';
 
-env.config({ path: '../.env' });
+config({ path: '../.env' });
 
 const sharder = new ShardingManager('./bot/index.js', {
   totalShards: Number(process.env.SHARD_COUNT ?? 1),

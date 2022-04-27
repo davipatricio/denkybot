@@ -9,6 +9,6 @@ export default class ReadyEvent extends Event {
   }
 
   override run(client: DenkyClient): Awaitable<any> {
-    console.log(`Bot ${client.user?.tag} online!`);
+    console.log(`[DENKY] Shard ${client.shard?.ids[0]} connected.`);
   }
 }

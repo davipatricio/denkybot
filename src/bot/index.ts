@@ -1,9 +1,9 @@
 import { Client, GatewayIntentBits } from 'discord.js';
-import env from 'dotenv';
+import { config } from 'dotenv';
 import type { DenkyClient } from '../types/Client';
 import { Initializer } from './utils/Initializer';
 
-env.config({ path: '../.env' });
+config({ path: '../.env' });
 
 // @ts-ignore
 const client: DenkyClient = new Client({
