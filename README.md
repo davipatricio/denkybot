@@ -7,6 +7,7 @@
 > Denky is a brazilian [Discord](https://discord.com) bot, build with [Node.js](https://nodejs.org), [TypeScript](https://www.typescriptlang.org/) and [discord.js](https://discord.js.org).
 
 ## ⚙️ How to
+
 1. Create a Discord application. [Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot).
 2. Install Node.js v16.9.0 or newer.
 3. Fork or clone this repository.
@@ -16,6 +17,7 @@
 7. Start your bot using `npm start`
 
 ## 🌎 Locales
+
 Currently available locales are:
 
 - English (en)
