@@ -1,5 +1,6 @@
 import type { Client, Collection } from 'discord.js';
 import type Database from '../bot/modules/Database';
+import type Languages from '../bot/modules/Languages';
 import type { Command } from '../structures/Command';
 
 export interface DenkyClient extends Client<boolean> {
@@ -7,4 +8,6 @@ export interface DenkyClient extends Client<boolean> {
   commands: Collection<string, Command>;
   /** Bot databases */
   databases: Database;
+  /** Bot languages */
+  languages: Languages;
 }
