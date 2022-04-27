@@ -11,7 +11,9 @@
     ],
     "ignorePatterns": [
         "node_modules/",
-        "build/"
+        "build/",
+        ".git/",
+        ".vscode/"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {

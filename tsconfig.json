@@ -43,7 +43,9 @@
         "build",
         "node_modules",
         "package-lock.json",
-        "package.json"
+        "package.json",
+        ".git/",
+        ".vscode/"
     ],
     "include": [
         "src/**/*.ts"
