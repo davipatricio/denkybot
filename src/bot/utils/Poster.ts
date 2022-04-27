@@ -10,7 +10,7 @@ export class Poster {
     if (!global.IS_MAIN_PROCESS) return;
 
     const serverCount = (await this.client.shard?.fetchClientValues('guilds.cache.size')) as number[];
-    const totalGuilds = serverCount.reduce((a, b) => a + b, 0);
+    const totalGuilds = Number(serverCount.reduce((a, b) => a + b, 0));
 
     await this.#postStatsToTopGG({ totalGuilds }).catch(console.log);
     await this.#postStatsToDiscords({ totalGuilds }).catch(console.log);
@@ -28,14 +28,15 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://top.gg/api/bots/${this.client.user?.id}/stats`, {
+    const request = await fetch(`https://top.gg/api/bots/stats`, {
       method: 'POST',
       headers: {
         Authorization,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         server_count: totalGuilds,
-        shard_count: process.env.SHARD_COUNT ?? 1,
+        shard_count: Number(process.env.SHARD_COUNT ?? 1),
       }),
     });
 
@@ -55,10 +56,11 @@ export class Poster {
       method: 'POST',
       headers: {
         Authorization,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         guildCount: totalGuilds,
-        shardCount: process.env.SHARD_COUNT ?? 1,
+        shardCount: Number(process.env.SHARD_COUNT ?? 1),
       }),
     });
 
@@ -74,10 +76,11 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://discords.com/api/bots/${this.client.user?.id}/stats`, {
+    const request = await fetch(`https://discords.com/bots/api/bot/${this.client.user?.id}`, {
       method: 'POST',
       headers: {
         Authorization,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         server_count: totalGuilds,
@@ -100,6 +103,7 @@ export class Poster {
       method: 'POST',
       headers: {
         Authorization,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         servers: totalGuilds,
@@ -118,10 +122,11 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://discordbotlist.com/api/v1/${this.client.user?.id}/stats`, {
+    const request = await fetch(`https://discordbotlist.com/api/v1/bots/${this.client.user?.id}/stats`, {
       method: 'POST',
       headers: {
         Authorization,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         guilds: totalGuilds,
@@ -143,12 +148,12 @@ export class Poster {
     const request = await fetch(`https://api.bladelist.gg/bots/${this.client.user?.id}`, {
       method: 'POST',
       headers: {
-        Authorization,
+        Authorization: `Token ${Authorization}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         server_count: totalGuilds,
-        shard_count: process.env.SHARD_COUNT ?? 1,
+        shard_count: Number(process.env.SHARD_COUNT ?? 1),
       }),
     });
 
