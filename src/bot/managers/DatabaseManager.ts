@@ -62,7 +62,7 @@ export class DatabaseManager {
     if (!Array.isArray(this.conteudo[nome])) {
       throw new Error('O valor já definido não é uma array ou não foi definido.');
     }
-    this.conteudo[nome].push(valor);
+    (this.conteudo[nome] as any[]).push(valor);
     this.#escrever();
   }
 
@@ -70,7 +70,7 @@ export class DatabaseManager {
     if (!Array.isArray(this.conteudo[nome])) {
       throw new Error('O valor já definido não é uma array ou não foi definido.');
     }
-    this.conteudo[nome] = this.conteudo[nome].filter((i: any) => i !== valor);
+    this.conteudo[nome] = (this.conteudo[nome] as any[]).filter((value: any) => value !== valor);
     this.#escrever();
   }
 
