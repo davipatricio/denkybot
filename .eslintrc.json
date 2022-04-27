@@ -1,64 +1,54 @@
 {
-    "env": {
-        "es2021": true,
-        "node": true
-    },
-    "extends": [
-        "airbnb-base",
-        "plugin:prettier/recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["airbnb-base", "plugin:prettier/recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
+  "ignorePatterns": ["node_modules/", "build/"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/require-await": "error",
+    "@typescript-eslint/no-use-before-define": "error",
+    "class-methods-use-this": "off",
+    "default-case": "off",
+    "default-param-last": "off",
+    "import/prefer-default-export": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "lines-between-class-members": [
+      "error",
+      "always",
+      {
+        "exceptAfterSingleLine": true
+      }
     ],
-    "ignorePatterns": [
-        "node_modules/",
-        "build/"
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": "./tsconfig.json"
-    },
-    "plugins": [
-        "@typescript-eslint"
+    "no-bitwise": "off",
+    "no-restricted-syntax": "off",
+    "no-restricted-globals": "off",
+    "no-continue": "off",
+    "no-console": "off",
+    "no-use-before-define": "off",
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
     ],
-    "rules": {
-        "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/no-unused-vars": "error",
-        "@typescript-eslint/ban-ts-comment": "off",
-        "@typescript-eslint/require-await": "error",
-        "@typescript-eslint/no-use-before-define": "error",
-        "class-methods-use-this": "off",
-        "default-case": "off",
-        "default-param-last": "off",
-        "import/prefer-default-export": "off",
-        "import/extensions": "off",
-        "import/no-unresolved": "off",
-        "lines-between-class-members": [
-            "error",
-            "always",
-            {
-                "exceptAfterSingleLine": true
-            }
-        ],
-        "no-param-reassign": [
-            "error",
-            {
-                "props": false
-            }
-        ],
-        "no-bitwise": "off",
-        "no-restricted-syntax": "off",
-        "no-restricted-globals": "off",
-        "no-continue": "off",
-        "no-console": "off",
-        "no-use-before-define": "off",
-        "no-plusplus": [
-            "error",
-            {
-                "allowForLoopAfterthoughts": true
-            }
-        ],
-        "require-await": "error"
-    }
+    "require-await": "error"
+  }
 }
