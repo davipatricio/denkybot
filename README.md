@@ -1,7 +1,6 @@
 [![Discord Bots](https://top.gg/api/widget/704517722100465746.svg)](https://top.gg/bot/704517722100465746)
 
-[![DeepSource](https://deepsource.io/gh/davipatricio/denky-rewrite.svg/?label=active+issues&show_trend=true&token=PIa9TXIWBBLXrciRt_l3H_8X)](https://deepsource.io/gh/davipatricio/denky-rewrite/?ref=repository-badge)
-[![CodeFactor](https://www.codefactor.io/repository/github/davipatricio/denky-rewrite/badge)](https://www.codefactor.io/repository/github/davipatricio/denky-rewrite)
+[![DeepSource](https://deepsource.io/gh/davipatricio/denky-typescript-new.svg/?label=active+issues&show_trend=true&token=PIa9TXIWBBLXrciRt_l3H_8X)](https://deepsource.io/gh/davipatricio/denky-typescript-new/?ref=repository-badge)
 
 # 🤖 Denky Bot
 
