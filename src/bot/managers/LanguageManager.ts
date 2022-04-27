@@ -2,15 +2,20 @@
 import { readdir } from 'node:fs/promises';
 import type { DenkyClient } from '../../types/Client';
 
-type LocaleCategories = 'command' | 'descriptions' | 'categories';
+type LocaleCategories = 'command' | 'commandNames' | 'commandDescriptions' | 'commandCategories';
 type SupportedLocales = 'en' | 'pt_BR';
 
-type CommandKeys = keyof typeof import('../../locales/command/pt_BR/index').default;
+type CommandLocaleKeys = keyof typeof import('../../locales/command/pt_BR/index').default;
+type CommandNamesKeys = keyof typeof import('../../locales/commandNames/pt_BR/index').default;
+type CommandDescriptionsKeys = keyof typeof import('../../locales/commandDescriptions/pt_BR/index').default;
+type CommandCategoriesKeys = keyof typeof import('../../locales/commandCategories/pt_BR/index').default;
+
+type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys;
 
 export class LanguageManager {
   /** The client that instantiated this manager */
   client: DenkyClient;
-  cache: Record<LocaleCategories, Record<SupportedLocales, Record<CommandKeys, string | ((...args: unknown[]) => string)>>>;
+  cache: Record<LocaleCategories, Record<SupportedLocales, Record<AllLocaleKeys, string | ((...args: unknown[]) => string)>>>;
   constructor(client: DenkyClient) {
     this.client = client;
   }
@@ -27,11 +32,13 @@ export class LanguageManager {
     }
   }
 
-  get(lang: SupportedLocales, path: `command/${CommandKeys}`, ...args: unknown[]): string;
-  get(lang: SupportedLocales, path: `descriptions/${CommandKeys}`, ...args: unknown[]): string;
+  get(lang: SupportedLocales, path: `command/${CommandLocaleKeys}`, ...args: unknown[]): string;
+  get(lang: SupportedLocales, path: `descriptions/${CommandDescriptionsKeys}`, ...args: unknown[]): string;
+  get(lang: SupportedLocales, path: `categories/${CommandCategoriesKeys}`, ...args: unknown[]): string;
+  get(lang: SupportedLocales, path: `names/${CommandNamesKeys}`, ...args: unknown[]): string;
   get(lang: SupportedLocales, path: string, ...args: unknown[]) {
     const [category, key] = path.split('/');
-    const locale = this.cache[category as LocaleCategories][lang][key as CommandKeys];
+    const locale = this.cache[category as LocaleCategories][lang][key as AllLocaleKeys];
     if (!locale) return `!!{${path}}!!`;
 
     if (typeof locale === 'string') return locale;

@@ -1,10 +1,10 @@
 import { Command, CommandRunOptions } from '../../../structures/Command';
 
-export default class TestCommand extends Command {
+export default class PingCommand extends Command {
   constructor() {
     super();
-    this.rawName = 'TEST';
-    this.rawCategory = 'Test';
+    this.rawName = 'PING';
+    this.rawCategory = 'UTILS';
     this.config = {
       autoDefer: true,
       ephemeral: false,
@@ -17,6 +17,6 @@ export default class TestCommand extends Command {
   }
 
   override run({ client, interaction }: CommandRunOptions) {
-    return { client, interaction };
+    return interaction.editReply(`${client.ws.ping}ms`);
   }
 }
