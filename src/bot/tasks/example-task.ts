@@ -6,10 +6,12 @@ export default class ExampleTask extends Task {
     super();
     this.name = 'example-task';
     this.delay = 1500;
+    this.interval = null;
   }
 
-  override run(_client: DenkyClient, interval: NodeJS.Timeout): Promise<any> | any {
+  override run(client: DenkyClient): Promise<any> | any {
     console.log("Running task 'Example task' now!");
-    clearInterval(interval);
+    if (this.interval) clearInterval(this.interval);
+    return client;
   }
 }

@@ -62,13 +62,15 @@ class Initializer {
   }
 
   async loadTasks(client: DenkyClient) {
+    client.tasks = new Collection();
     const tasks = await readdir('./bot/tasks/');
     for (const task of tasks) {
       if (!task.endsWith('.js')) continue;
 
       const { default: TaskClass }: { default: new () => Task } = await import(`../tasks/${task}`);
       const createdTask = new TaskClass();
-      const interval = setInterval(() => createdTask.run(client, interval), createdTask.delay);
+      createdTask.interval = setInterval(() => createdTask.run(client), createdTask.delay);
+      client.tasks.set(createdTask.name, createdTask);
       if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded task: ${task}`);
     }
   }
