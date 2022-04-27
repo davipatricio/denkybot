@@ -20,7 +20,6 @@ export default class ExampleTask extends Task {
         apiKeys: {
           discordbotsgg: process.env.BOTSGG_STATS_KEY as string,
           bladebotlist: process.env.BLADELIST_STATS_KEY as string,
-          discordboats: process.env.DISCORDBOATS_STATS_KEY as string,
           discordbotlist: process.env.DISCORDBOTLIST_STATS_KEY as string,
           discords: process.env.DISCORDS_STATS_KEY as string,
           disforge: process.env.DISFORGE_STATS_KEY as string,
