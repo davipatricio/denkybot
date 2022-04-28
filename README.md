@@ -1,6 +1,6 @@
-[![Discord Bots](https://top.gg/api/widget/704517722100465746.svg)](https://top.gg/bot/704517722100465746)
+[![DeepSource](https://deepsource.io/gh/denkylabs/denkybot.svg/?label=active+issues&show_trend=true&token=UQOnl2qHFX3H7dzvR077PMnv)](https://deepsource.io/gh/denkylabs/denkybot/?ref=repository-badge)
 
-[![DeepSource](https://deepsource.io/gh/davipatricio/denky-typescript-new.svg/?label=active+issues&show_trend=true&token=PIa9TXIWBBLXrciRt_l3H_8X)](https://deepsource.io/gh/davipatricio/denky-typescript-new/?ref=repository-badge)
+[![Discord Bots](https://top.gg/api/widget/704517722100465746.svg)](https://top.gg/bot/704517722100465746)
 
 # 🤖 Denky Bot
 
