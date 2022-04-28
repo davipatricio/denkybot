@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits } from 'discord.js';
+import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { config } from 'dotenv';
 import type { DenkyClient } from '../types/Client';
 import { Initializer } from './utils/Initializer';
@@ -13,6 +13,7 @@ const client: DenkyClient = new Client({
     parse: ['users'],
     repliedUser: true,
   },
+  partials: [Partials.Channel, Partials.User, Partials.GuildMember, Partials.Message, Partials.Reaction],
 });
 
 // We should set this, so tasks won't duplicate (giveaways, reminders, etc)
