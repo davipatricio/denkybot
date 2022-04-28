@@ -16,7 +16,12 @@ export default class PingCommand extends Command {
     };
   }
 
-  override run({ client, interaction }: CommandRunOptions) {
-    return interaction.editReply(`${client.ws.ping}ms`);
+  override async run({ client, t, interaction }: CommandRunOptions) {
+    const start = Date.now();
+    await interaction.editReply(`🤔 ${t('command/ping:calculating')}`);
+    const apiPing = Date.now() - start;
+
+    const dbPing = await client.databases.config.ping();
+    interaction.editReply(`${t('command/ping:result', Math.round(client.ws.ping), apiPing, dbPing)}`);
   }
 }
