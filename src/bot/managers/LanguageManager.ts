@@ -11,6 +11,7 @@ export type CommandDescriptionsKeys = keyof typeof import('../../locales/command
 export type CommandCategoriesKeys = keyof typeof import('../../locales/commandCategories/pt_BR/index').default;
 
 export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys;
+export type AllLocalePaths = `command:${CommandLocaleKeys}` | `descriptions:${CommandDescriptionsKeys}` | `categories:${CommandCategoriesKeys}` | `names:${CommandNamesKeys}`;
 
 export class LanguageManager {
   /** The client that instantiated this manager */
@@ -32,12 +33,12 @@ export class LanguageManager {
     }
   }
 
-  get(lang: SupportedLocales, path: `command/${CommandLocaleKeys}`, ...args: unknown[]): string;
-  get(lang: SupportedLocales, path: `descriptions/${CommandDescriptionsKeys}`, ...args: unknown[]): string;
-  get(lang: SupportedLocales, path: `categories/${CommandCategoriesKeys}`, ...args: unknown[]): string;
-  get(lang: SupportedLocales, path: `names/${CommandNamesKeys}`, ...args: unknown[]): string;
-  get(lang: SupportedLocales, path: string, ...args: unknown[]) {
-    const [category, key] = path.split('/');
+  get(lang: SupportedLocales, path: `command:${CommandLocaleKeys}`, ...args: unknown[]): string;
+  get(lang: SupportedLocales, path: `descriptions:${CommandDescriptionsKeys}`, ...args: unknown[]): string;
+  get(lang: SupportedLocales, path: `categories:${CommandCategoriesKeys}`, ...args: unknown[]): string;
+  get(lang: SupportedLocales, path: `names:${CommandNamesKeys}`, ...args: unknown[]): string;
+  get(lang: SupportedLocales, path: AllLocalePaths, ...args: unknown[]) {
+    const [category, key] = path.split(':');
     const locale = this.cache[category as LocaleCategories][lang][key as AllLocaleKeys];
     if (!locale) return `!!{${path}}!!`;
 
