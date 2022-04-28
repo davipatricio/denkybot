@@ -1,3 +1,4 @@
+import type { Awaitable } from 'discord.js';
 import type { DenkyClient } from '../types/Client';
 
 class Task {
@@ -13,7 +14,7 @@ class Task {
     this.interval = null;
   }
 
-  run(client: DenkyClient): Promise<any> | any {
+  run(client: DenkyClient): Awaitable<any> {
     return { client };
   }
 }
