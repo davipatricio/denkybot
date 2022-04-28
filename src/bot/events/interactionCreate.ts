@@ -2,7 +2,7 @@ import { CommandInteraction, GuildMember, Interaction, Locale } from 'discord.js
 import type { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
-import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandLocaleKeys, CommandNamesKeys, SupportedLocales } from '../managers/LanguageManager';
+import type { AllLocalePaths, CommandCategoriesKeys, CommandDescriptionsKeys, CommandLocaleKeys, CommandNamesKeys, SupportedLocales } from '../managers/LanguageManager';
 
 export default class InteractionCreateEvent extends Event {
   constructor() {
@@ -30,7 +30,7 @@ export default class InteractionCreateEvent extends Event {
         break;
     }
 
-    const t = (path: `command:${CommandLocaleKeys}` & `descriptions:${CommandDescriptionsKeys}` & `categories:${CommandCategoriesKeys}` & `names:${CommandNamesKeys}`, ...args: unknown[]) => {
+    const t = (path: AllLocalePaths, ...args: unknown[]) => {
       return client.languages.manager.get(userLocale, path, ...args);
     };
 

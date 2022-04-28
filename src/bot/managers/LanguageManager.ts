@@ -33,10 +33,6 @@ export class LanguageManager {
     }
   }
 
-  get(lang: SupportedLocales, path: `command:${CommandLocaleKeys}`, ...args: unknown[]): string;
-  get(lang: SupportedLocales, path: `descriptions:${CommandDescriptionsKeys}`, ...args: unknown[]): string;
-  get(lang: SupportedLocales, path: `categories:${CommandCategoriesKeys}`, ...args: unknown[]): string;
-  get(lang: SupportedLocales, path: `names:${CommandNamesKeys}`, ...args: unknown[]): string;
   get(lang: SupportedLocales, path: AllLocalePaths, ...args: unknown[]) {
     const [category, key] = path.split(':');
     const locale = this.cache[category as LocaleCategories][lang][key as AllLocaleKeys];
