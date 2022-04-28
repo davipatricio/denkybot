@@ -12,5 +12,6 @@ export default class Languages {
 
   loadLocales() {
     this.manager = new LanguageManager(this.client);
+    this.manager.loadLocales();
   }
 }

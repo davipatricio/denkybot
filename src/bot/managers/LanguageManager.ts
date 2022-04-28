@@ -19,6 +19,8 @@ export class LanguageManager {
   cache: Record<LocaleCategories, Record<SupportedLocales, Record<AllLocaleKeys, string | ((...args: unknown[]) => string)>>>;
   constructor(client: DenkyClient) {
     this.client = client;
+    // @ts-ignore
+    this.cache = {};
   }
 
   async loadLocales() {
@@ -27,7 +29,12 @@ export class LanguageManager {
       const categoryLocales = (await readdir(`./locales/${category}`)) as SupportedLocales[];
       for (const locale of categoryLocales) {
         const { default: localeData } = await import(`../../locales/${category}/${locale}`);
+        // @ts-ignore
+        if (!this.cache[category]) this.cache[category] = {};
+        // @ts-ignore
+        if (!this.cache[category][locale]) this.cache[category][locale] = {};
         this.cache[category][locale] = localeData;
+
         if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded ${category}/${locale} locale successfully.`);
       }
     }
