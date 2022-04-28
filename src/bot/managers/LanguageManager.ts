@@ -2,15 +2,15 @@
 import { readdir } from 'node:fs/promises';
 import type { DenkyClient } from '../../types/Client';
 
-type LocaleCategories = 'command' | 'commandNames' | 'commandDescriptions' | 'commandCategories';
-type SupportedLocales = 'en' | 'pt_BR';
+export type LocaleCategories = 'command' | 'commandNames' | 'commandDescriptions' | 'commandCategories';
+export type SupportedLocales = 'en_US' | 'pt_BR';
 
-type CommandLocaleKeys = keyof typeof import('../../locales/command/pt_BR/index').default;
-type CommandNamesKeys = keyof typeof import('../../locales/commandNames/pt_BR/index').default;
-type CommandDescriptionsKeys = keyof typeof import('../../locales/commandDescriptions/pt_BR/index').default;
-type CommandCategoriesKeys = keyof typeof import('../../locales/commandCategories/pt_BR/index').default;
+export type CommandLocaleKeys = keyof typeof import('../../locales/command/pt_BR/index').default;
+export type CommandNamesKeys = keyof typeof import('../../locales/commandNames/pt_BR/index').default;
+export type CommandDescriptionsKeys = keyof typeof import('../../locales/commandDescriptions/pt_BR/index').default;
+export type CommandCategoriesKeys = keyof typeof import('../../locales/commandCategories/pt_BR/index').default;
 
-type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys;
+export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys;
 
 export class LanguageManager {
   /** The client that instantiated this manager */
