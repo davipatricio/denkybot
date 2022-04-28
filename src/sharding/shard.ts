@@ -1,10 +1,11 @@
 import { ShardingManager } from 'discord.js';
 import { config } from 'dotenv';
+import Configuration from '../../config.json';
 
 config({ path: '../.env' });
 
 const sharder = new ShardingManager('./bot/index.js', {
-  totalShards: Number(process.env.SHARD_COUNT ?? 1),
+  totalShards: Configuration.shardCount,
   mode: 'process',
   token: process.env.BOT_TOKEN,
   respawn: true,

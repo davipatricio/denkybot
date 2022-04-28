@@ -1,0 +1,12 @@
+{
+    "defaultLanguage": "pt_BR",
+    "debug": true,
+    "shouldPublishBotStats": true,
+    "shouldLogCommands": true,
+    "shardCount": 1,
+    "links": {
+        "invite": "https://discord.com/oauth2/authorize?client_id=12345678912345678&scope=bot+applications.commands&permissions=1346759886",
+        "vote": "https://top.gg/bot/12345678912345678/vote",
+        "url": "https://your.website"
+    }
+}

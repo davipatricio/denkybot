@@ -26,7 +26,7 @@ export default class InteractionCreateEvent extends Event {
         userLocale = 'pt_BR';
         break;
       default:
-        userLocale = 'en_US';
+        userLocale = client.config.defaultLanguage as SupportedLocales;
         break;
     }
 

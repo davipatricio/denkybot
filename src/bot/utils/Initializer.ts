@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import { Collection } from 'discord.js';
-import { readdir } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import type { Command } from '../../structures/Command';
 import type { Event } from '../../structures/Event';
 import type { Task } from '../../structures/Task';
@@ -13,6 +13,7 @@ class Initializer {
   }
 
   async init(client: DenkyClient) {
+    await this.loadBotConfiguration(client);
     await this.loadModules(client);
     await this.loadEvents(client);
     await this.loadTasks(client);
@@ -76,6 +77,12 @@ class Initializer {
       client.tasks.set(createdTask.name, createdTask);
       if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[TASKS]\x1b[0m', `Loaded task: ${taskWithoutExtension}`);
     }
+  }
+
+  async loadBotConfiguration(client: DenkyClient) {
+    const configData = await readFile('../config.json');
+    client.config = JSON.parse(configData.toString());
+    if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[DENKY]\x1b[0m', 'Loaded bot configuration file.');
   }
 }
 
