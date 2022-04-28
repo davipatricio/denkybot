@@ -1,8 +1,11 @@
-import type { Awaitable, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
+import type { Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
 import type { AllLocalePaths } from '../bot/managers/LanguageManager';
 import type { DenkyClient } from '../types/Client';
 
 class Command {
+  /** The client that instantied this command */
+  client: DenkyClient;
+
   /** The raw command name. A user-friedly name will be shown through i18n. */
   rawName: string;
   /** The raw category name, uppercase. A user-friedly name will be shown through i18n. */
@@ -25,7 +28,12 @@ class Command {
     showInHelp: boolean;
   };
 
-  constructor() {
+  /** Command options to be posted to Discord */
+  options: ChatInputApplicationCommandData;
+
+  constructor(client: DenkyClient) {
+    this.client = client;
+
     this.rawName = '';
     this.rawCategory = '';
     this.permissions = {
@@ -39,8 +47,12 @@ class Command {
     };
   }
 
-  run({ client, t, interaction }: CommandRunOptions): Awaitable<any> {
-    return { client, t, interaction };
+  run({ t, interaction }: CommandRunOptions): Awaitable<any> {
+    return { t, interaction };
+  }
+
+  addRawOptions(options: ChatInputApplicationCommandData) {
+    this.options = options;
   }
 }
 

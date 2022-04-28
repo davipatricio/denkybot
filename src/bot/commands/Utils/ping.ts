@@ -1,8 +1,9 @@
 import { Command, CommandRunOptions } from '../../../structures/Command';
+import type { DenkyClient } from '../../../types/Client';
 
 export default class PingCommand extends Command {
-  constructor() {
-    super();
+  constructor(client: DenkyClient) {
+    super(client);
     this.rawName = 'PING';
     this.rawCategory = 'UTILS';
     this.config = {
@@ -10,18 +11,23 @@ export default class PingCommand extends Command {
       ephemeral: false,
       showInHelp: true,
     };
-    this.permissions = {
-      bot: [],
-      user: [],
-    };
+    this.permissions = { bot: [], user: [] };
+
+    this.addRawOptions({
+      name: 'ping',
+      description: client.languages.manager.get('pt_BR', 'commandDescriptions:PING'),
+      descriptionLocalizations: {
+        'en-US': client.languages.manager.get('en_US', 'commandDescriptions:PING'),
+      },
+    });
   }
 
-  override async run({ client, t, interaction }: CommandRunOptions) {
+  override async run({ t, interaction }: CommandRunOptions) {
     const start = Date.now();
     await interaction.editReply(`🤔 ${t('command:ping/calculating')}`);
     const apiPing = Date.now() - start;
 
-    const dbPing = await client.databases.config.ping();
-    interaction.editReply(`${t('command:ping/result', interaction.user, Math.round(client.ws.ping), apiPing, dbPing)}`);
+    const dbPing = await this.client.databases.config.ping();
+    interaction.editReply(`${t('command:ping/result', interaction.user, Math.round(this.client.ws.ping), apiPing, dbPing)}`);
   }
 }

@@ -7,10 +7,7 @@ export default class Languages {
   constructor(client: DenkyClient) {
     this.client = client;
     this.client.languages = this;
-    this.loadLocales();
-  }
 
-  loadLocales() {
     this.manager = new LanguageManager(this.client);
     this.manager.loadLocales();
   }
