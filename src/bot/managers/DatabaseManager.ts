@@ -82,9 +82,9 @@ export class DatabaseManager {
   }
 
   // Outros
-  ping() {
+  async ping() {
     const inicio = Date.now();
-    this.set(`((((((PING))))))_internal_denkydb${inicio}`, 0);
+    await this.set(`((((((PING))))))_internal_denkydb${inicio}`, 0);
     this.delete(`((((((PING))))))_internal_denkydb${inicio}`);
     return Date.now() - inicio;
   }
