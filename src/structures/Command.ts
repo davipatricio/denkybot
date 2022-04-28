@@ -1,4 +1,6 @@
-import type { Awaitable, ChatInputCommandInteraction, Client, PermissionResolvable } from 'discord.js';
+import type { Awaitable, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
+import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandLocaleKeys, CommandNamesKeys } from '../bot/managers/LanguageManager';
+import type { DenkyClient } from '../types/Client';
 
 class Command {
   /** The raw command name. A user-friedly name will be shown through i18n. */
@@ -37,11 +39,16 @@ class Command {
     };
   }
 
-  run({ client, interaction }: CommandRunOptions): Awaitable<any> {
-    return { client, interaction };
+  run({ client, t, interaction }: CommandRunOptions): Awaitable<any> {
+    return { client, t, interaction };
   }
 }
 
-export type CommandRunOptions = { client: Client; interaction: ChatInputCommandInteraction };
+export type CommandLocale = (
+  path: `command/${CommandLocaleKeys}` | `descriptions/${CommandDescriptionsKeys}` | `categories/${CommandCategoriesKeys}` | `names/${CommandNamesKeys}`,
+  ...args: unknown[]
+) => string;
+
+export type CommandRunOptions = { client: DenkyClient; t: CommandLocale; interaction: ChatInputCommandInteraction };
 
 export { Command };
