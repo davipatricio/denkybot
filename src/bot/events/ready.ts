@@ -1,4 +1,3 @@
-import type { Awaitable } from 'discord.js';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
 
@@ -8,7 +7,7 @@ export default class ReadyEvent extends Event {
     this.eventName = 'ready';
   }
 
-  override run(client: DenkyClient): Awaitable<any> {
+  override run(client: DenkyClient) {
     console.log('✅ \x1b[34m[SHARDS]\x1b[0m', `Shard ${client.shard?.ids[0]} connected.`);
   }
 }

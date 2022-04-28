@@ -1,10 +1,10 @@
 /* eslint-disable no-await-in-loop */
 import { Collection } from 'discord.js';
 import { readdir } from 'node:fs/promises';
-import type { DenkyClient } from '../../types/Client';
 import type { Command } from '../../structures/Command';
 import type { Event } from '../../structures/Event';
 import type { Task } from '../../structures/Task';
+import type { DenkyClient } from '../../types/Client';
 
 class Initializer {
   constructor(client: DenkyClient) {

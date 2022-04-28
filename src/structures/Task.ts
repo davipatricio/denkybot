@@ -13,7 +13,7 @@ class Task {
     this.interval = null;
   }
 
-  run(client: DenkyClient): Promise<any> | any {
+  run(client: DenkyClient) {
     return { client };
   }
 }
