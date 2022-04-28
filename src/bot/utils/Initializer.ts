@@ -1,10 +1,10 @@
 /* eslint-disable no-await-in-loop */
 import { Collection } from 'discord.js';
 import { readdir } from 'node:fs/promises';
-import type { DenkyClient } from '../../types/Client';
 import type { Command } from '../../structures/Command';
 import type { Event } from '../../structures/Event';
 import type { Task } from '../../structures/Task';
+import type { DenkyClient } from '../../types/Client';
 
 class Initializer {
   constructor(client: DenkyClient) {
@@ -13,10 +13,10 @@ class Initializer {
   }
 
   async init(client: DenkyClient) {
-    await this.loadCommands(client);
-    await this.loadEvents(client);
     await this.loadModules(client);
+    await this.loadEvents(client);
     await this.loadTasks(client);
+    await this.loadCommands(client);
   }
 
   async loadCommands(client: DenkyClient) {
@@ -29,8 +29,8 @@ class Initializer {
         if (!command.endsWith('.js')) continue;
         const commandWithoutExtension = command.replace('.js', '');
 
-        const { default: CommandClass }: { default: new () => Command } = await import(`../commands/${category}/${command}`);
-        const cmd = new CommandClass();
+        const { default: CommandClass }: { default: new (_client: DenkyClient) => Command } = await import(`../commands/${category}/${command}`);
+        const cmd = new CommandClass(client);
         client.commands.set(commandWithoutExtension, cmd);
         if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[COMMANDS]\x1b[0m', `Loaded command: ${commandWithoutExtension}`);
       }

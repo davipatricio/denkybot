@@ -11,7 +11,7 @@ export type CommandDescriptionsKeys = keyof typeof import('../../locales/command
 export type CommandCategoriesKeys = keyof typeof import('../../locales/commandCategories/pt_BR/index').default;
 
 export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys;
-export type AllLocalePaths = `command:${CommandLocaleKeys}` | `descriptions:${CommandDescriptionsKeys}` | `categories:${CommandCategoriesKeys}` | `names:${CommandNamesKeys}`;
+export type AllLocalePaths = `command:${CommandLocaleKeys}` | `commandDescriptions:${CommandDescriptionsKeys}` | `commandCategories:${CommandCategoriesKeys}` | `commandNames:${CommandNamesKeys}`;
 
 export class LanguageManager {
   /** The client that instantiated this manager */
