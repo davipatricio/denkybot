@@ -22,6 +22,6 @@ export default class PingCommand extends Command {
     const apiPing = Date.now() - start;
 
     const dbPing = await client.databases.config.ping();
-    interaction.editReply(`${t('command:ping/result', Math.round(client.ws.ping), apiPing, dbPing)}`);
+    interaction.editReply(`${t('command:ping/result', interaction.user, Math.round(client.ws.ping), apiPing, dbPing)}`);
   }
 }
