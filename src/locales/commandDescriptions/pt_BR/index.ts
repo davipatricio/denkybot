@@ -1,3 +1,3 @@
 export default {
-  PING: 'Mostra o ping do bot!',
+  PING: 'Informa o ping do Denky no seu servidor',
 } as const;
