@@ -15,7 +15,7 @@ export default class ExampleTask extends Task {
 
   override run(client: DenkyClient) {
     if (!global.IS_MAIN_PROCESS) return;
-    console.log(`[DENKY] Running task ${this.name} now!`);
+    console.log('✅ \x1b[34m[TASKS]\x1b[0m', `Running task ${this.name} now!`);
     if (!this.poster) this.poster = new Poster(client);
 
     if (!client.isReady() && !this.#isPedingReadyRetry) {

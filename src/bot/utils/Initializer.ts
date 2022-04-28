@@ -8,7 +8,7 @@ import type { Task } from '../../structures/Task';
 
 class Initializer {
   constructor(client: DenkyClient) {
-    if (global.IS_MAIN_PROCESS) console.log('[DENKY] Starting bot...');
+    if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[DENKY]\x1b[0m', 'Starting bot...');
     this.init(client);
   }
 
@@ -32,7 +32,7 @@ class Initializer {
         const { default: CommandClass }: { default: new () => Command } = await import(`../commands/${category}/${command}`);
         const cmd = new CommandClass();
         client.commands.set(commandWithoutExtension, cmd);
-        if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded command: ${commandWithoutExtension}`);
+        if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[COMMANDS]\x1b[0m', `Loaded command: ${commandWithoutExtension}`);
       }
     }
   }
@@ -45,7 +45,7 @@ class Initializer {
       const { default: EventClass }: { default: new () => Event } = await import(`../events/${event}`);
       const evt = new EventClass();
       client.on(evt.eventName, (...rest: any[]) => evt.run(client, ...rest));
-      if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded event: ${evt.eventName}`);
+      if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[EVENTS]\x1b[0m', `Loaded event: ${evt.eventName}`);
     }
   }
 
@@ -59,7 +59,7 @@ class Initializer {
       const { default: Module }: { default: new (client: DenkyClient) => unknown } = await import(`../modules/${module}`);
       // eslint-disable-next-line no-new
       new Module(client);
-      if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded module: ${moduleWithoutExtension}`);
+      if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[MODULES]\x1b[0m', `Loaded module: ${moduleWithoutExtension}`);
     }
   }
 
@@ -74,7 +74,7 @@ class Initializer {
       const createdTask = new TaskClass();
       createdTask.interval = setInterval(() => createdTask.run(client), createdTask.delay);
       client.tasks.set(createdTask.name, createdTask);
-      if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded task: ${taskWithoutExtension}`);
+      if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[TASKS]\x1b[0m', `Loaded task: ${taskWithoutExtension}`);
     }
   }
 }

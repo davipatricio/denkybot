@@ -9,6 +9,6 @@ export default class ReadyEvent extends Event {
   }
 
   override run(client: DenkyClient): Awaitable<any> {
-    console.log(`[DENKY] Shard ${client.shard?.ids[0]} connected.`);
+    console.log('✅ \x1b[34m[DENKY]\x1b[0m', `Shard ${client.shard?.ids[0]} connected.`);
   }
 }
