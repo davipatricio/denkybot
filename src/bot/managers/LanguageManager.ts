@@ -42,7 +42,7 @@ export class LanguageManager {
 
   get(lang: SupportedLocales, path: AllLocalePaths, ...args: unknown[]) {
     const [category, key] = path.split(':');
-    const locale = this.cache[category as LocaleCategories][lang][key as AllLocaleKeys];
+    const locale = this.cache[category as LocaleCategories][lang][key as AllLocaleKeys] ?? this.cache[category as LocaleCategories].pt_BR[key as AllLocaleKeys];
     if (!locale) return `!!{${path}}!!`;
 
     if (typeof locale === 'string') return locale;
