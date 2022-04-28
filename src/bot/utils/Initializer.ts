@@ -27,11 +27,12 @@ class Initializer {
 
       for (const command of commands) {
         if (!command.endsWith('.js')) continue;
+        const commandWithoutExtension = command.replace('.js', '');
 
         const { default: CommandClass }: { default: new () => Command } = await import(`../commands/${category}/${command}`);
         const cmd = new CommandClass();
-        client.commands.set(cmd.rawName, cmd);
-        if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded command: ${cmd.rawName}`);
+        client.commands.set(commandWithoutExtension, cmd);
+        if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded command: ${commandWithoutExtension}`);
       }
     }
   }
@@ -52,12 +53,13 @@ class Initializer {
     const modules = await readdir('./bot/modules/');
     for (const module of modules) {
       if (!module.endsWith('.js')) continue;
+      const moduleWithoutExtension = module.replace('.js', '');
 
       // eslint-disable-next-line no-shadow
       const { default: Module }: { default: new (client: DenkyClient) => unknown } = await import(`../modules/${module}`);
       // eslint-disable-next-line no-new
       new Module(client);
-      if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded module: ${module}`);
+      if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded module: ${moduleWithoutExtension}`);
     }
   }
 
@@ -66,12 +68,13 @@ class Initializer {
     const tasks = await readdir('./bot/tasks/');
     for (const task of tasks) {
       if (!task.endsWith('.js')) continue;
+      const taskWithoutExtension = task.replace('.js', '');
 
       const { default: TaskClass }: { default: new () => Task } = await import(`../tasks/${task}`);
       const createdTask = new TaskClass();
       createdTask.interval = setInterval(() => createdTask.run(client), createdTask.delay);
       client.tasks.set(createdTask.name, createdTask);
-      if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded task: ${task}`);
+      if (global.IS_MAIN_PROCESS) console.log(`[DENKY] Loaded task: ${taskWithoutExtension}`);
     }
   }
 }
