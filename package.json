@@ -16,8 +16,8 @@
     "build": "npx tsc --project tsconfig.json",
     "start": "cd ./build && node sharding/shard.js",
     "lint": "npx eslint src",
-    "lint:fix": "npm run lint:prettier && tsc eslint src --fix",
-    "lint:prettier": "npx tsc prettier -w src",
+    "lint:fix": "npm run lint:prettier && npx eslint src --fix",
+    "lint:prettier": "npx prettier -w src",
     "types:check": "npx tsc --noEmit --incremental false"
   },
   "keywords": [],
