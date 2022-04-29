@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "npx tsc --project tsconfig.json",
-    "start": "cd ./build && node sharding/shard.js",
+    "start": "cd ./build/src && node sharding/shard.js",
     "lint": "npx eslint src",
     "lint:fix": "npm run lint:prettier && npx eslint src --fix",
     "lint:prettier": "npx prettier -w src",

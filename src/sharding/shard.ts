@@ -2,7 +2,7 @@ import { ShardingManager } from 'discord.js';
 import { config } from 'dotenv';
 import Configuration from '../../config.json';
 
-config({ path: '../.env' });
+config({ path: '../../.env' });
 
 const sharder = new ShardingManager('./bot/index.js', {
   totalShards: Configuration.shardCount,

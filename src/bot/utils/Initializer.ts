@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { Collection } from 'discord.js';
 import { readdir, readFile } from 'node:fs/promises';
+import { setTimeout as sleep } from 'node:timers/promises';
 import type { Command } from '../../structures/Command';
 import type { Event } from '../../structures/Event';
 import type { Task } from '../../structures/Task';
@@ -15,9 +16,12 @@ class Initializer {
   async init(client: DenkyClient) {
     await this.loadBotConfiguration(client);
     await this.loadModules(client);
+    await sleep(2500);
+    await this.loadCommands(client);
     await this.loadEvents(client);
     await this.loadTasks(client);
-    await this.loadCommands(client);
+    // Log bot in after loading everything
+    client.login(process.env.BOT_TOKEN);
   }
 
   async loadCommands(client: DenkyClient) {

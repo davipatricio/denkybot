@@ -1,3 +1,4 @@
+import { ApplicationCommandType } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
@@ -15,9 +16,10 @@ export default class PingCommand extends Command {
 
     this.addRawOptions({
       name: 'ping',
-      description: client.languages.manager.get('pt_BR', 'commandDescriptions:PING'),
+      type: ApplicationCommandType.ChatInput,
+      description: client.languages.manager.get('pt_BR', 'commandDescriptions:ping'),
       descriptionLocalizations: {
-        'en-US': client.languages.manager.get('en_US', 'commandDescriptions:PING'),
+        'en-US': client.languages.manager.get('en_US', 'commandDescriptions:ping'),
       },
     });
   }
