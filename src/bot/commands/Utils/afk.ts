@@ -60,7 +60,7 @@ export default class PingCommand extends Command {
 
   override async run({ t, interaction }: CommandRunOptions) {
     switch (interaction.options.getSubcommand()) {
-      case 'ativar': {
+      case 'on': {
         if (this.client.databases.afk.get(interaction.user.id)) {
           interaction.editReply(t('command:afk/alreadySet', interaction.user));
           break;
@@ -80,7 +80,7 @@ export default class PingCommand extends Command {
         break;
       }
 
-      case 'desativar': {
+      case 'off': {
         const data = this.client.databases.afk.get(interaction.user.id);
         if (!data) {
           interaction.editReply(t('command:afk/notAfk', interaction.user));
