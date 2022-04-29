@@ -32,7 +32,7 @@ export default class PingCommand extends Command {
             {
               name: client.languages.manager.get('pt_BR', 'commandNames:afk/reason'),
               nameLocalizations: {
-                'en-US': client.languages.manager.get('pt_BR', 'commandNames:afk/reason'),
+                'en-US': client.languages.manager.get('en_US', 'commandNames:afk/reason'),
               },
               type: ApplicationCommandOptionType.String,
               description: client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on/reason'),
