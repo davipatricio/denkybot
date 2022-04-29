@@ -19,48 +19,48 @@ export default class PingCommand extends Command {
       type: ApplicationCommandType.ChatInput,
       options: [
         {
-          name: client.languages.manager.get('pt_BR', 'commandNames:afk/on'),
+          name: client.languages.manager.get('en_US', 'commandNames:afk/on'),
           nameLocalizations: {
-            'en-US': client.languages.manager.get('en_US', 'commandNames:afk/on'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/on'),
           },
-          description: client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on'),
+          description: client.languages.manager.get('en_US', 'commandDescriptions:afk/on'),
           descriptionLocalizations: {
-            'en-US': client.languages.manager.get('en_US', 'commandDescriptions:afk/on'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on'),
           },
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: client.languages.manager.get('pt_BR', 'commandNames:afk/reason'),
+              name: client.languages.manager.get('en_US', 'commandNames:afk/reason'),
               nameLocalizations: {
-                'en-US': client.languages.manager.get('en_US', 'commandNames:afk/reason'),
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/reason'),
               },
               type: ApplicationCommandOptionType.String,
-              description: client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on/reason'),
+              description: client.languages.manager.get('en_US', 'commandDescriptions:afk/on/reason'),
               descriptionLocalizations: {
-                'en-US': client.languages.manager.get('en_US', 'commandDescriptions:afk/on/reason'),
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on/reason'),
               },
             },
           ],
         },
         {
-          name: client.languages.manager.get('pt_BR', 'commandNames:afk/off'),
+          name: client.languages.manager.get('en_US', 'commandNames:afk/off'),
           nameLocalizations: {
-            'en-US': client.languages.manager.get('en_US', 'commandNames:afk/off'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/off'),
           },
-          description: client.languages.manager.get('pt_BR', 'commandDescriptions:afk/off'),
+          description: client.languages.manager.get('en_US', 'commandDescriptions:afk/off'),
           descriptionLocalizations: {
-            'en-US': client.languages.manager.get('en_US', 'commandDescriptions:afk/off'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/off'),
           },
           type: ApplicationCommandOptionType.Subcommand,
         },
       ],
-      description: client.languages.manager.get('pt_BR', 'commandNames:afk/on'),
+      description: client.languages.manager.get('en_US', 'commandNames:afk/on'),
     });
   }
 
   override async run({ t, interaction }: CommandRunOptions) {
     switch (interaction.options.getSubcommand()) {
-      case 'ativar': {
+      case 'on': {
         if (this.client.databases.afk.get(interaction.user.id)) {
           interaction.editReply(t('command:afk/alreadySet', interaction.user));
           break;
@@ -80,7 +80,7 @@ export default class PingCommand extends Command {
         break;
       }
 
-      case 'desativar': {
+      case 'off': {
         const data = this.client.databases.afk.get(interaction.user.id);
         if (!data) {
           interaction.editReply(t('command:afk/notAfk', interaction.user));
