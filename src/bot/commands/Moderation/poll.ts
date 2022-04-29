@@ -19,36 +19,36 @@ export default class PollCommand extends Command {
     const opts: ApplicationCommandSubCommandData['options'] = [];
     for (let i: PollAcceptableOptions = 1; i <= 5; (i as PollAcceptableOptions)++) {
       opts.push({
-        name: client.languages.manager.get('pt_BR', `commandNames:poll/create/option${i}`),
+        name: client.languages.manager.get('en_US', `commandNames:poll/create/option${i}`),
         nameLocalizations: {
-          'en-US': client.languages.manager.get('en_US', `commandNames:poll/create/option${i}`),
+          'pt-BR': client.languages.manager.get('pt_BR', `commandNames:poll/create/option${i}`),
         },
         type: ApplicationCommandOptionType.String,
         required: i === 1,
-        description: client.languages.manager.get('pt_BR', `commandDescriptions:poll/create/option${i}`),
+        description: client.languages.manager.get('en_US', `commandDescriptions:poll/create/option${i}`),
         descriptionLocalizations: {
-          'en-US': client.languages.manager.get('en_US', `commandDescriptions:poll/create/option${i}`),
+          'pt-BR': client.languages.manager.get('pt_BR', `commandDescriptions:poll/create/option${i}`),
         },
       });
     }
 
     this.addRawOptions({
-      name: client.languages.manager.get('pt_BR', 'commandNames:poll'),
+      name: client.languages.manager.get('en_US', 'commandNames:poll'),
       nameLocalizations: {
-        'en-US': client.languages.manager.get('en_US', 'commandNames:poll'),
+        'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:poll'),
       },
       type: ApplicationCommandType.ChatInput,
-      description: client.languages.manager.get('pt_BR', 'commandNames:poll'),
+      description: client.languages.manager.get('en_US', 'commandNames:poll'),
       options: [
         {
-          name: client.languages.manager.get('pt_BR', 'commandNames:poll/create'),
+          name: client.languages.manager.get('en_US', 'commandNames:poll/create'),
           nameLocalizations: {
-            'en-US': client.languages.manager.get('en_US', 'commandNames:poll/create'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:poll/create'),
           },
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('pt_BR', 'commandDescriptions:poll/create'),
+          description: client.languages.manager.get('en_US', 'commandDescriptions:poll/create'),
           descriptionLocalizations: {
-            'en-US': client.languages.manager.get('en_US', 'commandDescriptions:poll/create'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:poll/create'),
           },
           options: opts,
         },
@@ -56,5 +56,7 @@ export default class PollCommand extends Command {
     });
   }
 
-  override async run({ t, interaction }: CommandRunOptions) {}
+  override run({ t, interaction }: CommandRunOptions) {
+    return { t, interaction };
+  }
 }
