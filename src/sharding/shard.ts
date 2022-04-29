@@ -1,5 +1,6 @@
 import { ShardingManager } from 'discord.js';
 import { config } from 'dotenv';
+// @ts-ignore When running GitHub Actions, the config file isnt available
 import Configuration from '../../config.json';
 
 config({ path: '../../.env' });
