@@ -3,4 +3,3 @@ build
 *-lock.json
 *.lock
 .env
-config.json
