@@ -17,7 +17,7 @@ export default class MessageCreateEvent extends Event {
   }
 
   verifyAFK(client: DenkyClient, message: Message) {
-    const data = client.databases.afk.get(`afk${message.author.id}`);
+    const data = client.databases.afk.get(message.author.id);
     if (!data) return;
 
     const t = (path: AllLocalePaths, ...args: unknown[]) => {
@@ -25,8 +25,10 @@ export default class MessageCreateEvent extends Event {
     };
 
     client.databases.afk.delete(message.author.id);
-    message.member?.setNickname(data.o).catch(() => {});
-    message.reply(t('command:afk/autoremoved', message.author, data.t)).then(msg => setTimeout(msg.delete, 5000));
+    message.member?.setNickname(data.originalNick).catch(() => {});
+    message.reply(t('command:afk/autoremoved', message.author, data.startTime)).then(msg => {
+      if (msg.channel) setTimeout(() => msg.delete(), 5000);
+    });
   }
 
   verifyAFKMention(client: DenkyClient, message: Message) {
@@ -37,9 +39,20 @@ export default class MessageCreateEvent extends Event {
     };
 
     for (const user of message.mentions.users.first(5).values()) {
-      const data = client.databases.afk.get(message.author.id);
+      if (user.id === message.author.id) continue;
+      const data = client.databases.afk.get(user.id);
       if (!data) return;
-      message.reply(t('command:afk/mentioned', user, data.t, data.m)).then(msg => setTimeout(msg.delete, 5000));
+      message
+        .reply({
+          content: t('command:afk/mentioned', user, data.startTime, data.reason),
+          allowedMentions: {
+            parse: [],
+            users: [message.author.id],
+          },
+        })
+        .then(msg => {
+          if (msg.channel) setTimeout(() => msg.delete(), 5000);
+        });
     }
   }
 }
