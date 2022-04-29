@@ -44,6 +44,9 @@ export default class PingCommand extends Command {
         },
         {
           name: client.languages.manager.get('pt_BR', 'commandNames:afk/off'),
+          nameLocalizations: {
+            'en-US': client.languages.manager.get('en_US', 'commandNames:afk/off'),
+          },
           description: client.languages.manager.get('pt_BR', 'commandDescriptions:afk/off'),
           descriptionLocalizations: {
             'en-US': client.languages.manager.get('en_US', 'commandDescriptions:afk/off'),
