@@ -1,3 +1,8 @@
 export default {
-  PING: 'Get the ping for Denky in your server',
+  // Ping
+  ping: 'Get the ping for Denky in your server',
+  // AFK
+  'afk/on': 'Set an AFK status to display when you are mentioned',
+  'afk/on/reason': 'Reason for being AFK',
+  'afk/off': 'Disables your AFK mode',
 } as const;

@@ -1,11 +1,11 @@
 {
     "defaultLanguage": "pt_BR",
     "debug": true,
-    "shouldPublishBotStats": true,
+    "shouldPublishBotStats": false,
     "shouldLogCommands": true,
     "shardCount": 1,
     "links": {
-        "invite": "https://discord.com/oauth2/authorize?client_id=969350775497166868&scope=bot+applications.commands&permissions=8",
+        "invite": "https://discord.com/oauth2/authorize?client_id=123456789123456789&scope=bot+applications.commands&permissions=8",
         "vote": "https://top.gg/bot/704517722100465746/vote",
         "url": "https://denkylabs.com"
     }

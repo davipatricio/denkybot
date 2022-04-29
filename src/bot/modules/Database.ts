@@ -5,13 +5,15 @@ export default class Database {
   client: DenkyClient;
   /** Stores server configurations */
   config: DatabaseManager;
+  /** Stores afk states */
+  afk: DatabaseManager;
   constructor(client: DenkyClient) {
-    this.client = client;
-    this.client.databases = this;
+    client.databases = this;
     this.loadDatabases();
   }
 
   loadDatabases() {
     this.config = new DatabaseManager('config');
+    this.afk = new DatabaseManager('afk');
   }
 }
