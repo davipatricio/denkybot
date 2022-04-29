@@ -17,9 +17,9 @@ export default class PingCommand extends Command {
     this.addRawOptions({
       name: 'ping',
       type: ApplicationCommandType.ChatInput,
-      description: client.languages.manager.get('pt_BR', 'commandDescriptions:ping'),
+      description: client.languages.manager.get('en_US', 'commandDescriptions:ping'),
       descriptionLocalizations: {
-        'en-US': client.languages.manager.get('en_US', 'commandDescriptions:ping'),
+        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ping'),
       },
     });
   }
