@@ -12,19 +12,23 @@ export class Poster {
     const serverCount = (await this.client.shard?.fetchClientValues('guilds.cache.size')) as number[];
     const totalGuilds = Number(serverCount.reduce((a, b) => a + b, 0));
 
-    await this.#postStatsToTopGG({ totalGuilds }).catch(console.log);
-    await this.#postStatsToDiscords({ totalGuilds }).catch(console.log);
-    await this.#postStatsToDisforge({ totalGuilds }).catch(console.log);
-    await this.#postStatsToBladeList({ totalGuilds }).catch(console.log);
-    await this.#postStatsToFatesList({ totalGuilds }).catch(console.log);
-    await this.#postStatsToDiscordBots({ totalGuilds }).catch(console.log);
-    await this.#postStatsToDiscordBotList({ totalGuilds }).catch(console.log);
+    await this.#postStatsToTopGG({ totalGuilds }).catch(this.logError);
+    await this.#postStatsToDiscords({ totalGuilds }).catch(this.logError);
+    await this.#postStatsToDisforge({ totalGuilds }).catch(this.logError);
+    await this.#postStatsToBladeList({ totalGuilds }).catch(this.logError);
+    await this.#postStatsToFatesList({ totalGuilds }).catch(this.logError);
+    await this.#postStatsToDiscordBots({ totalGuilds }).catch(this.logError);
+    await this.#postStatsToDiscordBotList({ totalGuilds }).catch(this.logError);
+  }
+
+  logError(message: any) {
+    if (this.client.config.debug) console.log(message);
   }
 
   async #postStatsToTopGG({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.TOPGG_STATS_KEY;
     if (!Authorization) {
-      console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No top.gg API key found! Ignoring...');
+      if (this.client.config.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No top.gg API key found! Ignoring...');
       return false;
     }
 
@@ -41,14 +45,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to top.gg!');
-    console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to top.gg successfully!');
+    if (this.client.config.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to top.gg successfully!');
     return true;
   }
 
   async #postStatsToDiscordBots({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.BOTSGG_STATS_KEY;
     if (!Authorization) {
-      console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No bots.gg API key found! Ignoring...');
+      if (this.client.config.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No bots.gg API key found! Ignoring...');
       return false;
     }
 
@@ -65,14 +69,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to bots.gg!');
-    console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to bots.gg successfully!');
+    if (this.client.config.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to bots.gg successfully!');
     return true;
   }
 
   async #postStatsToDiscords({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.DISCORDS_STATS_KEY;
     if (!Authorization) {
-      console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No discords.com API key found! Ignoring...');
+      if (this.client.config.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No discords.com API key found! Ignoring...');
       return false;
     }
 
@@ -88,14 +92,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to discords!');
-    console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to discords.com successfully!');
+    if (this.client.config.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to discords.com successfully!');
     return true;
   }
 
   async #postStatsToDisforge({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.DISFORGE_STATS_KEY;
     if (!Authorization) {
-      console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No disforge.com API key found! Ignoring...');
+      if (this.client.config.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No disforge.com API key found! Ignoring...');
       return false;
     }
 
@@ -111,14 +115,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to disforge!');
-    console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to disforge.com successfully!');
+    if (this.client.config.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to disforge.com successfully!');
     return true;
   }
 
   async #postStatsToDiscordBotList({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.DISCORDBOTLIST_STATS_KEY;
     if (!Authorization) {
-      console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No discordbotlist.com API key found! Ignoring...');
+      if (this.client.config.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No discordbotlist.com API key found! Ignoring...');
       return false;
     }
 
@@ -134,14 +138,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to discordbotlist.com!');
-    console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to discordbotlist.com successfully!');
+    if (this.client.config.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to discordbotlist.com successfully!');
     return true;
   }
 
   async #postStatsToBladeList({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.BLADELIST_STATS_KEY;
     if (!Authorization) {
-      console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No bladelist.gg API key found! Ignoring...');
+      if (this.client.config.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No bladelist.gg API key found! Ignoring...');
       return false;
     }
 
@@ -158,14 +162,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to bladelist.gg!');
-    console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to bladelist.gg successfully!');
+    if (this.client.config.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to bladelist.gg successfully!');
     return true;
   }
 
   async #postStatsToFatesList({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.FATESLIST_STATS_KEY;
     if (!Authorization) {
-      console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No fateslist.xyz API key found! Ignoring...');
+      if (this.client.config.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No fateslist.xyz API key found! Ignoring...');
       return false;
     }
 
@@ -181,7 +185,7 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to fateslist.xyz!');
-    console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to fateslist.xyz successfully!');
+    if (this.client.config.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to fateslist.xyz successfully!');
     return true;
   }
 }

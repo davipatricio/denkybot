@@ -13,4 +13,6 @@ export interface DenkyClient extends Client<boolean> {
   databases: Database;
   /** Bot languages */
   languages: Languages;
+  /** Bot configuration */
+  config: typeof import('../../config.json');
 }

@@ -27,7 +27,7 @@
         "pretty": true,
         "preserveConstEnums": true,
         "removeComments": false,
-        "resolveJsonModule": false,
+        "resolveJsonModule": true,
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
         "strictNullChecks": true,
