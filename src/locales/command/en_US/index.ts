@@ -19,7 +19,7 @@ export default {
 
   // Poll
   'poll/create/title': 'Poll',
-  'poll/create/created': (u: User) => `${u} created a poll.`,
+  'poll/create/footer': (u: string) => `Poll created by ${u}`,
   'poll/create/options': 'Options',
   'poll/create/duplicatedWarning': 'Some options were removed automatically because they were duplicated.',
 } as const;

@@ -1,8 +1,8 @@
-import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandSubCommandData, ApplicationCommandType, ButtonBuilder, ButtonStyle, EmbedBuilder } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandSubCommandData, ApplicationCommandType, EmbedBuilder, Message } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
-type PollAcceptableOptions = 1 | 2 | 3 | 4 | 5;
+type PollAcceptableOptions = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 const MappedNumericEmojis = {
   1: '1️⃣',
@@ -10,6 +10,10 @@ const MappedNumericEmojis = {
   3: '3️⃣',
   4: '4️⃣',
   5: '5️⃣',
+  6: '6️⃣',
+  7: '7️⃣',
+  8: '8️⃣',
+  9: '9️⃣',
 };
 
 export default class PollCommand extends Command {
@@ -25,7 +29,7 @@ export default class PollCommand extends Command {
     this.permissions = { bot: [], user: [] };
 
     const opts: ApplicationCommandSubCommandData['options'] = [];
-    for (let i: PollAcceptableOptions = 1; i <= 5; (i as PollAcceptableOptions)++) {
+    for (let i: PollAcceptableOptions = 1; i <= 9; (i as PollAcceptableOptions)++) {
       opts.push({
         name: client.languages.manager.get('en_US', `commandNames:poll/create/option${i}`),
         nameLocalizations: {
@@ -70,7 +74,7 @@ export default class PollCommand extends Command {
         const pollOptions: string[] = [];
         let duplicatedOptionsDetected = false;
 
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 9; i++) {
           const option = interaction.options.getString(`option${i}`);
           if (!option) continue;
 
@@ -85,18 +89,14 @@ export default class PollCommand extends Command {
         const embed = new EmbedBuilder()
           .setTitle(`📊 ${t('command:poll/create/title')}`)
           .setColor('Blurple')
-          .setDescription(
-            `${t('command:poll/create/created', interaction.user)}\n\n> **${t('command:poll/create/options')}:**\n${pollOptions
-              .map((opt, index) => `${MappedNumericEmojis[index + 1]} **-** ${opt.slice(0, 200)}`)
-              .join('\n')}`,
-          );
+          .setFooter({ text: t('command:poll/create/footer', interaction.user.tag), iconURL: interaction.user.displayAvatarURL() })
+          .setDescription(`**${t('command:poll/create/options')}:**\n${pollOptions.map((opt, index) => `${MappedNumericEmojis[index + 1]} **-** ${opt.slice(0, 200)}`).join('\n')}`);
 
-        const row = new ActionRowBuilder<ButtonBuilder>();
-        for (let i = 1; i <= pollOptions.length; i++) row.addComponents([new ButtonBuilder().setCustomId(String(i)).setLabel(MappedNumericEmojis[i]).setStyle(ButtonStyle.Secondary)]);
-
-        await interaction.editReply({ embeds: [embed], components: [row] });
-
+        const message = (await interaction.editReply({ embeds: [embed] })) as Message;
         if (duplicatedOptionsDetected) interaction.followUp({ content: `⚠️ **|** ${t('command:poll/create/duplicatedWarning')}`, ephemeral: true });
+
+        // eslint-disable-next-line no-await-in-loop
+        for (let i = 1; i <= pollOptions.length; i++) await message.react(MappedNumericEmojis[i]);
       }
     }
   }

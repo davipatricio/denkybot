@@ -7,6 +7,7 @@ export default {
   'afk/off': 'Desabilita seu modo AFK',
   // Poll
   'poll/create': 'Cria uma enquete neste canal',
+  'poll/create/permanent': 'Esta enquete deverá ser permanente?',
   'poll/create/option1': '1º opção da enquete',
   'poll/create/option2': '2º opção da enquete',
   'poll/create/option3': '3º opção da enquete',
@@ -15,4 +16,5 @@ export default {
   'poll/create/option6': '6º opção da enquete',
   'poll/create/option7': '7º opção da enquete',
   'poll/create/option8': '8º opção da enquete',
+  'poll/create/option9': '9º opção da enquete',
 } as const;

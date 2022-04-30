@@ -19,7 +19,7 @@ export default {
 
   // Poll
   'poll/create/title': 'Enquete',
-  'poll/create/created': (u: User) => `${u} criou uma enquete.`,
+  'poll/create/footer': (u: string) => `Enquete criada por ${u}`,
   'poll/create/options': 'Opções',
   'poll/create/duplicatedWarning': 'Algumas opções foram removidas automaticamente de sua enquete por serem repetidas.',
 } as const;
