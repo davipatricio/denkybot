@@ -46,7 +46,7 @@ export default class InteractionCreateEvent extends Event {
   }
 
   logCommand(client: DenkyClient, interaction: ChatInputCommandInteraction, usedLocale: string) {
-    if (!client.config.shouldLogCommands || !process.env.DISCORD_COMMANDLOGS_WEBHOOK_URL) return;
+    if (!client.config.webhooks.commandLogs || !process.env.DISCORD_COMMANDLOGS_WEBHOOK_URL) return;
 
     if (!this.webhookCommandLogs)
       this.webhookCommandLogs = new WebhookClient({
