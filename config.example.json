@@ -2,7 +2,8 @@
     "defaultLanguage": "pt_BR",
     "shardCount": 1,
     "webhooks": {
-        "commandLogs": true
+        "commandLogs": true,
+        "serverLogs": true
     },
     "logs": {
         "debug": true

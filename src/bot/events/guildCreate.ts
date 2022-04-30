@@ -11,7 +11,7 @@ export default class GuildCreateEvent extends Event {
   }
 
   override run(client: DenkyClient, guild: Guild) {
-    if (!client.config.shouldLogServers || !process.env.DISCORD_SERVERLOGS_WEBHOOK_URL) return;
+    if (!client.config.webhooks.serverLogs || !process.env.DISCORD_SERVERLOGS_WEBHOOK_URL) return;
 
     if (!this.webhookServerLogs)
       this.webhookServerLogs = new WebhookClient({
