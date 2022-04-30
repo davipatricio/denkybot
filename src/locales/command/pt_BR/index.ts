@@ -16,4 +16,10 @@ export default {
   'afk/manuallyRemoved': (u: User) => `✅ ${u} **|** Você não está mais ausente.`,
   'afk/autoremoved': (u: User, time: number) => `👋 ${u} **|** Bem-vindo novamente, seu AFK foi removido.\n⏰ **|** Você ficou ausente <t:${time}:R>`,
   'afk/mentioned': (u: User, time: number, reason?: string) => `${u} ficou ausente <t:${time}:R>.\n_\`${reason ?? 'Sem motivo informado.'}\`_`,
+
+  // Poll
+  'poll/create/title': 'Enquete',
+  'poll/create/created': (u: User) => `${u} criou uma enquete.`,
+  'poll/create/options': 'Opções',
+  'poll/create/duplicatedWarning': 'Algumas opções foram removidas automaticamente de sua enquete por serem repetidas.',
 } as const;

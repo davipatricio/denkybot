@@ -1,8 +1,16 @@
-import { ApplicationCommandOptionType, ApplicationCommandSubCommandData, ApplicationCommandType } from 'discord.js';
+import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandSubCommandData, ApplicationCommandType, ButtonBuilder, ButtonStyle, EmbedBuilder } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
 type PollAcceptableOptions = 1 | 2 | 3 | 4 | 5;
+
+const MappedNumericEmojis = {
+  1: '1️⃣',
+  2: '2️⃣',
+  3: '3️⃣',
+  4: '4️⃣',
+  5: '5️⃣',
+};
 
 export default class PollCommand extends Command {
   constructor(client: DenkyClient) {
@@ -56,7 +64,40 @@ export default class PollCommand extends Command {
     });
   }
 
-  override run({ t, interaction }: CommandRunOptions) {
-    return { t, interaction };
+  override async run({ t, interaction }: CommandRunOptions) {
+    switch (interaction.options.getSubcommand()) {
+      case 'create': {
+        const pollOptions: string[] = [];
+        let duplicatedOptionsDetected = false;
+
+        for (let i = 1; i <= 5; i++) {
+          const option = interaction.options.getString(`option${i}`);
+          if (!option) continue;
+
+          if (pollOptions.includes(option)) {
+            duplicatedOptionsDetected = true;
+            continue;
+          }
+
+          pollOptions.push(option);
+        }
+
+        const embed = new EmbedBuilder()
+          .setTitle(`📊 ${t('command:poll/create/title')}`)
+          .setColor('Blurple')
+          .setDescription(
+            `${t('command:poll/create/created', interaction.user)}\n\n> **${t('command:poll/create/options')}:**\n${pollOptions
+              .map((opt, index) => `${MappedNumericEmojis[index + 1]} **-** ${opt.slice(0, 200)}`)
+              .join('\n')}`,
+          );
+
+        const row = new ActionRowBuilder<ButtonBuilder>();
+        for (let i = 1; i <= pollOptions.length; i++) row.addComponents([new ButtonBuilder().setCustomId(String(i)).setLabel(MappedNumericEmojis[i]).setStyle(ButtonStyle.Secondary)]);
+
+        await interaction.editReply({ embeds: [embed], components: [row] });
+
+        if (duplicatedOptionsDetected) interaction.followUp({ content: `⚠️ **|** ${t('command:poll/create/duplicatedWarning')}`, ephemeral: true });
+      }
+    }
   }
 }
