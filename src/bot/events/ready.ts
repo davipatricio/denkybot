@@ -11,7 +11,7 @@ export default class ReadyEvent extends Event {
   override async run(client: DenkyClient) {
     console.log('✅ \x1b[34m[DENKY]\x1b[0m', `Shard ${client.shard?.ids[0]} connected.`);
 
-    if (client.config.shouldTryToPreventCrashes) {
+    if (client.config.features.preventCrashes) {
       client.on('error', err => {
         console.error('❌ \x1b[31m[DENKY]\x1b[0m', err);
       });

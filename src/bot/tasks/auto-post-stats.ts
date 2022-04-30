@@ -14,7 +14,7 @@ export default class ExampleTask extends Task {
   }
 
   override run(client: DenkyClient) {
-    if (!client.config.shouldPublishBotStats) {
+    if (!client.config.features.publishStats) {
       console.log('✅ \x1b[34m[TASKS]\x1b[0m', `Cancelling task ${this.name} because 'shouldPublishBotStats' is disabled.`);
       if (this.interval) clearInterval(this.interval);
       client.tasks.delete(this.name);
