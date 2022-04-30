@@ -3,6 +3,7 @@
     "debug": true,
     "shouldPublishBotStats": false,
     "shouldLogCommands": true,
+    "shouldLogServers": true,
     "shouldTryToPreventCrashes": true,
     "shardCount": 1,
     "links": {
