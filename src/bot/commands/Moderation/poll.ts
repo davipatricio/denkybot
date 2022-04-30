@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandSubCommandData, ApplicationCommandType, EmbedBuilder, Message } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandSubCommandData, ApplicationCommandType, EmbedBuilder, Message, PermissionFlagsBits } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
@@ -26,7 +26,7 @@ export default class PollCommand extends Command {
       ephemeral: false,
       showInHelp: true,
     };
-    this.permissions = { bot: [], user: [] };
+    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
 
     const opts: ApplicationCommandSubCommandData['options'] = [];
     for (let i: PollAcceptableOptions = 1; i <= 9; (i as PollAcceptableOptions)++) {
