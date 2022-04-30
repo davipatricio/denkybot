@@ -17,6 +17,12 @@ export default {
   'afk/autoremoved': (u: User, time: number) => `👋 ${u} **|** Bem-vindo novamente, seu AFK foi removido.\n⏰ **|** Você ficou ausente <t:${time}:R>`,
   'afk/mentioned': (u: User, time: number, reason?: string) => `${u} ficou ausente <t:${time}:R>.\n_\`${reason ?? 'Sem motivo informado.'}\`_`,
 
+  // Poll
+  'poll/create/title': 'Enquete',
+  'poll/create/footer': (u: string) => `Enquete criada por ${u}`,
+  'poll/create/options': 'Opções',
+  'poll/create/duplicatedWarning': 'Algumas opções foram removidas automaticamente de sua enquete por serem repetidas.',
+
   // Help
   'help/button/add': 'Ne adicione',
   'help/button/support': 'Servidor de Suporte',
