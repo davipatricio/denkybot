@@ -24,4 +24,7 @@ export default {
 
   // Help
   help: 'help',
+
+  // User
+  'user/info/user': 'user',
 } as const;
