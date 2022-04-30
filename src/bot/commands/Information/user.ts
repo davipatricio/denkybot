@@ -93,6 +93,7 @@ export default class UserCommand extends Command {
         embed.setThumbnail(user.displayAvatarURL({ size: 1024 }));
 
         interaction.editReply({ content: interaction.user.toString(), embeds: [embed] });
+        break;
       }
     }
   }
