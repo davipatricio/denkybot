@@ -27,6 +27,7 @@ export default {
   // User
   user: 'Veja informações sobre um usuário',
   'user/avatar': 'Veja o avatar de um usuário',
+  'user/avatar/user': 'O usuário para ver o avatar',
   'user/info': 'Veja informações sobre um usuário',
   'user/info/user': 'O usuário para ver as informações',
 } as const;

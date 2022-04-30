@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, EmbedBuilder, GuildMember, PermissionFlagsBits, Util } from 'discord.js';
+import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType, ButtonBuilder, ButtonStyle, EmbedBuilder, GuildMember, Message, PermissionFlagsBits, Util } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
@@ -44,12 +44,82 @@ export default class UserCommand extends Command {
             },
           ],
         },
+        {
+          name: 'avatar',
+          type: ApplicationCommandOptionType.Subcommand,
+          description: client.languages.manager.get('en_US', 'commandDescriptions:user/avatar'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:user/avatar'),
+          },
+          options: [
+            {
+              name: client.languages.manager.get('en_US', 'commandNames:user/avatar/user'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:user/avatar/user'),
+              },
+              type: ApplicationCommandOptionType.User,
+              required: false,
+              description: client.languages.manager.get('en_US', 'commandDescriptions:user/avatar/user'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:user/avatar/user'),
+              },
+            },
+          ],
+        },
       ],
     });
   }
 
   override async run({ t, interaction }: CommandRunOptions) {
     switch (interaction.options.getSubcommand()) {
+      case 'avatar': {
+        const user = interaction.options.getUser('user') ?? interaction.user;
+
+        const userAvatar = user.displayAvatarURL({ size: 2048, extension: 'png' });
+        const guildAvatar =
+          (user.id !== interaction.user.id
+            ? (interaction.options.getMember('user') as GuildMember)?.avatarURL({ size: 2048, extension: 'png' })
+            : (interaction.member as GuildMember).avatarURL({ size: 2048, extension: 'png' })) ?? undefined;
+
+        const row = new ActionRowBuilder<ButtonBuilder>();
+        const row2 = new ActionRowBuilder<ButtonBuilder>();
+        row.setComponents([new ButtonBuilder().setCustomId('guild-avatar').setLabel('Ver o avatar do usuário neste servidor').setDisabled(!guildAvatar).setStyle(ButtonStyle.Secondary)]);
+        row2.setComponents([
+          new ButtonBuilder()
+            .setStyle(ButtonStyle.Link)
+            .setLabel('Abrir avatar no navegador')
+            .setURL(guildAvatar ?? userAvatar),
+        ]);
+
+        const embed = new EmbedBuilder().setTitle(`Avatar de ${user.username}`).setImage(guildAvatar ?? userAvatar);
+        const message = (await interaction.editReply({ content: interaction.user.toString(), embeds: [embed], components: [row, row2] })) as Message;
+
+        if (guildAvatar) {
+          const collector = message.createMessageComponentCollector({ time: 30000, filter: m => m.user.id === interaction.user.id });
+          collector.on('collect', async m => {
+            await m.deferUpdate();
+
+            if (embed.data.image?.url === guildAvatar) {
+              row.setComponents([new ButtonBuilder().setCustomId('guild-avatar').setLabel('Ver o avatar do usuário no Discord').setDisabled(!guildAvatar).setStyle(ButtonStyle.Danger)]);
+              row2.setComponents([new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Abrir avatar no navegador').setURL(guildAvatar)]);
+              m.editReply({ embeds: [embed.setImage(userAvatar)], components: [row, row2] });
+            } else {
+              row.setComponents([new ButtonBuilder().setCustomId('guild-avatar').setLabel('Ver o avatar do usuário no servidor').setDisabled(!guildAvatar).setStyle(ButtonStyle.Danger)]);
+              row2.setComponents([new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Abrir avatar no navegador').setURL(userAvatar)]);
+              m.editReply({ embeds: [embed.setImage(userAvatar)], components: [row, row2] });
+            }
+          });
+
+          collector.on('end', () => {
+            row.setComponents([new ButtonBuilder().setCustomId('guild-avatar').setLabel('Ver o avatar do usuário neste servidor').setDisabled(!guildAvatar).setStyle(ButtonStyle.Danger)]);
+            if (embed.data.image?.url) row2.setComponents([new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Abrir avatar no navegador').setURL(embed.data.image?.url)]);
+            message.edit({ embeds: [embed], components: [row, row2] });
+          });
+        }
+
+        break;
+      }
+
       case 'info': {
         const user = interaction.options.getUser('user') ?? interaction.user;
 

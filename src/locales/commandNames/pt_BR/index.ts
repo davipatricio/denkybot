@@ -27,4 +27,5 @@ export default {
 
   // User
   'user/info/user': 'usuario',
+  'user/avatar/user': 'usuario',
 } as const;
