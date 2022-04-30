@@ -1,11 +1,13 @@
 export default {
   // Ping
   ping: 'ping',
+
   // AFK
   afk: 'afk on | off',
   'afk/on': 'on',
   'afk/off': 'off',
   'afk/reason': 'reason',
+
   // Poll
   poll: 'poll',
   'poll/create': 'create',
@@ -19,4 +21,7 @@ export default {
   'poll/create/option7': 'option7',
   'poll/create/option8': 'option8',
   'poll/create/option9': 'option9',
+
+  // Help
+  help: 'help',
 } as const;

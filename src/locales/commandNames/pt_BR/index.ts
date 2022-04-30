@@ -1,11 +1,13 @@
 export default {
   // Ping
   ping: 'ping',
+
   // AFK
   afk: 'afk ativar | desativar',
   'afk/on': 'ativar',
   'afk/off': 'desativar',
   'afk/reason': 'motivo',
+
   // Poll
   poll: 'enquete',
   'poll/create': 'criar',
@@ -19,4 +21,7 @@ export default {
   'poll/create/option7': 'opcao7',
   'poll/create/option8': 'opcao8',
   'poll/create/option9': 'opcao9',
+
+  // Help
+  help: 'ajuda',
 } as const;

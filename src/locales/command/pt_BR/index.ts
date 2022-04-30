@@ -22,4 +22,12 @@ export default {
   'poll/create/footer': (u: string) => `Enquete criada por ${u}`,
   'poll/create/options': 'Opções',
   'poll/create/duplicatedWarning': 'Algumas opções foram removidas automaticamente de sua enquete por serem repetidas.',
+
+  // Help
+  'help/button/add': 'Ne adicione',
+  'help/button/support': 'Servidor de Suporte',
+  'help/button/vote': 'Vote',
+  'help/embed/description': (supportClick: string, addClick: string, totalCommands: string) =>
+    `❔ Meu prefixo neste servidor é: \`/.\`\n🚪 Entre em meu servidor de suporte: [clique aqui](${supportClick}).\n🎉 Me adicione em seu servidor: [clique aqui](${addClick}).\n\nAtualmente eu possuo \`${totalCommands}\` comandos.`,
+  'help/menu/placeholder': 'Clique aqui para escolher a categoria de comandos.',
 } as const;

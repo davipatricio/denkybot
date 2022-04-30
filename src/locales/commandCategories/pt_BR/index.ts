@@ -1,4 +1,4 @@
 export default {
-  UTILS: 'Utilidades',
-  MODERATION: 'Moderação',
+  UTILS: '⚙️ Utilidades',
+  MODERATION: '🛠️ Moderação',
 } as const;
