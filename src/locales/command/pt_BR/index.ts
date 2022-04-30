@@ -16,4 +16,12 @@ export default {
   'afk/manuallyRemoved': (u: User) => `✅ ${u} **|** Você não está mais ausente.`,
   'afk/autoremoved': (u: User, time: number) => `👋 ${u} **|** Bem-vindo novamente, seu AFK foi removido.\n⏰ **|** Você ficou ausente <t:${time}:R>`,
   'afk/mentioned': (u: User, time: number, reason?: string) => `${u} ficou ausente <t:${time}:R>.\n_\`${reason ?? 'Sem motivo informado.'}\`_`,
+
+  // Help
+  'help/button/add': 'Ne adicione',
+  'help/button/support': 'Servidor de Suporte',
+  'help/button/vote': 'Vote',
+  'help/embed/description': (supportClick: string, addClick: string, totalCommands: string) =>
+    `❔ Meu prefixo neste servidor é: \`/.\`\n🚪 Entre em meu servidor de suporte: [clique aqui](${supportClick}).\n🎉 Me adicione em seu servidor: [clique aqui](${addClick}).\n\nAtualmente eu possuo \`${totalCommands}\` comandos.`,
+  'help/menu/placeholder': 'Clique aqui para escolher a categoria de comandos.',
 } as const;

@@ -1,3 +1,3 @@
 export default {
-  UTILS: 'Utilidades',
+  UTILS: '⚙️ Utilidades',
 } as const;

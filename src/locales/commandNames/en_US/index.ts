@@ -6,4 +6,7 @@ export default {
   'afk/on': 'on',
   'afk/off': 'off',
   'afk/reason': 'reason',
+
+  // Help
+  help: 'help',
 } as const;
