@@ -25,8 +25,9 @@ export default class PollCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: true,
+      guildOnly: true,
     };
-    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
+    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [PermissionFlagsBits.ManageMessages] };
 
     const opts: ApplicationCommandSubCommandData['options'] = [];
     for (let i: PollAcceptableOptions = 1; i <= 9; (i as PollAcceptableOptions)++) {
