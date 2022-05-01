@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 import type { DenkyClient } from '../types/Client';
 import { Initializer } from './utils/Initializer';
 
-config({ path: '../../.env' });
+config({ path: '../.env' });
 
 // @ts-ignore
 const client: DenkyClient = new Client({
