@@ -1,4 +1,4 @@
-import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, Interaction, Locale, TextChannel, WebhookClient } from 'discord.js';
+import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, Interaction, Locale, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
 import type { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
@@ -81,7 +81,11 @@ export default class InteractionCreateEvent extends Event {
   static checkBotPermissions(interaction: ChatInputCommandInteraction, command: Command, t: CommandLocale): boolean {
     if (command.permissions.bot.length === 0) return true;
     if (!interaction.guild?.me?.permissions.has(command.permissions.bot)) {
-      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:permissions/bot/missing', command.permissions.bot)}`, ephemeral: true });
+      const permissions = new PermissionsBitField(command.permissions.user)
+        .toArray()
+        .map(p => t(`permissions:${p}`))
+        .join(', ');
+      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:permissions/bot/missing', permissions)}`, ephemeral: true });
       return false;
     }
     return true;
@@ -90,7 +94,11 @@ export default class InteractionCreateEvent extends Event {
   static checkMemberPermissions(interaction: ChatInputCommandInteraction, command: Command, t: CommandLocale): boolean {
     if (command.permissions.user.length === 0) return true;
     if (!(interaction.member as GuildMember).permissions.has(command.permissions.user)) {
-      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:permissions/user/missing', command.permissions.user)}`, ephemeral: true });
+      const permissions = new PermissionsBitField(command.permissions.user)
+        .toArray()
+        .map(p => t(`permissions:${p}`))
+        .join(', ');
+      interaction.reply({ content: `❌ ${interaction.user} **|** ${(t('command:permissions/user/missing'), permissions)}`, ephemeral: true });
       return false;
     }
     return true;

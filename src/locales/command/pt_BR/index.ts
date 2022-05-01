@@ -2,8 +2,8 @@ import type { User } from 'discord.js';
 
 export default {
   // General errors
-  'permissions/bot/missing': (perms: string[]) => `Eu não tenho as permissões necessárias: ${perms.join(', ')}`,
-  'permissions/user/missing': (perms: string[]) => `Você não tem as permissões necessárias: ${perms.join(', ')}`,
+  'permissions/bot/missing': (perms: string) => `Eu não tenho as permissões necessárias: ${perms}`,
+  'permissions/user/missing': (perms: string) => `Você não tem as permissões necessárias: ${perms}`,
 
   // Ping
   'ping/calculating': 'Calculando...',
