@@ -5,10 +5,10 @@ import {
   ButtonStyle,
   EmbedBuilder,
   Message,
+  PermissionFlagsBits,
+  SelectMenuInteraction,
   UnsafeSelectMenuBuilder,
   UnsafeSelectMenuOptionBuilder,
-  SelectMenuInteraction,
-  PermissionFlagsBits,
 } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
