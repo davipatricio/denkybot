@@ -30,4 +30,10 @@ export default {
   'help/embed/description': (supportClick: string, addClick: string, totalCommands: number) =>
     `❔ My prefix on this server is: \`/\`.\n🚪 Join my support server: [click here](${supportClick}).\n🎉 Add me to your server: [click here](${addClick}).\n\nCurrently I have \`${totalCommands}\` commands.`,
   'help/menu/placeholder': 'Click here to choose the command category.',
+
+  // User
+  'user/info/userTag': 'Discord Tag',
+  'user/info/userId': 'Discord ID',
+  'user/info/userCreatedAt': 'Account created at',
+  'user/info/memberJoinedAt': 'Member joined at',
 } as const;

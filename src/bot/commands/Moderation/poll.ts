@@ -98,6 +98,7 @@ export default class PollCommand extends Command {
 
         // eslint-disable-next-line no-await-in-loop
         for (let i = 1; i <= pollOptions.length; i++) await message.react(MappedNumericEmojis[i]);
+        break;
       }
     }
   }
