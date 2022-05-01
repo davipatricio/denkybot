@@ -30,4 +30,8 @@ export default {
   'user/avatar/user': 'The user to get the avatar of',
   'user/info': 'Shows user information',
   'user/info/user': 'The user to show information for',
+
+  // Server
+  server: 'View information about a server',
+  'server/info': 'View information about a server',
 } as const;

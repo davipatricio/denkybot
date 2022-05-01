@@ -30,4 +30,8 @@ export default {
   'user/avatar/user': 'O usuário para ver o avatar',
   'user/info': 'Veja informações sobre um usuário',
   'user/info/user': 'O usuário para ver as informações',
+
+  // Server
+  server: 'Veja informações sobre um servidor',
+  'server/info': 'Veja informações sobre um servidor',
 } as const;
