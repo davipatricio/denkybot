@@ -30,4 +30,12 @@ export default {
   'user/avatar/user': 'The user to get the avatar of',
   'user/info': 'Shows user information',
   'user/info/user': 'The user to show information for',
+
+  // Text
+  text: 'Translates or edits text in different ways',
+  'text/text': 'Text to edit',
+  'text/claps': 'Sends 👏 a 👏 text 👏 with 👏 claps',
+  'text/invert': 'Inverts a text',
+  'text/emojify': 'Emojifies a text',
+  'text/vaporwave': 'Creates a V A P O R W A V E text',
 } as const;

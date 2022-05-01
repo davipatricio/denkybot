@@ -28,4 +28,9 @@ export default {
   // User
   'user/info/user': 'user',
   'user/avatar/user': 'user',
+
+  // Text
+  text: 'text',
+  'text/claps': 'claps',
+  'text/invert': 'invert',
 } as const;
