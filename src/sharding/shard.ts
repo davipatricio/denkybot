@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 // @ts-ignore When running GitHub Actions, the config file isnt available
 import Configuration from '../../config.json';
 
-config({ path: '../../.env' });
+config({ path: '../.env' });
 
 const sharder = new ShardingManager('./bot/index.js', {
   totalShards: Configuration.shardCount,

@@ -9,9 +9,15 @@ export type CommandLocaleKeys = keyof typeof import('../../locales/command/pt_BR
 export type CommandNamesKeys = keyof typeof import('../../locales/commandNames/pt_BR/index').default;
 export type CommandDescriptionsKeys = keyof typeof import('../../locales/commandDescriptions/pt_BR/index').default;
 export type CommandCategoriesKeys = keyof typeof import('../../locales/commandCategories/pt_BR/index').default;
+export type PermissionLocaleKeys = keyof typeof import('../../locales/permissions/pt_BR/index').default;
 
-export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys;
-export type AllLocalePaths = `command:${CommandLocaleKeys}` | `commandDescriptions:${CommandDescriptionsKeys}` | `commandCategories:${CommandCategoriesKeys}` | `commandNames:${CommandNamesKeys}`;
+export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys | PermissionLocaleKeys;
+export type AllLocalePaths =
+  | `command:${CommandLocaleKeys}`
+  | `commandDescriptions:${CommandDescriptionsKeys}`
+  | `commandCategories:${CommandCategoriesKeys}`
+  | `commandNames:${CommandNamesKeys}`
+  | `permissions:${PermissionLocaleKeys}`;
 
 export class LanguageManager {
   /** The client that instantiated this manager */
@@ -42,11 +48,16 @@ export class LanguageManager {
 
   get(lang: SupportedLocales, path: AllLocalePaths, ...args: unknown[]) {
     const [category, key] = path.split(':');
-    const locale = this.cache[category as LocaleCategories][lang][key as AllLocaleKeys] ?? this.cache[category as LocaleCategories].pt_BR[key as AllLocaleKeys];
-    if (!locale) return `!!{${path}}!!`;
+    if (!this.cache[category]) return `!!{${category}.${key}}!!`;
+
+    const baseCategory = this.cache[category as LocaleCategories];
+    const baseLocale = baseCategory[lang] ?? baseCategory[this.client.config.defaultLanguage];
+
+    const locale = baseLocale[key as AllLocaleKeys];
+    if (!locale) return `!!{${category}.${key}}!!`;
 
     if (typeof locale === 'string') return locale;
     if (typeof locale === 'function') return locale(...args);
-    return `!!{${path}}!!`;
+    return `!!{${category}.${key}}!!`;
   }
 }

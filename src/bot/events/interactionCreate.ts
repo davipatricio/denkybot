@@ -1,8 +1,8 @@
-import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, Interaction, Locale, TextChannel, WebhookClient } from 'discord.js';
+import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, Interaction, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
 import type { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
-import type { AllLocalePaths, SupportedLocales } from '../managers/LanguageManager';
+import type { AllLocalePaths } from '../managers/LanguageManager';
 
 export default class InteractionCreateEvent extends Event {
   /** Webhook used to log commands */
@@ -17,28 +17,22 @@ export default class InteractionCreateEvent extends Event {
 
     const botCommand = client.commands.get(interaction.commandName);
     if (!botCommand) return;
-    if (!interaction.inGuild() && botCommand.config.guildOnly) return;
 
-    let userLocale: SupportedLocales = 'en_US';
-    switch (interaction.locale) {
-      case Locale.EnglishUS:
-      case Locale.EnglishGB:
-        userLocale = 'en_US';
-        break;
-      case Locale.PortugueseBR:
-        userLocale = 'pt_BR';
-        break;
-      default:
-        userLocale = client.config.defaultLanguage as SupportedLocales;
-        break;
-    }
+    const userLocale = client.helpers.recommendLocale(interaction.locale);
 
     const t = (path: AllLocalePaths, ...args: unknown[]) => {
       return client.languages.manager.get(userLocale, path, ...args);
     };
 
-    if (!InteractionCreateEvent.checkBotPermissions(interaction, botCommand, t)) return;
-    if (!InteractionCreateEvent.checkMemberPermissions(interaction, botCommand, t)) return;
+    if (!interaction.inGuild() && botCommand.config.guildOnly) {
+      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:errors/commandGuildOnly')}`, ephemeral: true });
+      return;
+    }
+
+    if (interaction.inGuild()) {
+      if (!InteractionCreateEvent.checkBotPermissions(interaction, botCommand, t)) return;
+      if (!InteractionCreateEvent.checkMemberPermissions(interaction, botCommand, t)) return;
+    }
 
     if (botCommand.config.autoDefer) await interaction.deferReply({ ephemeral: botCommand.config.ephemeral });
 
@@ -81,7 +75,11 @@ export default class InteractionCreateEvent extends Event {
   static checkBotPermissions(interaction: ChatInputCommandInteraction, command: Command, t: CommandLocale): boolean {
     if (command.permissions.bot.length === 0) return true;
     if (!interaction.guild?.me?.permissions.has(command.permissions.bot)) {
-      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:permissions/bot/missing', command.permissions.bot)}`, ephemeral: true });
+      const permissions = new PermissionsBitField(command.permissions.bot)
+        .toArray()
+        .map(p => t(`permissions:${p}`))
+        .join(', ');
+      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:permissions/bot/missing', permissions)}`, ephemeral: true });
       return false;
     }
     return true;
@@ -90,7 +88,11 @@ export default class InteractionCreateEvent extends Event {
   static checkMemberPermissions(interaction: ChatInputCommandInteraction, command: Command, t: CommandLocale): boolean {
     if (command.permissions.user.length === 0) return true;
     if (!(interaction.member as GuildMember).permissions.has(command.permissions.user)) {
-      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:permissions/user/missing', command.permissions.user)}`, ephemeral: true });
+      const permissions = new PermissionsBitField(command.permissions.user)
+        .toArray()
+        .map(p => t(`permissions:${p}`))
+        .join(', ');
+      interaction.reply({ content: `❌ ${interaction.user} **|** ${(t('command:permissions/user/missing'), permissions)}`, ephemeral: true });
       return false;
     }
     return true;

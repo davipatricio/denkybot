@@ -35,4 +35,12 @@ export default {
   server: 'Veja informações sobre um servidor',
   'server/info': 'Veja informações sobre um servidor',
   'server/icon': 'Veja o ícone de um servidor',
+
+  // Text
+  text: 'Traduza ou edite texto em diferentes maneiras',
+  'text/text': 'O texto para editar',
+  'text/claps': 'Envie 👏 um 👏 texto 👏 com 👏 palmas',
+  'text/invert': 'Inverte um texto',
+  'text/emojify': 'Transforme um texto em emojis',
+  'text/vaporwave': 'Faça uma mensagem V A P O R W A V E',
 } as const;
