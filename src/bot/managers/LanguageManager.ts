@@ -9,9 +9,15 @@ export type CommandLocaleKeys = keyof typeof import('../../locales/command/pt_BR
 export type CommandNamesKeys = keyof typeof import('../../locales/commandNames/pt_BR/index').default;
 export type CommandDescriptionsKeys = keyof typeof import('../../locales/commandDescriptions/pt_BR/index').default;
 export type CommandCategoriesKeys = keyof typeof import('../../locales/commandCategories/pt_BR/index').default;
+export type PermissionLocaleKeys = keyof typeof import('../../locales/permissions/pt_BR/index').default;
 
-export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys;
-export type AllLocalePaths = `command:${CommandLocaleKeys}` | `commandDescriptions:${CommandDescriptionsKeys}` | `commandCategories:${CommandCategoriesKeys}` | `commandNames:${CommandNamesKeys}`;
+export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys | PermissionLocaleKeys;
+export type AllLocalePaths =
+  | `command:${CommandLocaleKeys}`
+  | `commandDescriptions:${CommandDescriptionsKeys}`
+  | `commandCategories:${CommandCategoriesKeys}`
+  | `commandNames:${CommandNamesKeys}`
+  | `permissions:${PermissionLocaleKeys}`;
 
 export class LanguageManager {
   /** The client that instantiated this manager */
