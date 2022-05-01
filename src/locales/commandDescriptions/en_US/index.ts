@@ -23,4 +23,11 @@ export default {
 
   // Help
   help: 'Shows the bot commands',
+
+  // User
+  user: 'Shows user information',
+  'user/avatar': 'Shows the user avatar',
+  'user/avatar/user': 'The user to get the avatar of',
+  'user/info': 'Shows user information',
+  'user/info/user': 'The user to show information for',
 } as const;
