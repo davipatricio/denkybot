@@ -91,7 +91,10 @@ export default class UserCommand extends Command {
             .setURL(guildAvatar ?? userAvatar),
         ]);
 
-        const embed = new EmbedBuilder().setTitle(`Avatar de ${user.username}`).setImage(guildAvatar ?? userAvatar);
+        const embed = new EmbedBuilder()
+          .setTitle(`Avatar de ${user.username}`)
+          .setImage(guildAvatar ?? userAvatar)
+          .setColor('Green');
         const message = (await interaction.editReply({ content: interaction.user.toString(), embeds: [embed], components: [row, row2] })) as Message;
 
         if (guildAvatar) {
@@ -100,18 +103,18 @@ export default class UserCommand extends Command {
             await m.deferUpdate();
 
             if (embed.data.image?.url === guildAvatar) {
-              row.setComponents([new ButtonBuilder().setCustomId('guild-avatar').setLabel('Ver o avatar do usuário no Discord').setDisabled(!guildAvatar).setStyle(ButtonStyle.Danger)]);
-              row2.setComponents([new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Abrir avatar no navegador').setURL(guildAvatar)]);
-              m.editReply({ embeds: [embed.setImage(userAvatar)], components: [row, row2] });
-            } else {
-              row.setComponents([new ButtonBuilder().setCustomId('guild-avatar').setLabel('Ver o avatar do usuário no servidor').setDisabled(!guildAvatar).setStyle(ButtonStyle.Danger)]);
+              row.setComponents([new ButtonBuilder().setCustomId('guild-avatar').setLabel('Ver o avatar do usuário no Discord').setDisabled(!guildAvatar).setStyle(ButtonStyle.Secondary)]);
               row2.setComponents([new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Abrir avatar no navegador').setURL(userAvatar)]);
               m.editReply({ embeds: [embed.setImage(userAvatar)], components: [row, row2] });
+            } else {
+              row.setComponents([new ButtonBuilder().setCustomId('guild-avatar').setLabel('Ver o avatar do usuário no servidor').setDisabled(!guildAvatar).setStyle(ButtonStyle.Secondary)]);
+              row2.setComponents([new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Abrir avatar no navegador').setURL(guildAvatar)]);
+              m.editReply({ embeds: [embed.setImage(guildAvatar)], components: [row, row2] });
             }
           });
 
           collector.on('end', () => {
-            row.setComponents([new ButtonBuilder().setCustomId('guild-avatar').setLabel('Ver o avatar do usuário neste servidor').setDisabled(!guildAvatar).setStyle(ButtonStyle.Danger)]);
+            row.setComponents([new ButtonBuilder().setCustomId('guild-avatar').setLabel('Ver o avatar do usuário neste servidor').setDisabled(true).setStyle(ButtonStyle.Danger)]);
             if (embed.data.image?.url) row2.setComponents([new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Abrir avatar no navegador').setURL(embed.data.image?.url)]);
             message.edit({ embeds: [embed], components: [row, row2] });
           });
