@@ -31,9 +31,15 @@ export default {
     `❔ My prefix on this server is: \`/\`.\n🚪 Join my support server: [click here](${supportClick}).\n🎉 Add me to your server: [click here](${addClick}).\n\nCurrently I have \`${totalCommands}\` commands.`,
   'help/menu/placeholder': 'Click here to choose the command category.',
 
-  // User
+  // User info
   'user/info/userTag': 'Discord Tag',
   'user/info/userId': 'Discord ID',
   'user/info/userCreatedAt': 'Account created at',
   'user/info/memberJoinedAt': 'Member joined at',
+
+  // User avatar
+  'user/avatar/title': (user: User) => `${user}'s avatar`,
+  'user/avatar/browser': 'Open in browser',
+  'user/avatar/seeGuildAvatar': 'See guild avatar',
+  'user/avatar/seeGlobalAvatar': 'See global avatar',
 } as const;

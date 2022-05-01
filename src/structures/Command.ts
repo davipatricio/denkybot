@@ -61,6 +61,6 @@ class Command {
 
 export type CommandLocale = (path: AllLocalePaths, ...args: unknown[]) => string;
 
-export type CommandRunOptions = { client: DenkyClient; t: CommandLocale; interaction: ChatInputCommandInteraction };
+export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
 
 export { Command };

@@ -31,9 +31,15 @@ export default {
     `❔ Meu prefixo neste servidor é: \`/.\`\n🚪 Entre em meu servidor de suporte: [clique aqui](${supportClick}).\n🎉 Me adicione em seu servidor: [clique aqui](${addClick}).\n\nAtualmente eu possuo \`${totalCommands}\` comandos.`,
   'help/menu/placeholder': 'Clique aqui para escolher a categoria de comandos.',
 
-  // User
+  // User info
   'user/info/userTag': 'Tag do Discord',
   'user/info/userId': 'ID do Discord',
   'user/info/userCreatedAt': 'Conta criada em',
   'user/info/memberJoinedAt': 'Entrou em',
+
+  // User avatar
+  'user/avatar/title': (user: User) => `Avatar de ${user}`,
+  'user/avatar/browser': 'Abrir avatar no navegador',
+  'user/avatar/seeGuildAvatar': 'Ver o avatar do usuário neste servidor',
+  'user/avatar/seeGlobalAvatar': 'Ver o avatar do usuário neste servidor',
 } as const;

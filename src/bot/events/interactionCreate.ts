@@ -43,7 +43,7 @@ export default class InteractionCreateEvent extends Event {
     if (botCommand.config.autoDefer) await interaction.deferReply({ ephemeral: botCommand.config.ephemeral });
 
     this.logCommand(client, interaction, userLocale);
-    botCommand.run({ client, interaction, t } as CommandRunOptions);
+    botCommand.run({ interaction, t } as CommandRunOptions);
   }
 
   logCommand(client: DenkyClient, interaction: ChatInputCommandInteraction, usedLocale: string) {
