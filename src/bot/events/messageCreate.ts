@@ -1,7 +1,7 @@
 import type { Message } from 'discord.js';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
-import type { AllLocalePaths, SupportedLocales } from '../managers/LanguageManager';
+import type { AllLocalePaths } from '../managers/LanguageManager';
 
 export default class MessageCreateEvent extends Event {
   constructor() {

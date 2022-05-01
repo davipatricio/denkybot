@@ -1,8 +1,8 @@
-import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, Interaction, Locale, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
+import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, Interaction, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
 import type { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
-import type { AllLocalePaths, SupportedLocales } from '../managers/LanguageManager';
+import type { AllLocalePaths } from '../managers/LanguageManager';
 
 export default class InteractionCreateEvent extends Event {
   /** Webhook used to log commands */
