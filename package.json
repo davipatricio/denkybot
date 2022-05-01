@@ -13,8 +13,9 @@
     "url": "https://github.com/davipatricio/denky-rewrite/issues"
   },
   "scripts": {
-    "build": "npx tsc --project tsconfig.json",
-    "start": "cd ./build/src && node sharding/shard.js",
+    "build": "npx sucrase ./src -d ./build --esModuleInterop --transforms typescript,imports",
+    "build:check": "npm run types:check && npm run build",
+    "start": "cd ./build && node sharding/shard.js",
     "lint": "npx eslint src",
     "lint:fix": "npm run lint:prettier && npx eslint src --fix",
     "lint:prettier": "npx prettier -w src",
@@ -33,6 +34,7 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-prettier": "4.0.0",
     "prettier": "2.6.2",
+    "sucrase": "^3.21.0",
     "typescript": "4.6.4"
   },
   "dependencies": {
