@@ -12,7 +12,7 @@ import {
 } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
-import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys, SupportedLocales } from '../../managers/LanguageManager';
+import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys } from '../../managers/LanguageManager';
 
 export default class HelpCommand extends Command {
   constructor(client: DenkyClient) {
@@ -51,7 +51,7 @@ export default class HelpCommand extends Command {
     const categories: Record<string, string[]> = {};
     const categoriesEmoji: Record<string, string> = {};
 
-    const language = interaction.locale.replace('-', '_') as SupportedLocales;
+    const language = this.client.helpers.recommendLocale(interaction.locale);
 
     const initialEmbed = new EmbedBuilder()
       .setDescription(t('command:help/embed/description', this.client.config.links.support, this.client.config.links.invite, this.client.commands.size))

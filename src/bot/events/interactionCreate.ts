@@ -1,8 +1,8 @@
-import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, Interaction, Locale, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
+import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, Interaction, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
 import type { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
-import type { AllLocalePaths, SupportedLocales } from '../managers/LanguageManager';
+import type { AllLocalePaths } from '../managers/LanguageManager';
 
 export default class InteractionCreateEvent extends Event {
   /** Webhook used to log commands */
@@ -18,19 +18,7 @@ export default class InteractionCreateEvent extends Event {
     const botCommand = client.commands.get(interaction.commandName);
     if (!botCommand) return;
 
-    let userLocale: SupportedLocales = 'en_US';
-    switch (interaction.locale) {
-      case Locale.EnglishUS:
-      case Locale.EnglishGB:
-        userLocale = 'en_US';
-        break;
-      case Locale.PortugueseBR:
-        userLocale = 'pt_BR';
-        break;
-      default:
-        userLocale = client.config.defaultLanguage as SupportedLocales;
-        break;
-    }
+    const userLocale = client.helpers.recommendLocale(interaction.locale);
 
     const t = (path: AllLocalePaths, ...args: unknown[]) => {
       return client.languages.manager.get(userLocale, path, ...args);
