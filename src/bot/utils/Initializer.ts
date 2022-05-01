@@ -1,8 +1,8 @@
 /* eslint-disable no-await-in-loop */
 import { Collection } from 'discord.js';
 import { readdir, readFile } from 'node:fs/promises';
-import { setTimeout as sleep } from 'node:timers/promises';
 import type { Command } from '../../structures/Command';
+import type { CommandDataStructure } from '../../structures/CommandDataStructure';
 import type { Event } from '../../structures/Event';
 import type { Task } from '../../structures/Task';
 import type { DenkyClient } from '../../types/Client';
@@ -16,8 +16,8 @@ class Initializer {
   async init(client: DenkyClient) {
     await this.loadBotConfiguration(client);
     await this.loadModules(client);
-    await sleep(2500);
     await this.loadCommands(client);
+    await this.loadCommandData(client);
     await this.loadEvents(client);
     await this.loadTasks(client);
     // Log bot in after loading everything
@@ -38,6 +38,22 @@ class Initializer {
         const cmd = new CommandClass(client);
         client.commands.set(commandWithoutExtension, cmd);
         if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[COMMANDS]\x1b[0m', `Loaded command: ${commandWithoutExtension}`);
+      }
+    }
+  }
+
+  async loadCommandData(client: DenkyClient) {
+    const categories = await readdir('./bot/commands/');
+    for (const category of categories) {
+      const commands = await readdir(`./bot/commands/${category}/data`);
+
+      for (const command of commands) {
+        if (!command.endsWith('.js')) continue;
+        const commandDataWithoutExtension = command.replace('.js', '');
+
+        const { default: CommandDataClass }: { default: new (_client: DenkyClient) => CommandDataStructure } = await import(`../commands/${category}/data/${command}`);
+        const cachedCommand = client.commands.get(commandDataWithoutExtension);
+        if (cachedCommand) cachedCommand.options = new CommandDataClass(client).data;
       }
     }
   }

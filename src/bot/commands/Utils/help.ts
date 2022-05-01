@@ -1,15 +1,4 @@
-import {
-  ActionRowBuilder,
-  ApplicationCommandType,
-  ButtonBuilder,
-  ButtonStyle,
-  EmbedBuilder,
-  Message,
-  PermissionFlagsBits,
-  SelectMenuInteraction,
-  UnsafeSelectMenuBuilder,
-  UnsafeSelectMenuOptionBuilder,
-} from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Message, PermissionFlagsBits, SelectMenuInteraction, UnsafeSelectMenuBuilder, UnsafeSelectMenuOptionBuilder } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys } from '../../managers/LanguageManager';
@@ -26,18 +15,6 @@ export default class HelpCommand extends Command {
       guildOnly: false,
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
-
-    this.addRawOptions({
-      name: client.languages.manager.get('en_US', 'commandNames:help'),
-      nameLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:help'),
-      },
-      type: ApplicationCommandType.ChatInput,
-      description: client.languages.manager.get('en_US', 'commandDescriptions:help'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:help'),
-      },
-    });
   }
 
   override async run({ t, interaction }: CommandRunOptions) {

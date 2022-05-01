@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, GuildMember } from 'discord.js';
+import type { GuildMember } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
@@ -14,49 +14,6 @@ export default class PingCommand extends Command {
       guildOnly: true,
     };
     this.permissions = { bot: [], user: [] };
-
-    this.addRawOptions({
-      name: 'afk',
-      type: ApplicationCommandType.ChatInput,
-      options: [
-        {
-          name: client.languages.manager.get('en_US', 'commandNames:afk/on'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/on'),
-          },
-          description: client.languages.manager.get('en_US', 'commandDescriptions:afk/on'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on'),
-          },
-          type: ApplicationCommandOptionType.Subcommand,
-          options: [
-            {
-              name: client.languages.manager.get('en_US', 'commandNames:afk/reason'),
-              nameLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/reason'),
-              },
-              type: ApplicationCommandOptionType.String,
-              description: client.languages.manager.get('en_US', 'commandDescriptions:afk/on/reason'),
-              descriptionLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on/reason'),
-              },
-            },
-          ],
-        },
-        {
-          name: client.languages.manager.get('en_US', 'commandNames:afk/off'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/off'),
-          },
-          description: client.languages.manager.get('en_US', 'commandDescriptions:afk/off'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/off'),
-          },
-          type: ApplicationCommandOptionType.Subcommand,
-        },
-      ],
-      description: client.languages.manager.get('en_US', 'commandNames:afk/on'),
-    });
   }
 
   override async run({ t, interaction }: CommandRunOptions) {
