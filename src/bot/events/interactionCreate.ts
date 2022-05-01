@@ -17,6 +17,7 @@ export default class InteractionCreateEvent extends Event {
 
     const botCommand = client.commands.get(interaction.commandName);
     if (!botCommand) return;
+    if (!interaction.inGuild() && botCommand.config.guildOnly) return;
 
     let userLocale: SupportedLocales = 'en_US';
     switch (interaction.locale) {

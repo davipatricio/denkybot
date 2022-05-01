@@ -26,6 +26,8 @@ class Command {
     autoDefer: boolean;
     /** Whether this command should be hidden from the help command */
     showInHelp: boolean;
+    /** Whether this command should only be available in guilds */
+    guildOnly: boolean;
   };
 
   /** Command options to be posted to Discord */
@@ -42,8 +44,9 @@ class Command {
     };
     this.config = {
       ephemeral: false,
-      autoDefer: false,
+      autoDefer: true,
       showInHelp: true,
+      guildOnly: true,
     };
   }
 

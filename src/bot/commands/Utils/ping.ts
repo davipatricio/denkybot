@@ -11,6 +11,7 @@ export default class PingCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: true,
+      guildOnly: false,
     };
     this.permissions = { bot: [], user: [] };
 
