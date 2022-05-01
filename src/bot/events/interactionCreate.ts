@@ -18,19 +18,7 @@ export default class InteractionCreateEvent extends Event {
     const botCommand = client.commands.get(interaction.commandName);
     if (!botCommand) return;
 
-    let userLocale: SupportedLocales = 'en_US';
-    switch (interaction.locale) {
-      case Locale.EnglishUS:
-      case Locale.EnglishGB:
-        userLocale = 'en_US';
-        break;
-      case Locale.PortugueseBR:
-        userLocale = 'pt_BR';
-        break;
-      default:
-        userLocale = client.config.defaultLanguage as SupportedLocales;
-        break;
-    }
+    const userLocale = client.helpers.recommendLocale(interaction.locale);
 
     const t = (path: AllLocalePaths, ...args: unknown[]) => {
       return client.languages.manager.get(userLocale, path, ...args);

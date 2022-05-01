@@ -21,7 +21,7 @@ export default class MessageCreateEvent extends Event {
     if (!data) return;
 
     const t = (path: AllLocalePaths, ...args: unknown[]) => {
-      return client.languages.manager.get((message.guild?.preferredLocale.replace('-', '_') ?? client.config.defaultLanguage) as SupportedLocales, path, ...args);
+      return client.languages.manager.get(client.helpers.recommendLocale(message.guild?.preferredLocale), path, ...args);
     };
 
     client.databases.afk.delete(message.author.id);
@@ -35,7 +35,7 @@ export default class MessageCreateEvent extends Event {
     if (message.mentions.users.size === 0) return;
 
     const t = (path: AllLocalePaths, ...args: unknown[]) => {
-      return client.languages.manager.get((message.guild?.preferredLocale.replace('-', '_') ?? client.config.defaultLanguage) as SupportedLocales, path, ...args);
+      return client.languages.manager.get(client.helpers.recommendLocale(message.guild?.preferredLocale), path, ...args);
     };
 
     for (const user of message.mentions.users.first(5).values()) {
