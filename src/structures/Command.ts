@@ -52,10 +52,6 @@ class Command {
   run({ t, interaction }: CommandRunOptions): Awaitable<any> {
     return { t, interaction };
   }
-
-  addRawOptions(options: ChatInputApplicationCommandData) {
-    this.options = options;
-  }
 }
 
 export type CommandLocale = (path: AllLocalePaths, ...args: unknown[]) => string;

@@ -1,4 +1,3 @@
-import { ApplicationCommandType } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
@@ -14,15 +13,6 @@ export default class PingCommand extends Command {
       guildOnly: false,
     };
     this.permissions = { bot: [], user: [] };
-
-    this.addRawOptions({
-      name: 'ping',
-      type: ApplicationCommandType.ChatInput,
-      description: client.languages.manager.get('en_US', 'commandDescriptions:ping'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ping'),
-      },
-    });
   }
 
   override async run({ t, interaction }: CommandRunOptions) {
