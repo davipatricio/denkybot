@@ -48,11 +48,16 @@ export class LanguageManager {
 
   get(lang: SupportedLocales, path: AllLocalePaths, ...args: unknown[]) {
     const [category, key] = path.split(':');
-    const locale = this.cache[category as LocaleCategories][lang][key as AllLocaleKeys] ?? this.cache[category as LocaleCategories].pt_BR[key as AllLocaleKeys];
-    if (!locale) return `!!{${path}}!!`;
+    if (!this.cache[category]) return `!!{${category}.${key}}!!`;
+
+    const baseCategory = this.cache[category as LocaleCategories];
+    const baseLocale = baseCategory[lang] ?? baseCategory[this.client.config.defaultLanguage];
+
+    const locale = baseLocale[key as AllLocaleKeys];
+    if (!locale) return `!!{${category}.${key}}!!`;
 
     if (typeof locale === 'string') return locale;
     if (typeof locale === 'function') return locale(...args);
-    return `!!{${path}}!!`;
+    return `!!{${category}.${key}}!!`;
   }
 }
