@@ -13,16 +13,13 @@ export default class Helpers {
   recommendLocale(locale?: Locale) {
     if (!locale) return this.client.config.defaultLanguage as SupportedLocales;
     let recommendedLocale = this.client.config.defaultLanguage as SupportedLocales;
-    switch (this.formatLocale(locale)) {
+    switch (locale.replace('_', '-')) {
       case Locale.EnglishUS:
       case Locale.EnglishGB:
         recommendedLocale = 'en_US';
         break;
       case Locale.PortugueseBR:
         recommendedLocale = 'pt_BR';
-        break;
-      default:
-        recommendedLocale = this.client.config.defaultLanguage as SupportedLocales;
         break;
     }
     return recommendedLocale;
