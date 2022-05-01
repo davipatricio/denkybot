@@ -6,7 +6,6 @@ export default class UserAvatarSubCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
     this.rawName = '';
-    this.rawCategory = '';
     this.config = {
       autoDefer: true,
       ephemeral: false,
