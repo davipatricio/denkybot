@@ -34,4 +34,5 @@ export default {
   // Server
   server: 'Veja informações sobre um servidor',
   'server/info': 'Veja informações sobre um servidor',
+  'server/icon': 'Veja o ícone de um servidor',
 } as const;

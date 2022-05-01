@@ -1,4 +1,4 @@
-import type { User } from 'discord.js';
+import type { Guild, User } from 'discord.js';
 
 export default {
   // General errors
@@ -42,4 +42,8 @@ export default {
   'user/avatar/browser': 'Abrir avatar no navegador',
   'user/avatar/seeGuildAvatar': 'Ver o avatar do usuário neste servidor',
   'user/avatar/seeGlobalAvatar': 'Ver o avatar do usuário neste servidor',
+
+  // Server icon
+  'server/icon/title': (guild: Guild) => `Ícone do servidor ${guild}`,
+  'server/icon/browser': 'Abrir ícone no navegador',
 } as const;

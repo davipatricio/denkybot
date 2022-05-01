@@ -31,6 +31,14 @@ export default class ServerCommand extends Command {
             'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/info'),
           },
         },
+        {
+          name: 'icon',
+          type: ApplicationCommandOptionType.Subcommand,
+          description: client.languages.manager.get('en_US', 'commandDescriptions:server/icon'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/icon'),
+          },
+        },
       ],
     });
   }
@@ -39,6 +47,11 @@ export default class ServerCommand extends Command {
     switch (interaction.options.getSubcommand()) {
       case 'info': {
         this.client.commands.get('_server_info')?.run({ t, interaction });
+        break;
+      }
+
+      case 'icon': {
+        this.client.commands.get('_server_icon')?.run({ t, interaction });
         break;
       }
     }
