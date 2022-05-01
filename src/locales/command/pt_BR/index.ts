@@ -2,8 +2,9 @@ import type { User } from 'discord.js';
 
 export default {
   // General errors
-  'permissions/bot/missing': (perms: string) => `Eu não tenho as permissões necessárias: ${perms}`,
-  'permissions/user/missing': (perms: string) => `Você não tem as permissões necessárias: ${perms}`,
+  'permissions/bot/missing': (perms: string) => `Eu não tenho as permissões necessárias: \`${perms}\``,
+  'permissions/user/missing': (perms: string) => `Você não tem as permissões necessárias: \`${perms}\``,
+  'errors/commandGuildOnly': 'Este comando só pode ser executado em servidores.',
 
   // Ping
   'ping/calculating': 'Calculando...',

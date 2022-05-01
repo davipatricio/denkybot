@@ -17,7 +17,6 @@ export default class InteractionCreateEvent extends Event {
 
     const botCommand = client.commands.get(interaction.commandName);
     if (!botCommand) return;
-    if (!interaction.inGuild() && botCommand.config.guildOnly) return;
 
     let userLocale: SupportedLocales = 'en_US';
     switch (interaction.locale) {
@@ -37,8 +36,15 @@ export default class InteractionCreateEvent extends Event {
       return client.languages.manager.get(userLocale, path, ...args);
     };
 
-    if (!InteractionCreateEvent.checkBotPermissions(interaction, botCommand, t)) return;
-    if (!InteractionCreateEvent.checkMemberPermissions(interaction, botCommand, t)) return;
+    if (!interaction.inGuild() && botCommand.config.guildOnly) {
+      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:errors/commandGuildOnly')}`, ephemeral: true });
+      return;
+    }
+
+    if (interaction.inGuild()) {
+      if (!InteractionCreateEvent.checkBotPermissions(interaction, botCommand, t)) return;
+      if (!InteractionCreateEvent.checkMemberPermissions(interaction, botCommand, t)) return;
+    }
 
     if (botCommand.config.autoDefer) await interaction.deferReply({ ephemeral: botCommand.config.ephemeral });
 
@@ -81,7 +87,7 @@ export default class InteractionCreateEvent extends Event {
   static checkBotPermissions(interaction: ChatInputCommandInteraction, command: Command, t: CommandLocale): boolean {
     if (command.permissions.bot.length === 0) return true;
     if (!interaction.guild?.me?.permissions.has(command.permissions.bot)) {
-      const permissions = new PermissionsBitField(command.permissions.user)
+      const permissions = new PermissionsBitField(command.permissions.bot)
         .toArray()
         .map(p => t(`permissions:${p}`))
         .join(', ');
