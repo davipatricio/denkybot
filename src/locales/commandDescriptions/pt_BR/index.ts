@@ -32,6 +32,11 @@ export default {
   'user/info': 'Veja informações sobre um usuário',
   'user/info/user': 'O usuário para ver as informações',
 
+  // Server
+  server: 'Veja informações sobre um servidor',
+  'server/info': 'Veja informações sobre um servidor',
+  'server/icon': 'Veja o ícone de um servidor',
+
   // Text
   text: 'Traduza ou edite texto em diferentes maneiras',
   'text/text': 'O texto para editar',
