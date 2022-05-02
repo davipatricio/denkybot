@@ -44,4 +44,8 @@ export default {
   'text/invert': 'Inverte um texto',
   'text/emojify': 'Transforme um texto em emojis',
   'text/vaporwave': 'Faça uma mensagem V A P O R W A V E',
+
+  // Config
+  config: 'Configure funcionalidades do Denky no seu servidor',
+  'config/suggestions': 'Configure o sistema de sugestões do Denky',
 } as const;

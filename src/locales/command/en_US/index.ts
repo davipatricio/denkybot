@@ -58,4 +58,25 @@ export default {
   'server/info/embed/roles': 'Roles',
   'server/info/embed/boosts': (boosts: number, level: number) => `🌟 **Boosts:** ${boosts}\n🌠 **Level:** ${level}`,
   'server/info/embed/footer': (guild: Guild) => `🔢 ID: ${guild.id} | 📅 Created at`,
+
+  // Config suggestions
+  'config/suggestions/title': 'Settings Panel | Suggestions',
+  'config/suggestions/enable': 'Enable',
+  'config/suggestions/disable': 'Disable',
+
+  'config/suggestions/pages/suggestions': 'Enable or disable the suggestion system',
+  'config/suggestions/pages/categories': 'Add or delete suggestion categories',
+  'config/suggestions/pages/reactions': 'Enable or disable reactions on suggestions',
+  'config/suggestions/pages/cooldowns': 'Manage suggestion cooldowns',
+
+  'config/suggestions/pages': 'Pages',
+  'config/suggestions/pages/suggestions/title': 'Suggestions',
+  'config/suggestions/pages/categories/title': 'Categories',
+  'config/suggestions/pages/reactions/title': 'Reactions',
+  'config/suggestions/pages/cooldowns/title': 'Cooldowns',
+
+  'config/suggestions/disabled': 'The suggestion system is currently disabled.',
+  'config/suggestions/enabled': 'The suggestion system is currently enabled.',
+
+  'config/suggestions/actions/enabled': 'The suggestion system has been successfully enabled! Now, you need to add categories to finish the process.',
 } as const;

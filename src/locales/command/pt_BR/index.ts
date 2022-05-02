@@ -58,4 +58,25 @@ export default {
   'server/info/embed/roles': 'Cargos',
   'server/info/embed/boosts': (boosts: number, level: number) => `🌟 **Impulsos:** ${boosts}\n🌠 **Nível:** ${level}`,
   'server/info/embed/footer': (guild: Guild) => `🔢 ID: ${guild.id} | 📅 Criado em`,
+
+  // Config suggestions
+  'config/suggestions/title': 'Painel de configurações | Sugestões',
+  'config/suggestions/enable': 'Habilitar',
+  'config/suggestions/disable': 'Desabilitar',
+
+  'config/suggestions/pages': 'Páginas',
+  'config/suggestions/pages/suggestions': 'Ative ou desativar o sistema de sugestões',
+  'config/suggestions/pages/categories': 'Adicione ou exclua categorias de sugestões',
+  'config/suggestions/pages/reactions': 'Habilite ou desabilite reações em sugestões',
+  'config/suggestions/pages/cooldowns': 'Gerencie cooldowns de sugestões',
+
+  'config/suggestions/pages/suggestions/title': 'Sugestões',
+  'config/suggestions/pages/categories/title': 'Categorias',
+  'config/suggestions/pages/reactions/title': 'Reações',
+  'config/suggestions/pages/cooldowns/title': 'Cooldowns',
+
+  'config/suggestions/disabled': 'O sistema de sugestões está atualmente desativado.',
+  'config/suggestions/enabled': 'O sistema de sugestões está atualmente habilitado.',
+
+  'config/suggestions/actions/enabled': 'O sistema de sugestões foi habilitado com sucesso! Agora, você precisa adicionar categorias para finalizar o processo.',
 } as const;

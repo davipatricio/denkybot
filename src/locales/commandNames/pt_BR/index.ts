@@ -34,4 +34,8 @@ export default {
   text: 'texto',
   'text/claps': 'palmas',
   'text/invert': 'inverter',
+
+  // Config
+  config: 'config',
+  'config/suggestions': 'sugestoes',
 } as const;

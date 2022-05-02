@@ -44,4 +44,8 @@ export default {
   'text/invert': 'Inverts a text',
   'text/emojify': 'Emojifies a text',
   'text/vaporwave': 'Creates a V A P O R W A V E text',
+
+  // Config
+  config: 'Configure Denky features on your server',
+  'config/suggestions': "Configure Denky's suggestion system",
 } as const;
