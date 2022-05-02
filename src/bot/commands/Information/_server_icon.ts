@@ -6,7 +6,6 @@ export default class ServerIconSubCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
     this.rawName = '';
-    this.rawCategory = '';
     this.config = {
       autoDefer: true,
       ephemeral: false,
@@ -22,7 +21,7 @@ export default class ServerIconSubCommand extends Command {
     const embed = new EmbedBuilder()
       .setColor('Blurple')
       .setTitle(t('command:server/icon/title', interaction.guild.name))
-      .setImage(interaction.guild.iconURL({ size: 2048, extension: 'png' }) as string);
+      .setImage(interaction.guild.iconURL({ size: 2048, extension: 'png' }));
 
     const button = new ButtonBuilder()
       .setURL(interaction.guild.iconURL({ size: 2048, extension: 'png' }) as string)

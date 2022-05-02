@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
+import { PermissionFlagsBits } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
@@ -14,33 +14,6 @@ export default class ServerCommand extends Command {
       guildOnly: true,
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
-
-    this.addRawOptions({
-      name: 'server',
-      type: ApplicationCommandType.ChatInput,
-      description: client.languages.manager.get('en_US', 'commandDescriptions:server'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server'),
-      },
-      options: [
-        {
-          name: 'info',
-          type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:server/info'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/info'),
-          },
-        },
-        {
-          name: 'icon',
-          type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:server/icon'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/icon'),
-          },
-        },
-      ],
-    });
   }
 
   override run({ t, interaction }: CommandRunOptions) {

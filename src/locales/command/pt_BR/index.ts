@@ -1,4 +1,4 @@
-import type { Guild, User } from 'discord.js';
+import type { Guild, GuildMember, User } from 'discord.js';
 
 export default {
   // General errors
@@ -47,4 +47,15 @@ export default {
   // Server icon
   'server/icon/title': (guild: Guild) => `Ícone do servidor ${guild}`,
   'server/icon/browser': 'Abrir ícone no navegador',
+
+  // Server info
+  'server/info/embed/owner': (owner: GuildMember) => `👑 **Dono**\n${owner.user.tag} (${owner.user.id})`,
+  'server/info/embed/categories': 'Categorias',
+  'server/info/embed/textChannels': 'Canais de texto',
+  'server/info/embed/voiceChannels': 'Canais de voz',
+  'server/info/embed/members': 'Membros',
+  'server/info/embed/memberCount': (members: number, bots: number, total: number) => `🙆 **Membros:** ${members}\n🤖 **Bots:** ${bots}\n👥 **Total:** ${total}`,
+  'server/info/embed/roles': 'Cargos',
+  'server/info/embed/boosts': (boosts: number, level: number) => `🌟 **Impulsos:** ${boosts}\n🌠 **Nível:** ${level}`,
+  'server/info/embed/footer': (guild: Guild) => `🔢 ID: ${guild.id} | 📅 Criado em`,
 } as const;
