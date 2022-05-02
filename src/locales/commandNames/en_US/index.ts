@@ -26,6 +26,7 @@ export default {
   help: 'help',
 
   // User
+  user: 'user avatar | info',
   'user/info/user': 'user',
   'user/avatar/user': 'user',
 

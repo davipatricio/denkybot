@@ -9,6 +9,7 @@ export default {
   'afk/off': 'Disables your AFK mode',
 
   // Poll
+  poll: 'Create polls with up to 9 options',
   'poll/create': 'Creates a poll in this channel',
   'poll/create/permanent': 'Should this poll be permanent?',
   'poll/create/option1': '1st poll option',
