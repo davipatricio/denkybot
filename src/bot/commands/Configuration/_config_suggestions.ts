@@ -30,16 +30,12 @@ export default class SuggestionsSubCommand extends Command {
 
   override async run({ t, interaction }: CommandRunOptions) {
     if (!interaction.guild) return;
-
     const configStatus = this.client.databases.config.get(`suggestions.${interaction.guild.id}`);
 
-    const embed = this.generateEmbedPage('sugestoes', interaction, configStatus, t);
-    const buttonRow = this.generateButtonsFromPage('sugestoes', interaction, configStatus, t);
-
     const selectRow = new ActionRowBuilder<SelectMenuBuilder>();
+    const { embed, buttons: buttonRow } = this.updateMessage('sugestoes', null, selectRow, interaction, configStatus, t);
 
-    const paginationSelect = new UnsafeSelectMenuBuilder();
-    paginationSelect
+    const paginationSelect = new UnsafeSelectMenuBuilder()
       .setCustomId('pagination')
       .setPlaceholder(t('command:config/suggestions/pages'))
       .setOptions([
@@ -73,20 +69,12 @@ export default class SuggestionsSubCommand extends Command {
     selectRow.setComponents([paginationSelect]);
 
     const message = (await interaction.editReply({ components: [selectRow, buttonRow], embeds: [embed] })) as Message;
-    const collector = message.createMessageComponentCollector({
-      filter: int => int.user.id === interaction.user.id,
-      time: 120000,
-    });
+    const collector = message.createMessageComponentCollector({ filter: int => int.user.id === interaction.user.id, time: 120000 });
 
     collector.on('collect', async int => {
       const updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
       await int.deferUpdate();
-      if (int.isSelectMenu()) {
-        const updatedEmbed = this.generateEmbedPage(int.values[0] as PageTypes, interaction, updatedConfig, t);
-        const updatedButtons = this.generateButtonsFromPage(int.values[0] as PageTypes, interaction, updatedConfig, t);
-        message.edit({ components: [selectRow, updatedButtons], embeds: [updatedEmbed] });
-        return;
-      }
+      if (int.isSelectMenu()) this.updateMessage('categorias', message, selectRow, interaction, updatedConfig, t);
       if (int.isButton()) {
         switch (int.customId) {
           // Enable suggestions
@@ -96,78 +84,62 @@ export default class SuggestionsSubCommand extends Command {
               categories: [],
               cooldown: 0,
             });
-
             const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-            const updatedEmbed = this.generateEmbedPage('sugestoes', interaction, newConfig, t);
-            const updatedButtons = this.generateButtonsFromPage('sugestoes', interaction, newConfig, t);
-            message.edit({ components: [selectRow, updatedButtons], embeds: [updatedEmbed] });
+            this.updateMessage('categorias', message, selectRow, interaction, newConfig, t);
             int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/enabled')}`, ephemeral: true });
             break;
           }
           // Disable suggestions
           case 'disable': {
             this.client.databases.config.delete(`suggestions.${interaction.guild?.id}`);
-            const updatedEmbed = this.generateEmbedPage('sugestoes', interaction, undefined, t);
-            const updatedButtons = this.generateButtonsFromPage('sugestoes', interaction, undefined, t);
-            message.edit({ components: [selectRow, updatedButtons], embeds: [updatedEmbed] });
+            this.updateMessage('categorias', message, selectRow, interaction, undefined, t);
             break;
           }
           // Add category
           case 'add_category': {
-            const oldConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToAdd', interaction.channel)}`, ephemeral: true });
             message.channel
-              .awaitMessages({
-                filter: m => m.author.id === interaction.user.id && m.mentions.channels.size === 1,
-                max: 1,
-                time: 120000,
-              })
+              .awaitMessages({ filter: m => m.author.id === interaction.user.id && m.mentions.channels.size === 1, max: 1, time: 120000 })
               .then(m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
-                oldConfig.categories = oldConfig.categories.filter(c => c !== mentionedChannel);
-                oldConfig.categories.push(mentionedChannel);
-                this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, oldConfig);
+                updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel);
+                updatedConfig.categories.push(mentionedChannel);
+                this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, updatedConfig);
                 const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
                 int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/category/added')}`, ephemeral: true });
-                const updatedEmbed = this.generateEmbedPage('categorias', interaction, newConfig, t);
-                const updatedButtons = this.generateButtonsFromPage('categorias', interaction, newConfig, t);
-                message.edit({ components: [selectRow, updatedButtons], embeds: [updatedEmbed] });
+                this.updateMessage('categorias', message, selectRow, interaction, newConfig, t);
               })
-              .catch(() => {
-                int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/addError')}`, ephemeral: true });
-              });
+              .catch(() => int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/addError')}`, ephemeral: true }));
             break;
           }
           // Remove category
           case 'del_category': {
-            const oldConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToRemove', interaction.channel)}`, ephemeral: true });
             message.channel
-              .awaitMessages({
-                filter: m => m.author.id === interaction.user.id && m.mentions.channels.size === 1,
-                max: 1,
-                time: 120000,
-              })
+              .awaitMessages({ filter: m => m.author.id === interaction.user.id && m.mentions.channels.size === 1, max: 1, time: 120000 })
               .then(m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
-                oldConfig.categories = oldConfig.categories.filter(c => c !== mentionedChannel);
-                this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, oldConfig);
+                updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel);
+                this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, updatedConfig);
                 const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
                 int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/category/removed')}`, ephemeral: true });
-                const updatedEmbed = this.generateEmbedPage('categorias', interaction, newConfig, t);
-                const updatedButtons = this.generateButtonsFromPage('categorias', interaction, newConfig, t);
-                message.edit({ components: [selectRow, updatedButtons], embeds: [updatedEmbed] });
+                this.updateMessage('categorias', message, selectRow, interaction, newConfig, t);
               })
-              .catch(() => {
-                int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/delError')}`, ephemeral: true });
-              });
+              .catch(() => int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/delError')}`, ephemeral: true }));
             break;
           }
         }
       }
     });
+  }
+
+  updateMessage(page: PageTypes, message: Message | null, selectRow: ActionRowBuilder<UnsafeSelectMenuBuilder>, interaction: ChatInputCommandInteraction, config: any, t: CommandLocale) {
+    const embed = this.generateEmbedPage(page, interaction, config, t);
+    const buttons = this.generateButtonsFromPage(page, config, t);
+    message?.edit({ components: [selectRow, buttons], embeds: [embed] });
+    return { embed, buttons };
   }
 
   generateEmbedPage(page: PageTypes, interaction: ChatInputCommandInteraction, configStatus: any, t: CommandLocale) {
@@ -177,67 +149,55 @@ export default class SuggestionsSubCommand extends Command {
       .setTitle(`🔧 ${t('command:config/suggestions/title')}`)
       .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() });
     switch (page) {
-      case 'sugestoes': {
-        if (configStatus) embed.setDescription(`✅ **|** ${t('command:config/suggestions/enabled')}`);
-        else embed.setDescription(`❌ **|** ${t('command:config/suggestions/disabled')}`);
-        return embed;
-      }
+      case 'sugestoes':
+        return embed.setDescription(configStatus ? `✅ **|** ${t('command:config/suggestions/enabled')}` : `❌ **|** ${t('command:config/suggestions/disabled')}`);
       case 'categorias': {
-        if (configStatus) {
-          const { categories } = configStatus;
-          embed.setDescription(`✅ **|** ${t('command:config/suggestions/enabled')}`);
-          embed.addFields([
-            {
-              name: 'Categorias',
-              value: categories.length >= 1 ? categories.map(catId => `<#${catId}>`).join('\n') : t('command:config/suggestions/noCategories'),
-            },
-          ]);
-        } else embed.setDescription(`❌ **|** ${t('command:config/suggestions/disabled')}`);
-        return embed;
+        if (!configStatus) return embed.setDescription(`❌ **|** ${t('command:config/suggestions/disabled')}`);
+        const { categories } = configStatus;
+        return embed.setDescription(`✅ **|** ${t('command:config/suggestions/enabled')}`).addFields([
+          {
+            name: 'Categorias',
+            value: categories.length >= 1 ? categories.map(catId => `<#${catId}>`).join('\n') : t('command:config/suggestions/noCategories'),
+          },
+        ]);
       }
       default:
         return embed;
     }
   }
 
-  generateButtonsFromPage(page: PageTypes, _interaction: ChatInputCommandInteraction, configStatus: any, t: CommandLocale) {
+  generateButtonsFromPage(page: PageTypes, configStatus: any, t: CommandLocale) {
     const buttonRow = new ActionRowBuilder<ButtonBuilder>();
     switch (page) {
       case 'sugestoes': {
-        if (configStatus) {
-          buttonRow.setComponents([
+        if (configStatus)
+          return buttonRow.setComponents([
             new ButtonBuilder().setLabel(t('command:config/suggestions/enable')).setDisabled(true).setStyle(ButtonStyle.Success).setCustomId('enable'),
             new ButtonBuilder().setLabel(t('command:config/suggestions/disable')).setDisabled(false).setStyle(ButtonStyle.Danger).setCustomId('disable'),
           ]);
-        } else {
-          buttonRow.setComponents([
-            new ButtonBuilder().setLabel(t('command:config/suggestions/enable')).setDisabled(false).setStyle(ButtonStyle.Success).setCustomId('enable'),
-            new ButtonBuilder().setLabel(t('command:config/suggestions/disable')).setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('disable'),
-          ]);
-        }
-        return buttonRow;
+        return buttonRow.setComponents([
+          new ButtonBuilder().setLabel(t('command:config/suggestions/enable')).setDisabled(false).setStyle(ButtonStyle.Success).setCustomId('enable'),
+          new ButtonBuilder().setLabel(t('command:config/suggestions/disable')).setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('disable'),
+        ]);
       }
       case 'categorias': {
-        if (configStatus) {
-          buttonRow.setComponents([
-            new ButtonBuilder()
-              .setLabel('Adicionar categoria')
-              .setDisabled(configStatus.categories.length === 5)
-              .setStyle(ButtonStyle.Success)
-              .setCustomId('add_category'),
-            new ButtonBuilder()
-              .setLabel('Remover categoria')
-              .setDisabled(configStatus.categories.length === 0)
-              .setStyle(ButtonStyle.Danger)
-              .setCustomId('del_category'),
-          ]);
-        } else {
-          buttonRow.setComponents([
+        if (!configStatus)
+          return buttonRow.setComponents([
             new ButtonBuilder().setLabel('Adicionar categoria').setDisabled(true).setStyle(ButtonStyle.Success).setCustomId('add_category'),
             new ButtonBuilder().setLabel('Remover categoria').setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('del_category'),
           ]);
-        }
-        return buttonRow;
+        return buttonRow.setComponents([
+          new ButtonBuilder()
+            .setLabel('Adicionar categoria')
+            .setDisabled(configStatus.categories.length === 5)
+            .setStyle(ButtonStyle.Success)
+            .setCustomId('add_category'),
+          new ButtonBuilder()
+            .setLabel('Remover categoria')
+            .setDisabled(configStatus.categories.length === 0)
+            .setStyle(ButtonStyle.Danger)
+            .setCustomId('del_category'),
+        ]);
       }
       default:
         return buttonRow;
