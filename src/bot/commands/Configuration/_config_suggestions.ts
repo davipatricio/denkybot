@@ -137,7 +137,7 @@ export default class SuggestionsSubCommand extends Command {
           embed.addFields([
             {
               name: 'Categorias',
-              value: categories.length >= 1 ? categories.map(catId => `<#${catId}>`).join('\n') : 'Não há categorias configuradas',
+              value: categories.length >= 1 ? categories.map(catId => `<#${catId}>`).join('\n') : t('command:config/suggestions/noCategories'),
             },
           ]);
         } else embed.setDescription(`❌ **|** ${t('command:config/suggestions/disabled')}`);

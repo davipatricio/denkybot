@@ -80,5 +80,7 @@ export default {
   'config/suggestions/disabled': 'O sistema de sugestões está atualmente desativado.',
   'config/suggestions/enabled': 'O sistema de sugestões está atualmente habilitado.',
 
+  'config/suggestions/noCategories': 'Não há categorias configuradas',
+
   'config/suggestions/actions/enabled': 'O sistema de sugestões foi habilitado com sucesso! Agora, você precisa adicionar categorias para finalizar o processo.',
 } as const;

@@ -80,5 +80,7 @@ export default {
   'config/suggestions/disabled': 'The suggestion system is currently disabled.',
   'config/suggestions/enabled': 'The suggestion system is currently enabled.',
 
+  'config/suggestions/noCategories': 'No categories have been created yet',
+
   'config/suggestions/actions/enabled': 'The suggestion system has been successfully enabled! Now, you need to add categories to finish the process.',
 } as const;
