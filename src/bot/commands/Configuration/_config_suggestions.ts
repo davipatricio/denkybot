@@ -133,7 +133,7 @@ export default class SuggestionsSubCommand extends Command {
                 this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, updatedConfig);
                 const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
                 int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/category/removed')}`, ephemeral: true });
-                this.updateMessage('categorias', message, selectRow, interaction, newConfig, t);
+                this.updateMessage('sugestoes', message, selectRow, interaction, newConfig, t);
               })
               .catch(() => int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/delError')}`, ephemeral: true }));
             break;
@@ -169,7 +169,7 @@ export default class SuggestionsSubCommand extends Command {
               useThreads: true,
             });
             const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-            this.updateMessage('reacoes', message, selectRow, interaction, newConfig, t);
+            this.updateMessage('threads', message, selectRow, interaction, newConfig, t);
             int.followUp({
               content: `✅ **|** ${t('command:config/suggestions/actions/threads/enabled')}`,
               ephemeral: true,
@@ -183,7 +183,7 @@ export default class SuggestionsSubCommand extends Command {
               useThreads: false,
             });
             const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-            this.updateMessage('reacoes', message, selectRow, interaction, newConfig, t);
+            this.updateMessage('threads', message, selectRow, interaction, newConfig, t);
             int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/threads/disabled')}`, ephemeral: true });
             break;
           }
