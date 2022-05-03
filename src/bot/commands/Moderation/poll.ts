@@ -17,7 +17,7 @@ const MappedNumericEmojis = {
 export default class PollCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
-    this.rawName = 'poll';
+    this.rawName = 'POLL';
     this.rawCategory = 'MODERATION';
     this.config = {
       autoDefer: true,

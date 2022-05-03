@@ -35,6 +35,9 @@ export default {
   'text/claps': 'claps',
   'text/invert': 'invert',
 
+  // Server
+  server: 'server',
+
   // Config
   config: 'config',
   'config/suggestions': 'suggestions',
