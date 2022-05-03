@@ -32,7 +32,7 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://top.gg/api/bots/stats`, {
+    const request = await fetch('https://top.gg/api/bots/stats', {
       method: 'POST',
       headers: {
         Authorization,

@@ -63,6 +63,11 @@ export default class SuggestionsSubCommand extends Command {
           .setLabel(t('command:config/suggestions/pages/cooldowns/title'))
           .setValue('cooldown')
           .setEmoji({ name: '⏲️' }),
+        new UnsafeSelectMenuOptionBuilder()
+          .setDescription(t('command:config/suggestions/pages/threads'))
+          .setLabel(t('command:config/suggestions/pages/threads/title'))
+          .setValue('threads')
+          .setEmoji({ name: '💭' }),
       ]);
 
     selectRow.setComponents([paginationSelect]);

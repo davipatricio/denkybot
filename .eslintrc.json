@@ -63,6 +63,7 @@
                 "allowForLoopAfterthoughts": true
             }
         ],
-        "require-await": "error"
+        "require-await": "error",
+        "quotes": ["error", "single", {"avoidEscape": true}]
     }
 }

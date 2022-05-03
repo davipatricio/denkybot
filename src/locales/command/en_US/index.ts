@@ -68,12 +68,14 @@ export default {
   'config/suggestions/pages/categories': 'Add or delete suggestion categories',
   'config/suggestions/pages/reactions': 'Enable or disable reactions on suggestions',
   'config/suggestions/pages/cooldowns': 'Manage suggestion cooldowns',
+  'config/suggestions/pages/threads': 'Enable or disable the use of threads',
 
   'config/suggestions/pages': 'Pages',
   'config/suggestions/pages/suggestions/title': 'Suggestions',
   'config/suggestions/pages/categories/title': 'Categories',
   'config/suggestions/pages/reactions/title': 'Reactions',
   'config/suggestions/pages/cooldowns/title': 'Cooldowns',
+  'config/suggestions/pages/threads/title': 'Threads',
 
   'config/suggestions/disabled': 'The suggestion system is currently disabled.',
   'config/suggestions/enabled': 'The suggestion system is currently enabled.',
