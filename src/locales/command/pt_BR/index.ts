@@ -68,6 +68,8 @@ export default {
   'config/suggestions/buttons/delCategory': 'Remover categoria',
   'config/suggestions/buttons/enableReact': 'Habilitar reações',
   'config/suggestions/buttons/disableReact': 'Desabilitar reações',
+  'config/suggestions/buttons/enableThreads': 'Habilitar tópicos',
+  'config/suggestions/buttons/disableThreads': 'Desabilitar tópicos',
 
   'config/suggestions/pages': 'Páginas',
   'config/suggestions/pages/suggestions': 'Ative ou desativar o sistema de sugestões',
@@ -85,6 +87,7 @@ export default {
   'config/suggestions/disabled': 'O sistema de sugestões está atualmente desativado.',
   'config/suggestions/enabled': 'O sistema de sugestões está atualmente habilitado.',
   'config/suggestions/reactions': (status: boolean) => `As reações estão atualmente: ${status ? 'ativadas' : 'desativadas'}.`,
+  'config/suggestions/threads': (status: boolean) => `Os tópicos estão atualmente: ${status ? 'ativados' : 'desativados'}.`,
 
   'config/suggestions/noCategories': 'Não há categorias configuradas',
 
@@ -101,4 +104,7 @@ export default {
   'config/suggestions/actions/reactions/enabled': 'Reações habilitadas com sucesso!',
   'config/suggestions/actions/reactions/enabledTip': '**Dica**: você pode configurar reações automáticas utilizando `/config autoreact`.',
   'config/suggestions/actions/reactions/disabled': 'Reações desabilitadas com sucesso!',
+
+  'config/suggestions/actions/threads/enabled': 'Tópicos habilitados com sucesso!',
+  'config/suggestions/actions/threads/disabled': 'Tópicos desabilitados com sucesso!',
 } as const;

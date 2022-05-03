@@ -2,6 +2,7 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  ChannelType,
   ChatInputCommandInteraction,
   EmbedBuilder,
   Message,
@@ -12,7 +13,7 @@ import {
 import { Command, CommandLocale, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
-type PageTypes = 'sugestoes' | 'categorias' | 'reacoes' | 'cooldown';
+type PageTypes = 'sugestoes' | 'categorias' | 'reacoes' | 'cooldown' | 'threads';
 
 export default class SuggestionsSubCommand extends Command {
   constructor(client: DenkyClient) {
@@ -99,7 +100,11 @@ export default class SuggestionsSubCommand extends Command {
           case 'add_category':
             await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToAdd', interaction.channel)}`, ephemeral: true });
             message.channel
-              .awaitMessages({ filter: m => m.author.id === interaction.user.id && m.mentions.channels.size === 1, max: 1, time: 120000 })
+              .awaitMessages({
+                filter: m => m.author.id === interaction.user.id && m.mentions.channels.filter(c => [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildForum].includes(c.type)).size === 1,
+                max: 1,
+                time: 120000,
+              })
               .then(m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
@@ -116,7 +121,11 @@ export default class SuggestionsSubCommand extends Command {
           case 'del_category':
             await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToRemove', interaction.channel)}`, ephemeral: true });
             message.channel
-              .awaitMessages({ filter: m => m.author.id === interaction.user.id && m.mentions.channels.size === 1, max: 1, time: 120000 })
+              .awaitMessages({
+                filter: m => m.author.id === interaction.user.id && m.mentions.channels.filter(c => [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildForum].includes(c.type)).size === 1,
+                max: 1,
+                time: 120000,
+              })
               .then(m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
@@ -153,6 +162,31 @@ export default class SuggestionsSubCommand extends Command {
             int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/reactions/disabled')}`, ephemeral: true });
             break;
           }
+          // Enable threads
+          case 'enable_threads': {
+            this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+              ...updatedConfig,
+              useThreads: true,
+            });
+            const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            this.updateMessage('reacoes', message, selectRow, interaction, newConfig, t);
+            int.followUp({
+              content: `✅ **|** ${t('command:config/suggestions/actions/threads/enabled')}`,
+              ephemeral: true,
+            });
+            break;
+          }
+          // Disable threads
+          case 'disable_threads': {
+            this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+              ...updatedConfig,
+              useThreads: false,
+            });
+            const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            this.updateMessage('reacoes', message, selectRow, interaction, newConfig, t);
+            int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/threads/disabled')}`, ephemeral: true });
+            break;
+          }
         }
       }
     });
@@ -186,6 +220,12 @@ export default class SuggestionsSubCommand extends Command {
             ? `✅ **|** ${t('command:config/suggestions/enabled')}\n👍 **|** ${t('command:config/suggestions/reactions', configStatus.addReactions)}`
             : `❌ **|** ${t('command:config/suggestions/disabled')}`,
         );
+      case 'threads':
+        return embed.setDescription(
+          configStatus
+            ? `✅ **|** ${t('command:config/suggestions/enabled')}\n👍 **|** ${t('command:config/suggestions/threads', configStatus.useThreads)}`
+            : `❌ **|** ${t('command:config/suggestions/disabled')}`,
+        );
       default:
         return embed;
     }
@@ -210,6 +250,12 @@ export default class SuggestionsSubCommand extends Command {
         const disableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disableReact')).setStyle(ButtonStyle.Danger).setCustomId('disable_reactions');
         if (!configStatus) return buttonRow.setComponents([enableReact.setDisabled(true), disableReact.setDisabled(true)]);
         return buttonRow.setComponents([enableReact.setDisabled(!!configStatus.addReactions), disableReact.setDisabled(!configStatus.addReactions)]);
+      }
+      case 'threads': {
+        const enableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enableThreads')).setStyle(ButtonStyle.Success).setCustomId('enable_threads');
+        const disableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disableThreads')).setStyle(ButtonStyle.Danger).setCustomId('disable_threads');
+        if (!configStatus) return buttonRow.setComponents([enableReact.setDisabled(true), disableReact.setDisabled(true)]);
+        return buttonRow.setComponents([enableReact.setDisabled(!!configStatus.useThreads), disableReact.setDisabled(!configStatus.useThreads)]);
       }
       default:
         return buttonRow;

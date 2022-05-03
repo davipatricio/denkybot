@@ -85,6 +85,7 @@ export default {
   'config/suggestions/disabled': 'The suggestion system is currently disabled.',
   'config/suggestions/enabled': 'The suggestion system is currently enabled.',
   'config/suggestions/reactions': (status: boolean) => `Reactions are currently: ${status ? 'enabled' : 'disabled'}.`,
+  'config/suggestions/threads': (status: boolean) => `Threads are currently: ${status ? 'enabled' : 'disabled'}.`,
 
   'config/suggestions/noCategories': 'No categories have been created yet',
 
@@ -101,4 +102,7 @@ export default {
   'config/suggestions/actions/reactions/enabled': 'Reactions enabled successfully!',
   'config/suggestions/actions/reactions/enabledTip': '**Tip**: you can add automatic custom reactions by using `config autoreact`.',
   'config/suggestions/actions/reactions/disabled': 'Reactions disabled successfully!',
+
+  'config/suggestions/actions/threads/enabled': 'Threads enabled successfully!',
+  'config/suggestions/actions/threads/disabled': 'Threads disabled successfully!',
 } as const;
