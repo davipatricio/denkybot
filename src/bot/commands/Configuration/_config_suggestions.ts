@@ -166,35 +166,16 @@ export default class SuggestionsSubCommand extends Command {
   generateButtonsFromPage(page: PageTypes, configStatus: any, t: CommandLocale) {
     const buttonRow = new ActionRowBuilder<ButtonBuilder>();
     switch (page) {
-      case 'sugestoes': {
-        if (configStatus)
-          return buttonRow.setComponents([
-            new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enable')).setDisabled(true).setStyle(ButtonStyle.Success).setCustomId('enable'),
-            new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disable')).setDisabled(false).setStyle(ButtonStyle.Danger).setCustomId('disable'),
-          ]);
+      case 'sugestoes':
         return buttonRow.setComponents([
-          new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enable')).setDisabled(false).setStyle(ButtonStyle.Success).setCustomId('enable'),
-          new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disable')).setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('disable'),
+          new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enable')).setDisabled(!!configStatus).setStyle(ButtonStyle.Success).setCustomId('enable'),
+          new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disable')).setDisabled(!configStatus).setStyle(ButtonStyle.Danger).setCustomId('disable'),
         ]);
-      }
       case 'categorias': {
-        if (!configStatus)
-          return buttonRow.setComponents([
-            new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/addCategory')).setDisabled(true).setStyle(ButtonStyle.Success).setCustomId('add_category'),
-            new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/delCategory')).setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('del_category'),
-          ]);
-        return buttonRow.setComponents([
-          new ButtonBuilder()
-            .setLabel(t('command:config/suggestions/buttons/addCategory'))
-            .setDisabled(configStatus.categories.length === 5)
-            .setStyle(ButtonStyle.Success)
-            .setCustomId('add_category'),
-          new ButtonBuilder()
-            .setLabel(t('command:config/suggestions/buttons/delCategory'))
-            .setDisabled(configStatus.categories.length === 0)
-            .setStyle(ButtonStyle.Danger)
-            .setCustomId('del_category'),
-        ]);
+        const addCat = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/addCategory')).setStyle(ButtonStyle.Success).setCustomId('add_category');
+        const delCat = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/delCategory')).setStyle(ButtonStyle.Danger).setCustomId('del_category');
+        if (!configStatus) return buttonRow.setComponents([addCat.setDisabled(true), delCat.setDisabled(true)]);
+        return buttonRow.setComponents([addCat.setDisabled(configStatus.categories.length === 5), delCat.setDisabled(configStatus.categories.length === 0)]);
       }
       default:
         return buttonRow;
