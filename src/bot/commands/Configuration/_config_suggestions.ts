@@ -183,17 +183,17 @@ export default class SuggestionsSubCommand extends Command {
       case 'categorias': {
         if (!configStatus)
           return buttonRow.setComponents([
-            new ButtonBuilder().setLabel('Adicionar categoria').setDisabled(true).setStyle(ButtonStyle.Success).setCustomId('add_category'),
-            new ButtonBuilder().setLabel('Remover categoria').setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('del_category'),
+            new ButtonBuilder().setLabel(t('command:config/suggestions/addCategory')).setDisabled(true).setStyle(ButtonStyle.Success).setCustomId('add_category'),
+            new ButtonBuilder().setLabel(t('command:config/suggestions/delCategory')).setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('del_category'),
           ]);
         return buttonRow.setComponents([
           new ButtonBuilder()
-            .setLabel('Adicionar categoria')
+            .setLabel(t('command:config/suggestions/addCategory'))
             .setDisabled(configStatus.categories.length === 5)
             .setStyle(ButtonStyle.Success)
             .setCustomId('add_category'),
           new ButtonBuilder()
-            .setLabel('Remover categoria')
+            .setLabel(t('command:config/suggestions/delCategory'))
             .setDisabled(configStatus.categories.length === 0)
             .setStyle(ButtonStyle.Danger)
             .setCustomId('del_category'),

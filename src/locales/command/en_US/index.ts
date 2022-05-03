@@ -63,6 +63,8 @@ export default {
   'config/suggestions/title': 'Settings Panel | Suggestions',
   'config/suggestions/enable': 'Enable',
   'config/suggestions/disable': 'Disable',
+  'config/suggestions/addCategory': 'Add category',
+  'config/suggestions/delCategory': 'Remove category',
 
   'config/suggestions/pages/suggestions': 'Enable or disable the suggestion system',
   'config/suggestions/pages/categories': 'Add or delete suggestion categories',

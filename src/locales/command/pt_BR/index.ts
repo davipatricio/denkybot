@@ -63,6 +63,8 @@ export default {
   'config/suggestions/title': 'Painel de configurações | Sugestões',
   'config/suggestions/enable': 'Habilitar',
   'config/suggestions/disable': 'Desabilitar',
+  'config/suggestions/addCategory': 'Adicionar categoria',
+  'config/suggestions/delCategory': 'Remover categoria',
 
   'config/suggestions/pages': 'Páginas',
   'config/suggestions/pages/suggestions': 'Ative ou desativar o sistema de sugestões',
