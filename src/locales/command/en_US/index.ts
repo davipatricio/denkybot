@@ -66,6 +66,8 @@ export default {
   'config/suggestions/buttons/disable': 'Disable',
   'config/suggestions/buttons/addCategory': 'Add category',
   'config/suggestions/buttons/delCategory': 'Remove category',
+  'config/suggestions/buttons/enableReact': 'Enable reactions',
+  'config/suggestions/buttons/disableReact': 'Disable reactions',
 
   'config/suggestions/pages/suggestions': 'Enable or disable the suggestion system',
   'config/suggestions/pages/categories': 'Add or delete suggestion categories',
@@ -82,6 +84,7 @@ export default {
 
   'config/suggestions/disabled': 'The suggestion system is currently disabled.',
   'config/suggestions/enabled': 'The suggestion system is currently enabled.',
+  'config/suggestions/reactions': (status: boolean) => `Reactions are currently: ${status ? 'enabled' : 'disabled'}.`,
 
   'config/suggestions/noCategories': 'No categories have been created yet',
 
@@ -94,4 +97,8 @@ export default {
   'config/suggestions/actions/category/askToRemove': (channel: TextChannel) => `Send a message mentioning a channel to remove it from the category list. Example: ${channel}`,
   'config/suggestions/actions/category/removed': 'Category removed successfully!',
   'config/suggestions/actions/category/delError': "Unable to remove category because you didn't send a message mentioning a channel!",
+
+  'config/suggestions/actions/reactions/enabled': 'Reactions enabled successfully!',
+  'config/suggestions/actions/reactions/enabledTip': '**Tip**: you can add automatic custom reactions by using `config autoreact`.',
+  'config/suggestions/actions/reactions/disabled': 'Reactions disabled successfully!',
 } as const;

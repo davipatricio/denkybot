@@ -74,7 +74,7 @@ export default class SuggestionsSubCommand extends Command {
     collector.on('collect', async int => {
       const updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
       await int.deferUpdate();
-      if (int.isSelectMenu()) this.updateMessage('categorias', message, selectRow, interaction, updatedConfig, t);
+      if (int.isSelectMenu()) this.updateMessage(int.values[0] as PageTypes, message, selectRow, interaction, updatedConfig, t);
       if (int.isButton()) {
         switch (int.customId) {
           // Enable suggestions
@@ -102,7 +102,7 @@ export default class SuggestionsSubCommand extends Command {
               .then(m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
-                updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel);
+                updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel).slice(0, 5);
                 updatedConfig.categories.push(mentionedChannel);
                 this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, updatedConfig);
                 const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
@@ -127,6 +127,31 @@ export default class SuggestionsSubCommand extends Command {
               })
               .catch(() => int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/delError')}`, ephemeral: true }));
             break;
+          // Enable reactions
+          case 'enable_reactions': {
+            this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+              ...updatedConfig,
+              addReactions: true,
+            });
+            const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            this.updateMessage('reacoes', message, selectRow, interaction, newConfig, t);
+            int.followUp({
+              content: `✅ **|** ${t('command:config/suggestions/actions/reactions/enabled')}\n💡 **|** ${t('command:config/suggestions/actions/reactions/enabledTip')}`,
+              ephemeral: true,
+            });
+            break;
+          }
+          // Disable reactions
+          case 'disable_reactions': {
+            this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+              ...updatedConfig,
+              addReactions: false,
+            });
+            const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            this.updateMessage('reacoes', message, selectRow, interaction, newConfig, t);
+            int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/reactions/disabled')}`, ephemeral: true });
+            break;
+          }
         }
       }
     });
@@ -154,6 +179,12 @@ export default class SuggestionsSubCommand extends Command {
           },
         ]);
       }
+      case 'reacoes':
+        return embed.setDescription(
+          configStatus
+            ? `✅ **|** ${t('command:config/suggestions/enabled')}\n👍 **|** ${t('command:config/suggestions/reactions', configStatus.addReactions)}`
+            : `❌ **|** ${t('command:config/suggestions/disabled')}`,
+        );
       default:
         return embed;
     }
@@ -172,6 +203,12 @@ export default class SuggestionsSubCommand extends Command {
         const delCat = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/delCategory')).setStyle(ButtonStyle.Danger).setCustomId('del_category');
         if (!configStatus) return buttonRow.setComponents([addCat.setDisabled(true), delCat.setDisabled(true)]);
         return buttonRow.setComponents([addCat.setDisabled(configStatus.categories.length === 5), delCat.setDisabled(configStatus.categories.length === 0)]);
+      }
+      case 'reacoes': {
+        const enableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enableReact')).setStyle(ButtonStyle.Success).setCustomId('enable_reactions');
+        const disableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disableReact')).setStyle(ButtonStyle.Danger).setCustomId('disable_reactions');
+        if (!configStatus) return buttonRow.setComponents([enableReact.setDisabled(true), disableReact.setDisabled(true)]);
+        return buttonRow.setComponents([enableReact.setDisabled(!!configStatus.addReactions), disableReact.setDisabled(!configStatus.addReactions)]);
       }
       default:
         return buttonRow;
