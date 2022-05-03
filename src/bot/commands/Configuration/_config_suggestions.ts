@@ -90,13 +90,12 @@ export default class SuggestionsSubCommand extends Command {
             break;
           }
           // Disable suggestions
-          case 'disable': {
+          case 'disable':
             this.client.databases.config.delete(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('categorias', message, selectRow, interaction, undefined, t);
             break;
-          }
           // Add category
-          case 'add_category': {
+          case 'add_category':
             await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToAdd', interaction.channel)}`, ephemeral: true });
             message.channel
               .awaitMessages({ filter: m => m.author.id === interaction.user.id && m.mentions.channels.size === 1, max: 1, time: 120000 })
@@ -112,9 +111,8 @@ export default class SuggestionsSubCommand extends Command {
               })
               .catch(() => int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/addError')}`, ephemeral: true }));
             break;
-          }
           // Remove category
-          case 'del_category': {
+          case 'del_category':
             await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToRemove', interaction.channel)}`, ephemeral: true });
             message.channel
               .awaitMessages({ filter: m => m.author.id === interaction.user.id && m.mentions.channels.size === 1, max: 1, time: 120000 })
@@ -129,7 +127,6 @@ export default class SuggestionsSubCommand extends Command {
               })
               .catch(() => int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/delError')}`, ephemeral: true }));
             break;
-          }
         }
       }
     });
@@ -172,28 +169,28 @@ export default class SuggestionsSubCommand extends Command {
       case 'sugestoes': {
         if (configStatus)
           return buttonRow.setComponents([
-            new ButtonBuilder().setLabel(t('command:config/suggestions/enable')).setDisabled(true).setStyle(ButtonStyle.Success).setCustomId('enable'),
-            new ButtonBuilder().setLabel(t('command:config/suggestions/disable')).setDisabled(false).setStyle(ButtonStyle.Danger).setCustomId('disable'),
+            new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enable')).setDisabled(true).setStyle(ButtonStyle.Success).setCustomId('enable'),
+            new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disable')).setDisabled(false).setStyle(ButtonStyle.Danger).setCustomId('disable'),
           ]);
         return buttonRow.setComponents([
-          new ButtonBuilder().setLabel(t('command:config/suggestions/enable')).setDisabled(false).setStyle(ButtonStyle.Success).setCustomId('enable'),
-          new ButtonBuilder().setLabel(t('command:config/suggestions/disable')).setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('disable'),
+          new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enable')).setDisabled(false).setStyle(ButtonStyle.Success).setCustomId('enable'),
+          new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disable')).setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('disable'),
         ]);
       }
       case 'categorias': {
         if (!configStatus)
           return buttonRow.setComponents([
-            new ButtonBuilder().setLabel(t('command:config/suggestions/addCategory')).setDisabled(true).setStyle(ButtonStyle.Success).setCustomId('add_category'),
-            new ButtonBuilder().setLabel(t('command:config/suggestions/delCategory')).setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('del_category'),
+            new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/addCategory')).setDisabled(true).setStyle(ButtonStyle.Success).setCustomId('add_category'),
+            new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/delCategory')).setDisabled(true).setStyle(ButtonStyle.Danger).setCustomId('del_category'),
           ]);
         return buttonRow.setComponents([
           new ButtonBuilder()
-            .setLabel(t('command:config/suggestions/addCategory'))
+            .setLabel(t('command:config/suggestions/buttons/addCategory'))
             .setDisabled(configStatus.categories.length === 5)
             .setStyle(ButtonStyle.Success)
             .setCustomId('add_category'),
           new ButtonBuilder()
-            .setLabel(t('command:config/suggestions/delCategory'))
+            .setLabel(t('command:config/suggestions/buttons/delCategory'))
             .setDisabled(configStatus.categories.length === 0)
             .setStyle(ButtonStyle.Danger)
             .setCustomId('del_category'),
