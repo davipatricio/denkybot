@@ -139,12 +139,8 @@ export default class SuggestionsSubCommand extends Command {
     return { embed, buttons };
   }
 
-  generateEmbedPage(page: PageTypes, interaction: ChatInputCommandInteraction, configStatus: any, t: CommandLocale) {
-    const embed = new EmbedBuilder()
-      .setTimestamp()
-      .setColor('Blurple')
-      .setTitle(`🔧 ${t('command:config/suggestions/title')}`)
-      .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() });
+  generateEmbedPage(page: PageTypes, { user }: ChatInputCommandInteraction, configStatus: any, t: CommandLocale) {
+    const embed = new EmbedBuilder({ timestamp: Date.now(), footer: { text: user.tag, iconURL: user.displayAvatarURL() } }).setColor('Blurple').setTitle(`🔧 ${t('command:config/suggestions/title')}`);
     switch (page) {
       case 'sugestoes':
         return embed.setDescription(configStatus ? `✅ **|** ${t('command:config/suggestions/enabled')}` : `❌ **|** ${t('command:config/suggestions/disabled')}`);
