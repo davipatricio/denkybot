@@ -83,6 +83,7 @@ export default class SuggestionsSubCommand extends Command {
               addReactions: true,
               categories: [],
               cooldown: 0,
+              useThreads: false,
             });
             const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('categorias', message, selectRow, interaction, newConfig, t);
