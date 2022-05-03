@@ -1,4 +1,4 @@
-import type { Guild, GuildMember, User } from 'discord.js';
+import type { Guild, GuildMember, TextChannel, User } from 'discord.js';
 
 export default {
   // General errors
@@ -83,4 +83,12 @@ export default {
   'config/suggestions/noCategories': 'No categories have been created yet',
 
   'config/suggestions/actions/enabled': 'The suggestion system has been successfully enabled! Now, you need to add categories to finish the process.',
+
+  'config/suggestions/actions/category/askToAdd': (channel: TextChannel) => `Send a message mentioning a channel to add it to the category list. Example: ${channel}`,
+  'config/suggestions/actions/category/added': 'Category added successfully!',
+  'config/suggestions/actions/category/addError': "Unable to add category because you didn't send a message mentioning a channel!",
+
+  'config/suggestions/actions/category/askToRemove': (channel: TextChannel) => `Send a message mentioning a channel to remove it from the category list. Example: ${channel}`,
+  'config/suggestions/actions/category/removed': 'Category removed successfully!',
+  'config/suggestions/actions/category/delError': "Unable to remove category because you didn't send a message mentioning a channel!",
 } as const;

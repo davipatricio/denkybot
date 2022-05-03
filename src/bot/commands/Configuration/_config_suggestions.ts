@@ -107,10 +107,62 @@ export default class SuggestionsSubCommand extends Command {
           // Disable suggestions
           case 'disable': {
             this.client.databases.config.delete(`suggestions.${interaction.guild?.id}`);
-
             const updatedEmbed = this.generateEmbedPage('sugestoes', interaction, undefined, t);
             const updatedButtons = this.generateButtonsFromPage('sugestoes', interaction, undefined, t);
             message.edit({ components: [selectRow, updatedButtons], embeds: [updatedEmbed] });
+            break;
+          }
+          // Add category
+          case 'add_category': {
+            const oldConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToAdd', interaction.channel)}`, ephemeral: true });
+            message.channel
+              .awaitMessages({
+                filter: m => m.author.id === interaction.user.id && m.mentions.channels.size === 1,
+                max: 1,
+                time: 120000,
+              })
+              .then(m => {
+                const sentMsg = m.first();
+                const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
+                oldConfig.categories = oldConfig.categories.filter(c => c !== mentionedChannel);
+                oldConfig.categories.push(mentionedChannel);
+                this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, oldConfig);
+                const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+                int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/category/added')}`, ephemeral: true });
+                const updatedEmbed = this.generateEmbedPage('categorias', interaction, newConfig, t);
+                const updatedButtons = this.generateButtonsFromPage('categorias', interaction, newConfig, t);
+                message.edit({ components: [selectRow, updatedButtons], embeds: [updatedEmbed] });
+              })
+              .catch(() => {
+                int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/addError')}`, ephemeral: true });
+              });
+            break;
+          }
+          // Remove category
+          case 'del_category': {
+            const oldConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToRemove', interaction.channel)}`, ephemeral: true });
+            message.channel
+              .awaitMessages({
+                filter: m => m.author.id === interaction.user.id && m.mentions.channels.size === 1,
+                max: 1,
+                time: 120000,
+              })
+              .then(m => {
+                const sentMsg = m.first();
+                const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
+                oldConfig.categories = oldConfig.categories.filter(c => c !== mentionedChannel);
+                this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, oldConfig);
+                const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+                int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/category/removed')}`, ephemeral: true });
+                const updatedEmbed = this.generateEmbedPage('categorias', interaction, newConfig, t);
+                const updatedButtons = this.generateButtonsFromPage('categorias', interaction, newConfig, t);
+                message.edit({ components: [selectRow, updatedButtons], embeds: [updatedEmbed] });
+              })
+              .catch(() => {
+                int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/delError')}`, ephemeral: true });
+              });
             break;
           }
         }
