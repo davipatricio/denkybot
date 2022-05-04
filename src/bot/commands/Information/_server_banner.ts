@@ -22,6 +22,7 @@ export default class ServerBannerSubCommand extends Command {
 
     if (!guildBanner) {
       interaction.reply({ content: t('command:server/banner/noBanner'), ephemeral: true });
+      return;
     }
 
     const embed = new EmbedBuilder().setColor('Blurple').setTitle(t('command:server/banner/title')).setImage(guildBanner);
