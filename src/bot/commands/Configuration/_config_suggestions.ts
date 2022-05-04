@@ -10,6 +10,7 @@ import {
   UnsafeSelectMenuBuilder,
   UnsafeSelectMenuOptionBuilder,
 } from 'discord.js';
+import ms from 'ms';
 import { Command, CommandLocale, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
@@ -73,9 +74,22 @@ export default class SuggestionsSubCommand extends Command {
     const collector = message.createMessageComponentCollector({ filter: int => int.user.id === interaction.user.id, time: 120000 });
 
     collector.on('collect', async int => {
-      const updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+      let updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
       await int.deferUpdate();
-      if (int.isSelectMenu()) this.updateMessage(int.values[0] as PageTypes, message, selectRow, interaction, updatedConfig, t);
+      if (int.isSelectMenu()) {
+        if (int.customId === 'set_cooldown') {
+          const time = Number(int.values[0]);
+          this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+            ...updatedConfig,
+            cooldown: time,
+          });
+          updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+          this.updateMessage('cooldown', message, selectRow, interaction, updatedConfig, t);
+          int.followUp({ content: `Cooldown definido com sucesso para \`${ms(time)}\`` });
+          return;
+        }
+        this.updateMessage(int.values[0] as PageTypes, message, selectRow, interaction, updatedConfig, t);
+      }
       if (int.isButton()) {
         switch (int.customId) {
           // Enable suggestions
@@ -86,15 +100,15 @@ export default class SuggestionsSubCommand extends Command {
               cooldown: 0,
               useThreads: false,
             });
-            const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-            this.updateMessage('categorias', message, selectRow, interaction, newConfig, t);
+            updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            this.updateMessage('categorias', message, selectRow, interaction, updatedConfig, t);
             int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/enabled')}`, ephemeral: true });
             break;
           }
           // Disable suggestions
           case 'disable':
             this.client.databases.config.delete(`suggestions.${interaction.guild?.id}`);
-            this.updateMessage('categorias', message, selectRow, interaction, undefined, t);
+            this.updateMessage('sugestoes', message, selectRow, interaction, undefined, t);
             break;
           // Add category
           case 'add_category':
@@ -111,9 +125,9 @@ export default class SuggestionsSubCommand extends Command {
                 updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel).slice(0, 5);
                 updatedConfig.categories.push(mentionedChannel);
                 this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, updatedConfig);
-                const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+                updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
                 int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/category/added')}`, ephemeral: true });
-                this.updateMessage('categorias', message, selectRow, interaction, newConfig, t);
+                this.updateMessage('categorias', message, selectRow, interaction, updatedConfig, t);
               })
               .catch(() => int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/addError')}`, ephemeral: true }));
             break;
@@ -131,9 +145,9 @@ export default class SuggestionsSubCommand extends Command {
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
                 updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel);
                 this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, updatedConfig);
-                const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+                updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
                 int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/category/removed')}`, ephemeral: true });
-                this.updateMessage('sugestoes', message, selectRow, interaction, newConfig, t);
+                this.updateMessage('sugestoes', message, selectRow, interaction, updatedConfig, t);
               })
               .catch(() => int.followUp({ content: `❌ **|** ${t('command:config/suggestions/actions/category/delError')}`, ephemeral: true }));
             break;
@@ -143,8 +157,8 @@ export default class SuggestionsSubCommand extends Command {
               ...updatedConfig,
               addReactions: true,
             });
-            const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-            this.updateMessage('reacoes', message, selectRow, interaction, newConfig, t);
+            updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            this.updateMessage('reacoes', message, selectRow, interaction, updatedConfig, t);
             int.followUp({
               content: `✅ **|** ${t('command:config/suggestions/actions/reactions/enabled')}\n💡 **|** ${t('command:config/suggestions/actions/reactions/enabledTip')}`,
               ephemeral: true,
@@ -157,8 +171,8 @@ export default class SuggestionsSubCommand extends Command {
               ...updatedConfig,
               addReactions: false,
             });
-            const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-            this.updateMessage('reacoes', message, selectRow, interaction, newConfig, t);
+            updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            this.updateMessage('reacoes', message, selectRow, interaction, updatedConfig, t);
             int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/reactions/disabled')}`, ephemeral: true });
             break;
           }
@@ -168,8 +182,8 @@ export default class SuggestionsSubCommand extends Command {
               ...updatedConfig,
               useThreads: true,
             });
-            const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-            this.updateMessage('threads', message, selectRow, interaction, newConfig, t);
+            updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            this.updateMessage('threads', message, selectRow, interaction, updatedConfig, t);
             int.followUp({
               content: `✅ **|** ${t('command:config/suggestions/actions/threads/enabled')}`,
               ephemeral: true,
@@ -182,8 +196,8 @@ export default class SuggestionsSubCommand extends Command {
               ...updatedConfig,
               useThreads: false,
             });
-            const newConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-            this.updateMessage('threads', message, selectRow, interaction, newConfig, t);
+            updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+            this.updateMessage('threads', message, selectRow, interaction, updatedConfig, t);
             int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/threads/disabled')}`, ephemeral: true });
             break;
           }
@@ -204,6 +218,12 @@ export default class SuggestionsSubCommand extends Command {
     switch (page) {
       case 'sugestoes':
         return embed.setDescription(configStatus ? `✅ **|** ${t('command:config/suggestions/enabled')}` : `❌ **|** ${t('command:config/suggestions/disabled')}`);
+      case 'cooldown':
+        return embed.setDescription(
+          `${configStatus ? `✅ **|** ${t('command:config/suggestions/enabled')}` : `❌ **|** ${t('command:config/suggestions/disabled')}`}\n⏲️ **|** O cooldown atualmente está em ${ms(
+            configStatus.cooldown,
+          )}`,
+        );
       case 'categorias': {
         if (!configStatus) return embed.setDescription(`❌ **|** ${t('command:config/suggestions/disabled')}`);
         const { categories } = configStatus;
@@ -232,6 +252,20 @@ export default class SuggestionsSubCommand extends Command {
   }
 
   generateButtonsFromPage(page: PageTypes, configStatus: any, t: CommandLocale) {
+    if (page === 'cooldown') {
+      const selectRow = new ActionRowBuilder<UnsafeSelectMenuBuilder>();
+      const selectMenu = new UnsafeSelectMenuBuilder()
+        .setCustomId('set_cooldown')
+        .setPlaceholder('Escolha o tempo do cooldown')
+        .setOptions([
+          new UnsafeSelectMenuOptionBuilder().setLabel('Sem cooldown').setDescription('Membros não deverão esperar para sugerir consecutivamente').setValue('0'),
+          new UnsafeSelectMenuOptionBuilder().setLabel('15 segundos').setDescription('Membros deverão esperar 15 segundos para sugerir consecutivamente').setValue('15000'),
+          new UnsafeSelectMenuOptionBuilder().setLabel('30 segundos').setDescription('Membros deverão esperar 30 segundos para sugerir consecutivamente').setValue('30000'),
+          new UnsafeSelectMenuOptionBuilder().setLabel('1 minuto').setDescription('Membros deverão esperar 1 minuto para sugerir consecutivamente').setValue('60000'),
+          new UnsafeSelectMenuOptionBuilder().setLabel('15 minutos').setDescription('Membros deverão esperar 15 minutos para sugerir consecutivamente').setValue('900000'),
+        ]);
+      return selectRow.setComponents([selectMenu]);
+    }
     const buttonRow = new ActionRowBuilder<ButtonBuilder>();
     switch (page) {
       case 'sugestoes':
