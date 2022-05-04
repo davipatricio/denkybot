@@ -27,6 +27,11 @@ export default class UserCommand extends Command {
         this.client.commands.get('_user_info')?.run({ t, interaction });
         break;
       }
+
+      case 'banner': {
+        this.client.commands.get('_user_banner')?.run({ t, interaction });
+        break;
+      }
     }
   }
 }

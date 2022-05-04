@@ -2,7 +2,7 @@ import { EmbedBuilder, GuildMember, PermissionFlagsBits, Util } from 'discord.js
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
-export default class UserAvatarSubCommand extends Command {
+export default class UserInfoSubCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
     this.rawName = '';
