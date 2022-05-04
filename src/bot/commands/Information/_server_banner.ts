@@ -2,7 +2,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionF
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
-export default class UserBannerSubCommand extends Command {
+export default class ServerBannerSubCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
     this.rawName = '';
@@ -15,20 +15,18 @@ export default class UserBannerSubCommand extends Command {
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
   }
 
-  override async run({ t, interaction }: CommandRunOptions) {
-    const user = interaction.options.getUser('user') ?? interaction.user;
-    const userFetched = await user.fetch(true);
+  override run({ t, interaction }: CommandRunOptions) {
+    if (!interaction.guild) return;
 
-    const userBanner = userFetched.bannerURL({ size: 2048 });
+    const guildBanner = interaction.guild.bannerURL({ size: 2048, extension: 'png' }) as string;
 
-    if (!userBanner) {
-      interaction.editReply(t('command:user/banner/noBanner'));
-      return;
+    if (!guildBanner) {
+      interaction.reply({ content: t('command:server/banner/noBanner'), ephemeral: true });
     }
 
-    const embed = new EmbedBuilder().setTitle(t('command:user/banner/title', user.username)).setImage(userBanner).setColor('Blurple');
+    const embed = new EmbedBuilder().setColor('Blurple').setTitle(t('command:server/banner/title')).setImage(guildBanner);
 
-    const button = new ButtonBuilder().setURL(userBanner).setStyle(ButtonStyle.Link).setLabel(t('command:user/banner/browser'));
+    const button = new ButtonBuilder().setURL(guildBanner).setStyle(ButtonStyle.Link).setLabel(t('command:server/banner/browser'));
 
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents([button]);
 

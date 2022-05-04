@@ -45,8 +45,9 @@ export default {
   'user/avatar/seeGlobalAvatar': 'See global avatar',
 
   // User Banner
-  'user/banner/noBanner': 'This user has no banner.',
+  'user/banner/noBanner': 'This user no  has banner.',
   'user/banner/title': (user: User) => `${user}'s banner`,
+  'user/banner/browser': 'Open in browser',
 
   // Server icon
   'server/icon/title': (guild: Guild) => `${guild} icon`,
@@ -62,4 +63,9 @@ export default {
   'server/info/embed/roles': 'Roles',
   'server/info/embed/boosts': (boosts: number, level: number) => `🌟 **Boosts:** ${boosts}\n🌠 **Level:** ${level}`,
   'server/info/embed/footer': (guild: Guild) => `🔢 ID: ${guild.id} | 📅 Created at`,
+
+  // Server Banner
+  'server/banner/noBanner': 'This server no has banner.',
+  'server/banner/title': (guild: Guild) => `${guild} banner`,
+  'server/banner/browser': 'Open in browser',
 } as const;

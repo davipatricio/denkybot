@@ -47,6 +47,7 @@ export default {
   // User Banner
   'user/banner/noBanner': 'Este usuário não tem um banner.',
   'user/banner/title': (user: User) => `Banner de ${user}`,
+  'user/banner/browser': 'Abrir banner no navegador',
 
   // Server icon
   'server/icon/title': (guild: Guild) => `Ícone do servidor ${guild}`,
@@ -62,4 +63,9 @@ export default {
   'server/info/embed/roles': 'Cargos',
   'server/info/embed/boosts': (boosts: number, level: number) => `🌟 **Impulsos:** ${boosts}\n🌠 **Nível:** ${level}`,
   'server/info/embed/footer': (guild: Guild) => `🔢 ID: ${guild.id} | 📅 Criado em`,
+
+  // Server Banner
+  'server/banner/noBanner': 'Este servidor não tem um banner.',
+  'server/banner/title': (guild: Guild) => `Banner do servidor ${guild}`,
+  'server/banner/browser': 'Abrir banner no navegador',
 } as const;

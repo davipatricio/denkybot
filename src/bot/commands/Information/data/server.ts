@@ -29,6 +29,14 @@ export default class ServerData extends CommandDataStructure {
             'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/icon'),
           },
         },
+        {
+          name: 'banner',
+          type: ApplicationCommandOptionType.Subcommand,
+          description: client.languages.manager.get('en_US', 'commandDescriptions:server/banner'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/banner'),
+          },
+        },
       ],
     };
   }

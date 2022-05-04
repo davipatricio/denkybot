@@ -38,6 +38,7 @@ export default {
   server: 'Veja informações sobre um servidor',
   'server/info': 'Veja informações sobre um servidor',
   'server/icon': 'Veja o ícone de um servidor',
+  'server/banner': 'Veja o banner de um servidor',
 
   // Text
   text: 'Traduza ou edite texto em diferentes maneiras',

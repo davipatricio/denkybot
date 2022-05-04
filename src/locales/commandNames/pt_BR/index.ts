@@ -31,6 +31,9 @@ export default {
   'user/avatar/user': 'usuario',
   'user/banner/user': 'usuario',
 
+  // Server
+  server: 'server avatar | info | banner',
+
   // Text
   text: 'texto',
   'text/claps': 'palmas',

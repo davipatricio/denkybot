@@ -35,9 +35,10 @@ export default {
   'users/banner/user': 'The user to get the banner of',
 
   // Server
-  server: 'View information about a server',
+  server: 'Shows server information',
   'server/info': 'View information about a server',
   'server/icon': 'See a server icon',
+  'server/banner': 'See a server banner',
 
   // Text
   text: 'Translates or edits text in different ways',
