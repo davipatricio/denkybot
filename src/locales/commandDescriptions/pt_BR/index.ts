@@ -31,6 +31,8 @@ export default {
   'user/avatar/user': 'O usuário para ver o avatar',
   'user/info': 'Veja informações sobre um usuário',
   'user/info/user': 'O usuário para ver as informações',
+  'user/banner': 'Veja o banner de um usuário',
+  'user/banner/user': 'O usuário para ver o banner',
 
   // Server
   server: 'Veja informações sobre um servidor',

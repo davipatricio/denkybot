@@ -26,9 +26,10 @@ export default {
   help: 'ajuda',
 
   // User
-  user: 'user avatar | info',
+  user: 'user avatar | info | banner',
   'user/info/user': 'usuario',
   'user/avatar/user': 'usuario',
+  'user/banner/user': 'usuario',
 
   // Text
   text: 'texto',
