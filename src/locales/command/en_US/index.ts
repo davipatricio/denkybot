@@ -44,6 +44,10 @@ export default {
   'user/avatar/seeGuildAvatar': 'See guild avatar',
   'user/avatar/seeGlobalAvatar': 'See global avatar',
 
+  // User Banner
+  'user/banner/noBanner': 'This user has no banner.',
+  'user/banner/title': (user: User) => `${user}'s banner`,
+
   // Server icon
   'server/icon/title': (guild: Guild) => `${guild} icon`,
   'server/icon/browser': 'Open in browser',
