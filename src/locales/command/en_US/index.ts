@@ -52,6 +52,7 @@ export default {
   // Server icon
   'server/icon/title': (guild: Guild) => `${guild} icon`,
   'server/icon/browser': 'Open in browser',
+  'server/icon/noIcon': 'This server no has icon.',
 
   // Server info
   'server/info/embed/owner': (owner: GuildMember) => `👑 **Owner**\n${owner.user.tag} (${owner.user.id})`,

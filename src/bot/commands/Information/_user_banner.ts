@@ -16,10 +16,8 @@ export default class UserBannerSubCommand extends Command {
   }
 
   override async run({ t, interaction }: CommandRunOptions) {
-    const user = interaction.options.getUser('user') ?? interaction.user;
-    const userFetched = await user.fetch(true);
-
-    const userBanner = userFetched.bannerURL({ size: 2048 });
+    const user = await (interaction.options.getUser('user') ?? interaction.user).fetch();
+    const userBanner = user.bannerURL({ size: 2048, extension: 'png' });
 
     if (!userBanner) {
       interaction.editReply(t('command:user/banner/noBanner'));

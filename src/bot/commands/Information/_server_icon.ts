@@ -17,16 +17,15 @@ export default class ServerIconSubCommand extends Command {
 
   override run({ t, interaction }: CommandRunOptions) {
     if (!interaction.guild) return;
+    const guildIcon = interaction.guild.iconURL({ size: 2048, extension: 'png' });
+    if (!guildIcon) {
+      interaction.reply({ content: t('command:server/icon/noIcon'), ephemeral: true });
+      return;
+    }
 
-    const embed = new EmbedBuilder()
-      .setColor('Blurple')
-      .setTitle(t('command:server/icon/title', interaction.guild.name))
-      .setImage(interaction.guild.iconURL({ size: 2048, extension: 'png' }));
+    const embed = new EmbedBuilder().setColor('Blurple').setTitle(t('command:server/icon/title', interaction.guild.name)).setImage(guildIcon);
 
-    const button = new ButtonBuilder()
-      .setURL(interaction.guild.iconURL({ size: 2048, extension: 'png' }) as string)
-      .setStyle(ButtonStyle.Link)
-      .setLabel(t('command:server/icon/browser'));
+    const button = new ButtonBuilder().setURL(guildIcon).setStyle(ButtonStyle.Link).setLabel(t('command:server/icon/browser'));
 
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents([button]);
 

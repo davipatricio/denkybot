@@ -52,6 +52,7 @@ export default {
   // Server icon
   'server/icon/title': (guild: Guild) => `Ícone do servidor ${guild}`,
   'server/icon/browser': 'Abrir ícone no navegador',
+  'server/icon/noIcon': 'Este servidor não tem um ícone.',
 
   // Server info
   'server/info/embed/owner': (owner: GuildMember) => `👑 **Dono**\n${owner.user.tag} (${owner.user.id})`,

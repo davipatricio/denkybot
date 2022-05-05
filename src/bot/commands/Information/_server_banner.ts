@@ -18,7 +18,7 @@ export default class ServerBannerSubCommand extends Command {
   override run({ t, interaction }: CommandRunOptions) {
     if (!interaction.guild) return;
 
-    const guildBanner = interaction.guild.bannerURL({ size: 2048, extension: 'png' }) as string;
+    const guildBanner = interaction.guild.bannerURL({ size: 2048, extension: 'png' });
 
     if (!guildBanner) {
       interaction.reply({ content: t('command:server/banner/noBanner'), ephemeral: true });
