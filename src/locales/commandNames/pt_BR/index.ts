@@ -41,4 +41,9 @@ export default {
   // Config
   config: 'config',
   'config/suggestions': 'sugestoes',
+
+  // Suggestions
+  suggestions: 'sugestoes',
+  suggestion: 'sugestao',
+  'suggestion/send': 'enviar',
 } as const;

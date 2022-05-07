@@ -48,4 +48,8 @@ export default {
   // Config
   config: 'Configure Denky features on your server',
   'config/suggestions': "Configure Denky's suggestion system",
+
+  // Suggestions
+  suggestions: 'Send suggestions to the server',
+  'suggestions/send': 'Send suggestions to the server',
 } as const;
