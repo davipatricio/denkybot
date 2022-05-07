@@ -37,6 +37,12 @@ export default class SuggestionsSubCommand extends Command {
     const selectRow = new ActionRowBuilder<SelectMenuBuilder>();
     const { embed, buttons: buttonRow } = this.updateMessage('sugestoes', null, selectRow, interaction, configStatus, t);
 
+    const CATEGORY_MANAGE_FILTER = (m: Message) =>
+      m.author.id === interaction.user.id &&
+      m.mentions.channels.filter(c =>
+        [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildForum, ChannelType.GuildNewsThread, ChannelType.GuildPublicThread, ChannelType.GuildPrivateThread].includes(c.type),
+      ).size === 1;
+
     const paginationSelect = new UnsafeSelectMenuBuilder()
       .setCustomId('pagination')
       .setPlaceholder(t('command:config/suggestions/pages'))
@@ -114,11 +120,7 @@ export default class SuggestionsSubCommand extends Command {
           case 'add_category':
             await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToAdd', interaction.channel)}`, ephemeral: true });
             message.channel
-              .awaitMessages({
-                filter: m => m.author.id === interaction.user.id && m.mentions.channels.filter(c => [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildForum].includes(c.type)).size === 1,
-                max: 1,
-                time: 120000,
-              })
+              .awaitMessages({ filter: CATEGORY_MANAGE_FILTER, max: 1, time: 120000 })
               .then(m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
@@ -135,11 +137,7 @@ export default class SuggestionsSubCommand extends Command {
           case 'del_category':
             await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToRemove', interaction.channel)}`, ephemeral: true });
             message.channel
-              .awaitMessages({
-                filter: m => m.author.id === interaction.user.id && m.mentions.channels.filter(c => [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildForum].includes(c.type)).size === 1,
-                max: 1,
-                time: 120000,
-              })
+              .awaitMessages({ filter: CATEGORY_MANAGE_FILTER, max: 1, time: 120000 })
               .then(m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
