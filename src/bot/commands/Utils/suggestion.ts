@@ -1,8 +1,10 @@
 import {
   ActionRowBuilder,
+  Awaitable,
   ChatInputCommandInteraction,
   EmbedBuilder,
   GuildTextBasedChannel,
+  Interaction,
   Message,
   ModalBuilder,
   ModalMessageModalSubmitInteraction,
@@ -64,8 +66,9 @@ export default class PingCommand extends Command {
 
     modal.setComponents([row1]);
     interaction.showModal(modal);
-    const eventFn = async (int: ModalMessageModalSubmitInteraction) => {
+    const eventFn = async (int: Interaction) => {
       if (int.user.id !== interaction.user.id) return;
+      if (!int.isModalSubmit()) return;
       if (int.customId !== 'suggestion_modal') return;
       this.client.off('interactionCreate', eventFn);
 
@@ -113,6 +116,7 @@ export default class PingCommand extends Command {
         finalChannel.send({ embeds: [embed] });
       });
     };
+
     return this.client.on('interactionCreate', eventFn);
   }
 }
