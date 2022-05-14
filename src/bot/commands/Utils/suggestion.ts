@@ -99,7 +99,7 @@ export default class PingCommand extends Command {
         const channelId = i.values[0] as string;
         const finalChannel = int.guild?.channels.cache.get(channelId) as GuildTextBasedChannel;
         if (!finalChannel) {
-          interaction.reply({ content: 'Não foi possível encontrar a categoria selecionada.' });
+          interaction.reply({ content: 'Não foi possível encontrar a categoria selecionada, provavelmente a categoria não existe mais.' });
           return;
         }
 
@@ -111,7 +111,11 @@ export default class PingCommand extends Command {
           .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() });
 
         i.editReply({ content: 'Sugestão enviada com sucesso!', components: [] });
-        finalChannel.send({ embeds: [embed] });
+        const message = await finalChannel.send({ embeds: [embed] });
+        if (config.addReactions) {
+          await message.react('👍');
+          await message.react('👎');
+        }
       });
     };
 
