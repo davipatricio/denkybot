@@ -14,6 +14,11 @@ const client: DenkyClient = new Client({
     repliedUser: true,
   },
   partials: [Partials.Channel, Partials.User, Partials.GuildMember, Partials.Message, Partials.Reaction],
+  ws: {
+        properties: {
+           $browser: "Discord Android"
+      }
+    }
 });
 
 // We should set this, so tasks won't duplicate (giveaways, reminders, etc)
