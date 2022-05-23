@@ -27,6 +27,11 @@ export default class ServerCommand extends Command {
         this.client.commands.get('_server_icon')?.run({ t, interaction });
         break;
       }
+
+      case 'banner': {
+        this.client.commands.get('_server_banner')?.run({ t, interaction });
+        break;
+      }
     }
   }
 }

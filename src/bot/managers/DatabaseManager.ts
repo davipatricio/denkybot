@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
 export class DatabaseManager {
-  conteudo!: { [key: string]: any };
+  content!: { [key: string]: any };
   local: string;
   constructor(local: string) {
     this.local = local;
@@ -19,15 +19,15 @@ export class DatabaseManager {
     }
     try {
       const data = await readFile(`databases/${local}.json`);
-      this.conteudo = JSON.parse(data.toString());
+      this.content = JSON.parse(data.toString());
     } catch (e) {
-      throw new Error(`Erro ao carregar banco de dados ${this.local}\n${e}`);
+      throw new Error(`Error loading database ${this.local}\n${e}`);
     }
   }
 
-  // Listagem
+  // Listing
   get storage() {
-    return this.conteudo;
+    return this.content;
   }
 
   get length() {
@@ -42,63 +42,63 @@ export class DatabaseManager {
     return Object.keys(this.storage);
   }
 
-  // Geral
-  set(nome: string, valor: any) {
-    this.conteudo[nome] = valor;
-    return this.#escrever();
+  // General
+  set(name: string, value: any) {
+    this.content[name] = value;
+    return this.#write();
   }
 
-  delete(nome: string) {
-    delete this.conteudo[nome];
-    return this.#escrever();
+  delete(name: string) {
+    delete this.content[name];
+    return this.#write();
   }
 
-  get(nome: string) {
-    return this.#obter(nome);
+  get(name: string) {
+    return this.#get(name);
   }
 
   // Array
-  push(nome: string, valor: any) {
-    if (!Array.isArray(this.conteudo[nome])) {
-      throw new Error('O valor já definido não é uma array ou não foi definido.');
+  push(name: string, value: any) {
+    if (!Array.isArray(this.content[name])) {
+      throw new Error('The value already set is not an Array or has not been set.');
     }
-    (this.conteudo[nome] as any[]).push(valor);
-    this.#escrever();
+    (this.content[name] as any[]).push(value);
+    this.#write();
   }
 
-  pull(nome: string, valor: any) {
-    if (!Array.isArray(this.conteudo[nome])) {
-      throw new Error('O valor já definido não é uma array ou não foi definido.');
+  pull(name: string, value: any) {
+    if (!Array.isArray(this.content[name])) {
+      throw new Error('The value already set is not an Array or has not been set.');
     }
-    this.conteudo[nome] = (this.conteudo[nome] as any[]).filter((value: any) => value !== valor);
-    this.#escrever();
+    this.content[name] = (this.content[name] as any[]).filter((val: any) => val !== value);
+    this.#write();
   }
 
-  includes(nome: string, valor: any) {
-    if (!Array.isArray(this.conteudo[nome])) {
-      throw new Error('O valor já definido não é uma array ou não foi definido.');
+  includes(name: string, value: any) {
+    if (!Array.isArray(this.content[name])) {
+      throw new Error('The value already set is not an Array or has not been set.');
     }
-    return this.#obter(nome).includes(valor);
+    return this.#get(name).includes(value);
   }
 
-  // Outros
+  // Others
   async ping() {
-    const inicio = Date.now();
-    await this.set(`((((((PING))))))_internal_denkydb${inicio}`, 0);
-    this.delete(`((((((PING))))))_internal_denkydb${inicio}`);
-    return Date.now() - inicio;
+    const start = Date.now();
+    await this.set(`((((((PING))))))_internal_denkydb${start}`, 0);
+    this.delete(`((((((PING))))))_internal_denkydb${start}`);
+    return Date.now() - start;
   }
 
   deleteAll() {
-    this.conteudo = {};
-    this.#escrever();
+    this.content = {};
+    this.#write();
   }
 
-  #escrever() {
-    return writeFile(`./databases/${this.local}.json`, JSON.stringify(this.conteudo));
+  #write() {
+    return writeFile(`./databases/${this.local}.json`, JSON.stringify(this.content));
   }
 
-  #obter(nome: string) {
-    return this.conteudo[nome];
+  #get(name: string) {
+    return this.content[name];
   }
 }

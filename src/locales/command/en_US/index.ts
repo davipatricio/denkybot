@@ -44,9 +44,15 @@ export default {
   'user/avatar/seeGuildAvatar': 'See guild avatar',
   'user/avatar/seeGlobalAvatar': 'See global avatar',
 
+  // User Banner
+  'user/banner/noBanner': 'This user no  has banner.',
+  'user/banner/title': (user: User) => `${user}'s banner`,
+  'user/banner/browser': 'Open in browser',
+
   // Server icon
   'server/icon/title': (guild: Guild) => `${guild} icon`,
   'server/icon/browser': 'Open in browser',
+  'server/icon/noIcon': 'This server no has icon.',
 
   // Server info
   'server/info/embed/owner': (owner: GuildMember) => `👑 **Owner**\n${owner.user.tag} (${owner.user.id})`,
@@ -105,4 +111,9 @@ export default {
 
   'config/suggestions/actions/threads/enabled': 'Threads enabled successfully!',
   'config/suggestions/actions/threads/disabled': 'Threads disabled successfully!',
+
+  // Server Banner
+  'server/banner/noBanner': 'This server no has banner.',
+  'server/banner/title': (guild: Guild) => `${guild} banner`,
+  'server/banner/browser': 'Open in browser',
 } as const;

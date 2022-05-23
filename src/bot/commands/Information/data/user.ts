@@ -57,6 +57,28 @@ export default class UserData extends CommandDataStructure {
             },
           ],
         },
+        {
+          name: 'banner',
+          type: ApplicationCommandOptionType.Subcommand,
+          description: client.languages.manager.get('en_US', 'commandDescriptions:user/banner'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:user/banner'),
+          },
+          options: [
+            {
+              name: client.languages.manager.get('en_US', 'commandNames:user/banner/user'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:user/banner/user'),
+              },
+              type: ApplicationCommandOptionType.User,
+              required: false,
+              description: client.languages.manager.get('en_US', 'commandDescriptions:user/banner/user'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:user/banner/user'),
+              },
+            },
+          ],
+        },
       ],
     };
   }

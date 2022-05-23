@@ -44,9 +44,15 @@ export default {
   'user/avatar/seeGuildAvatar': 'Ver o avatar do usuário neste servidor',
   'user/avatar/seeGlobalAvatar': 'Ver o avatar do usuário neste servidor',
 
+  // User Banner
+  'user/banner/noBanner': 'Este usuário não tem um banner.',
+  'user/banner/title': (user: User) => `Banner de ${user}`,
+  'user/banner/browser': 'Abrir banner no navegador',
+
   // Server icon
   'server/icon/title': (guild: Guild) => `Ícone do servidor ${guild}`,
   'server/icon/browser': 'Abrir ícone no navegador',
+  'server/icon/noIcon': 'Este servidor não tem um ícone.',
 
   // Server info
   'server/info/embed/owner': (owner: GuildMember) => `👑 **Dono**\n${owner.user.tag} (${owner.user.id})`,
@@ -107,4 +113,9 @@ export default {
 
   'config/suggestions/actions/threads/enabled': 'Tópicos habilitados com sucesso!',
   'config/suggestions/actions/threads/disabled': 'Tópicos desabilitados com sucesso!',
+
+  // Server Banner
+  'server/banner/noBanner': 'Este servidor não tem um banner.',
+  'server/banner/title': (guild: Guild) => `Banner do servidor ${guild}`,
+  'server/banner/browser': 'Abrir banner no navegador',
 } as const;
