@@ -25,21 +25,21 @@
   "author": "Davi Patricio",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "18.0.0",
-    "@typescript-eslint/eslint-plugin": "5.28.0",
-    "@typescript-eslint/parser": "5.28.0",
-    "eslint": "8.17.0",
-    "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-prettier": "4.0.0",
-    "prettier": "2.7.1",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.7.1",
     "sucrase": "^3.21.0",
     "typescript": "^4.8.0-dev.20220616"
   },
   "dependencies": {
     "discord.js": "^14.0.0-dev.1655381041-4df491c",
-    "dotenv": "16.0.1",
+    "dotenv": "^16.0.1",
     "tslib": "2.4.0"
   }
 }
