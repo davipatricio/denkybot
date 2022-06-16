@@ -2,6 +2,9 @@ on: [push, pull_request]
 
 jobs:
   tsc:
+    if:
+      github.event_name == 'push' || github.event.pull_request.head.repo.full_name !=
+      github.repository
     name: tsc
     runs-on: ubuntu-latest
     steps:
