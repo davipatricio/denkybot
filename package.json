@@ -7,40 +7,41 @@
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/davipatricio/denky-rewrite.git"
+    "url": "https://github.com/denkylabs/denkybot.git"
   },
   "bugs": {
-    "url": "https://github.com/davipatricio/denky-rewrite/issues"
+    "url": "https://github.com/denkylabs/denkybot/issues"
   },
   "scripts": {
     "build": "npx sucrase ./src -d ./build --esModuleInterop --transforms typescript,imports",
-    "build:check": "npm run types:check && npm run build",
+    "build:check": "yarn types:check && yarn build",
     "start": "cd ./build && node sharding/shard.js",
     "lint": "npx eslint src",
-    "lint:fix": "npm run lint:prettier && npx eslint src --fix",
+    "lint:fix": "yarn lint:prettier && npx eslint src --fix",
     "lint:prettier": "npx prettier -w src",
     "types:check": "npx tsc --noEmit --incremental false"
   },
   "keywords": [],
   "author": "Davi Patricio",
-  "license": "MIT",
+  "license": "GPL-3.0 license",
   "devDependencies": {
-    "@types/node": "17.0.35",
-    "@typescript-eslint/eslint-plugin": "5.25.0",
-    "@typescript-eslint/parser": "5.25.0",
-    "eslint": "8.16.0",
-    "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-prettier": "4.0.0",
-    "prettier": "2.6.2",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.7.1",
     "sucrase": "^3.21.0",
-    "typescript": "^4.8.0-dev.20220522"
+    "typescript": "^4.8.0-dev.20220616"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "discord.js": "^14.0.0-dev.1655381041-4df491c",
+    "dotenv": "^16.0.1",
     "ms": "^2.1.3",
-    "discord.js": "^14.0.0-dev.1653091711-fdeac9d",
-    "dotenv": "16.0.1",
     "tslib": "2.4.0"
   }
 }
