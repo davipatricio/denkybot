@@ -1,4 +1,4 @@
-import { EmbedBuilder, GuildMember, PermissionFlagsBits, Util } from 'discord.js';
+import { EmbedBuilder, escapeMarkdown, GuildMember, PermissionFlagsBits } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
@@ -21,7 +21,7 @@ export default class UserInfoSubCommand extends Command {
     const tempMember = interaction.options.getMember('user') as GuildMember;
     const member = user.id === tempMember?.id ? tempMember : undefined;
 
-    const cleanUsername = Util.escapeMarkdown(user.username);
+    const cleanUsername = escapeMarkdown(user.username);
 
     const embed = new EmbedBuilder()
       .setColor('Blurple')
