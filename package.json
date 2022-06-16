@@ -7,10 +7,10 @@
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/davipatricio/denky-rewrite.git"
+    "url": "https://github.com/denkylabs/denkybot.git"
   },
   "bugs": {
-    "url": "https://github.com/davipatricio/denky-rewrite/issues"
+    "url": "https://github.com/denkylabs/denkybot/issues"
   },
   "scripts": {
     "build": "npx sucrase ./src -d ./build --esModuleInterop --transforms typescript,imports",
