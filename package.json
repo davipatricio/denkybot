@@ -14,10 +14,10 @@
   },
   "scripts": {
     "build": "npx sucrase ./src -d ./build --esModuleInterop --transforms typescript,imports",
-    "build:check": "npm run types:check && npm run build",
+    "build:check": "yarn types:check && yarn build",
     "start": "cd ./build && node sharding/shard.js",
     "lint": "npx eslint src",
-    "lint:fix": "npm run lint:prettier && npx eslint src --fix",
+    "lint:fix": "yarn lint:prettier && npx eslint src --fix",
     "lint:prettier": "npx prettier -w src",
     "types:check": "npx tsc --noEmit --incremental false"
   },
