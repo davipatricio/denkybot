@@ -1,3 +1,5 @@
+// FIXME: Use Node 18.x fetch instead of axios when @types/node gets the fetch function added to the global namespace
+import axios from 'axios';
 import type { DenkyClient } from '../../types/Client';
 
 export class Poster {
@@ -32,13 +34,13 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://top.gg/api/bots/stats`, {
+    const request = await axios(`https://top.gg/api/bots/stats`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         server_count: totalGuilds,
         shard_count: Number(process.env.SHARD_COUNT ?? 1),
       }),
@@ -56,13 +58,13 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://discord.bots.gg/api/v1/bots/${this.client.user?.id}/stats`, {
+    const request = await axios(`https://discord.bots.gg/api/v1/bots/${this.client.user?.id}/stats`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         guildCount: totalGuilds,
         shardCount: Number(process.env.SHARD_COUNT ?? 1),
       }),
@@ -80,13 +82,13 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://discords.com/bots/api/bot/${this.client.user?.id}`, {
+    const request = await axios(`https://discords.com/bots/api/bot/${this.client.user?.id}`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         server_count: totalGuilds,
       }),
     });
@@ -103,13 +105,13 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://disforge.com/api/botstats/${this.client.user?.id}`, {
+    const request = await axios(`https://disforge.com/api/botstats/${this.client.user?.id}`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         servers: totalGuilds,
       }),
     });
@@ -126,13 +128,13 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://discordbotlist.com/api/v1/bots/${this.client.user?.id}/stats`, {
+    const request = await axios(`https://discordbotlist.com/api/v1/bots/${this.client.user?.id}/stats`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         guilds: totalGuilds,
       }),
     });
@@ -149,13 +151,13 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://api.bladelist.gg/bots/${this.client.user?.id}`, {
+    const request = await axios(`https://api.bladelist.gg/bots/${this.client.user?.id}`, {
       method: 'POST',
       headers: {
         Authorization: `Token ${Authorization}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         server_count: totalGuilds,
         shard_count: Number(process.env.SHARD_COUNT ?? 1),
       }),
@@ -173,13 +175,13 @@ export class Poster {
       return false;
     }
 
-    const request = await fetch(`https://api.fateslist.xyz/bots/${this.client.user?.id}/stats`, {
+    const request = await axios(`https://api.fateslist.xyz/bots/${this.client.user?.id}/stats`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         guild_count: totalGuilds,
       }),
     });

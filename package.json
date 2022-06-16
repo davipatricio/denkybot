@@ -38,6 +38,7 @@
     "typescript": "^4.8.0-dev.20220616"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "discord.js": "^14.0.0-dev.1655381041-4df491c",
     "dotenv": "^16.0.1",
     "tslib": "2.4.0"
