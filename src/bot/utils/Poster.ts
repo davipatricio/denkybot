@@ -34,7 +34,7 @@ export class Poster {
       return false;
     }
 
-    const request = await axios(`https://top.gg/api/bots/stats`, {
+    const request = await axios('https://top.gg/api/bots/stats', {
       method: 'POST',
       headers: {
         Authorization,
@@ -47,7 +47,6 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to top.gg!');
-    if (this.client.config.logs.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to top.gg successfully!');
     return true;
   }
 
