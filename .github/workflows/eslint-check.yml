@@ -2,6 +2,9 @@ on: [push, pull_request]
 
 jobs:
   eslint:
+    if:
+      github.event_name == 'push' || github.event.pull_request.head.repo.full_name !=
+      github.repository
     name: eslint
     runs-on: ubuntu-latest
     steps:
