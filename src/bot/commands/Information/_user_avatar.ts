@@ -10,7 +10,7 @@ export default class UserAvatarSubCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: false,
-      guildOnly: true,
+      guildOnly: true
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
   }
@@ -31,7 +31,7 @@ export default class UserAvatarSubCommand extends Command {
       new ButtonBuilder()
         .setStyle(ButtonStyle.Link)
         .setLabel(t('command:user/avatar/browser'))
-        .setURL(guildAvatar ?? userAvatar),
+        .setURL(guildAvatar ?? userAvatar)
     ]);
 
     const embed = new EmbedBuilder()

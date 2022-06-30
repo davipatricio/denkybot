@@ -9,7 +9,7 @@ export default class TextInvertSubCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: false,
-      guildOnly: true,
+      guildOnly: true
     };
     this.permissions = { bot: [], user: [] };
   }

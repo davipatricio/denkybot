@@ -11,7 +11,7 @@ import {
   TextInputBuilder,
   TextInputStyle,
   UnsafeSelectMenuBuilder,
-  UnsafeSelectMenuOptionBuilder,
+  UnsafeSelectMenuOptionBuilder
 } from 'discord.js';
 import { Command, CommandLocale, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
@@ -31,7 +31,7 @@ export default class PingCommand extends Command {
       autoDefer: false,
       ephemeral: false,
       showInHelp: true,
-      guildOnly: true,
+      guildOnly: true
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
   }
@@ -87,8 +87,8 @@ export default class PingCommand extends Command {
               .setValue(cat.id)
               .setEmoji({ name: '💬' })
               .setDescription(cat.topic ?? '');
-          }),
-        ),
+          })
+        )
       ]);
 
       const msg = (await int.editReply({ content: '📥 **|** Escolha uma categoria para enviar sua sugestão.', components: [categoriesRow] })) as Message;

@@ -10,21 +10,21 @@ export default class PingData extends CommandDataStructure {
       type: ApplicationCommandType.ChatInput,
       description: client.languages.manager.get('en_US', 'commandDescriptions:config'),
       descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:config'),
+        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:config')
       },
       options: [
         {
           name: client.languages.manager.get('en_US', 'commandNames:config/suggestions'),
           nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:config/suggestions'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:config/suggestions')
           },
           type: ApplicationCommandOptionType.Subcommand,
           description: client.languages.manager.get('en_US', 'commandDescriptions:config/suggestions'),
           descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:config/suggestions'),
-          },
-        },
-      ],
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:config/suggestions')
+          }
+        }
+      ]
     };
   }
 }

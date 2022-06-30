@@ -38,12 +38,12 @@ export class Poster {
       method: 'POST',
       headers: {
         Authorization,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       data: JSON.stringify({
         server_count: totalGuilds,
-        shard_count: Number(process.env.SHARD_COUNT ?? 1),
-      }),
+        shard_count: Number(process.env.SHARD_COUNT ?? 1)
+      })
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to top.gg!');
@@ -61,12 +61,12 @@ export class Poster {
       method: 'POST',
       headers: {
         Authorization,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       data: JSON.stringify({
         guildCount: totalGuilds,
-        shardCount: Number(process.env.SHARD_COUNT ?? 1),
-      }),
+        shardCount: Number(process.env.SHARD_COUNT ?? 1)
+      })
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to bots.gg!');
@@ -85,11 +85,11 @@ export class Poster {
       method: 'POST',
       headers: {
         Authorization,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       data: JSON.stringify({
-        server_count: totalGuilds,
-      }),
+        server_count: totalGuilds
+      })
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to discords!');
@@ -108,11 +108,11 @@ export class Poster {
       method: 'POST',
       headers: {
         Authorization,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       data: JSON.stringify({
-        servers: totalGuilds,
-      }),
+        servers: totalGuilds
+      })
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to disforge!');
@@ -131,11 +131,11 @@ export class Poster {
       method: 'POST',
       headers: {
         Authorization,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       data: JSON.stringify({
-        guilds: totalGuilds,
-      }),
+        guilds: totalGuilds
+      })
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to discordbotlist.com!');
@@ -154,12 +154,12 @@ export class Poster {
       method: 'POST',
       headers: {
         Authorization: `Token ${Authorization}`,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       data: JSON.stringify({
         server_count: totalGuilds,
-        shard_count: Number(process.env.SHARD_COUNT ?? 1),
-      }),
+        shard_count: Number(process.env.SHARD_COUNT ?? 1)
+      })
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to bladelist.gg!');
@@ -178,11 +178,11 @@ export class Poster {
       method: 'POST',
       headers: {
         Authorization,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       data: JSON.stringify({
-        guild_count: totalGuilds,
-      }),
+        guild_count: totalGuilds
+      })
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to fateslist.xyz!');

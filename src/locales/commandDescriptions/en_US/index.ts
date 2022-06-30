@@ -54,5 +54,5 @@ export default {
 
   // Suggestions
   suggestions: 'Send suggestions to the server',
-  'suggestions/send': 'Send suggestions to the server',
+  'suggestions/send': 'Send suggestions to the server'
 } as const;

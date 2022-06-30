@@ -10,7 +10,7 @@ export default class ServerData extends CommandDataStructure {
       type: ApplicationCommandType.ChatInput,
       description: client.languages.manager.get('en_US', 'commandDescriptions:server'),
       descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server'),
+        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server')
       },
       options: [
         {
@@ -18,26 +18,26 @@ export default class ServerData extends CommandDataStructure {
           type: ApplicationCommandOptionType.Subcommand,
           description: client.languages.manager.get('en_US', 'commandDescriptions:server/info'),
           descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/info'),
-          },
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/info')
+          }
         },
         {
           name: 'icon',
           type: ApplicationCommandOptionType.Subcommand,
           description: client.languages.manager.get('en_US', 'commandDescriptions:server/icon'),
           descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/icon'),
-          },
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/icon')
+          }
         },
         {
           name: 'banner',
           type: ApplicationCommandOptionType.Subcommand,
           description: client.languages.manager.get('en_US', 'commandDescriptions:server/banner'),
           descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/banner'),
-          },
-        },
-      ],
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/banner')
+          }
+        }
+      ]
     };
   }
 }

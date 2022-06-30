@@ -10,7 +10,7 @@ export default class ServerInfoSubCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: false,
-      guildOnly: true,
+      guildOnly: true
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
   }
@@ -35,33 +35,33 @@ export default class ServerInfoSubCommand extends Command {
         {
           name: t('command:server/info/embed/categories'),
           value: categories,
-          inline: true,
+          inline: true
         },
         {
           name: t('command:server/info/embed/textChannels'),
           value: textChannels,
-          inline: true,
+          inline: true
         },
         {
           name: t('command:server/info/embed/voiceChannels'),
           value: voiceChannels,
-          inline: true,
+          inline: true
         },
         {
           name: t('command:server/info/embed/members'),
           value: t('command:server/info/embed/memberCount', interaction.guild.members.cache.filter(x => x.user.bot).size, interaction.guild.members.cache.size, interaction.guild.memberCount),
-          inline: true,
+          inline: true
         },
         {
           name: t('command:server/info/embed/roles'),
           value: interaction.guild.roles.cache.size.toString() as string,
-          inline: true,
+          inline: true
         },
         {
           name: 'Boosts',
           value: t('command:server/info/embed/boosts', interaction.guild.premiumSubscriptionCount, interaction.guild.premiumTier),
-          inline: true,
-        },
+          inline: true
+        }
       ])
       .setFooter({ text: t('command:server/info/embed/footer', interaction.guild) })
       .setTimestamp(interaction.guild.createdTimestamp);

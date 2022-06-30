@@ -40,13 +40,13 @@ class Command {
     this.rawCategory = '';
     this.permissions = {
       user: [],
-      bot: [],
+      bot: []
     };
     this.config = {
       ephemeral: false,
       autoDefer: true,
       showInHelp: true,
-      guildOnly: true,
+      guildOnly: true
     };
   }
 

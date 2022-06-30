@@ -9,7 +9,7 @@ const sharder = new ShardingManager('./bot/index.js', {
   totalShards: Configuration.shardCount,
   mode: 'process',
   token: process.env.BOT_TOKEN,
-  respawn: true,
+  respawn: true
 });
 
 sharder.spawn().then(shards => {

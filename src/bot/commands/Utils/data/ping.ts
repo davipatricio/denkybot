@@ -10,8 +10,8 @@ export default class PingData extends CommandDataStructure {
       type: ApplicationCommandType.ChatInput,
       description: client.languages.manager.get('en_US', 'commandDescriptions:ping'),
       descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ping'),
-      },
+        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ping')
+      }
     };
   }
 }

@@ -8,7 +8,7 @@ import {
   Message,
   SelectMenuBuilder,
   UnsafeSelectMenuBuilder,
-  UnsafeSelectMenuOptionBuilder,
+  UnsafeSelectMenuOptionBuilder
 } from 'discord.js';
 import ms from 'ms';
 import { Command, CommandLocale, CommandRunOptions } from '../../../structures/Command';
@@ -25,7 +25,7 @@ export default class SuggestionsSubCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: false,
-      guildOnly: true,
+      guildOnly: true
     };
     this.permissions = { bot: [], user: [] };
   }
@@ -40,7 +40,7 @@ export default class SuggestionsSubCommand extends Command {
     const CATEGORY_MANAGE_FILTER = (m: Message) =>
       m.author.id === interaction.user.id &&
       m.mentions.channels.filter(c =>
-        [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildForum, ChannelType.GuildNewsThread, ChannelType.GuildPublicThread, ChannelType.GuildPrivateThread].includes(c.type),
+        [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildForum, ChannelType.GuildNewsThread, ChannelType.GuildPublicThread, ChannelType.GuildPrivateThread].includes(c.type)
       ).size === 1;
 
     const paginationSelect = new UnsafeSelectMenuBuilder()
@@ -71,7 +71,7 @@ export default class SuggestionsSubCommand extends Command {
           .setDescription(t('command:config/suggestions/pages/threads'))
           .setLabel(t('command:config/suggestions/pages/threads/title'))
           .setValue('threads')
-          .setEmoji({ name: '💭' }),
+          .setEmoji({ name: '💭' })
       ]);
 
     selectRow.setComponents([paginationSelect]);
@@ -87,7 +87,7 @@ export default class SuggestionsSubCommand extends Command {
           const time = Number(int.values[0]);
           this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
             ...updatedConfig,
-            cooldown: time,
+            cooldown: time
           });
           updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
           this.updateMessage('cooldown', message, selectRow, interaction, updatedConfig, t);
@@ -104,7 +104,7 @@ export default class SuggestionsSubCommand extends Command {
               addReactions: true,
               categories: [],
               cooldown: 0,
-              useThreads: false,
+              useThreads: false
             });
             updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('categorias', message, selectRow, interaction, updatedConfig, t);
@@ -153,13 +153,13 @@ export default class SuggestionsSubCommand extends Command {
           case 'enable_reactions': {
             this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
               ...updatedConfig,
-              addReactions: true,
+              addReactions: true
             });
             updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('reacoes', message, selectRow, interaction, updatedConfig, t);
             int.followUp({
               content: `✅ **|** ${t('command:config/suggestions/actions/reactions/enabled')}\n💡 **|** ${t('command:config/suggestions/actions/reactions/enabledTip')}`,
-              ephemeral: true,
+              ephemeral: true
             });
             break;
           }
@@ -167,7 +167,7 @@ export default class SuggestionsSubCommand extends Command {
           case 'disable_reactions': {
             this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
               ...updatedConfig,
-              addReactions: false,
+              addReactions: false
             });
             updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('reacoes', message, selectRow, interaction, updatedConfig, t);
@@ -178,13 +178,13 @@ export default class SuggestionsSubCommand extends Command {
           case 'enable_threads': {
             this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
               ...updatedConfig,
-              useThreads: true,
+              useThreads: true
             });
             updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('threads', message, selectRow, interaction, updatedConfig, t);
             int.followUp({
               content: `✅ **|** ${t('command:config/suggestions/actions/threads/enabled')}`,
-              ephemeral: true,
+              ephemeral: true
             });
             break;
           }
@@ -192,7 +192,7 @@ export default class SuggestionsSubCommand extends Command {
           case 'disable_threads': {
             this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
               ...updatedConfig,
-              useThreads: false,
+              useThreads: false
             });
             updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('threads', message, selectRow, interaction, updatedConfig, t);
@@ -218,9 +218,9 @@ export default class SuggestionsSubCommand extends Command {
         return embed.setDescription(configStatus ? `✅ **|** ${t('command:config/suggestions/enabled')}` : `❌ **|** ${t('command:config/suggestions/disabled')}`);
       case 'cooldown':
         return embed.setDescription(
-          `${configStatus ? `✅ **|** ${t('command:config/suggestions/enabled')}` : `❌ **|** ${t('command:config/suggestions/disabled')}`}\n⏲️ **|** O cooldown atualmente está em ${ms(
-            configStatus.cooldown,
-          )}`,
+          configStatus
+            ? `✅ **|** ${t('command:config/suggestions/enabled')}\n⏲️ **|** O cooldown atualmente está em ${ms(configStatus.cooldown)}`
+            : `❌ **|** ${t('command:config/suggestions/disabled')}`
         );
       case 'categorias': {
         if (!configStatus) return embed.setDescription(`❌ **|** ${t('command:config/suggestions/disabled')}`);
@@ -228,21 +228,21 @@ export default class SuggestionsSubCommand extends Command {
         return embed.setDescription(`✅ **|** ${t('command:config/suggestions/enabled')}`).addFields([
           {
             name: 'Categorias',
-            value: categories.length >= 1 ? categories.map(catId => `<#${catId}>`).join('\n') : t('command:config/suggestions/noCategories'),
-          },
+            value: categories.length >= 1 ? categories.map(catId => `<#${catId}>`).join('\n') : t('command:config/suggestions/noCategories')
+          }
         ]);
       }
       case 'reacoes':
         return embed.setDescription(
           configStatus
             ? `✅ **|** ${t('command:config/suggestions/enabled')}\n👍 **|** ${t('command:config/suggestions/reactions', configStatus.addReactions)}`
-            : `❌ **|** ${t('command:config/suggestions/disabled')}`,
+            : `❌ **|** ${t('command:config/suggestions/disabled')}`
         );
       case 'threads':
         return embed.setDescription(
           configStatus
             ? `✅ **|** ${t('command:config/suggestions/enabled')}\n👍 **|** ${t('command:config/suggestions/threads', configStatus.useThreads)}`
-            : `❌ **|** ${t('command:config/suggestions/disabled')}`,
+            : `❌ **|** ${t('command:config/suggestions/disabled')}`
         );
       default:
         return embed;
@@ -260,7 +260,7 @@ export default class SuggestionsSubCommand extends Command {
           new UnsafeSelectMenuOptionBuilder().setLabel('15 segundos').setDescription('Membros deverão esperar 15 segundos para sugerir consecutivamente').setValue('15000'),
           new UnsafeSelectMenuOptionBuilder().setLabel('30 segundos').setDescription('Membros deverão esperar 30 segundos para sugerir consecutivamente').setValue('30000'),
           new UnsafeSelectMenuOptionBuilder().setLabel('1 minuto').setDescription('Membros deverão esperar 1 minuto para sugerir consecutivamente').setValue('60000'),
-          new UnsafeSelectMenuOptionBuilder().setLabel('15 minutos').setDescription('Membros deverão esperar 15 minutos para sugerir consecutivamente').setValue('900000'),
+          new UnsafeSelectMenuOptionBuilder().setLabel('15 minutos').setDescription('Membros deverão esperar 15 minutos para sugerir consecutivamente').setValue('900000')
         ]);
       return selectRow.setComponents([selectMenu]);
     }
@@ -269,7 +269,7 @@ export default class SuggestionsSubCommand extends Command {
       case 'sugestoes':
         return buttonRow.setComponents([
           new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enable')).setDisabled(!!configStatus).setStyle(ButtonStyle.Success).setCustomId('enable'),
-          new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disable')).setDisabled(!configStatus).setStyle(ButtonStyle.Danger).setCustomId('disable'),
+          new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disable')).setDisabled(!configStatus).setStyle(ButtonStyle.Danger).setCustomId('disable')
         ]);
       case 'categorias': {
         const addCat = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/addCategory')).setStyle(ButtonStyle.Success).setCustomId('add_category');

@@ -47,8 +47,8 @@ export default class MessageCreateEvent extends Event {
           content: t('command:afk/mentioned', user, data.startTime, data.reason),
           allowedMentions: {
             parse: [],
-            users: [message.author.id],
-          },
+            users: [message.author.id]
+          }
         })
         .then(msg => {
           if (msg.channel) setTimeout(() => msg.delete(), 5000);

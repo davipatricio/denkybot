@@ -3,5 +3,5 @@ export default {
   MODERATION: '🛠️ Moderação',
   INFO: '💁 Informações',
   TEXT: '💬 Texto',
-  CONFIG: '🔧 Configurações',
+  CONFIG: '🔧 Configurações'
 } as const;

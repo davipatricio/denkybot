@@ -39,9 +39,6 @@ export default {
   'text/claps': 'palmas',
   'text/invert': 'inverter',
 
-  // Server
-  server: 'server',
-
   // Config
   config: 'config',
   'config/suggestions': 'sugestoes',
@@ -49,5 +46,5 @@ export default {
   // Suggestions
   suggestions: 'sugestoes',
   suggestion: 'sugestao',
-  'suggestion/send': 'enviar',
+  'suggestion/send': 'enviar'
 } as const;

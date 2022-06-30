@@ -115,5 +115,5 @@ export default {
   // Server Banner
   'server/banner/noBanner': 'This server no has banner.',
   'server/banner/title': (guild: Guild) => `${guild} banner`,
-  'server/banner/browser': 'Open in browser',
+  'server/banner/browser': 'Open in browser'
 } as const;

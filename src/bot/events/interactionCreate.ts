@@ -45,7 +45,7 @@ export default class InteractionCreateEvent extends Event {
 
     if (!this.webhookCommandLogs)
       this.webhookCommandLogs = new WebhookClient({
-        url: process.env.DISCORD_COMMANDLOGS_WEBHOOK_URL,
+        url: process.env.DISCORD_COMMANDLOGS_WEBHOOK_URL
       });
 
     const embed = new EmbedBuilder()
@@ -55,18 +55,18 @@ export default class InteractionCreateEvent extends Event {
       .addFields([
         {
           name: 'User information',
-          value: `User Tag: ${interaction.user.tag} (${interaction.user.id})\nUser Locale: ${interaction.locale}\nBot suggested locale: ${usedLocale}`,
+          value: `User Tag: ${interaction.user.tag} (${interaction.user.id})\nUser Locale: ${interaction.locale}\nBot suggested locale: ${usedLocale}`
         },
         {
           name: 'Guild information',
-          value: `Guild: ${interaction.guild?.name ?? 'Command was not run in a guild.'} (${interaction.guild?.id ?? 'No ID.'})\nMembers: ${interaction.guild?.memberCount ?? 0}`,
+          value: `Guild: ${interaction.guild?.name ?? 'Command was not run in a guild.'} (${interaction.guild?.id ?? 'No ID.'})\nMembers: ${interaction.guild?.memberCount ?? 0}`
         },
         {
           name: 'Channel information',
           value: `Channel: ${(interaction.channel as TextChannel)?.name ?? 'Unknown name.'} (${interaction.channel?.id ?? 'Unknown ID.'})\nChannel Type: ${
             ChannelType[(interaction.channel as TextChannel).type] ?? 'UNKNOWN'
-          }`,
-        },
+          }`
+        }
       ]);
 
     this.webhookCommandLogs.send({ embeds: [embed] });
