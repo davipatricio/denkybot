@@ -134,6 +134,7 @@ export default {
   'suggestions/send/small-suggestion': 'Sua sugestão deve ter pelo menos 5 caracteres.',
   'suggestions/send/choose-a-category': 'Escolha uma categoria para enviar sua sugestão',
   'suggestions/send/sent': 'Sugestão enviada com sucesso!',
+  'suggestions/send/thread-name': 'Comentários',
 
   'suggestions/embed/title': 'Nova sugestão'
 } as const;

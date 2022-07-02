@@ -1,5 +1,6 @@
 import {
   ActionRowBuilder,
+  ChannelType,
   ChatInputCommandInteraction,
   EmbedBuilder,
   GuildTextBasedChannel,
@@ -116,6 +117,10 @@ export default class PingCommand extends Command {
           .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() });
         i.editReply({ content: t('command:suggestions/send/sent'), components: [] });
         const message = await finalChannel.send({ embeds: [embed] });
+
+        if (config.useThreads) {
+          if ([ChannelType.GuildText, ChannelType.GuildNews].includes(finalChannel.type)) message.startThread({ name: t('command:suggestions/send/thread-name') });
+        }
 
         if (config.addReactions) {
           await message.react('👍');
