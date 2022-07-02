@@ -122,11 +122,11 @@ export default class PingCommand extends Command {
         }
 
         const embed = new EmbedBuilder()
-          .setTitle(`💡 ${t('command:suggestions/embed/title')}`)
+          .setTitle(`💡 • ${t('command:suggestions/embed/title')}`)
           .setDescription(`> ${text}`)
           .setColor('Yellow')
           .setTimestamp()
-          .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() });
+          .setFooter({ text: `${interaction.user.tag} (${interaction.user.id})`, iconURL: interaction.user.displayAvatarURL() });
         const message = await finalChannel.send({ embeds: [embed] });
         i.editReply({ content: t('command:suggestions/send/sent'), components: [] });
 
