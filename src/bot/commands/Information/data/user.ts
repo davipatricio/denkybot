@@ -8,6 +8,7 @@ export default class UserData extends CommandDataStructure {
     this.data = {
       name: 'user',
       type: ApplicationCommandType.ChatInput,
+      dmPermission: false,
       description: client.languages.manager.get('en_US', 'commandDescriptions:user'),
       descriptionLocalizations: {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:user')

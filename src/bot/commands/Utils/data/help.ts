@@ -11,6 +11,7 @@ export default class HelpData extends CommandDataStructure {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:help')
       },
       type: ApplicationCommandType.ChatInput,
+      dmPermission: true,
       description: client.languages.manager.get('en_US', 'commandDescriptions:help'),
       descriptionLocalizations: {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:help')

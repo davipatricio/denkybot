@@ -8,6 +8,7 @@ export default class ServerData extends CommandDataStructure {
     this.data = {
       name: 'server',
       type: ApplicationCommandType.ChatInput,
+      dmPermission: false,
       description: client.languages.manager.get('en_US', 'commandDescriptions:server'),
       descriptionLocalizations: {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server')

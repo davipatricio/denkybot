@@ -11,6 +11,7 @@ export default class PingData extends CommandDataStructure {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion')
       },
       type: ApplicationCommandType.ChatInput,
+      dmPermission: false,
       description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions'),
       descriptionLocalizations: {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions')

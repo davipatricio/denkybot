@@ -30,6 +30,7 @@ export default class PollData extends CommandDataStructure {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:poll')
       },
       type: ApplicationCommandType.ChatInput,
+      dmPermission: false,
       description: client.languages.manager.get('en_US', 'commandNames:poll'),
       options: [
         {

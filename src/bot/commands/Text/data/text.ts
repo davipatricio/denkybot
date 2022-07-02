@@ -27,6 +27,7 @@ export default class TextData extends CommandDataStructure {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:text')
       },
       type: ApplicationCommandType.ChatInput,
+      dmPermission: true,
       description: client.languages.manager.get('en_US', 'commandDescriptions:text'),
       descriptionLocalizations: {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:text')

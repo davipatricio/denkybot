@@ -8,6 +8,7 @@ export default class PingData extends CommandDataStructure {
     this.data = {
       name: 'ping',
       type: ApplicationCommandType.ChatInput,
+      dmPermission: true,
       description: client.languages.manager.get('en_US', 'commandDescriptions:ping'),
       descriptionLocalizations: {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ping')

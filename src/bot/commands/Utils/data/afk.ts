@@ -8,6 +8,7 @@ export default class AfkData extends CommandDataStructure {
     this.data = {
       name: 'afk',
       type: ApplicationCommandType.ChatInput,
+      dmPermission: true,
       options: [
         {
           name: client.languages.manager.get('en_US', 'commandNames:afk/on'),
