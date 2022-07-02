@@ -4,7 +4,6 @@ import {
   ChatInputCommandInteraction,
   EmbedBuilder,
   GuildTextBasedChannel,
-  InteractionType,
   Message,
   ModalBuilder,
   ModalSubmitInteraction,
@@ -15,8 +14,11 @@ import {
   UnsafeSelectMenuBuilder,
   UnsafeSelectMenuOptionBuilder
 } from 'discord.js';
+import ms from 'ms';
 import { Command, CommandLocale, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
+
+const cooldowns = new Map<string, boolean>();
 
 type CategoriesStructure = {
   name: string;
@@ -67,9 +69,7 @@ export default class PingCommand extends Command {
     modal.setComponents([row1]);
     interaction.showModal(modal);
     const eventFn = async (int: ModalSubmitInteraction) => {
-      if (int.user.id !== interaction.user.id) return;
-      if (int.type !== InteractionType.ModalSubmit) return;
-      if (int.customId !== 'suggestion_modal') return;
+      if (int.user.id !== interaction.user.id || int.customId !== 'suggestion_modal') return;
       this.client.off('interactionCreate', eventFn);
 
       await int.deferReply();
@@ -103,6 +103,18 @@ export default class PingCommand extends Command {
         if (!i.isSelectMenu()) return;
         await i.deferUpdate();
         const channelId = i.values[0] as string;
+
+        const userCooldown = cooldowns.get(`${interaction.user.id}.${channelId}`);
+        if (userCooldown) {
+          i.editReply({ content: `😅 ${t('command:suggestions/send/in-cooldown', ms(config.cooldown))}`, components: [] });
+          return;
+        }
+
+        cooldowns.set(`${interaction.user.id}.${channelId}`, true);
+        setTimeout(() => {
+          cooldowns.delete(`${interaction.user.id}.${channelId}`);
+        }, config.cooldown + 1);
+
         const finalChannel = int.guild?.channels.cache.get(channelId) as GuildTextBasedChannel;
         if (!finalChannel) {
           interaction.editReply({ content: t('command:suggestions/unknown-category'), components: [] });
@@ -115,8 +127,8 @@ export default class PingCommand extends Command {
           .setColor('Yellow')
           .setTimestamp()
           .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() });
-        i.editReply({ content: t('command:suggestions/send/sent'), components: [] });
         const message = await finalChannel.send({ embeds: [embed] });
+        i.editReply({ content: t('command:suggestions/send/sent'), components: [] });
 
         if (config.useThreads) {
           if ([ChannelType.GuildText, ChannelType.GuildNews].includes(finalChannel.type)) message.startThread({ name: t('command:suggestions/send/thread-name') });

@@ -129,6 +129,7 @@ export default {
   'suggestions/send/modal/label': 'Enter the text of your suggestion',
   'suggestions/send/modal/placeholder': 'My suggestion is...',
 
+  'suggestions/send/in-cooldown': (n: string) => `Calm down there! A server administrator has asked members to wait at least ${n} to submit another suggestion in this category.`,
   'suggestions/send/small-suggestion': 'Your suggestion must be at least 5 characters long.',
   'suggestions/send/choose-a-category': 'Choose a category to submit your suggestion',
   'suggestions/send/sent': 'Suggestion sent successfully!',
