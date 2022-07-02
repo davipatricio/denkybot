@@ -10,7 +10,7 @@ export default class TextCommand extends Command {
       autoDefer: false,
       ephemeral: false,
       showInHelp: true,
-      guildOnly: false,
+      guildOnly: false
     };
     this.permissions = { bot: [], user: [] };
   }

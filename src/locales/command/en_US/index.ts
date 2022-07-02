@@ -1,4 +1,4 @@
-import type { Guild, GuildMember, User } from 'discord.js';
+import type { Guild, GuildMember, TextChannel, User } from 'discord.js';
 
 export default {
   // General errors
@@ -65,8 +65,75 @@ export default {
   'server/info/embed/boosts': (boosts: number, level: number) => `🌟 **Boosts:** ${boosts}\n🌠 **Level:** ${level}`,
   'server/info/embed/footer': (guild: Guild) => `🔢 ID: ${guild.id} | 📅 Created at`,
 
+  // Config suggestions
+  'config/suggestions/title': 'Settings Panel | Suggestions',
+
+  'config/suggestions/buttons/enable': 'Enable',
+  'config/suggestions/buttons/disable': 'Disable',
+  'config/suggestions/buttons/addCategory': 'Add category',
+  'config/suggestions/buttons/delCategory': 'Remove category',
+  'config/suggestions/buttons/enableReact': 'Enable reactions',
+  'config/suggestions/buttons/disableReact': 'Disable reactions',
+
+  'config/suggestions/pages/suggestions': 'Enable or disable the suggestion system',
+  'config/suggestions/pages/categories': 'Add or delete suggestion categories',
+  'config/suggestions/pages/reactions': 'Enable or disable reactions on suggestions',
+  'config/suggestions/pages/cooldowns': 'Manage suggestion cooldowns',
+  'config/suggestions/pages/threads': 'Enable or disable the use of threads',
+
+  'config/suggestions/pages': 'Pages',
+  'config/suggestions/pages/suggestions/title': 'Suggestions',
+  'config/suggestions/pages/categories/title': 'Categories',
+  'config/suggestions/pages/reactions/title': 'Reactions',
+  'config/suggestions/pages/cooldowns/title': 'Cooldowns',
+  'config/suggestions/pages/threads/title': 'Threads',
+
+  'config/suggestions/disabled': 'The suggestion system is currently disabled.',
+  'config/suggestions/enabled': 'The suggestion system is currently enabled.',
+  'config/suggestions/reactions': (status: boolean) => `Reactions are currently: ${status ? 'enabled' : 'disabled'}.`,
+  'config/suggestions/threads': (status: boolean) => `Threads are currently: ${status ? 'enabled' : 'disabled'}.`,
+  'config/suggestions/cooldowns': 'The cooldown is currently at:',
+
+  'config/suggestions/noCategories': 'No categories have been created yet',
+
+  'config/suggestions/actions/enabled': 'The suggestion system has been successfully enabled! Now, you need to add categories to finish the process.',
+
+  'config/suggestions/actions/category/askToAdd': (channel: TextChannel) => `Send a message mentioning a channel to add it to the category list. Example: ${channel}`,
+  'config/suggestions/actions/category/added': 'Category added successfully!',
+  'config/suggestions/actions/category/addError': "Unable to add category because you didn't send a message mentioning a channel!",
+
+  'config/suggestions/actions/category/askToRemove': (channel: TextChannel) => `Send a message mentioning a channel to remove it from the category list. Example: ${channel}`,
+  'config/suggestions/actions/category/removed': 'Category removed successfully!',
+  'config/suggestions/actions/category/delError': "Unable to remove category because you didn't send a message mentioning a channel!",
+
+  'config/suggestions/actions/reactions/enabled': 'Reactions enabled successfully!',
+  'config/suggestions/actions/reactions/enabledTip': '**Tip**: you can add automatic custom reactions by using `config autoreact`.',
+  'config/suggestions/actions/reactions/disabled': 'Reactions disabled successfully!',
+
+  'config/suggestions/actions/threads/enabled': 'Threads enabled successfully!',
+  'config/suggestions/actions/threads/disabled': 'Threads disabled successfully!',
+
+  'config/suggestions/actions/cooldowns/set': 'Cooldown successfully set to',
+
   // Server Banner
   'server/banner/noBanner': 'This server no has banner.',
   'server/banner/title': (guild: Guild) => `${guild} banner`,
   'server/banner/browser': 'Open in browser',
+
+  // Suggestions
+  'suggestions/not-enabled': 'This server has not yet set up the suggestion system. Ask an administrator to configure it.',
+  'suggestions/no-categories': 'This server has not yet added a category for suggestions. Ask an admin to add one.',
+  'suggestions/unknown-category': 'Could not find the selected category, probably the category no longer exists.',
+
+  'suggestions/send/modal/title': 'Send suggestion',
+  'suggestions/send/modal/label': 'Enter the text of your suggestion',
+  'suggestions/send/modal/placeholder': 'My suggestion is...',
+
+  'suggestions/send/in-cooldown': (n: string) => `Calm down there! A server administrator has asked members to wait at least ${n} to submit another suggestion in this category.`,
+  'suggestions/send/small-suggestion': 'Your suggestion must be at least 5 characters long.',
+  'suggestions/send/choose-a-category': 'Choose a category to submit your suggestion',
+  'suggestions/send/sent': 'Suggestion sent successfully!',
+  'suggestions/send/thread-name': 'Feedback',
+
+  'suggestions/embed/title': 'New suggestion'
 } as const;

@@ -11,7 +11,7 @@ export default class PingCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: true,
-      guildOnly: true,
+      guildOnly: false
     };
     this.permissions = { bot: [], user: [] };
   }
@@ -28,12 +28,15 @@ export default class PingCommand extends Command {
           guild: interaction.guild?.id,
           reason: interaction.options.getString('reason'),
           originalNick: (interaction.member as GuildMember).nickname as string,
-          startTime: Math.round(Date.now() / 1000),
+          startTime: Math.round(Date.now() / 1000)
         });
 
         const originalNick = (interaction.member as GuildMember).nickname ?? interaction.user.username;
 
-        (interaction.member as GuildMember).setNickname(`[AFK] ${originalNick.slice(0, 19)}`, 'AFK').catch(() => {});
+        if (interaction.inGuild()) {
+          (interaction.member as GuildMember).setNickname(`[AFK] ${originalNick.slice(0, 19)}`, 'AFK').catch(() => {});
+        }
+
         interaction.editReply(t('command:afk/enabled', interaction.user));
         break;
       }
@@ -46,7 +49,11 @@ export default class PingCommand extends Command {
         }
 
         await this.client.databases.afk.delete(interaction.user.id);
-        (interaction.member as GuildMember).setNickname(data.o).catch(() => {});
+
+        if (interaction.inGuild()) {
+          (interaction.member as GuildMember).setNickname(data.o).catch(() => {});
+        }
+
         interaction.editReply(t('command:afk/manuallyRemoved', interaction.user));
         break;
       }

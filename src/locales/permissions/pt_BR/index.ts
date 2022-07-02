@@ -41,7 +41,7 @@ const PERMISSIONS: Record<PermissionsString, string> = {
   UseEmbeddedActivities: 'Usar atividades',
   UseExternalStickers: 'Usar figurinhas externas',
   UseVAD: 'Usar detecção de voz',
-  ViewGuildInsights: 'Ver análises do servidor',
+  ViewGuildInsights: 'Ver análises do servidor'
 };
 
 export default PERMISSIONS;

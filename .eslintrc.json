@@ -64,6 +64,9 @@
             }
         ],
         "require-await": "error",
-        "quotes": ["error", "single", {"avoidEscape": true}]
+        "quotes": ["error", "single", {"avoidEscape": true}],
+        "prettier/prettier": ["error", {}, {
+          "usePrettierrc": true
+        }]
     }
 }

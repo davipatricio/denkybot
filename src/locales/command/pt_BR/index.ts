@@ -1,4 +1,4 @@
-import type { Guild, GuildMember, User } from 'discord.js';
+import type { Guild, GuildMember, TextChannel, User } from 'discord.js';
 
 export default {
   // General errors
@@ -65,8 +65,77 @@ export default {
   'server/info/embed/boosts': (boosts: number, level: number) => `🌟 **Impulsos:** ${boosts}\n🌠 **Nível:** ${level}`,
   'server/info/embed/footer': (guild: Guild) => `🔢 ID: ${guild.id} | 📅 Criado em`,
 
+  // Config suggestions
+  'config/suggestions/title': 'Painel de configurações | Sugestões',
+
+  'config/suggestions/buttons/enable': 'Habilitar',
+  'config/suggestions/buttons/disable': 'Desabilitar',
+  'config/suggestions/buttons/addCategory': 'Adicionar categoria',
+  'config/suggestions/buttons/delCategory': 'Remover categoria',
+  'config/suggestions/buttons/enableReact': 'Habilitar reações',
+  'config/suggestions/buttons/disableReact': 'Desabilitar reações',
+  'config/suggestions/buttons/enableThreads': 'Habilitar tópicos',
+  'config/suggestions/buttons/disableThreads': 'Desabilitar tópicos',
+
+  'config/suggestions/pages': 'Páginas',
+  'config/suggestions/pages/suggestions': 'Ative ou desativar o sistema de sugestões',
+  'config/suggestions/pages/categories': 'Adicione ou exclua categorias de sugestões',
+  'config/suggestions/pages/reactions': 'Habilite ou desabilite reações em sugestões',
+  'config/suggestions/pages/cooldowns': 'Gerencie cooldowns de sugestões',
+  'config/suggestions/pages/threads': "Ative ou desative o uso de tópicos 'threads' em sugestões",
+
+  'config/suggestions/pages/suggestions/title': 'Sugestões',
+  'config/suggestions/pages/categories/title': 'Categorias',
+  'config/suggestions/pages/reactions/title': 'Reações',
+  'config/suggestions/pages/cooldowns/title': 'Cooldowns',
+  'config/suggestions/pages/threads/title': 'Tópicos',
+
+  'config/suggestions/disabled': 'O sistema de sugestões está atualmente desativado.',
+  'config/suggestions/enabled': 'O sistema de sugestões está atualmente habilitado.',
+  'config/suggestions/reactions': (status: boolean) => `As reações estão atualmente: ${status ? 'ativadas' : 'desativadas'}.`,
+  'config/suggestions/threads': (status: boolean) => `Os tópicos estão atualmente: ${status ? 'ativados' : 'desativados'}.`,
+  'config/suggestions/cooldowns': 'O cooldown atualmente está em:',
+
+  'config/suggestions/noCategories': 'Não há categorias configuradas',
+
+  'config/suggestions/actions/enabled': 'O sistema de sugestões foi habilitado com sucesso! Agora, você precisa adicionar categorias para finalizar o processo.',
+
+  'config/suggestions/actions/category/askToAdd': (channel: TextChannel) => `Envie uma mensagem mencionando um canal para o adicionar a lista de categorias. Exemplo: ${channel}`,
+  'config/suggestions/actions/category/added': 'Categoria adicionada com sucesso!',
+  'config/suggestions/actions/category/addError': 'Não foi possível adicionar a categoria pois você não enviou uma mensagem mencionando um canal!',
+
+  'config/suggestions/actions/category/askToRemove': (channel: TextChannel) => `Envie uma mensagem mencionando um canal para o remover da lista de categorias. Exemplo: ${channel}`,
+  'config/suggestions/actions/category/removed': 'Categoria removida com sucesso!',
+  'config/suggestions/actions/category/delError': 'Não foi possível remover a categoria pois você não enviou uma mensagem mencionando um canal!',
+
+  'config/suggestions/actions/reactions/enabled': 'Reações habilitadas com sucesso!',
+  'config/suggestions/actions/reactions/enabledTip': '**Dica**: você pode configurar reações automáticas utilizando `/config autoreact`.',
+  'config/suggestions/actions/reactions/disabled': 'Reações desabilitadas com sucesso!',
+
+  'config/suggestions/actions/threads/enabled': 'Tópicos habilitados com sucesso!',
+  'config/suggestions/actions/threads/disabled': 'Tópicos desabilitados com sucesso!',
+
+  'config/suggestions/actions/cooldowns/set': 'Cooldown definido com sucesso para',
+
   // Server Banner
   'server/banner/noBanner': 'Este servidor não tem um banner.',
   'server/banner/title': (guild: Guild) => `Banner do servidor ${guild}`,
   'server/banner/browser': 'Abrir banner no navegador',
+
+  // Suggestions
+  'suggestions/not-enabled': 'Este servidor ainda não configurou o sistema de sugestões. Peça para um administrador o configurar.',
+  'suggestions/no-categories': 'Este servidor ainda não adicionou uma categoria para sugestões. Peça para um administrador adicionar uma.',
+  'suggestions/unknown-category': 'Não foi possível encontrar a categoria selecionada, provavelmente a categoria não existe mais.',
+
+  'suggestions/send/modal/title': 'Enviar sugestão',
+  'suggestions/send/modal/label': 'Insira o texto de sua sugestão',
+  'suggestions/send/modal/placeholder': 'A minha sugestão é...',
+
+  'suggestions/send/in-cooldown': (n: string) => `Calma lá! Um administrador do servidor pediu que membros aguardem ao menos ${n} para enviar outra sugestão nesta categoria.`,
+  'suggestions/send/small-suggestion': 'Sua sugestão deve ter pelo menos 5 caracteres.',
+  'suggestions/send/choose-a-category': 'Escolha uma categoria para enviar sua sugestão',
+  'suggestions/send/sent': 'Sugestão enviada com sucesso!',
+  'suggestions/send/thread-name': 'Comentários',
+
+  'suggestions/embed/title': 'Nova sugestão'
 } as const;

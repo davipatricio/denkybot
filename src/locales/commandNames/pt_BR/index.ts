@@ -38,4 +38,13 @@ export default {
   text: 'texto',
   'text/claps': 'palmas',
   'text/invert': 'inverter',
+
+  // Config
+  config: 'config',
+  'config/suggestions': 'sugestoes',
+
+  // Suggestions
+  suggestions: 'sugestoes',
+  suggestion: 'sugestao',
+  'suggestion/send': 'enviar'
 } as const;

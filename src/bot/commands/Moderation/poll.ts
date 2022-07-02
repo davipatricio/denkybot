@@ -11,19 +11,19 @@ const MappedNumericEmojis = {
   6: '6️⃣',
   7: '7️⃣',
   8: '8️⃣',
-  9: '9️⃣',
+  9: '9️⃣'
 };
 
 export default class PollCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
-    this.rawName = 'poll';
+    this.rawName = 'POLL';
     this.rawCategory = 'MODERATION';
     this.config = {
       autoDefer: true,
       ephemeral: false,
       showInHelp: true,
-      guildOnly: true,
+      guildOnly: true
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [PermissionFlagsBits.ManageMessages] };
   }

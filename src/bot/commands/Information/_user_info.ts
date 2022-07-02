@@ -10,7 +10,7 @@ export default class UserInfoSubCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: false,
-      guildOnly: true,
+      guildOnly: true
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
   }
@@ -30,26 +30,26 @@ export default class UserInfoSubCommand extends Command {
         {
           name: `🔖 ${t('command:user/info/userTag')}`,
           value: cleanUsername === user.username ? `\`${user.tag}\`` : `${cleanUsername}#${user.discriminator}`,
-          inline: true,
+          inline: true
         },
         {
           name: `📡 ${t('command:user/info/userId')}`,
           value: `\`${user.id}\``,
-          inline: true,
+          inline: true
         },
         {
           name: `📅 ${t('command:user/info/userCreatedAt')}`,
           value: `<t:${Math.round(user.createdTimestamp / 1000)}:F> (<t:${Math.round(user.createdTimestamp / 1000)}:R>)`,
-          inline: true,
-        },
+          inline: true
+        }
       ]);
 
     if (member && member.joinedTimestamp) {
       embed.addFields([
         {
           name: `🌟 ${t('command:user/info/memberJoinedAt')}`,
-          value: `<t:${Math.round(member.joinedTimestamp / 1000)}:F> (<t:${Math.round(member.joinedTimestamp / 1000)}:R>)`,
-        },
+          value: `<t:${Math.round(member.joinedTimestamp / 1000)}:F> (<t:${Math.round(member.joinedTimestamp / 1000)}:R>)`
+        }
       ]);
     }
 

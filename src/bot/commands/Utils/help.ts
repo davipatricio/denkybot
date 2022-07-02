@@ -12,7 +12,7 @@ export default class HelpCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: true,
-      guildOnly: false,
+      guildOnly: false
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
   }
@@ -22,7 +22,7 @@ export default class HelpCommand extends Command {
     Row1.addComponents([
       new ButtonBuilder().setStyle(ButtonStyle.Link).setURL(this.client.config.links.invite).setLabel(t('command:help/button/add')),
       new ButtonBuilder().setStyle(ButtonStyle.Link).setURL(this.client.config.links.support).setLabel(t('command:help/button/support')),
-      new ButtonBuilder().setStyle(ButtonStyle.Link).setURL(this.client.config.links.vote).setLabel(t('command:help/button/vote')),
+      new ButtonBuilder().setStyle(ButtonStyle.Link).setURL(this.client.config.links.vote).setLabel(t('command:help/button/vote'))
     ]);
 
     const categories: Record<string, string[]> = {};
@@ -68,7 +68,7 @@ export default class HelpCommand extends Command {
     const message = (await interaction.editReply({ embeds: [initialEmbed], components: [Row, Row1] })) as Message;
     const collector = message.createMessageComponentCollector({
       filter: int => int.user.id === interaction.user.id,
-      time: 300000 /* 5 minutes */,
+      time: 300000 /* 5 minutes */
     });
 
     collector.on('collect', async (int: SelectMenuInteraction) => {

@@ -41,7 +41,7 @@ const PERMISSIONS: Record<PermissionsString, string> = {
   UseEmbeddedActivities: 'Use activities',
   UseExternalStickers: 'Use external stickers',
   UseVAD: 'Use Voice Activity',
-  ViewGuildInsights: 'See guild insights',
+  ViewGuildInsights: 'See guild insights'
 };
 
 export default PERMISSIONS;

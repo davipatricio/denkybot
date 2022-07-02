@@ -8,44 +8,45 @@ export default class AfkData extends CommandDataStructure {
     this.data = {
       name: 'afk',
       type: ApplicationCommandType.ChatInput,
+      dmPermission: true,
       options: [
         {
           name: client.languages.manager.get('en_US', 'commandNames:afk/on'),
           nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/on'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/on')
           },
           description: client.languages.manager.get('en_US', 'commandDescriptions:afk/on'),
           descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on')
           },
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
               name: client.languages.manager.get('en_US', 'commandNames:afk/reason'),
               nameLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/reason'),
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/reason')
               },
               type: ApplicationCommandOptionType.String,
               description: client.languages.manager.get('en_US', 'commandDescriptions:afk/on/reason'),
               descriptionLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on/reason'),
-              },
-            },
-          ],
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/on/reason')
+              }
+            }
+          ]
         },
         {
           name: client.languages.manager.get('en_US', 'commandNames:afk/off'),
           nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/off'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:afk/off')
           },
           description: client.languages.manager.get('en_US', 'commandDescriptions:afk/off'),
           descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/off'),
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:afk/off')
           },
-          type: ApplicationCommandOptionType.Subcommand,
-        },
+          type: ApplicationCommandOptionType.Subcommand
+        }
       ],
-      description: client.languages.manager.get('en_US', 'commandNames:afk/on'),
+      description: client.languages.manager.get('en_US', 'commandNames:afk/on')
     };
   }
 }

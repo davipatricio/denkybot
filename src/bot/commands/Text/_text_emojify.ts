@@ -45,7 +45,7 @@ const EMOJIS: Record<string, string> = {
   '6': '6️⃣',
   '7': '7️⃣',
   '8': '8️⃣',
-  '9': '9️⃣',
+  '9': '9️⃣'
 };
 
 export default class TextEmojifySubCommand extends Command {
@@ -56,7 +56,7 @@ export default class TextEmojifySubCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: false,
-      guildOnly: true,
+      guildOnly: true
     };
     this.permissions = { bot: [], user: [] };
   }

@@ -11,7 +11,7 @@ export default class UserCommand extends Command {
       autoDefer: true,
       ephemeral: false,
       showInHelp: true,
-      guildOnly: false,
+      guildOnly: false
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
   }

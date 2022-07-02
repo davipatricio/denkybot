@@ -11,9 +11,9 @@ const client: DenkyClient = new Client({
   failIfNotExists: false,
   allowedMentions: {
     parse: ['users'],
-    repliedUser: true,
+    repliedUser: true
   },
-  partials: [Partials.Channel, Partials.User, Partials.GuildMember, Partials.Message, Partials.Reaction],
+  partials: [Partials.Channel, Partials.User, Partials.GuildMember, Partials.Message, Partials.Reaction]
 });
 
 // We should set this, so tasks won't duplicate (giveaways, reminders, etc)

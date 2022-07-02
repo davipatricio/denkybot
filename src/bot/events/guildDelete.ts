@@ -15,7 +15,7 @@ export default class GuildDeleteEvent extends Event {
 
     if (!this.webhookServerLogs)
       this.webhookServerLogs = new WebhookClient({
-        url: process.env.DISCORD_SERVERLOGS_WEBHOOK_URL,
+        url: process.env.DISCORD_SERVERLOGS_WEBHOOK_URL
       });
 
     const embed = new EmbedBuilder()
@@ -26,8 +26,8 @@ export default class GuildDeleteEvent extends Event {
           name: 'Server info',
           value: `Name: ${guild.name} (${guild.id})\nMembers: ${guild.memberCount}\nOwner: <@${guild.ownerId}> (${guild.ownerId})\nDiscord partner: ${guild.partnered ? 'Yes' : 'No'}\nVerified: ${
             guild.verified ? 'Yes' : 'No'
-          }`,
-        },
+          }`
+        }
       ]);
 
     this.webhookServerLogs.send({ embeds: [embed] });

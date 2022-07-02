@@ -39,8 +39,9 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "discord.js": "^14.0.0-dev.1655381041-4df491c",
+    "discord.js": "^14.0.0-dev.1656590649-525bf03",
     "dotenv": "^16.0.1",
+    "ms": "^2.1.3",
     "tslib": "2.4.0"
   }
 }

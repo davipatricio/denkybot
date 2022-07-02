@@ -1,5 +1,5 @@
 import type { Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
-import type { AllLocalePaths, CommandCategoriesKeys } from '../bot/managers/LanguageManager';
+import type { AllLocalePaths, CommandCategoriesKeys, CommandNamesKeys } from '../bot/managers/LanguageManager';
 import type { DenkyClient } from '../types/Client';
 
 class Command {
@@ -7,9 +7,9 @@ class Command {
   client: DenkyClient;
 
   /** The raw command name. A user-friedly name will be shown through i18n. */
-  rawName: string;
+  rawName: Uppercase<CommandNamesKeys | ''>;
   /** The raw category name, uppercase. A user-friedly name will be shown through i18n. */
-  rawCategory: CommandCategoriesKeys;
+  rawCategory: CommandCategoriesKeys | '';
   /** Required permissions to execute the command. */
   permissions: {
     /** Which permissions the user needs to have. */
@@ -37,15 +37,16 @@ class Command {
     this.client = client;
 
     this.rawName = '';
+    this.rawCategory = '';
     this.permissions = {
       user: [],
-      bot: [],
+      bot: []
     };
     this.config = {
       ephemeral: false,
       autoDefer: true,
       showInHelp: true,
-      guildOnly: true,
+      guildOnly: true
     };
   }
 
