@@ -95,7 +95,7 @@ export class DatabaseManager {
   }
 
   #write() {
-    return writeFile(`./databases/${this.local}.json`, JSON.stringify(this.content));
+    return writeFile(`./databases/${this.local}.json`, JSON.stringify(this.content, null, 4));
   }
 
   #get(name: string) {
