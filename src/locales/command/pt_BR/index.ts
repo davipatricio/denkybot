@@ -94,6 +94,7 @@ export default {
   'config/suggestions/enabled': 'O sistema de sugestões está atualmente habilitado.',
   'config/suggestions/reactions': (status: boolean) => `As reações estão atualmente: ${status ? 'ativadas' : 'desativadas'}.`,
   'config/suggestions/threads': (status: boolean) => `Os tópicos estão atualmente: ${status ? 'ativados' : 'desativados'}.`,
+  'config/suggestions/cooldowns': 'O cooldown atualmente está em:',
 
   'config/suggestions/noCategories': 'Não há categorias configuradas',
 
@@ -113,6 +114,8 @@ export default {
 
   'config/suggestions/actions/threads/enabled': 'Tópicos habilitados com sucesso!',
   'config/suggestions/actions/threads/disabled': 'Tópicos desabilitados com sucesso!',
+
+  'config/suggestions/actions/cooldowns/set': 'Cooldown definido com sucesso para',
 
   // Server Banner
   'server/banner/noBanner': 'Este servidor não tem um banner.',

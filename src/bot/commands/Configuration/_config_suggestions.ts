@@ -91,7 +91,7 @@ export default class SuggestionsSubCommand extends Command {
           });
           updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
           this.updateMessage('cooldown', message, selectRow, interaction, updatedConfig, t);
-          int.followUp({ content: `Cooldown definido com sucesso para \`${ms(time)}\`` });
+          int.followUp({ content: `${t('command:config/suggestions/actions/cooldowns/set')} \`${ms(time)}\``, ephemeral: true });
           return;
         }
         this.updateMessage(int.values[0] as PageTypes, message, selectRow, interaction, updatedConfig, t);
@@ -219,7 +219,7 @@ export default class SuggestionsSubCommand extends Command {
       case 'cooldown':
         return embed.setDescription(
           configStatus
-            ? `✅ **|** ${t('command:config/suggestions/enabled')}\n⏲️ **|** O cooldown atualmente está em ${ms(configStatus.cooldown)}`
+            ? `✅ **|** ${t('command:config/suggestions/enabled')}\n⏲️ **|** ${t('command:config/suggestions/cooldowns')} ${ms(configStatus.cooldown)}`
             : `❌ **|** ${t('command:config/suggestions/disabled')}`
         );
       case 'categorias': {
