@@ -115,5 +115,20 @@ export default {
   // Server Banner
   'server/banner/noBanner': 'This server no has banner.',
   'server/banner/title': (guild: Guild) => `${guild} banner`,
-  'server/banner/browser': 'Open in browser'
+  'server/banner/browser': 'Open in browser',
+
+  // Suggestions
+  'suggestions/not-enabled': 'This server has not yet set up the suggestion system. Ask an administrator to configure it.',
+  'suggestions/no-categories': 'This server has not yet added a category for suggestions. Ask an admin to add one.',
+  'suggestions/unknown-category': 'Could not find the selected category, probably the category no longer exists.',
+
+  'suggestions/send/modal/title': 'Send suggestion',
+  'suggestions/send/modal/label': 'Enter the text of your suggestion',
+  'suggestions/send/modal/placeholder': 'My suggestion is...',
+
+  'suggestions/send/small-suggestion': 'Your suggestion must be at least 5 characters long.',
+  'suggestions/send/choose-a-category': 'Choose a category to submit your suggestion',
+  'suggestions/send/sent': 'Suggestion sent successfully!',
+
+  'suggestions/embed/title': 'New suggestion'
 } as const;
