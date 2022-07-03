@@ -64,20 +64,7 @@ export default class PingCommand extends Command {
       return interaction.reply({ content: t('command:suggestions/invalid-id'), ephemeral: true });
     }
 
-    const modal = new ModalBuilder().setCustomId('edit_suggestion_modal').setTitle(t('command:suggestions/edit/modal/title'));
-    const userSuggestion = new TextInputBuilder()
-      .setCustomId('user_suggestion')
-      .setLabel(t('command:suggestions/send/modal/label'))
-      .setMaxLength(1500)
-      .setMinLength(5)
-      .setRequired(true)
-      .setStyle(TextInputStyle.Paragraph)
-      .setPlaceholder(t('command:suggestions/send/modal/placeholder'));
-
-    const row1 = new ActionRowBuilder<TextInputBuilder>().setComponents([userSuggestion]);
-
-    modal.setComponents([row1]);
-    interaction.showModal(modal);
+    this.#generateAndShowModal(interaction, t, false);
     const eventFn = async (int: ModalSubmitInteraction) => {
       if (int.user.id !== interaction.user.id) return;
       if (int.customId !== 'edit_suggestion_modal') return;
@@ -91,28 +78,13 @@ export default class PingCommand extends Command {
         return;
       }
 
-      const categoriesName: CategoriesStructure[] = [];
-      for (const categoryId of config.categories) {
-        const channel = int.guild?.channels.cache.get(categoryId) as TextChannel;
-        if (channel) categoriesName.push({ name: channel.name, id: channel.id, topic: channel.topic });
-      }
-
+      const categoriesName = this.#generateCategoriesArray(config, interaction);
       if (categoriesName.length === 0) {
         interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
         return;
       }
 
-      const categoriesRow = new ActionRowBuilder<UnsafeSelectMenuBuilder>().setComponents([
-        new UnsafeSelectMenuBuilder().setCustomId('categorias').setOptions(
-          categoriesName.map(cat =>
-            new UnsafeSelectMenuOptionBuilder()
-              .setLabel(cat.name)
-              .setValue(cat.id)
-              .setEmoji({ name: '💬' })
-              .setDescription(cat.topic ?? '')
-          )
-        )
-      ]);
+      const categoriesRow = this.#generateCategoriesRow(categoriesName);
 
       const msg = (await int.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] })) as Message;
       const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id, max: 1, time: 60000 });
@@ -160,20 +132,7 @@ export default class PingCommand extends Command {
     if (!config) return interaction.reply({ content: t('command:suggestions/not-enabled'), ephemeral: true });
     if (config.categories.length === 0) return interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
 
-    const modal = new ModalBuilder().setCustomId('suggestion_modal').setTitle(t('command:suggestions/send/modal/title'));
-    const userSuggestion = new TextInputBuilder()
-      .setCustomId('user_suggestion')
-      .setLabel(t('command:suggestions/send/modal/label'))
-      .setMaxLength(1500)
-      .setMinLength(5)
-      .setRequired(true)
-      .setStyle(TextInputStyle.Paragraph)
-      .setPlaceholder(t('command:suggestions/send/modal/placeholder'));
-
-    const row1 = new ActionRowBuilder<TextInputBuilder>().setComponents([userSuggestion]);
-
-    modal.setComponents([row1]);
-    interaction.showModal(modal);
+    this.#generateAndShowModal(interaction, t, false);
     const eventFn = async (int: ModalSubmitInteraction) => {
       if (int.user.id !== interaction.user.id) return;
       if (int.customId !== 'suggestion_modal') return;
@@ -187,28 +146,13 @@ export default class PingCommand extends Command {
         return;
       }
 
-      const categoriesName: CategoriesStructure[] = [];
-      for (const categoryId of config.categories) {
-        const channel = int.guild?.channels.cache.get(categoryId) as TextChannel;
-        if (channel) categoriesName.push({ name: channel.name, id: channel.id, topic: channel.topic });
-      }
-
+      const categoriesName = this.#generateCategoriesArray(config, interaction);
       if (categoriesName.length === 0) {
         interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
         return;
       }
 
-      const categoriesRow = new ActionRowBuilder<UnsafeSelectMenuBuilder>().setComponents([
-        new UnsafeSelectMenuBuilder().setCustomId('categorias').setOptions(
-          categoriesName.map(cat =>
-            new UnsafeSelectMenuOptionBuilder()
-              .setLabel(cat.name)
-              .setValue(cat.id)
-              .setEmoji({ name: '💬' })
-              .setDescription(cat.topic ?? '')
-          )
-        )
-      ]);
+      const categoriesRow = this.#generateCategoriesRow(categoriesName);
 
       const msg = (await int.editReply({ content: `📥 **|** ${t('command:suggestions/send/choose-a-category')}`, components: [categoriesRow] })) as Message;
       const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id, max: 1, time: 60000 });
@@ -263,5 +207,50 @@ export default class PingCommand extends Command {
 
   #isValidId(id: string) {
     return id.length >= 18 && id.length <= 20 && !isNaN(Number(id));
+  }
+
+  #generateAndShowModal(interaction: ChatInputCommandInteraction, t: CommandLocale, edit = false) {
+    const modal = new ModalBuilder().setCustomId('suggestion_modal').setTitle(edit ? t('command:suggestions/edit/modal/title') : t('command:suggestions/send/modal/title'));
+    const userSuggestion = new TextInputBuilder()
+      .setCustomId('user_suggestion')
+      .setLabel(t('command:suggestions/send/modal/label'))
+      .setMaxLength(1500)
+      .setMinLength(5)
+      .setRequired(true)
+      .setStyle(TextInputStyle.Paragraph)
+      .setPlaceholder(t('command:suggestions/send/modal/placeholder'));
+
+    const row1 = new ActionRowBuilder<TextInputBuilder>().setComponents([userSuggestion]);
+
+    modal.setComponents([row1]);
+    interaction.showModal(modal);
+
+    return modal;
+  }
+
+  #generateCategoriesRow(categories: CategoriesStructure[]) {
+    const categoriesRow = new ActionRowBuilder<UnsafeSelectMenuBuilder>().setComponents([
+      new UnsafeSelectMenuBuilder().setCustomId('categorias').setOptions(
+        categories.map(cat =>
+          new UnsafeSelectMenuOptionBuilder()
+            .setLabel(cat.name)
+            .setValue(cat.id)
+            .setEmoji({ name: '💬' })
+            .setDescription(cat.topic ?? '')
+        )
+      )
+    ]);
+
+    return categoriesRow;
+  }
+
+  #generateCategoriesArray(config: any, int: ChatInputCommandInteraction) {
+    const categories: CategoriesStructure[] = [];
+    for (const categoryId of config.categories) {
+      const channel = int.guild?.channels.cache.get(categoryId) as TextChannel;
+      if (channel) categories.push({ name: channel.name, id: channel.id, topic: channel.topic });
+    }
+
+    return categories;
   }
 }
