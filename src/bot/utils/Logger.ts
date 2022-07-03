@@ -9,18 +9,18 @@ export class Logger {
 
   static get currentTime() {
     const currentDate = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
-    return `${Logger.Colors.Blue}${currentDate}${Logger.Colors.Reset}`;
+    return `${Logger.Colors.Blue}[${currentDate}]${Logger.Colors.Reset}`;
   }
 
   error(content: unknown, path = 'ERROR') {
-    return console.error(`${Logger.currentTime} - ${Logger.Colors.Red}[${path}]${Logger.Colors.Reset}:`, content);
+    return console.error(`${Logger.currentTime} - ${Logger.Colors.Red}[${path}]${Logger.Colors.Reset}`, content);
   }
 
   log(content: unknown, path = 'LOG') {
-    return console.log(`${Logger.currentTime} - ${Logger.Colors.Blue}[${path}]${Logger.Colors.Reset}:`, content);
+    return console.log(`${Logger.currentTime} - ${Logger.Colors.Green}[${path}]${Logger.Colors.Reset}`, content);
   }
 
   warn(content: unknown, path = 'WARN') {
-    return console.warn(`${Logger.currentTime} - ${Logger.Colors.Yellow}[${path}]${Logger.Colors.Reset}:`, content);
+    return console.warn(`${Logger.currentTime} - ${Logger.Colors.Yellow}[${path}]${Logger.Colors.Reset}`, content);
   }
 }

@@ -41,7 +41,7 @@ export class LanguageManager {
         if (!this.cache[category][locale]) this.cache[category][locale] = {};
         this.cache[category][locale] = localeData;
 
-        if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[LOCALES]\x1b[0m', `Loaded ${category}/${locale} locale successfully.`);
+        if (global.IS_MAIN_PROCESS) this.client.logger.log(`Loaded ${category}/${locale} locale successfully.`, 'LOCALES');
       }
     }
   }
