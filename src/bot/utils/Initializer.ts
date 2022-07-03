@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 import { Collection } from 'discord.js';
 import { readdir, readFile } from 'node:fs/promises';
 import type { Command } from '../../structures/Command';
@@ -6,6 +5,7 @@ import type { CommandDataStructure } from '../../structures/CommandDataStructure
 import type { Event } from '../../structures/Event';
 import type { Task } from '../../structures/Task';
 import type { DenkyClient } from '../../types/Client';
+import { InteractionsWebserver } from '../webserver/server';
 
 class Initializer {
   constructor(client: DenkyClient) {
@@ -20,6 +20,7 @@ class Initializer {
     await this.loadCommandData(client);
     await this.loadEvents(client);
     await this.loadTasks(client);
+    this.loadWebserver(client);
     // Log bot in after loading everything
     client.login(process.env.BOT_TOKEN);
   }
@@ -27,10 +28,10 @@ class Initializer {
   async loadCommands(client: DenkyClient) {
     client.commands = new Collection();
     const categories = await readdir('./bot/commands/');
-    for (const category of categories) {
+    for await (const category of categories) {
       const commands = await readdir(`./bot/commands/${category}`);
 
-      for (const command of commands) {
+      for await (const command of commands) {
         if (!command.endsWith('.js')) continue;
         const commandWithoutExtension = command.replace('.js', '');
 
@@ -44,10 +45,10 @@ class Initializer {
 
   async loadCommandData(client: DenkyClient) {
     const categories = await readdir('./bot/commands/');
-    for (const category of categories) {
+    for await (const category of categories) {
       const commands = await readdir(`./bot/commands/${category}/data`);
 
-      for (const command of commands) {
+      for await (const command of commands) {
         if (!command.endsWith('.js')) continue;
         const commandDataWithoutExtension = command.replace('.js', '');
 
@@ -60,7 +61,7 @@ class Initializer {
 
   async loadEvents(client: DenkyClient) {
     const events = await readdir('./bot/events/');
-    for (const event of events) {
+    for await (const event of events) {
       if (!event.endsWith('.js')) continue;
 
       const { default: EventClass }: { default: new () => Event } = await import(`../events/${event}`);
@@ -72,7 +73,7 @@ class Initializer {
 
   async loadModules(client: DenkyClient) {
     const modules = await readdir('./bot/modules/');
-    for (const module of modules) {
+    for await (const module of modules) {
       if (!module.endsWith('.js')) continue;
       const moduleWithoutExtension = module.replace('.js', '');
 
@@ -87,7 +88,7 @@ class Initializer {
   async loadTasks(client: DenkyClient) {
     client.tasks = new Collection();
     const tasks = await readdir('./bot/tasks/');
-    for (const task of tasks) {
+    for await (const task of tasks) {
       if (!task.endsWith('.js')) continue;
       const taskWithoutExtension = task.replace('.js', '');
 
@@ -103,6 +104,17 @@ class Initializer {
     const configData = await readFile('../config.json');
     client.config = JSON.parse(configData.toString());
     if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[DENKY]\x1b[0m', 'Loaded bot configuration file.');
+  }
+
+  loadWebserver(client: DenkyClient) {
+    if (global.IS_MAIN_PROCESS) {
+      const { port, publicKey, useHttpServer } = client.config.interactions;
+      if (useHttpServer && publicKey && port) {
+        console.log('✅ \x1b[34m[DENKY]\x1b[0m', 'Starting webserver to listen to interactions...');
+        const webserver = new InteractionsWebserver(client);
+        webserver.start({ port, publicKey });
+      }
+    }
   }
 }
 
