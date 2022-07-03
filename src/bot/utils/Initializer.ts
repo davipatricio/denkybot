@@ -6,21 +6,24 @@ import type { Event } from '../../structures/Event';
 import type { Task } from '../../structures/Task';
 import type { DenkyClient } from '../../types/Client';
 import { InteractionsWebserver } from '../webserver/server';
+import { Logger } from './Logger';
 
 class Initializer {
+  /** Logger to send useful information to the console */
+  logger: Logger;
   constructor(client: DenkyClient) {
     if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[DENKY]\x1b[0m', 'Starting bot...');
     this.init(client);
   }
 
   async init(client: DenkyClient) {
+    this.peformPreInitialization(client);
     await this.loadBotConfiguration(client);
     await this.loadModules(client);
     await this.loadCommands(client);
     await this.loadCommandData(client);
     await this.loadEvents(client);
     await this.loadTasks(client);
-    this.loadWebserver(client);
     // Log bot in after loading everything
     client.login(process.env.BOT_TOKEN);
   }
@@ -104,6 +107,11 @@ class Initializer {
     const configData = await readFile('../config.json');
     client.config = JSON.parse(configData.toString());
     if (global.IS_MAIN_PROCESS) console.log('✅ \x1b[34m[DENKY]\x1b[0m', 'Loaded bot configuration file.');
+  }
+
+  peformPreInitialization(client: DenkyClient) {
+    this.logger = new Logger();
+    this.loadWebserver(client);
   }
 
   loadWebserver(client: DenkyClient) {
