@@ -9,19 +9,19 @@ export default class ReadyEvent extends Event {
   }
 
   override async run(client: DenkyClient) {
-    console.log('✅ \x1b[34m[DENKY]\x1b[0m', `Shard ${client.shard?.ids[0]} connected.`);
+    client.logger.log(`Shard ${client.shard?.ids[0]} connected.`, 'SHARDS');
 
     if (client.config.features.preventCrashes) {
       client.on('error', err => {
-        console.error('❌ \x1b[31m[DENKY]\x1b[0m', err);
+        client.logger.error(err, 'DENKY');
       });
 
       process.on('unhandledRejection', err => {
-        console.error('❌ \x1b[31m[DENKY]\x1b[0m', err);
+        client.logger.error(err, 'PROCESS');
       });
 
       process.on('uncaughtException', err => {
-        console.error('❌ \x1b[31m[DENKY]\x1b[0m', err);
+        client.logger.error(err, 'PROCESS');
       });
     }
 
@@ -30,6 +30,6 @@ export default class ReadyEvent extends Event {
     const mappedCommands = client.commands.filter(c => c.options && c.config.showInHelp === true).map(c => c.options) as ChatInputApplicationCommandData[];
 
     await client.application?.commands.set(mappedCommands);
-    console.log('✅ \x1b[34m[COMMANDS]\x1b[0m', `Posted ${mappedCommands.length} commands to Discord!`);
+    client.logger.log(`Posted ${mappedCommands.length} commands to Discord!`, 'COMMANDS');
   }
 }

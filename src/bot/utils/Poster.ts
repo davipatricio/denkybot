@@ -24,13 +24,13 @@ export class Poster {
   }
 
   logError(message: any) {
-    if (this.client.config.logs.debug) console.log(message);
+    if (this.client.config.logs.debug) this.client.logger.error(message, 'VOTES');
   }
 
   async #postStatsToTopGG({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.TOPGG_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No top.gg API key found! Ignoring...');
+      if (this.client.config.logs.debug) this.client.logger.error('No top.gg API key found! Ignoring...', 'VOTES');
       return false;
     }
 
@@ -53,7 +53,7 @@ export class Poster {
   async #postStatsToDiscordBots({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.BOTSGG_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No bots.gg API key found! Ignoring...');
+      if (this.client.config.logs.debug) this.client.logger.error('No bots.gg API key found! Ignoring...', 'VOTES');
       return false;
     }
 
@@ -70,14 +70,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to bots.gg!');
-    if (this.client.config.logs.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to bots.gg successfully!');
+    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to bots.gg successfully!', 'VOTES');
     return true;
   }
 
   async #postStatsToDiscords({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.DISCORDS_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No discords.com API key found! Ignoring...');
+      if (this.client.config.logs.debug) this.client.logger.error('No discords.com API key found! Ignoring...', 'VOTES');
       return false;
     }
 
@@ -93,14 +93,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to discords!');
-    if (this.client.config.logs.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to discords.com successfully!');
+    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to discords.com successfully!', 'VOTES');
     return true;
   }
 
   async #postStatsToDisforge({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.DISFORGE_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No disforge.com API key found! Ignoring...');
+      if (this.client.config.logs.debug) this.client.logger.error('No disforge.com API key found! Ignoring...', 'VOTES');
       return false;
     }
 
@@ -116,14 +116,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to disforge!');
-    if (this.client.config.logs.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to disforge.com successfully!');
+    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to disforge.com successfully!', 'VOTES');
     return true;
   }
 
   async #postStatsToDiscordBotList({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.DISCORDBOTLIST_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No discordbotlist.com API key found! Ignoring...');
+      if (this.client.config.logs.debug) this.client.logger.error('No discordbotlist.com API key found! Ignoring...', 'VOTES');
       return false;
     }
 
@@ -139,14 +139,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to discordbotlist.com!');
-    if (this.client.config.logs.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to discordbotlist.com successfully!');
+    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to discordbotlist.com successfully!', 'VOTES');
     return true;
   }
 
   async #postStatsToBladeList({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.BLADELIST_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No bladelist.gg API key found! Ignoring...');
+      if (this.client.config.logs.debug) this.client.logger.error('No bladelist.gg API key found! Ignoring...', 'VOTES');
       return false;
     }
 
@@ -163,14 +163,14 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to bladelist.gg!');
-    if (this.client.config.logs.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to bladelist.gg successfully!');
+    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to bladelist.gg successfully!', 'VOTES');
     return true;
   }
 
   async #postStatsToFatesList({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.FATESLIST_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) console.log('❌ \x1b[31m[VOTES]\x1b[0m', 'No fateslist.xyz API key found! Ignoring...');
+      if (this.client.config.logs.debug) this.client.logger.error('No fateslist.xyz API key found! Ignoring...', 'VOTES');
       return false;
     }
 
@@ -186,7 +186,7 @@ export class Poster {
     });
 
     if (request.status >= 400) throw new Error('Failed to post stats to fateslist.xyz!');
-    if (this.client.config.logs.debug) console.log('✅ \x1b[34m[VOTES]\x1b[0m', 'Posted stats to fateslist.xyz successfully!');
+    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to fateslist.xyz successfully!', 'VOTES');
     return true;
   }
 }
