@@ -12,7 +12,7 @@ export default class PingCommand extends Command {
       showInHelp: true,
       guildOnly: false
     };
-    this.permissions = { bot: [], user: [] };
+    this.permissions = { bot: [] };
   }
 
   override async run({ t, interaction }: CommandRunOptions) {

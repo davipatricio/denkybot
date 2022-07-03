@@ -58,7 +58,7 @@ export default class TextEmojifySubCommand extends Command {
       showInHelp: false,
       guildOnly: true
     };
-    this.permissions = { bot: [], user: [] };
+    this.permissions = { bot: [] };
   }
 
   override async run({ interaction }: CommandRunOptions) {

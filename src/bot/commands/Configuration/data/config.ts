@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandType } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
 import { CommandDataStructure } from '../../../../structures/CommandDataStructure';
 import type { DenkyClient } from '../../../../types/Client';
 
@@ -9,6 +9,7 @@ export default class PingData extends CommandDataStructure {
       name: 'config',
       type: ApplicationCommandType.ChatInput,
       dmPermission: false,
+      defaultMemberPermissions: [PermissionFlagsBits.ManageGuild, PermissionFlagsBits.ManageChannels],
       description: client.languages.manager.get('en_US', 'commandDescriptions:config'),
       descriptionLocalizations: {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:config')

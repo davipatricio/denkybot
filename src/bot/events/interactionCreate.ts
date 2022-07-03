@@ -1,4 +1,4 @@
-import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, Interaction, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
+import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, Interaction, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
 import type { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
@@ -31,7 +31,6 @@ export default class InteractionCreateEvent extends Event {
 
     if (interaction.inGuild()) {
       if (!InteractionCreateEvent.checkBotPermissions(interaction, botCommand, t)) return;
-      if (!InteractionCreateEvent.checkMemberPermissions(interaction, botCommand, t)) return;
     }
 
     if (botCommand.config.autoDefer) await interaction.deferReply({ ephemeral: botCommand.config.ephemeral });
@@ -80,19 +79,6 @@ export default class InteractionCreateEvent extends Event {
         .map(p => t(`permissions:${p}`))
         .join(', ');
       interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:permissions/bot/missing', permissions)}`, ephemeral: true });
-      return false;
-    }
-    return true;
-  }
-
-  static checkMemberPermissions(interaction: ChatInputCommandInteraction, command: Command, t: CommandLocale): boolean {
-    if (command.permissions.user.length === 0) return true;
-    if (!(interaction.member as GuildMember).permissions.has(command.permissions.user)) {
-      const permissions = new PermissionsBitField(command.permissions.user)
-        .toArray()
-        .map(p => t(`permissions:${p}`))
-        .join(', ');
-      interaction.reply({ content: `❌ ${interaction.user} **|** ${(t('command:permissions/user/missing'), permissions)}`, ephemeral: true });
       return false;
     }
     return true;

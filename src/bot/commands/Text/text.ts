@@ -12,7 +12,7 @@ export default class TextCommand extends Command {
       showInHelp: true,
       guildOnly: false
     };
-    this.permissions = { bot: [], user: [] };
+    this.permissions = { bot: [] };
   }
 
   override run({ t, interaction }: CommandRunOptions) {

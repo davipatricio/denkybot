@@ -12,8 +12,6 @@ class Command {
   rawCategory: CommandCategoriesKeys | '';
   /** Required permissions to execute the command. */
   permissions: {
-    /** Which permissions the user needs to have. */
-    user: PermissionResolvable[];
     /** Which permissions the bot needs to have. */
     bot: PermissionResolvable[];
   };
@@ -39,7 +37,6 @@ class Command {
     this.rawName = '';
     this.rawCategory = '';
     this.permissions = {
-      user: [],
       bot: []
     };
     this.config = {

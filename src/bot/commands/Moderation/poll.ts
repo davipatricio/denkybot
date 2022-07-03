@@ -25,7 +25,7 @@ export default class PollCommand extends Command {
       showInHelp: true,
       guildOnly: true
     };
-    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [PermissionFlagsBits.ManageMessages] };
+    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
   }
 
   override async run({ t, interaction }: CommandRunOptions) {

@@ -39,7 +39,7 @@ export default class PingCommand extends Command {
       showInHelp: true,
       guildOnly: true
     };
-    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
+    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
   }
 
   override run({ t, interaction }: CommandRunOptions) {

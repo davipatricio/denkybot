@@ -1,14 +1,14 @@
 import {
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  ChannelType,
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-  Message,
-  SelectMenuBuilder,
-  UnsafeSelectMenuBuilder,
-  UnsafeSelectMenuOptionBuilder
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    ChannelType,
+    ChatInputCommandInteraction,
+    EmbedBuilder,
+    Message,
+    SelectMenuBuilder,
+    UnsafeSelectMenuBuilder,
+    UnsafeSelectMenuOptionBuilder
 } from 'discord.js';
 import ms from 'ms';
 import { Command, CommandLocale, CommandRunOptions } from '../../../structures/Command';
@@ -27,7 +27,7 @@ export default class SuggestionsSubCommand extends Command {
       showInHelp: false,
       guildOnly: true
     };
-    this.permissions = { bot: [], user: [] };
+    this.permissions = { bot: [] };
   }
 
   override async run({ t, interaction }: CommandRunOptions) {

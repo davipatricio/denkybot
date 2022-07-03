@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandSubCommandData, ApplicationCommandType } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandSubCommandData, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
 import { CommandDataStructure } from '../../../../structures/CommandDataStructure';
 import type { DenkyClient } from '../../../../types/Client';
 
@@ -31,6 +31,7 @@ export default class PollData extends CommandDataStructure {
       },
       type: ApplicationCommandType.ChatInput,
       dmPermission: false,
+      defaultMemberPermissions: [PermissionFlagsBits.ManageMessages],
       description: client.languages.manager.get('en_US', 'commandNames:poll'),
       options: [
         {

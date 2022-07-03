@@ -12,7 +12,7 @@ export default class UserAvatarSubCommand extends Command {
       showInHelp: false,
       guildOnly: true
     };
-    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [] };
+    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
   }
 
   override async run({ t, interaction }: CommandRunOptions) {

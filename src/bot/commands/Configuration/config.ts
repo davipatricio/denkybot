@@ -13,7 +13,7 @@ export default class ConfigCommand extends Command {
       showInHelp: true,
       guildOnly: true
     };
-    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks], user: [PermissionFlagsBits.ManageGuild, PermissionFlagsBits.ManageChannels] };
+    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
   }
 
   override run({ t, interaction }: CommandRunOptions) {
