@@ -8,6 +8,8 @@ import type { DenkyClient } from '../../types/Client';
 import { InteractionsWebserver } from '../webserver/server';
 import { Logger } from './Logger';
 
+type DefaultClass<T> = { default: new (...args: any[]) => T };
+
 class Initializer {
   constructor(client: DenkyClient) {
     this.peformPreInitialization(client).then(() => {
@@ -66,7 +68,7 @@ class Initializer {
     for await (const event of events) {
       if (!event.endsWith('.js')) continue;
 
-      const { default: EventClass }: { default: new () => Event } = await import(`../events/${event}`);
+      const { default: EventClass }: DefaultClass<Event> = await import(`../events/${event}`);
       const evt = new EventClass();
       client.on(evt.eventName, (...rest: any[]) => evt.run(client, ...rest));
       if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded event: ${evt.eventName}`, 'EVENTS');
@@ -80,7 +82,7 @@ class Initializer {
       const moduleWithoutExtension = module.replace('.js', '');
 
       // eslint-disable-next-line no-shadow
-      const { default: Module }: { default: new (client: DenkyClient) => unknown } = await import(`../modules/${module}`);
+      const { default: Module }: DefaultClass<unknown> = await import(`../modules/${module}`);
       // eslint-disable-next-line no-new
       new Module(client);
       if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded module: ${moduleWithoutExtension}`, 'MODULES');
@@ -94,7 +96,7 @@ class Initializer {
       if (!task.endsWith('.js')) continue;
       const taskWithoutExtension = task.replace('.js', '');
 
-      const { default: TaskClass }: { default: new () => Task } = await import(`../tasks/${task}`);
+      const { default: TaskClass }: DefaultClass<Task> = await import(`../tasks/${task}`);
       const createdTask = new TaskClass();
       createdTask.interval = setInterval(() => createdTask.run(client), createdTask.delay);
       client.tasks.set(createdTask.name, createdTask);
