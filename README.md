@@ -1,10 +1,12 @@
-[![DeepSource](https://deepsource.io/gh/denkylabs/denkybot.svg/?label=active+issues&show_trend=true&token=UQOnl2qHFX3H7dzvR077PMnv)](https://deepsource.io/gh/denkylabs/denkybot/?ref=repository-badge)
+[![Github tag](https://badgen.net/github/tag/denkylabs/denkybot)](https://github.com/denkylabs/denkybot/tags/) [![CodeFactor](https://www.codefactor.io/repository/github/denkylabs/denkybot/badge)](https://www.codefactor.io/repository/github/denkylabs/denkybot) [![DeepSource](https://deepsource.io/gh/denkylabs/denkybot.svg/?label=active+issues&show_trend=true&token=UQOnl2qHFX3H7dzvR077PMnv)](https://deepsource.io/gh/denkylabs/denkybot/?ref=repository-badge) [![GitHub issues](https://img.shields.io/github/issues/denkylabs/denkybot.svg)](https://GitHub.com/denkylabs/denkybot/issues/) [![GitHub contributors](https://badgen.net/github/contributors/denkylabs/denkybot)](https://GitHub.com/denkylabs/denkybot/graphs/contributors/)
 
 [![Discord Bots](https://top.gg/api/widget/704517722100465746.svg)](https://top.gg/bot/704517722100465746)
 
 # 🤖 Denky Bot
 
-> Denky is a brazilian [Discord](https://discord.com) bot, built with [Node.js](https://nodejs.org), [TypeScript](https://www.typescriptlang.org/) and [discord.js](https://discord.js.org).
+Denky is a brazilian [Discord](https://discord.com) bot, built with [Node.js](https://nodejs.org), [TypeScript](https://www.typescriptlang.org/) and [discord.js](https://discord.js.org).
+
+Denky is totally modular, you can enable or disable features that you don't want, for example, http interactions, data posting to Discord bot lists, server/command logs etc.
 
 ## ⚙️ Self hosting
 
@@ -23,3 +25,6 @@ Currently available locales are:
 
 - English (en)
 - Brazilian Portuguese (pt_BR)
+
+## License
+This project is licensed under the [GPL-3.0](LICENSE) license.
