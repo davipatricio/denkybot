@@ -38,7 +38,7 @@ class Initializer {
         if (!command.endsWith('.js')) continue;
         const commandWithoutExtension = command.replace('.js', '');
 
-        const { default: CommandClass }: { default: new (_client: DenkyClient) => Command } = await import(`../commands/${category}/${command}`);
+        const { default: CommandClass }: DefaultClass<Command> = await import(`../commands/${category}/${command}`);
         const cmd = new CommandClass(client);
         client.commands.set(commandWithoutExtension, cmd);
 
@@ -56,7 +56,7 @@ class Initializer {
         if (!command.endsWith('.js')) continue;
         const commandDataWithoutExtension = command.replace('.js', '');
 
-        const { default: CommandDataClass }: { default: new (_client: DenkyClient) => CommandDataStructure } = await import(`../commands/${category}/data/${command}`);
+        const { default: CommandDataClass }: DefaultClass<CommandDataStructure> = await import(`../commands/${category}/data/${command}`);
         const cachedCommand = client.commands.get(commandDataWithoutExtension);
         if (cachedCommand) cachedCommand.options = new CommandDataClass(client).data;
       }
