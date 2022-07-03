@@ -10,7 +10,7 @@ import { Logger } from './Logger';
 
 type DefaultClass<T> = { default: new (...args: any[]) => T };
 
-class Initializer {
+export class Initializer {
   constructor(client: DenkyClient) {
     this.peformPreInitialization(client).then(() => {
       if (global.IS_MAIN_PROCESS) client.logger.log('Starting bot...', 'DENKY');
@@ -70,7 +70,7 @@ class Initializer {
 
       const { default: EventClass }: DefaultClass<Event> = await import(`../events/${event}`);
       const evt = new EventClass();
-      client.on(evt.eventName, (...rest: any[]) => evt.run(client, ...rest));
+      client.on(evt.eventName, rest => evt.run(client, ...rest));
       if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded event: ${evt.eventName}`, 'EVENTS');
     }
   }
@@ -81,7 +81,6 @@ class Initializer {
       if (!module.endsWith('.js')) continue;
       const moduleWithoutExtension = module.replace('.js', '');
 
-      // eslint-disable-next-line no-shadow
       const { default: Module }: DefaultClass<unknown> = await import(`../modules/${module}`);
       // eslint-disable-next-line no-new
       new Module(client);
@@ -127,5 +126,3 @@ class Initializer {
     }
   }
 }
-
-export { Initializer };
