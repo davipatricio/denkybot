@@ -1,3 +1,4 @@
+import { APIInteraction, InteractionResponseType, InteractionType } from 'discord.js';
 import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import nacl from 'tweetnacl';
 import type { DenkyClient } from '../../types/Client';
@@ -11,8 +12,7 @@ export class InteractionsWebserver {
   }
 
   start({ port }: { port: number; publicKey: string }) {
-    this.router.get('/', (_, res) => res.send('express vivo'));
-
+    this.router.get('/', (_, res) => res.redirect('https://github.com/denkylabs/denkybot'));
     this.router.post('/interactions', (request, response) => this.#handleRequest(request, response));
 
     this.router.listen({ port, host: '0.0.0.0' }, err => {
@@ -29,7 +29,15 @@ export class InteractionsWebserver {
     const isValidRequest = nacl.sign.detached.verify(Buffer.from(timestamp + body), Buffer.from(signature, 'hex'), Buffer.from(this.client.config.interactions.publicKey, 'hex'));
     if (!isValidRequest) return response.code(401).send('Invalid signature');
 
-    // @ts-expect-error
-    return this.client.actions.InteractionCreate?.handle(request.body);
+    const interaction = request.body as APIInteraction;
+
+    switch (interaction.type) {
+      case InteractionType.Ping:
+        response.status(200).send({ type: InteractionResponseType.Pong });
+        break;
+    }
+
+    // @ts-expect-error ActionsManager is private
+    return this.client.actions.InteractionCreate?.handle(interaction);
   }
 }
