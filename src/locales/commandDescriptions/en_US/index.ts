@@ -54,5 +54,7 @@ export default {
 
   // Suggestions
   suggestions: 'Send suggestions to the server',
-  'suggestions/send': 'Send suggestions to the server'
+  'suggestions/send': 'Send suggestions to the server',
+  'suggestions/edit': 'Edit a suggestion you previously submitted',
+  'suggestions/edit/id': 'ID of your suggestion'
 } as const;

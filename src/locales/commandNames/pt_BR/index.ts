@@ -46,5 +46,6 @@ export default {
   // Suggestions
   suggestions: 'sugestoes',
   suggestion: 'sugestao',
-  'suggestion/send': 'enviar'
+  'suggestion/send': 'enviar',
+  'suggestion/edit': 'editar'
 } as const;

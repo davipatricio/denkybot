@@ -124,7 +124,10 @@ export default {
   'suggestions/not-enabled': 'This server has not yet set up the suggestion system. Ask an administrator to configure it.',
   'suggestions/no-categories': 'This server has not yet added a category for suggestions. Ask an admin to add one.',
   'suggestions/unknown-category': 'Could not find the selected category, probably the category no longer exists.',
-
+  'suggestions/embed/title': 'New suggestion',
+  'suggestions/invalid-id': 'This suggestion ID does not exist in this category.',
+  'suggestions/not-same-member': 'You cannot edit suggestions from other members.',
+  // Send
   'suggestions/send/modal/title': 'Send suggestion',
   'suggestions/send/modal/label': 'Enter the text of your suggestion',
   'suggestions/send/modal/placeholder': 'My suggestion is...',
@@ -132,8 +135,12 @@ export default {
   'suggestions/send/in-cooldown': (n: string) => `Calm down there! A server administrator has asked members to wait at least ${n} to submit another suggestion in this category.`,
   'suggestions/send/small-suggestion': 'Your suggestion must be at least 5 characters long.',
   'suggestions/send/choose-a-category': 'Choose a category to submit your suggestion',
-  'suggestions/send/sent': 'Suggestion sent successfully!',
+  'suggestions/send/sent': (url: string) => `Your suggestion has been successfully sent! Check it out [here](${url}).`,
   'suggestions/send/thread-name': 'Feedback',
 
-  'suggestions/embed/title': 'New suggestion'
+  // Edit
+  'suggestions/edit/modal/title': 'Edit suggestion',
+  'suggestions/edit/embed/edited': 'edited',
+  'suggestions/edit/edited': (url: string) => `Your suggestion has been successfully edited! Check it out [here](${url}).`,
+  'suggestions/edit/choose-category': 'Choose the category your suggestion was submitted to'
 } as const;

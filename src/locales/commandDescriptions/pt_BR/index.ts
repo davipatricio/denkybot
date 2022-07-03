@@ -54,5 +54,7 @@ export default {
 
   // Suggestions
   suggestions: 'Envie sugestões para o servidor',
-  'suggestions/send': 'Envie sugestões para o servidor'
+  'suggestions/send': 'Envie sugestões para o servidor',
+  'suggestions/edit': 'Edite uma sugestão que você enviou anteriormente',
+  'suggestions/edit/id': 'ID da sua sugestão'
 } as const;

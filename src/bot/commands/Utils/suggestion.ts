@@ -2,6 +2,7 @@ import {
   ActionRowBuilder,
   ChannelType,
   ChatInputCommandInteraction,
+  Embed,
   EmbedBuilder,
   GuildTextBasedChannel,
   Message,
@@ -12,7 +13,8 @@ import {
   TextInputBuilder,
   TextInputStyle,
   UnsafeSelectMenuBuilder,
-  UnsafeSelectMenuOptionBuilder
+  UnsafeSelectMenuOptionBuilder,
+  User
 } from 'discord.js';
 import ms from 'ms';
 import { Command, CommandLocale, CommandRunOptions } from '../../../structures/Command';
@@ -46,7 +48,111 @@ export default class PingCommand extends Command {
       case 'send':
         this.sendSuggestion(t, interaction);
         break;
+      case 'edit':
+        this.editSuggestion(t, interaction);
+        break;
     }
+  }
+
+  editSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
+    const config = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+    if (!config) return interaction.reply({ content: t('command:suggestions/not-enabled'), ephemeral: true });
+    if (config.categories.length === 0) return interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+
+    const suggestionId = interaction.options.getString('id', true);
+    if (!this.#isValidId(suggestionId)) {
+      return interaction.reply({ content: t('command:suggestions/invalid-id'), ephemeral: true });
+    }
+
+    const modal = new ModalBuilder().setCustomId('edit_suggestion_modal').setTitle(t('command:suggestions/edit/modal/title'));
+    const userSuggestion = new TextInputBuilder()
+      .setCustomId('user_suggestion')
+      .setLabel(t('command:suggestions/send/modal/label'))
+      .setMaxLength(1500)
+      .setMinLength(5)
+      .setRequired(true)
+      .setStyle(TextInputStyle.Paragraph)
+      .setPlaceholder(t('command:suggestions/send/modal/placeholder'));
+
+    const row1 = new ActionRowBuilder<TextInputBuilder>().setComponents([userSuggestion]);
+
+    modal.setComponents([row1]);
+    interaction.showModal(modal);
+    const eventFn = async (int: ModalSubmitInteraction) => {
+      if (int.user.id !== interaction.user.id) return;
+      if (int.customId !== 'edit_suggestion_modal') return;
+
+      this.client.off('interactionCreate', eventFn);
+
+      await int.deferReply();
+      const text = int.fields.getTextInputValue('user_suggestion').trim();
+      if (text.length < 5) {
+        interaction.reply({ content: t('command:suggestions/send/small-suggestion'), ephemeral: true });
+        return;
+      }
+
+      const categoriesName: CategoriesStructure[] = [];
+      for (const categoryId of config.categories) {
+        const channel = int.guild?.channels.cache.get(categoryId) as TextChannel;
+        if (channel) categoriesName.push({ name: channel.name, id: channel.id, topic: channel.topic });
+      }
+
+      if (categoriesName.length === 0) {
+        interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+        return;
+      }
+
+      const categoriesRow = new ActionRowBuilder<UnsafeSelectMenuBuilder>().setComponents([
+        new UnsafeSelectMenuBuilder().setCustomId('categorias').setOptions(
+          categoriesName.map(cat =>
+            new UnsafeSelectMenuOptionBuilder()
+              .setLabel(cat.name)
+              .setValue(cat.id)
+              .setEmoji({ name: '💬' })
+              .setDescription(cat.topic ?? '')
+          )
+        )
+      ]);
+
+      const msg = (await int.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] })) as Message;
+      const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id, max: 1, time: 60000 });
+      collector.on('collect', async i => {
+        if (!i.isSelectMenu()) return;
+        await i.deferUpdate();
+        const channelId = i.values[0] as string;
+
+        let shouldContinue = true;
+
+        const suggestionChannel = interaction.guild?.channels.cache.get(channelId) as GuildTextBasedChannel;
+        if (!suggestionChannel) {
+          i.editReply({ content: t('command:suggestions/unknown-category'), components: [] });
+          return;
+        }
+
+        const suggestionMessage = await suggestionChannel.messages.fetch(suggestionId).catch(() => {
+          i.editReply({ content: t('command:suggestions/invalid-id'), components: [] });
+          shouldContinue = false;
+        });
+
+        if (!shouldContinue || !suggestionMessage) return;
+
+        if (!this.#isFromSameMember(suggestionMessage.embeds[0], interaction.user)) {
+          i.editReply({ content: `❌ **|** ${t('command:suggestions/not-same-member')}`, components: [] });
+          return;
+        }
+
+        const embed = new EmbedBuilder()
+          .setTitle(`💡 • ${t('command:suggestions/embed/title')}`)
+          .setDescription(`> ${text}`)
+          .setColor('Yellow')
+          .setTimestamp()
+          .setFooter({ text: `[${t('command:suggestions/edit/embed/edited')}] ${interaction.user.tag} (${interaction.user.id})`, iconURL: interaction.user.displayAvatarURL() });
+        await suggestionMessage.edit({ embeds: [embed] });
+        i.editReply({ content: `📝 **|** ${t('command:suggestions/edit/edited', suggestionMessage.url)}`, components: [] });
+      });
+    };
+
+    return this.client.on('interactionCreate', eventFn);
   }
 
   sendSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
@@ -69,7 +175,9 @@ export default class PingCommand extends Command {
     modal.setComponents([row1]);
     interaction.showModal(modal);
     const eventFn = async (int: ModalSubmitInteraction) => {
-      if (int.user.id !== interaction.user.id || int.customId !== 'suggestion_modal') return;
+      if (int.user.id !== interaction.user.id) return;
+      if (int.customId !== 'suggestion_modal') return;
+
       this.client.off('interactionCreate', eventFn);
 
       await int.deferReply();
@@ -83,6 +191,11 @@ export default class PingCommand extends Command {
       for (const categoryId of config.categories) {
         const channel = int.guild?.channels.cache.get(categoryId) as TextChannel;
         if (channel) categoriesName.push({ name: channel.name, id: channel.id, topic: channel.topic });
+      }
+
+      if (categoriesName.length === 0) {
+        interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+        return;
       }
 
       const categoriesRow = new ActionRowBuilder<UnsafeSelectMenuBuilder>().setComponents([
@@ -117,7 +230,7 @@ export default class PingCommand extends Command {
 
         const finalChannel = int.guild?.channels.cache.get(channelId) as GuildTextBasedChannel;
         if (!finalChannel) {
-          interaction.editReply({ content: t('command:suggestions/unknown-category'), components: [] });
+          i.editReply({ content: t('command:suggestions/unknown-category'), components: [] });
           return;
         }
 
@@ -128,7 +241,7 @@ export default class PingCommand extends Command {
           .setTimestamp()
           .setFooter({ text: `${interaction.user.tag} (${interaction.user.id})`, iconURL: interaction.user.displayAvatarURL() });
         const message = await finalChannel.send({ embeds: [embed] });
-        i.editReply({ content: t('command:suggestions/send/sent'), components: [] });
+        i.editReply({ content: `✅ **|** ${t('command:suggestions/send/sent', message.url)}`, components: [] });
 
         if (config.useThreads) {
           if ([ChannelType.GuildText, ChannelType.GuildNews].includes(finalChannel.type)) message.startThread({ name: t('command:suggestions/send/thread-name') });
@@ -142,5 +255,13 @@ export default class PingCommand extends Command {
     };
 
     return this.client.on('interactionCreate', eventFn);
+  }
+
+  #isFromSameMember(embed: Embed, user: User) {
+    return embed.footer?.text.endsWith(` (${user.id})`);
+  }
+
+  #isValidId(id: string) {
+    return id.length >= 18 && id.length <= 20 && !isNaN(Number(id));
   }
 }

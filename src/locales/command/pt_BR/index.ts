@@ -126,7 +126,10 @@ export default {
   'suggestions/not-enabled': 'Este servidor ainda não configurou o sistema de sugestões. Peça para um administrador o configurar.',
   'suggestions/no-categories': 'Este servidor ainda não adicionou uma categoria para sugestões. Peça para um administrador adicionar uma.',
   'suggestions/unknown-category': 'Não foi possível encontrar a categoria selecionada, provavelmente a categoria não existe mais.',
-
+  'suggestions/embed/title': 'Nova sugestão',
+  'suggestions/invalid-id': 'Esse ID de sugestão não existe nesta categoria.',
+  'suggestions/not-same-member': 'Você não pode editar sugestões de outros membros.',
+  // Send
   'suggestions/send/modal/title': 'Enviar sugestão',
   'suggestions/send/modal/label': 'Insira o texto de sua sugestão',
   'suggestions/send/modal/placeholder': 'A minha sugestão é...',
@@ -134,8 +137,12 @@ export default {
   'suggestions/send/in-cooldown': (n: string) => `Calma lá! Um administrador do servidor pediu que membros aguardem ao menos ${n} para enviar outra sugestão nesta categoria.`,
   'suggestions/send/small-suggestion': 'Sua sugestão deve ter pelo menos 5 caracteres.',
   'suggestions/send/choose-a-category': 'Escolha uma categoria para enviar sua sugestão',
-  'suggestions/send/sent': 'Sugestão enviada com sucesso!',
+  'suggestions/send/sent': (url: string) => `Sugestão enviada com sucesso! Confira-a [aqui](${url}).`,
   'suggestions/send/thread-name': 'Comentários',
 
-  'suggestions/embed/title': 'Nova sugestão'
+  // Edit
+  'suggestions/edit/modal/title': 'Editar sugestão',
+  'suggestions/edit/embed/edited': 'editada',
+  'suggestions/edit/edited': (url: string) => `Sua sugestão foi editada com sucesso! Confira-a [aqui](${url}).`,
+  'suggestions/edit/choose-category': 'Escolha a categoria que sua sugestão foi enviada'
 } as const;
