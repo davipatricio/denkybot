@@ -1,14 +1,14 @@
 import {
-    ActionRowBuilder,
-    ButtonBuilder,
-    ButtonStyle,
-    ChannelType,
-    ChatInputCommandInteraction,
-    EmbedBuilder,
-    Message,
-    SelectMenuBuilder,
-    UnsafeSelectMenuBuilder,
-    UnsafeSelectMenuOptionBuilder
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ChannelType,
+  ChatInputCommandInteraction,
+  EmbedBuilder,
+  Message,
+  SelectMenuBuilder,
+  UnsafeSelectMenuBuilder,
+  UnsafeSelectMenuOptionBuilder
 } from 'discord.js';
 import ms from 'ms';
 import { Command, CommandLocale, CommandRunOptions } from '../../../structures/Command';
