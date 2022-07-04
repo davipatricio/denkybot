@@ -43,6 +43,7 @@ export default {
   // Bot
   bot: 'Veja informações sobre o bot',
   'bot/invite': 'Convide o Denky para seu servidor',
+  'bot/vote': 'Informa o link para votar em mim',
 
   // Text
   text: 'Traduza ou edite texto em diferentes maneiras',
