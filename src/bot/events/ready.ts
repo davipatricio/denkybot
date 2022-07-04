@@ -13,7 +13,7 @@ export default class ReadyEvent extends Event {
 
     if (client.config.features.preventCrashes) {
       client.on('error', err => {
-        client.logger.error(err, 'DENKY');
+        client.logger.error(err, 'BOT');
       });
 
       process.on('unhandledRejection', err => {
