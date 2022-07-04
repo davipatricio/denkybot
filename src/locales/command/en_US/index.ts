@@ -128,7 +128,7 @@ export default {
   'suggestions/invalid-id': 'This suggestion ID does not exist in this category.',
   'suggestions/not-same-member': 'You cannot edit suggestions from other members.',
   // Send
-  'suggestions/send/modal/title': 'Send suggestion',
+  'suggestions/send/modal/title': 'Send suggestion sent',
   'suggestions/send/modal/label': 'Enter the text of your suggestion',
   'suggestions/send/modal/placeholder': 'My suggestion is...',
 

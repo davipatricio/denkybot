@@ -1,7 +1,10 @@
 import {
   ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
   ChannelType,
   ChatInputCommandInteraction,
+  Colors,
   Embed,
   EmbedBuilder,
   GuildTextBasedChannel,
@@ -9,6 +12,7 @@ import {
   ModalBuilder,
   ModalSubmitInteraction,
   PermissionFlagsBits,
+  SelectMenuInteraction,
   TextChannel,
   TextInputBuilder,
   TextInputStyle,
@@ -51,7 +55,77 @@ export default class PingCommand extends Command {
       case 'edit':
         this.editSuggestion(t, interaction);
         break;
+      case 'accept':
+        this.acceptSuggestion(t, interaction);
     }
+  }
+
+  async acceptSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
+    const config = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+    if (!config) return interaction.reply({ content: t('command:suggestions/not-enabled'), ephemeral: true });
+    if (config.categories.length === 0) return interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+
+    const reason = interaction.options.getString('reason');
+    const suggestionId = interaction.options.getString('id_suggestion', true);
+    if (!this.#isValidId(suggestionId)) {
+      return interaction.reply({ content: t('command:suggestions/invalid-id'), ephemeral: true });
+    }
+
+    const categoriesName = this.#generateCategoriesArray(config, interaction);
+    if (categoriesName.length === 0) return interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+
+    await interaction.deferReply();
+
+    const categoriesRow = this.#generateCategoriesRow(categoriesName);
+    const msg = (await interaction.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] })) as Message;
+    const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === interaction.user.id, max: 1, time: 60000 });
+    return collector.on('collect', async i => {
+      if (!i.isSelectMenu()) return;
+      await i.deferUpdate();
+      const channelId = i.values[0] as string;
+
+      let shouldContinue = true;
+
+      const suggestionChannel = interaction.guild?.channels.cache.get(channelId) as GuildTextBasedChannel;
+      if (!suggestionChannel) {
+        i.editReply({ content: t('command:suggestions/unknown-category'), components: [] });
+        return;
+      }
+
+      const suggestionMessage = await suggestionChannel.messages.fetch(suggestionId).catch(() => {
+        i.editReply({ content: t('command:suggestions/invalid-id'), components: [] });
+        shouldContinue = false;
+      });
+      if (!shouldContinue || !suggestionMessage || suggestionMessage.embeds.length !== 1 || !this.#getIdFromFooter(suggestionMessage.embeds[0].footer?.text)) {
+        i.editReply({ content: t('command:suggestions/invalid-id'), components: [] });
+        return;
+      }
+
+      if (this.#alreadyAnswered(suggestionMessage.embeds[0])) {
+        i.editReply({ content: 'Essa sugestão já foi respondida anteriormente por um membro da equipe', components: [] });
+        return;
+      }
+
+      // const suggesterId = this.#getIdFromFooter(suggestionMessage.embeds[0].footer?.text);
+
+      const embed = new EmbedBuilder(suggestionMessage.embeds[0].toJSON())
+        .setTitle('✅ • Nova sugestão enviada [aceita]')
+        .setColor('Green')
+        .addFields([
+          {
+            name: 'Resposta',
+            value: `> ${interaction.user}: ${reason ?? 'Nenhuma resposta inserida.'}`
+          }
+        ]);
+      await suggestionMessage.edit({ embeds: [embed] });
+      suggestionMessage.reactions.removeAll().catch(() => {});
+      if (i.channelId === suggestionMessage.channel.id) {
+        i.editReply({ content: '✅ **|** A sugestão foi aceita com sucesso!', components: [] });
+        return;
+      }
+
+      this.#askStaffToMove(i, embed);
+    });
   }
 
   editSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
@@ -74,13 +148,13 @@ export default class PingCommand extends Command {
       await int.deferReply();
       const text = int.fields.getTextInputValue('user_suggestion').trim();
       if (text.length < 5) {
-        interaction.reply({ content: t('command:suggestions/send/small-suggestion'), ephemeral: true });
+        int.editReply({ content: `❌ **|** ${t('command:suggestions/send/small-suggestion')}` });
         return;
       }
 
       const categoriesName = this.#generateCategoriesArray(config, interaction);
       if (categoriesName.length === 0) {
-        interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+        int.editReply({ content: `❌ **|** ${t('command:suggestions/no-categories')}` });
         return;
       }
 
@@ -106,8 +180,10 @@ export default class PingCommand extends Command {
           shouldContinue = false;
         });
 
-        if (!shouldContinue || !suggestionMessage) return;
-
+        if (!shouldContinue || !suggestionMessage || suggestionMessage.embeds.length !== 1 || !this.#getIdFromFooter(suggestionMessage.embeds[0].footer?.text)) {
+          i.editReply({ content: t('command:suggestions/invalid-id'), components: [] });
+          return;
+        }
         if (!this.#isFromSameMember(suggestionMessage.embeds[0], interaction.user)) {
           i.editReply({ content: `❌ **|** ${t('command:suggestions/not-same-member')}`, components: [] });
           return;
@@ -142,13 +218,13 @@ export default class PingCommand extends Command {
       await int.deferReply();
       const text = int.fields.getTextInputValue('user_suggestion').trim();
       if (text.length < 5) {
-        interaction.reply({ content: t('command:suggestions/send/small-suggestion'), ephemeral: true });
+        int.editReply({ content: `❌ **|** ${t('command:suggestions/send/small-suggestion')}` });
         return;
       }
 
       const categoriesName = this.#generateCategoriesArray(config, interaction);
       if (categoriesName.length === 0) {
-        interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+        int.editReply({ content: `❌ **|** ${t('command:suggestions/no-categories')}` });
         return;
       }
 
@@ -201,12 +277,52 @@ export default class PingCommand extends Command {
     return this.client.on('interactionCreate', eventFn);
   }
 
+  #askStaffToMove(i: SelectMenuInteraction, finalEmbed: EmbedBuilder) {
+    return new Promise<boolean>(resolve => {
+      const buttonRow = new ActionRowBuilder<ButtonBuilder>().setComponents([
+        new ButtonBuilder().setCustomId('sim').setEmoji('✅').setLabel('Sim, mover').setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId('nao').setEmoji('❌').setLabel('Não mover').setStyle(ButtonStyle.Danger)
+      ]);
+
+      i.editReply({ content: '✅ **|** A sugestão foi aceita com sucesso!\n➡️ **|** Você deseja mover a sugestão para este canal?', components: [buttonRow] });
+      i.message
+        .awaitMessageComponent({ time: 30000, filter: m => m.user.id === i.user.id })
+        .then(async m => {
+          await m.deferUpdate();
+          resolve(true);
+          if (m.customId === 'sim') {
+            i.editReply({ content: '✅ **|** A sugestão foi aceita com sucesso e movida para este canal!', components: [] });
+            i.channel?.send({ embeds: [finalEmbed] });
+            return;
+          }
+
+          i.editReply({ content: '✅ **|** A sugestão foi aceita com sucesso!', components: [] });
+        })
+        .catch(() => {
+          resolve(false);
+
+          i.editReply({ content: '✅ **|** A sugestão foi aceita com sucesso!', components: [] });
+        });
+    });
+  }
+
   #isFromSameMember(embed: Embed, user: User) {
     return embed.footer?.text.endsWith(` (${user.id})`);
   }
 
+  #alreadyAnswered(embed: Embed) {
+    return !embed.title?.startsWith('💡 • ') || embed.color !== Colors.Yellow || (embed.fields ?? []).length >= 1;
+  }
+
   #isValidId(id: string) {
     return id.length >= 18 && id.length <= 20 && !isNaN(Number(id));
+  }
+
+  #getIdFromFooter(footer?: string) {
+    if (!footer) return null;
+    const lastParenthesis = footer.lastIndexOf('(');
+    if (lastParenthesis === -1) return null;
+    return footer.substring(lastParenthesis + 1, footer.length - 1);
   }
 
   #generateAndShowModal(interaction: ChatInputCommandInteraction, t: CommandLocale, edit = false) {

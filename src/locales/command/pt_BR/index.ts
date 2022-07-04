@@ -126,7 +126,7 @@ export default {
   'suggestions/not-enabled': 'Este servidor ainda não configurou o sistema de sugestões. Peça para um administrador o configurar.',
   'suggestions/no-categories': 'Este servidor ainda não adicionou uma categoria para sugestões. Peça para um administrador adicionar uma.',
   'suggestions/unknown-category': 'Não foi possível encontrar a categoria selecionada, provavelmente a categoria não existe mais.',
-  'suggestions/embed/title': 'Nova sugestão',
+  'suggestions/embed/title': 'Nova sugestão enviada',
   'suggestions/invalid-id': 'Esse ID de sugestão não existe nesta categoria.',
   'suggestions/not-same-member': 'Você não pode editar sugestões de outros membros.',
   // Send

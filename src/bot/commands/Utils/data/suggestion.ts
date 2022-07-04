@@ -49,6 +49,43 @@ export default class PingData extends CommandDataStructure {
               required: true
             }
           ]
+        },
+        {
+          name: 'accept',
+          nameLocalizations: {
+            'pt-BR': 'aceitar'
+          },
+          type: ApplicationCommandOptionType.Subcommand,
+          description: 'Accepts a suggestion',
+          descriptionLocalizations: {
+            'pt-BR': 'Aceita uma sugestão'
+          },
+          options: [
+            {
+              name: 'id_suggestion',
+              nameLocalizations: {
+                'pt-BR': 'id_sugestao'
+              },
+              description: 'The ID of the suggestion',
+              descriptionLocalizations: {
+                'pt-BR': 'O ID da sugestão'
+              },
+              type: ApplicationCommandOptionType.String,
+              required: true
+            },
+            {
+              name: 'reason',
+              nameLocalizations: {
+                'pt-BR': 'motivo'
+              },
+              description: 'The reason for accepting the suggestion',
+              descriptionLocalizations: {
+                'pt-BR': 'A razão para aceitar a sugestão'
+              },
+              type: ApplicationCommandOptionType.String,
+              required: false
+            }
+          ]
         }
       ]
     };

@@ -70,7 +70,7 @@ export class Initializer {
 
       const { default: EventClass }: DefaultClass<Event> = await import(`../events/${event}`);
       const evt = new EventClass();
-      client.on(evt.eventName, rest => evt.run(client, ...rest));
+      client.on(evt.eventName, (...rest) => evt.run(client, ...rest));
       if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded event: ${evt.eventName}`, 'EVENTS');
     }
   }
