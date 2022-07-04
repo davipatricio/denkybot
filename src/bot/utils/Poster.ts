@@ -1,5 +1,5 @@
-// FIXME: Use Node 18.x fetch instead of axios when @types/node gets the fetch function added to the global namespace
-import axios from 'axios';
+// FIXME: Use Node 18.x fetch instead of undici when @types/node gets the fetch function added to the global namespace
+import { request } from 'undici';
 import type { DenkyClient } from '../../types/Client';
 
 export class Poster {
@@ -34,19 +34,19 @@ export class Poster {
       return false;
     }
 
-    const request = await axios('https://top.gg/api/bots/stats', {
+    const req = await request('https://top.gg/api/bots/stats', {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify({
+      body: JSON.stringify({
         server_count: totalGuilds,
         shard_count: Number(process.env.SHARD_COUNT ?? 1)
       })
     });
 
-    if (request.status >= 400) throw new Error('Failed to post stats to top.gg!');
+    if (req.statusCode >= 400) throw new Error('Failed to post stats to top.gg!');
     return true;
   }
 
@@ -57,19 +57,19 @@ export class Poster {
       return false;
     }
 
-    const request = await axios(`https://discord.bots.gg/api/v1/bots/${this.client.user?.id}/stats`, {
+    const req = await request(`https://discord.bots.gg/api/v1/bots/${this.client.user?.id}/stats`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify({
+      body: JSON.stringify({
         guildCount: totalGuilds,
         shardCount: Number(process.env.SHARD_COUNT ?? 1)
       })
     });
 
-    if (request.status >= 400) throw new Error('Failed to post stats to bots.gg!');
+    if (req.statusCode >= 400) throw new Error('Failed to post stats to bots.gg!');
     if (this.client.config.logs.debug) this.client.logger.log('Posted stats to bots.gg successfully!', 'VOTES');
     return true;
   }
@@ -81,18 +81,18 @@ export class Poster {
       return false;
     }
 
-    const request = await axios(`https://discords.com/bots/api/bot/${this.client.user?.id}`, {
+    const req = await request(`https://discords.com/bots/api/bot/${this.client.user?.id}`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify({
+      body: JSON.stringify({
         server_count: totalGuilds
       })
     });
 
-    if (request.status >= 400) throw new Error('Failed to post stats to discords!');
+    if (req.statusCode >= 400) throw new Error('Failed to post stats to discords!');
     if (this.client.config.logs.debug) this.client.logger.log('Posted stats to discords.com successfully!', 'VOTES');
     return true;
   }
@@ -104,18 +104,18 @@ export class Poster {
       return false;
     }
 
-    const request = await axios(`https://disforge.com/api/botstats/${this.client.user?.id}`, {
+    const req = await request(`https://disforge.com/api/botstats/${this.client.user?.id}`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify({
+      body: JSON.stringify({
         servers: totalGuilds
       })
     });
 
-    if (request.status >= 400) throw new Error('Failed to post stats to disforge!');
+    if (req.statusCode >= 400) throw new Error('Failed to post stats to disforge!');
     if (this.client.config.logs.debug) this.client.logger.log('Posted stats to disforge.com successfully!', 'VOTES');
     return true;
   }
@@ -127,18 +127,18 @@ export class Poster {
       return false;
     }
 
-    const request = await axios(`https://discordbotlist.com/api/v1/bots/${this.client.user?.id}/stats`, {
+    const req = await request(`https://discordbotlist.com/api/v1/bots/${this.client.user?.id}/stats`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify({
+      body: JSON.stringify({
         guilds: totalGuilds
       })
     });
 
-    if (request.status >= 400) throw new Error('Failed to post stats to discordbotlist.com!');
+    if (req.statusCode >= 400) throw new Error('Failed to post stats to discordbotlist.com!');
     if (this.client.config.logs.debug) this.client.logger.log('Posted stats to discordbotlist.com successfully!', 'VOTES');
     return true;
   }
@@ -150,19 +150,19 @@ export class Poster {
       return false;
     }
 
-    const request = await axios(`https://api.bladelist.gg/bots/${this.client.user?.id}`, {
+    const req = await request(`https://api.bladelist.gg/bots/${this.client.user?.id}`, {
       method: 'POST',
       headers: {
         Authorization: `Token ${Authorization}`,
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify({
+      body: JSON.stringify({
         server_count: totalGuilds,
         shard_count: Number(process.env.SHARD_COUNT ?? 1)
       })
     });
 
-    if (request.status >= 400) throw new Error('Failed to post stats to bladelist.gg!');
+    if (req.statusCode >= 400) throw new Error('Failed to post stats to bladelist.gg!');
     if (this.client.config.logs.debug) this.client.logger.log('Posted stats to bladelist.gg successfully!', 'VOTES');
     return true;
   }
@@ -174,18 +174,18 @@ export class Poster {
       return false;
     }
 
-    const request = await axios(`https://api.fateslist.xyz/bots/${this.client.user?.id}/stats`, {
+    const req = await request(`https://api.fateslist.xyz/bots/${this.client.user?.id}/stats`, {
       method: 'POST',
       headers: {
         Authorization,
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify({
+      body: JSON.stringify({
         guild_count: totalGuilds
       })
     });
 
-    if (request.status >= 400) throw new Error('Failed to post stats to fateslist.xyz!');
+    if (req.statusCode >= 400) throw new Error('Failed to post stats to fateslist.xyz!');
     if (this.client.config.logs.debug) this.client.logger.log('Posted stats to fateslist.xyz successfully!', 'VOTES');
     return true;
   }
