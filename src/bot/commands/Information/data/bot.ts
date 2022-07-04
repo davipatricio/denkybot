@@ -23,6 +23,17 @@ export default class BotData extends CommandDataStructure {
           descriptionLocalizations: {
             'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:bot/invite')
           }
+        },
+        {
+          name: client.languages.manager.get('en_US', 'commandNames:bot/vote'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:bot/vote')
+          },
+          type: ApplicationCommandOptionType.Subcommand,
+          description: client.languages.manager.get('en_US', 'commandDescriptions:bot/vote'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:bot/vote')
+          }
         }
       ]
     };

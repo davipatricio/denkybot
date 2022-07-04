@@ -21,6 +21,11 @@ export default class BotCommand extends Command {
         this.client.commands.get('_bot_invite')?.run({ t, interaction });
         break;
       }
+
+      case 'vote': {
+        this.client.commands.get('_bot_vote')?.run({ t, interaction });
+        break;
+      }
     }
   }
 }

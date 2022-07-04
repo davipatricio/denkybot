@@ -37,6 +37,7 @@ export default {
   // Bot
   bot: 'bot info | invite | vote',
   'bot/invite': 'convidar',
+  'bot/vote': 'votar',
 
   // Text
   text: 'texto',

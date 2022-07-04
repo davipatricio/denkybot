@@ -68,6 +68,9 @@ export default {
   // Bot invite
   'bot/invite/invite': (user: User, invite: string) => `😊 ${user} | Click [here](${invite}) to add me to your server!`,
 
+  // Bot vote
+  'bot/vote/vote': (user: User, voteUrl: string) => `😊 ${user} | Click [here](${voteUrl}) to vote for me.`,
+
   // Config suggestions
   'config/suggestions/title': 'Settings Panel | Suggestions',
 
