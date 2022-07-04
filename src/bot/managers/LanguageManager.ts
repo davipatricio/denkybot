@@ -40,8 +40,6 @@ export class LanguageManager {
         // @ts-ignore
         if (!this.cache[category][locale]) this.cache[category][locale] = {};
         this.cache[category][locale] = localeData;
-
-        if (global.IS_MAIN_PROCESS) this.client.logger.log(`Loaded ${category}/${locale} locale successfully.`, 'LOCALES');
       }
     }
   }
