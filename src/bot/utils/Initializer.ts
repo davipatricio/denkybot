@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { Collection } from 'discord.js';
 import { readdir, readFile } from 'node:fs/promises';
 import type { Command } from '../../structures/Command';
@@ -13,7 +14,7 @@ type DefaultClass<T> = { default: new (...args: any[]) => T };
 export class Initializer {
   constructor(client: DenkyClient) {
     this.peformPreInitialization(client).then(() => {
-      if (global.IS_MAIN_PROCESS) client.logger.log('Starting bot...', 'DENKY');
+      if (global.IS_MAIN_PROCESS) client.logger.log('Starting bot...', 'BOT');
       this.init(client);
     });
   }
@@ -31,29 +32,29 @@ export class Initializer {
   async loadCommands(client: DenkyClient) {
     client.commands = new Collection();
     const categories = await readdir('./bot/commands/');
-    for await (const category of categories) {
-      const commands = await readdir(`./bot/commands/${category}`);
+    let totalCommands = 0;
 
-      for await (const command of commands) {
-        if (!command.endsWith('.js')) continue;
+    for (const category of categories) {
+      const commands = (await readdir(`./bot/commands/${category}`)).filter(file => file.endsWith('.js'));
+      totalCommands += commands.length;
+      for (const command of commands) {
         const commandWithoutExtension = command.replace('.js', '');
 
         const { default: CommandClass }: DefaultClass<Command> = await import(`../commands/${category}/${command}`);
         const cmd = new CommandClass(client);
         client.commands.set(commandWithoutExtension, cmd);
-
-        if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded command: ${commandWithoutExtension}`, 'COMMANDS');
       }
     }
+
+    if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded ${totalCommands} commands successfully.`, 'COMMANDS');
   }
 
   async loadCommandData(client: DenkyClient) {
     const categories = await readdir('./bot/commands/');
     for await (const category of categories) {
-      const commands = await readdir(`./bot/commands/${category}/data`);
+      const commands = (await readdir(`./bot/commands/${category}/data`)).filter(file => file.endsWith('.js'));
 
       for await (const command of commands) {
-        if (!command.endsWith('.js')) continue;
         const commandDataWithoutExtension = command.replace('.js', '');
 
         const { default: CommandDataClass }: DefaultClass<CommandDataStructure> = await import(`../commands/${category}/data/${command}`);
@@ -64,55 +65,45 @@ export class Initializer {
   }
 
   async loadEvents(client: DenkyClient) {
-    const events = await readdir('./bot/events/');
+    const events = (await readdir('./bot/events/')).filter(file => file.endsWith('.js'));
     for await (const event of events) {
-      if (!event.endsWith('.js')) continue;
-
       const { default: EventClass }: DefaultClass<Event> = await import(`../events/${event}`);
       const evt = new EventClass();
-      client.on(evt.eventName, rest => evt.run(client, ...rest));
-      if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded event: ${evt.eventName}`, 'EVENTS');
+      client.on(evt.eventName, (...rest) => evt.run(client, ...rest));
     }
+
+    if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded ${events.length} events successfully.`, 'EVENTS');
   }
 
   async loadModules(client: DenkyClient) {
-    const modules = await readdir('./bot/modules/');
+    const modules = (await readdir('./bot/modules/')).filter(file => file.endsWith('.js'));
     for await (const module of modules) {
-      if (!module.endsWith('.js')) continue;
-      const moduleWithoutExtension = module.replace('.js', '');
-
       const { default: Module }: DefaultClass<unknown> = await import(`../modules/${module}`);
       // eslint-disable-next-line no-new
       new Module(client);
-      if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded module: ${moduleWithoutExtension}`, 'MODULES');
     }
+
+    if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded ${modules.length} modules successfully.`, 'MODULES');
   }
 
   async loadTasks(client: DenkyClient) {
     client.tasks = new Collection();
-    const tasks = await readdir('./bot/tasks/');
+    const tasks = (await readdir('./bot/tasks/')).filter(file => file.endsWith('.js'));
     for await (const task of tasks) {
-      if (!task.endsWith('.js')) continue;
-      const taskWithoutExtension = task.replace('.js', '');
-
       const { default: TaskClass }: DefaultClass<Task> = await import(`../tasks/${task}`);
       const createdTask = new TaskClass();
       createdTask.interval = setInterval(() => createdTask.run(client), createdTask.delay);
+
       client.tasks.set(createdTask.name, createdTask);
-      client.logger.log(`Loaded task: ${taskWithoutExtension}`, 'TASKS');
     }
+
+    if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded ${tasks.length} tasks successfully.`, 'TASKS');
   }
 
   async loadBotConfiguration(client: DenkyClient) {
     const configData = await readFile('../config.json');
     client.config = JSON.parse(configData.toString());
     if (global.IS_MAIN_PROCESS) client.logger.log('Loaded bot configuration file.', 'CONFIGURATION');
-  }
-
-  async peformPreInitialization(client: DenkyClient) {
-    client.logger = new Logger();
-    await this.loadBotConfiguration(client);
-    this.loadWebserver(client);
   }
 
   loadWebserver(client: DenkyClient) {
@@ -124,5 +115,11 @@ export class Initializer {
         webserver.start({ port, publicKey });
       }
     }
+  }
+
+  async peformPreInitialization(client: DenkyClient) {
+    client.logger = new Logger();
+    await this.loadBotConfiguration(client);
+    this.loadWebserver(client);
   }
 }
