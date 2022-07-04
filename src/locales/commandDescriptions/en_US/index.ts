@@ -56,5 +56,8 @@ export default {
   suggestions: 'Send suggestions to the server',
   'suggestions/send': 'Send suggestions to the server',
   'suggestions/edit': 'Edit a suggestion you previously submitted',
-  'suggestions/edit/id': 'ID of your suggestion'
+  'suggestions/edit/id': 'ID of your suggestion',
+  'suggestions/accept': 'Accepts a suggestion that was previously submitted',
+  'suggestions/accept/id': 'ID of the suggestion to accept',
+  'suggestions/accept/reason': 'The reason for accepting the suggestion'
 } as const;

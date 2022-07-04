@@ -142,5 +142,16 @@ export default {
   'suggestions/edit/modal/title': 'Edit suggestion',
   'suggestions/edit/embed/edited': 'edited',
   'suggestions/edit/edited': (url: string) => `Your suggestion has been successfully edited! Check it out [here](${url}).`,
-  'suggestions/edit/choose-category': 'Choose the category your suggestion was submitted to'
+  'suggestions/edit/choose-category': 'Choose the category your suggestion was submitted to',
+
+  // Management
+  'suggestions/management/embed/answer': 'Answer',
+  'suggestions/management/embed/answer/empty': 'No answer was provided.',
+  'suggestions/management/buttons/move/yes': 'Yes, move',
+  'suggestions/management/buttons/move/no': "Don't move",
+  'suggestions/management/answered': 'This suggestion has been answered previously by a team member',
+  'suggestions/management/accept/embed/title': 'New suggestion sent [accepted]',
+  'suggestions/management/accept/accepted': 'The suggestion was successfully accepted!',
+  'suggestions/management/accept/accepted/move': '✅ **|** The suggestion was successfully accepted\n➡️ **|** Do you want to move the suggestion to this channel?',
+  'suggestions/management/accept/accepted/moved': 'The suggestion was successfully accepted and moved to this channel!'
 } as const;

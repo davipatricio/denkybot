@@ -47,5 +47,8 @@ export default {
   suggestions: 'suggestions',
   suggestion: 'suggestion',
   'suggestion/send': 'send',
-  'suggestion/edit': 'edit'
+  'suggestion/edit': 'edit',
+  'suggestion/accept': 'accept',
+  'suggestion/accept/id': 'id_suggestion',
+  'suggestion/accept/reason': 'reason'
 } as const;

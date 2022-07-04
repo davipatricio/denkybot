@@ -51,36 +51,36 @@ export default class PingData extends CommandDataStructure {
           ]
         },
         {
-          name: 'accept',
+          name: client.languages.manager.get('en_US', 'commandNames:suggestion/accept'),
           nameLocalizations: {
-            'pt-BR': 'aceitar'
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/accept')
           },
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'Accepts a suggestion',
+          description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/accept'),
           descriptionLocalizations: {
-            'pt-BR': 'Aceita uma sugestão'
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/accept')
           },
           options: [
             {
-              name: 'id_suggestion',
+              name: client.languages.manager.get('en_US', 'commandNames:suggestion/accept/id'),
               nameLocalizations: {
-                'pt-BR': 'id_sugestao'
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/accept/id')
               },
-              description: 'The ID of the suggestion',
+              description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/accept/id'),
               descriptionLocalizations: {
-                'pt-BR': 'O ID da sugestão'
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/accept/id')
               },
               type: ApplicationCommandOptionType.String,
               required: true
             },
             {
-              name: 'reason',
+              name: client.languages.manager.get('en_US', 'commandNames:suggestion/accept/reason'),
               nameLocalizations: {
-                'pt-BR': 'motivo'
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/accept/reason')
               },
-              description: 'The reason for accepting the suggestion',
+              description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/accept/reason'),
               descriptionLocalizations: {
-                'pt-BR': 'A razão para aceitar a sugestão'
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/accept/reason')
               },
               type: ApplicationCommandOptionType.String,
               required: false
