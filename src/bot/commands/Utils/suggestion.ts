@@ -62,17 +62,17 @@ export default class PingCommand extends Command {
 
   async acceptSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
     const config = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-    if (!config) return interaction.reply({ content: t('command:suggestions/not-enabled'), ephemeral: true });
-    if (config.categories.length === 0) return interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+    if (!config) return interaction.reply({ content: `❌ **|** ${t('command:suggestions/not-enabled')}`, ephemeral: true });
+    if (config.categories.length === 0) return interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
 
     const reason = interaction.options.getString('reason');
     const suggestionId = interaction.options.getString('id_suggestion', true);
     if (!this.#isValidId(suggestionId)) {
-      return interaction.reply({ content: t('command:suggestions/invalid-id'), ephemeral: true });
+      return interaction.reply({ content: `❌ **|** ${t('command:suggestions/invalid-id')}`, ephemeral: true });
     }
 
     const categoriesName = this.#generateCategoriesArray(config, interaction);
-    if (categoriesName.length === 0) return interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+    if (categoriesName.length === 0) return interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
 
     await interaction.deferReply();
 
@@ -88,54 +88,54 @@ export default class PingCommand extends Command {
 
       const suggestionChannel = interaction.guild?.channels.cache.get(channelId) as GuildTextBasedChannel;
       if (!suggestionChannel) {
-        i.editReply({ content: t('command:suggestions/unknown-category'), components: [] });
+        i.editReply({ content: `❌ **|** ${t('command:suggestions/unknown-category')}`, components: [] });
         return;
       }
 
       const suggestionMessage = await suggestionChannel.messages.fetch(suggestionId).catch(() => {
-        i.editReply({ content: t('command:suggestions/invalid-id'), components: [] });
+        i.editReply({ content: `❌ **|** ${t('command:suggestions/invalid-id')}`, components: [] });
         shouldContinue = false;
       });
       if (!shouldContinue || !suggestionMessage || suggestionMessage.embeds.length !== 1 || !this.#getIdFromFooter(suggestionMessage.embeds[0].footer?.text)) {
-        i.editReply({ content: t('command:suggestions/invalid-id'), components: [] });
+        i.editReply({ content: `❌ **|** ${t('command:suggestions/invalid-id')}`, components: [] });
         return;
       }
 
       if (this.#alreadyAnswered(suggestionMessage.embeds[0])) {
-        i.editReply({ content: 'Essa sugestão já foi respondida anteriormente por um membro da equipe', components: [] });
+        i.editReply({ content: `❌ **|** ${t('command:suggestions/management/answered')}`, components: [] });
         return;
       }
 
       // const suggesterId = this.#getIdFromFooter(suggestionMessage.embeds[0].footer?.text);
 
       const embed = new EmbedBuilder(suggestionMessage.embeds[0].toJSON())
-        .setTitle('✅ • Nova sugestão enviada [aceita]')
+        .setTitle(`✅ • ${t('command:suggestions/management/accept/embed/title')}`)
         .setColor('Green')
         .addFields([
           {
-            name: 'Resposta',
-            value: `> ${interaction.user}: ${reason ?? 'Nenhuma resposta inserida.'}`
+            name: t('command:suggestions/management/embed/answer'),
+            value: `> ${interaction.user}: ${reason ?? t('command:suggestions/management/embed/answer/empty')}`
           }
         ]);
       await suggestionMessage.edit({ embeds: [embed] });
       suggestionMessage.reactions.removeAll().catch(() => {});
       if (i.channelId === suggestionMessage.channel.id) {
-        i.editReply({ content: '✅ **|** A sugestão foi aceita com sucesso!', components: [] });
+        i.editReply({ content: `✅ **|** ${t('command:suggestions/management/accept/accepted')}`, components: [] });
         return;
       }
 
-      this.#askStaffToMove(i, embed);
+      this.#askStaffToMove(t, i, embed);
     });
   }
 
   editSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
     const config = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-    if (!config) return interaction.reply({ content: t('command:suggestions/not-enabled'), ephemeral: true });
-    if (config.categories.length === 0) return interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+    if (!config) return interaction.reply({ content: `❌ **|** ${t('command:suggestions/not-enabled')}`, ephemeral: true });
+    if (config.categories.length === 0) return interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
 
     const suggestionId = interaction.options.getString('id', true);
     if (!this.#isValidId(suggestionId)) {
-      return interaction.reply({ content: t('command:suggestions/invalid-id'), ephemeral: true });
+      return interaction.reply({ content: `❌ **|** ${t('command:suggestions/invalid-id')}`, ephemeral: true });
     }
 
     this.#generateAndShowModal(interaction, t, false);
@@ -171,17 +171,17 @@ export default class PingCommand extends Command {
 
         const suggestionChannel = interaction.guild?.channels.cache.get(channelId) as GuildTextBasedChannel;
         if (!suggestionChannel) {
-          i.editReply({ content: t('command:suggestions/unknown-category'), components: [] });
+          i.editReply({ content: `❌ **|** ${t('command:suggestions/unknown-category')}`, components: [] });
           return;
         }
 
         const suggestionMessage = await suggestionChannel.messages.fetch(suggestionId).catch(() => {
-          i.editReply({ content: t('command:suggestions/invalid-id'), components: [] });
+          i.editReply({ content: `❌ **|** ${t('command:suggestions/invalid-id')}`, components: [] });
           shouldContinue = false;
         });
 
         if (!shouldContinue || !suggestionMessage || suggestionMessage.embeds.length !== 1 || !this.#getIdFromFooter(suggestionMessage.embeds[0].footer?.text)) {
-          i.editReply({ content: t('command:suggestions/invalid-id'), components: [] });
+          i.editReply({ content: `❌ **|** ${t('command:suggestions/invalid-id')}`, components: [] });
           return;
         }
         if (!this.#isFromSameMember(suggestionMessage.embeds[0], interaction.user)) {
@@ -277,31 +277,31 @@ export default class PingCommand extends Command {
     return this.client.on('interactionCreate', eventFn);
   }
 
-  #askStaffToMove(i: SelectMenuInteraction, finalEmbed: EmbedBuilder) {
+  #askStaffToMove(t: CommandLocale, i: SelectMenuInteraction, finalEmbed: EmbedBuilder) {
     return new Promise<boolean>(resolve => {
       const buttonRow = new ActionRowBuilder<ButtonBuilder>().setComponents([
-        new ButtonBuilder().setCustomId('sim').setEmoji('✅').setLabel('Sim, mover').setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId('nao').setEmoji('❌').setLabel('Não mover').setStyle(ButtonStyle.Danger)
+        new ButtonBuilder().setCustomId('sim').setEmoji('✅').setLabel(t('command:suggestions/management/buttons/move/yes')).setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId('nao').setEmoji('❌').setLabel(t('command:suggestions/management/buttons/move/no')).setStyle(ButtonStyle.Danger)
       ]);
 
-      i.editReply({ content: '✅ **|** A sugestão foi aceita com sucesso!\n➡️ **|** Você deseja mover a sugestão para este canal?', components: [buttonRow] });
+      i.editReply({ content: t('command:suggestions/management/accept/accepted/move'), components: [buttonRow] });
       i.message
         .awaitMessageComponent({ time: 30000, filter: m => m.user.id === i.user.id })
         .then(async m => {
           await m.deferUpdate();
           resolve(true);
           if (m.customId === 'sim') {
-            i.editReply({ content: '✅ **|** A sugestão foi aceita com sucesso e movida para este canal!', components: [] });
+            i.editReply({ content: `✅ **|** ${t('command:suggestions/management/accept/accepted/moved')}`, components: [] });
             i.channel?.send({ embeds: [finalEmbed] });
             return;
           }
 
-          i.editReply({ content: '✅ **|** A sugestão foi aceita com sucesso!', components: [] });
+          i.editReply({ content: `✅ **|** ${t('command:suggestions/management/accept/accepted')}`, components: [] });
         })
         .catch(() => {
           resolve(false);
 
-          i.editReply({ content: '✅ **|** A sugestão foi aceita com sucesso!', components: [] });
+          i.editReply({ content: `✅ **|** ${t('command:suggestions/management/accept/accepted')}`, components: [] });
         });
     });
   }

@@ -147,5 +147,16 @@ export default {
   'suggestions/edit/modal/title': 'Editar sugestão',
   'suggestions/edit/embed/edited': 'editada',
   'suggestions/edit/edited': (url: string) => `Sua sugestão foi editada com sucesso! Confira-a [aqui](${url}).`,
-  'suggestions/edit/choose-category': 'Escolha a categoria que sua sugestão foi enviada'
+  'suggestions/edit/choose-category': 'Escolha a categoria que sua sugestão foi enviada',
+
+  // Management
+  'suggestions/management/embed/answer': 'Resposta',
+  'suggestions/management/embed/answer/empty': 'Nenhuma resposta inserida.',
+  'suggestions/management/buttons/move/yes': 'Sim, mover',
+  'suggestions/management/buttons/move/no': 'Não over',
+  'suggestions/management/answered': 'Essa sugestão já foi respondida anteriormente por um membro da equipe',
+  'suggestions/management/accept/embed/title': 'Nova sugestão enviada [aceita]',
+  'suggestions/management/accept/accepted': 'A sugestão foi aceita com sucesso!',
+  'suggestions/management/accept/accepted/move': '✅ **|** A sugestão foi aceita com sucesso!\n➡️ **|** Você deseja mover a sugestão para este canal?',
+  'suggestions/management/accept/accepted/moved': 'A sugestão foi aceita com sucesso e movida para este canal!'
 } as const;

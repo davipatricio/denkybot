@@ -51,5 +51,8 @@ export default {
   suggestions: 'sugestoes',
   suggestion: 'sugestao',
   'suggestion/send': 'enviar',
-  'suggestion/edit': 'editar'
+  'suggestion/edit': 'editar',
+  'suggestion/accept': 'aceitar',
+  'suggestion/accept/id': 'id_sugestao',
+  'suggestion/accept/reason': 'motivo'
 } as const;
