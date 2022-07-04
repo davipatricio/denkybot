@@ -34,6 +34,10 @@ export default {
   // Server
   server: 'server avatar | info | banner',
 
+  // Bot
+  bot: 'bot info | invite | vote',
+  'bot/invite': 'convidar',
+
   // Text
   text: 'texto',
   'text/claps': 'palmas',

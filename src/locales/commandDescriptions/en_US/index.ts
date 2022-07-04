@@ -40,6 +40,10 @@ export default {
   'server/icon': 'See a server icon',
   'server/banner': 'See a server banner',
 
+  // Bot
+  bot: 'Shows bot information',
+  'bot/invite': 'Invite Denky to your server',
+
   // Text
   text: 'Translates or edits text in different ways',
   'text/text': 'Text to edit',
