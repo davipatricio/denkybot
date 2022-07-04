@@ -65,6 +65,9 @@ export default {
   'server/info/embed/boosts': (boosts: number, level: number) => `🌟 **Boosts:** ${boosts}\n🌠 **Level:** ${level}`,
   'server/info/embed/footer': (guild: Guild) => `🔢 ID: ${guild.id} | 📅 Created at`,
 
+  // Bot invite
+  'bot/invite/invite': (user: User, invite: string) => `😊 ${user} | Click [here](${invite}) to add me to your server!`,
+
   // Config suggestions
   'config/suggestions/title': 'Settings Panel | Suggestions',
 
