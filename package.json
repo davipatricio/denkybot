@@ -25,25 +25,25 @@
   "author": "Davi Patricio",
   "license": "GPL-3.0 license",
   "devDependencies": {
-    "@types/node": "^18.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.28.0",
-    "@typescript-eslint/parser": "^5.28.0",
-    "eslint": "^8.17.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.7.1",
-    "sucrase": "^3.21.0",
-    "typescript": "^4.8.0-dev.20220616"
+    "@types/node": "18.0.1",
+    "@typescript-eslint/eslint-plugin": "5.30.5",
+    "@typescript-eslint/parser": "5.30.5",
+    "eslint": "8.19.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "prettier": "2.7.1",
+    "sucrase": "3.23.0",
+    "typescript": "4.8.0-dev.20220705"
   },
   "dependencies": {
-    "discord.js": "^14.0.0-dev.1656590649-525bf03",
-    "dotenv": "^16.0.1",
-    "fastify": "^4.2.0",
-    "ms": "^2.1.3",
+    "discord.js": "14.0.0-dev.1657022642-fd1c240",
+    "dotenv": "16.0.1",
+    "fastify": "4.2.0",
+    "ms": "2.1.3",
     "tslib": "2.4.0",
-    "tweetnacl": "^1.0.3",
-    "undici": "^5.6.0"
+    "tweetnacl": "1.0.3",
+    "undici": "5.6.0"
   }
 }
