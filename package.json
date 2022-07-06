@@ -23,7 +23,9 @@
     "lint:fix": "yarn lint:prettier && npx eslint src --fix",
     "lint:prettier": "npx prettier -w src",
     "types:check": "npx tsc --noEmit --incremental false",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "migrate:dev": "prisma migrate dev --name prod --schema=./src/prisma/schema.prisma",
+    "migrate:deploy": "prisma migrate deploy --schema=./src/prisma/schema.prisma"
   },
   "keywords": [],
   "author": "Davi Patricio",
