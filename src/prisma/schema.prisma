@@ -8,7 +8,7 @@ generator client {
 }
 
 model Suggestion {
-  guildId Int @id @default(autoincrement())
+  guildId String @id @default("")
   addReactions Boolean @default(true)
   categories String[] @default([])
   cooldown Int @default(0)
@@ -16,8 +16,8 @@ model Suggestion {
 }
 
 model Afk {
-  userId Int @id @default(autoincrement())
-  guildId Int?
+  userId String @id @default("")
+  guildId String?
   reason String?
   originalNick String?
   startTime Int
