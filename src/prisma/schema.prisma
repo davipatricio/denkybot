@@ -1,0 +1,24 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "postgres"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Suggestion {
+  guildId Int @id @default(autoincrement())
+  addReactions Boolean @default(true)
+  categories String[] @default([])
+  cooldown Int @default(0)
+  useThreads Boolean @default(false)
+}
+
+model AFK {
+  userId Int @id @default(autoincrement())
+  guildId Int?
+  reason String?
+  originalNick String?
+  startTime Int
+}
