@@ -64,5 +64,11 @@ export default {
   'suggestions/edit/id': 'ID of your suggestion',
   'suggestions/accept': 'Accepts a suggestion that was previously submitted',
   'suggestions/accept/id': 'ID of the suggestion to accept',
-  'suggestions/accept/reason': 'The reason for accepting the suggestion'
+  'suggestions/accept/reason': 'The reason for accepting the suggestion',
+
+  // Ban
+  ban: 'Bans a user from the server',
+  'ban/user': 'The user to ban',
+  'ban/delete_messages': 'Whether or not to delete the messages of the banned user',
+  'ban/reason': 'The reason for the ban'
 } as const;
