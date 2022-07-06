@@ -1,3 +1,4 @@
+import type { Suggestion } from '@prisma/client';
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -31,8 +32,8 @@ export default class SuggestionsSubCommand extends Command {
   }
 
   override async run({ t, interaction }: CommandRunOptions) {
-    if (!interaction.guild) return;
-    const configStatus = this.client.databases.config.get(`suggestions.${interaction.guild.id}`);
+    if (!interaction.inCachedGuild()) return;
+    const configStatus = await this.client.databases.getSuggestion(interaction.guild.id);
 
     const selectRow = new ActionRowBuilder<SelectMenuBuilder>();
     const { embed, buttons: buttonRow } = this.updateMessage('sugestoes', null, selectRow, interaction, configStatus, t);
@@ -80,16 +81,15 @@ export default class SuggestionsSubCommand extends Command {
     const collector = message.createMessageComponentCollector({ filter: int => int.user.id === interaction.user.id, time: 120000 });
 
     collector.on('collect', async int => {
-      let updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+      let updatedConfig = (await this.client.databases.getSuggestion(interaction.guild.id)) as Suggestion;
       await int.deferUpdate();
       if (int.isSelectMenu()) {
         if (int.customId === 'set_cooldown') {
           const time = Number(int.values[0]);
-          this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+          updatedConfig = await this.client.databases.updateSuggestion({
             ...updatedConfig,
             cooldown: time
           });
-          updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
           this.updateMessage('cooldown', message, selectRow, interaction, updatedConfig, t);
           int.followUp({ content: `${t('command:config/suggestions/actions/cooldowns/set')} \`${ms(time)}\``, ephemeral: true });
           return;
@@ -100,20 +100,20 @@ export default class SuggestionsSubCommand extends Command {
         switch (int.customId) {
           // Enable suggestions
           case 'enable': {
-            this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+            updatedConfig = await this.client.databases.createSuggestion({
+              guildId: interaction.guild.id,
               addReactions: true,
               categories: [],
               cooldown: 0,
               useThreads: false
             });
-            updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('categorias', message, selectRow, interaction, updatedConfig, t);
             int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/enabled')}`, ephemeral: true });
             break;
           }
           // Disable suggestions
           case 'disable':
-            this.client.databases.config.delete(`suggestions.${interaction.guild?.id}`);
+            await this.client.databases.deleteSuggestion(interaction.guild.id);
             this.updateMessage('sugestoes', message, selectRow, interaction, undefined, t);
             break;
           // Add category
@@ -121,13 +121,14 @@ export default class SuggestionsSubCommand extends Command {
             await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToAdd', interaction.channel)}`, ephemeral: true });
             message.channel
               .awaitMessages({ filter: CATEGORY_MANAGE_FILTER, max: 1, time: 120000 })
-              .then(m => {
+              .then(async m => {
                 const sentMsg = m.first();
-                const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
+                const mentionedChannel = sentMsg?.mentions.channels.first()?.id as string;
                 updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel).slice(0, 5);
                 updatedConfig.categories.push(mentionedChannel);
-                this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, updatedConfig);
-                updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+                updatedConfig = await this.client.databases.updateSuggestion({
+                  ...updatedConfig
+                });
                 int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/category/added')}`, ephemeral: true });
                 this.updateMessage('categorias', message, selectRow, interaction, updatedConfig, t);
               })
@@ -138,12 +139,13 @@ export default class SuggestionsSubCommand extends Command {
             await int.followUp({ content: `📥 **|** ${t('command:config/suggestions/actions/category/askToRemove', interaction.channel)}`, ephemeral: true });
             message.channel
               .awaitMessages({ filter: CATEGORY_MANAGE_FILTER, max: 1, time: 120000 })
-              .then(m => {
+              .then(async m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id;
                 updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel);
-                this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, updatedConfig);
-                updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
+                updatedConfig = await this.client.databases.updateSuggestion({
+                  ...updatedConfig
+                });
                 int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/category/removed')}`, ephemeral: true });
                 this.updateMessage('sugestoes', message, selectRow, interaction, updatedConfig, t);
               })
@@ -151,11 +153,10 @@ export default class SuggestionsSubCommand extends Command {
             break;
           // Enable reactions
           case 'enable_reactions': {
-            this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+            updatedConfig = await this.client.databases.updateSuggestion({
               ...updatedConfig,
               addReactions: true
             });
-            updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('reacoes', message, selectRow, interaction, updatedConfig, t);
             int.followUp({
               content: `✅ **|** ${t('command:config/suggestions/actions/reactions/enabled')}\n💡 **|** ${t('command:config/suggestions/actions/reactions/enabledTip')}`,
@@ -165,22 +166,20 @@ export default class SuggestionsSubCommand extends Command {
           }
           // Disable reactions
           case 'disable_reactions': {
-            this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+            updatedConfig = await this.client.databases.updateSuggestion({
               ...updatedConfig,
               addReactions: false
             });
-            updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('reacoes', message, selectRow, interaction, updatedConfig, t);
             int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/reactions/disabled')}`, ephemeral: true });
             break;
           }
           // Enable threads
           case 'enable_threads': {
-            this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+            updatedConfig = await this.client.databases.updateSuggestion({
               ...updatedConfig,
               useThreads: true
             });
-            updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('threads', message, selectRow, interaction, updatedConfig, t);
             int.followUp({
               content: `✅ **|** ${t('command:config/suggestions/actions/threads/enabled')}`,
@@ -190,11 +189,10 @@ export default class SuggestionsSubCommand extends Command {
           }
           // Disable threads
           case 'disable_threads': {
-            this.client.databases.config.set(`suggestions.${interaction.guild?.id}`, {
+            updatedConfig = await this.client.databases.updateSuggestion({
               ...updatedConfig,
               useThreads: false
             });
-            updatedConfig = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
             this.updateMessage('threads', message, selectRow, interaction, updatedConfig, t);
             int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/threads/disabled')}`, ephemeral: true });
             break;
