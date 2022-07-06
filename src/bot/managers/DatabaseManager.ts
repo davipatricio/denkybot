@@ -33,19 +33,23 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getSuggestion(guildId: string) {
-    return this.suggestion.findFirst({
-      where: {
-        guildId
-      }
-    });
+    return this.suggestion
+      .findFirst({
+        where: {
+          guildId
+        }
+      })
+      .catch(() => undefined);
   }
 
   deleteSuggestion(guildId: string) {
-    return this.suggestion.delete({
-      where: {
-        guildId
-      }
-    });
+    return this.suggestion
+      .delete({
+        where: {
+          guildId
+        }
+      })
+      .catch(() => {});
   }
 
   updateSuggestion(config: FullSuggestionConfig) {
@@ -77,19 +81,23 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getAfk(userId: string) {
-    return this.afk.findFirst({
-      where: {
-        userId
-      }
-    });
+    return this.afk
+      .findFirst({
+        where: {
+          userId
+        }
+      })
+      .catch(() => undefined);
   }
 
   deleteAfk(userId: string) {
-    return this.afk.delete({
-      where: {
-        userId
-      }
-    });
+    return this.afk
+      .delete({
+        where: {
+          userId
+        }
+      })
+      .catch(() => {});
   }
 
   updateAfk(config: FullAFKConfig) {
