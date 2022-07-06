@@ -19,16 +19,17 @@ export default class PingCommand extends Command {
   override async run({ t, interaction }: CommandRunOptions) {
     switch (interaction.options.getSubcommand()) {
       case 'on': {
-        if (this.client.databases.afk.get(interaction.user.id)) {
+        if (await this.client.databases.getAfk(interaction.user.id)) {
           interaction.editReply(t('command:afk/alreadySet', interaction.user));
           break;
         }
 
         const originalNick = interaction.inGuild() ? (interaction.member as GuildMember).nickname ?? interaction.user.username : undefined;
 
-        await this.client.databases.afk.set(interaction.user.id, {
-          guild: interaction.guild?.id,
-          reason: interaction.options.getString('reason'),
+        await this.client.databases.createAfk({
+          userId: interaction.user.id,
+          guildId: interaction.guild?.id,
+          reason: interaction.options.getString('reason') ?? undefined,
           originalNick,
           startTime: Math.round(Date.now() / 1000)
         });
@@ -42,13 +43,13 @@ export default class PingCommand extends Command {
       }
 
       case 'off': {
-        const data = this.client.databases.afk.get(interaction.user.id);
+        const data = await this.client.databases.getAfk(interaction.user.id);
         if (!data) {
           interaction.editReply(t('command:afk/notAfk', interaction.user));
           break;
         }
 
-        await this.client.databases.afk.delete(interaction.user.id);
+        await this.client.databases.deleteAfk(interaction.user.id);
 
         if (interaction.inGuild()) {
           (interaction.member as GuildMember).setNickname(data.originalNick).catch(() => {});
