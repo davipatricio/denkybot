@@ -12,7 +12,7 @@ export class DatabaseManager {
   async prepareDatabase() {
     const { local } = this;
     if (!existsSync('./databases')) {
-      await mkdir('./databases');
+      await mkdir('./databases').catch(() => {});
     }
     if (!existsSync(`./databases/${local}.json`)) {
       await writeFile(`./databases/${local}.json`, '{}');
