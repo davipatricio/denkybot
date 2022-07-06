@@ -1,22 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import { Afk, PrismaClient, Suggestion } from '@prisma/client';
 
-export interface SuggestionConfig {
-  guildId: string;
-  addReactions?: boolean;
-  categories?: string[];
-  cooldown?: number;
-  useThreads?: boolean;
-}
-export type FullSuggestionConfig = Required<SuggestionConfig>;
+export type SuggestionConfig = Partial<Suggestion> & Pick<Suggestion, 'guildId'>;
+export type FullSuggestionConfig = Suggestion;
 
-export interface AFKConfig {
-  userId: string;
-  guildId?: string;
-  reason?: string;
-  originalNick?: string;
-  startTime: number;
-}
-export type FullAFKConfig = Required<AFKConfig>;
+export type AFKConfig = Partial<Afk> & Pick<Afk, 'userId' | 'startTime'>;
+export type FullAFKConfig = Afk;
 
 export class DatabaseManager extends PrismaClient {
   // #region Suggestion
@@ -52,7 +40,7 @@ export class DatabaseManager extends PrismaClient {
       .catch(() => {});
   }
 
-  updateSuggestion(config: FullSuggestionConfig) {
+  updateSuggestion(config: SuggestionConfig) {
     return this.suggestion.update({
       where: {
         guildId: config.guildId
@@ -100,7 +88,7 @@ export class DatabaseManager extends PrismaClient {
       .catch(() => {});
   }
 
-  updateAfk(config: FullAFKConfig) {
+  updateAfk(config: AFKConfig) {
     return this.afk.update({
       where: {
         userId: config.userId
@@ -114,4 +102,14 @@ export class DatabaseManager extends PrismaClient {
     });
   }
   // #endregion
+
+  async getPing(userId: string) {
+    const date = Date.now();
+    try {
+      await this.getAfk(userId);
+      return Date.now() - date;
+    } catch {
+      return Date.now() - date;
+    }
+  }
 }
