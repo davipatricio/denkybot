@@ -38,7 +38,7 @@
     "typescript": "4.8.0-dev.20220705"
   },
   "dependencies": {
-    "discord.js": "14.0.0-dev.1657066252-68c3d87",
+    "discord.js": "14.0.0-dev.1657109083-8198da5",
     "dotenv": "16.0.1",
     "fastify": "4.2.0",
     "ms": "2.1.3",
