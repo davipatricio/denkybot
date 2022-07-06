@@ -15,7 +15,7 @@ model Suggestion {
   useThreads Boolean @default(false)
 }
 
-model AFK {
+model Afk {
   userId Int @id @default(autoincrement())
   guildId Int?
   reason String?
