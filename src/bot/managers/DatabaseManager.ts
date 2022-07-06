@@ -7,8 +7,16 @@ export interface SuggestionConfig {
   cooldown?: number;
   useThreads?: boolean;
 }
-
 export type FullSuggestionConfig = Required<SuggestionConfig>;
+
+export interface AFKConfig {
+  userId: string;
+  guildId?: string;
+  reason?: string;
+  originalNick?: string;
+  startTime: number;
+}
+export type FullAFKConfig = Required<AFKConfig>;
 
 export class DatabaseManager extends PrismaClient {
   // #region Suggestion
@@ -53,6 +61,49 @@ export class DatabaseManager extends PrismaClient {
       }
     });
   }
+  // #endregion
 
+  // #region Afk
+  createAfk(config: AFKConfig) {
+    return this.afk.create({
+      data: {
+        userId: config.userId,
+        guildId: config.guildId,
+        reason: config.reason,
+        originalNick: config.originalNick,
+        startTime: config.startTime
+      }
+    });
+  }
+
+  getAfk(userId: string) {
+    return this.afk.findFirst({
+      where: {
+        userId
+      }
+    });
+  }
+
+  deleteAfk(userId: string) {
+    return this.afk.delete({
+      where: {
+        userId
+      }
+    });
+  }
+
+  updateAfk(config: FullAFKConfig) {
+    return this.afk.update({
+      where: {
+        userId: config.userId
+      },
+      data: {
+        guildId: config.guildId,
+        reason: config.reason,
+        originalNick: config.originalNick,
+        startTime: config.startTime
+      }
+    });
+  }
   // #endregion
 }
