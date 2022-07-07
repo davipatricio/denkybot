@@ -1,6 +1,5 @@
 node_modules
 build
 *-lock.json
-*.lock
 .env
 config.json
