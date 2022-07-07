@@ -12,12 +12,12 @@ import {
   ModalBuilder,
   ModalSubmitInteraction,
   PermissionFlagsBits,
+  SelectMenuBuilder,
   SelectMenuInteraction,
+  SelectMenuOptionBuilder,
   TextChannel,
   TextInputBuilder,
   TextInputStyle,
-  UnsafeSelectMenuBuilder,
-  UnsafeSelectMenuOptionBuilder,
   User
 } from 'discord.js';
 import ms from 'ms';
@@ -372,15 +372,12 @@ export default class PingCommand extends Command {
   }
 
   #generateCategoriesRow(categories: CategoriesStructure[]) {
-    const categoriesRow = new ActionRowBuilder<UnsafeSelectMenuBuilder>().setComponents([
-      new UnsafeSelectMenuBuilder().setCustomId('categorias').setOptions(
-        categories.map(cat =>
-          new UnsafeSelectMenuOptionBuilder()
-            .setLabel(cat.name)
-            .setValue(cat.id)
-            .setEmoji({ name: '💬' })
-            .setDescription(cat.topic ?? '')
-        )
+    const categoriesRow = new ActionRowBuilder<SelectMenuBuilder>().setComponents([
+      new SelectMenuBuilder().setCustomId('categorias').setOptions(
+        categories.map(cat => {
+          const d = new SelectMenuOptionBuilder().setLabel(cat.name).setValue(cat.id).setEmoji('💬');
+          return cat.topic ? d.setDescription(cat.topic) : d;
+        })
       )
     ]);
 
