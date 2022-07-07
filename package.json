@@ -18,14 +18,15 @@
   "scripts": {
     "build": "npx sucrase ./src -d ./build --esModuleInterop --transforms typescript,imports",
     "build:check": "yarn types:check && yarn build",
+    "types:check": "npx tsc --noEmit --incremental false",
     "start": "cd ./build && node sharding/shard.js",
     "lint": "npx eslint src",
     "lint:fix": "yarn lint:prettier && npx eslint src --fix",
     "lint:prettier": "npx prettier -w src",
-    "types:check": "npx tsc --noEmit --incremental false",
-    "generate": "prisma generate",
-    "migrate:dev": "prisma migrate dev --name prod --schema=./src/prisma/schema.prisma",
-    "migrate:deploy": "prisma migrate deploy --schema=./src/prisma/schema.prisma"
+    "generate:postgre": "prisma generate --schema=./src/prisma/postgres.prisma",
+    "generate:mongodb": "prisma generate --schema=./src/prisma/mongodb.prisma",
+    "migrate": "prisma migrate dev --schema=./src/prisma/postgres.prisma",
+    "migrate:create": "prisma migrate dev --name production --schema=./src/prisma/postgres.prisma --create-only"
   },
   "keywords": [],
   "author": "Davi Patricio",
