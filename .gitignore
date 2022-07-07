@@ -3,4 +3,3 @@ build
 *-lock.json
 .env
 config.json
-yarn.lock
