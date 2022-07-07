@@ -128,13 +128,11 @@ export class Initializer {
             format.timestamp(),
             format.colorize(),
             format.printf(
-              info =>
-                `${info.timestamp} ${info.level.includes('info') || info.level.includes('warn') ? `${info.level} ` : info.level} ${process.pid}${
-                  info.tags && info.tags.length > 0
-                    ? ` --- [${typeof shardId === 'number' ? `\x1B[36mShard ${shardId}\x1B[39m, ` : '\x1B[36mShard Manager\x1B[39m, '}${info.tags.map(t => `\x1B[36m${t}\x1B[39m`).join(', ')}]:`
-                    : ` --- [${typeof shardId === 'number' ? `\x1B[36mShard ${shardId}\x1B[39m` : '\x1B[36mShard Manager\x1B[39m'}]`
-                } ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`
-            )
+              (info) => {
+                const tags = info.tags?.map(t => `\x1B[36m${t}\x1B[39m`).join(', ') ?? '';
+                const shardPrefix = ` --- [\x1B[36mShard ${shardId}\x1B[39m, ${tags}]:`
+                return `${info.timestamp} ${shardPrefix} ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`
+              })
           )
         })
       )
