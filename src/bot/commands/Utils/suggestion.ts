@@ -12,6 +12,7 @@ import {
   ModalBuilder,
   ModalSubmitInteraction,
   PermissionFlagsBits,
+  PermissionsBitField,
   SelectMenuBuilder,
   SelectMenuInteraction,
   SelectMenuOptionBuilder,
@@ -56,7 +57,8 @@ export default class PingCommand extends Command {
         this.editSuggestion(t, interaction);
         break;
       case 'accept':
-        this.acceptSuggestion(t, interaction);
+        if (this.#verifyMemberPermissions(interaction, t)) this.acceptSuggestion(t, interaction);
+        break;
     }
   }
 
@@ -392,5 +394,17 @@ export default class PingCommand extends Command {
     }
 
     return categories;
+  }
+
+  #verifyMemberPermissions(interaction: ChatInputCommandInteraction, t: CommandLocale) {
+    if (!interaction.appPermissions?.has([PermissionFlagsBits.ManageMessages])) {
+      const permissions = new PermissionsBitField([PermissionFlagsBits.ManageMessages])
+        .toArray()
+        .map(p => t(`permissions:${p}`))
+        .join(', ');
+      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:permissions/bot/missing', permissions)}`, ephemeral: true });
+      return false;
+    }
+    return true;
   }
 }
