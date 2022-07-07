@@ -9,8 +9,7 @@ export default class BotCommand extends Command {
     this.config = {
       autoDefer: true,
       ephemeral: false,
-      showInHelp: true,
-      guildOnly: true
+      showInHelp: true
     };
     this.permissions = { bot: [] };
   }

@@ -11,8 +11,7 @@ export default class HelpCommand extends Command {
     this.config = {
       autoDefer: true,
       ephemeral: false,
-      showInHelp: true,
-      guildOnly: false
+      showInHelp: true
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
   }
