@@ -61,7 +61,7 @@ export default class SuggestionsSubCommand extends Command {
 
     selectRow.setComponents([paginationSelect]);
 
-    const message = (await interaction.editReply({ components: [selectRow, buttonRow], embeds: [embed] })) as Message;
+    const message = await interaction.editReply({ components: [selectRow, buttonRow], embeds: [embed] });
     const collector = message.createMessageComponentCollector({ filter: int => int.user.id === interaction.user.id, time: 120000 });
 
     collector.on('collect', async int => {
