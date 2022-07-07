@@ -99,6 +99,16 @@ export default {
   'config/suggestions/reactions': (status: boolean) => `Reactions are currently: ${status ? 'enabled' : 'disabled'}.`,
   'config/suggestions/threads': (status: boolean) => `Threads are currently: ${status ? 'enabled' : 'disabled'}.`,
   'config/suggestions/cooldowns': 'The cooldown is currently at:',
+  'config/suggestions/cooldowns/no-cooldown': 'No cooldown',
+  'config/suggestions/cooldowns/no-cooldown/about': 'Members will not need to wait for a cooldown before making a suggestion',
+  'config/suggestions/cooldowns/15s-cooldown': '15 seconds',
+  'config/suggestions/cooldowns/15s-cooldown/about': 'Members must wait 15 seconds before suggesting again',
+  'config/suggestions/cooldowns/30s-cooldown': '30 seconds',
+  'config/suggestions/cooldowns/30s-cooldown/about': 'Members must wait 30 seconds to suggest consecutively',
+  'config/suggestions/cooldowns/1m-cooldown': '1 minute',
+  'config/suggestions/cooldowns/1m-cooldown/about': 'Members must wait 1 minute to suggest consecutively',
+  'config/suggestions/cooldowns/15m-cooldown': '15 minutes',
+  'config/suggestions/cooldowns/15m-cooldown/about': 'Members must wait 15 minutes to suggest consecutively',
 
   'config/suggestions/noCategories': 'No categories have been created yet',
 

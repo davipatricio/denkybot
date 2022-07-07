@@ -254,11 +254,23 @@ export default class SuggestionsSubCommand extends Command {
         .setCustomId('set_cooldown')
         .setPlaceholder('Escolha o tempo do cooldown')
         .setOptions([
-          new UnsafeSelectMenuOptionBuilder().setLabel('Sem cooldown').setDescription('Membros não deverão esperar para sugerir consecutivamente').setValue('0'),
-          new UnsafeSelectMenuOptionBuilder().setLabel('15 segundos').setDescription('Membros deverão esperar 15 segundos para sugerir consecutivamente').setValue('15000'),
-          new UnsafeSelectMenuOptionBuilder().setLabel('30 segundos').setDescription('Membros deverão esperar 30 segundos para sugerir consecutivamente').setValue('30000'),
-          new UnsafeSelectMenuOptionBuilder().setLabel('1 minuto').setDescription('Membros deverão esperar 1 minuto para sugerir consecutivamente').setValue('60000'),
-          new UnsafeSelectMenuOptionBuilder().setLabel('15 minutos').setDescription('Membros deverão esperar 15 minutos para sugerir consecutivamente').setValue('900000')
+          new UnsafeSelectMenuOptionBuilder().setLabel(t('command:config/suggestions/cooldowns/no-cooldown')).setDescription(t('command:config/suggestions/cooldowns/no-cooldown/about')).setValue('0'),
+          new UnsafeSelectMenuOptionBuilder()
+            .setLabel(t('command:config/suggestions/cooldowns/15s-cooldown'))
+            .setDescription(t('command:config/suggestions/cooldowns/15s-cooldown/about'))
+            .setValue('15000'),
+          new UnsafeSelectMenuOptionBuilder()
+            .setLabel(t('command:config/suggestions/cooldowns/30s-cooldown'))
+            .setDescription(t('command:config/suggestions/cooldowns/30s-cooldown/about'))
+            .setValue('30000'),
+          new UnsafeSelectMenuOptionBuilder()
+            .setLabel(t('command:config/suggestions/cooldowns/1m-cooldown'))
+            .setDescription(t('command:config/suggestions/cooldowns/1m-cooldown/about'))
+            .setValue('60000'),
+          new UnsafeSelectMenuOptionBuilder()
+            .setLabel(t('command:config/suggestions/cooldowns/15m-cooldown'))
+            .setDescription(t('command:config/suggestions/cooldowns/15m-cooldown/about'))
+            .setValue('900000')
         ]);
       return selectRow.setComponents([selectMenu]);
     }

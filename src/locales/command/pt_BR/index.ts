@@ -101,6 +101,16 @@ export default {
   'config/suggestions/reactions': (status: boolean) => `As reações estão atualmente: ${status ? 'ativadas' : 'desativadas'}.`,
   'config/suggestions/threads': (status: boolean) => `Os tópicos estão atualmente: ${status ? 'ativados' : 'desativados'}.`,
   'config/suggestions/cooldowns': 'O cooldown atualmente está em:',
+  'config/suggestions/cooldowns/no-cooldown': 'Sem cooldown',
+  'config/suggestions/cooldowns/no-cooldown/about': 'Membros não deverão esperar para sugerir consecutivamente',
+  'config/suggestions/cooldowns/15s-cooldown': '15 segundos',
+  'config/suggestions/cooldowns/15s-cooldown/about': 'Membros deverão esperar 15 segundos para sugerir consecutivamente',
+  'config/suggestions/cooldowns/30s-cooldown': '30 segundos',
+  'config/suggestions/cooldowns/30s-cooldown/about': 'Membros deverão esperar 30 segundos para sugerir consecutivamente',
+  'config/suggestions/cooldowns/1m-cooldown': '1 minuto',
+  'config/suggestions/cooldowns/1m-cooldown/about': 'Membros deverão esperar 1 minuto para sugerir consecutivamente',
+  'config/suggestions/cooldowns/15m-cooldown': '15 minutos',
+  'config/suggestions/cooldowns/15m-cooldown/about': 'Membros deverão esperar 15 minutos para sugerir consecutivamente',
 
   'config/suggestions/noCategories': 'Não há categorias configuradas',
 
