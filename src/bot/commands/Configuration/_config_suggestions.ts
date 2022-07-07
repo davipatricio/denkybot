@@ -1,16 +1,5 @@
 import type { Suggestion } from '@prisma/client';
-import {
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  ChannelType,
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-  Message,
-  SelectMenuBuilder,
-  UnsafeSelectMenuBuilder,
-  UnsafeSelectMenuOptionBuilder
-} from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ChatInputCommandInteraction, EmbedBuilder, Message, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 import ms from 'ms';
 import { Command, CommandLocale, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
@@ -44,35 +33,31 @@ export default class SuggestionsSubCommand extends Command {
         [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildForum, ChannelType.GuildNewsThread, ChannelType.GuildPublicThread, ChannelType.GuildPrivateThread].includes(c.type)
       ).size === 1;
 
-    const paginationSelect = new UnsafeSelectMenuBuilder()
+    const paginationSelect = new SelectMenuBuilder()
       .setCustomId('pagination')
       .setPlaceholder(t('command:config/suggestions/pages'))
       .setOptions([
-        new UnsafeSelectMenuOptionBuilder()
+        new SelectMenuOptionBuilder()
           .setDescription(t('command:config/suggestions/pages/suggestions'))
           .setLabel(t('command:config/suggestions/pages/suggestions/title'))
           .setValue('sugestoes')
-          .setEmoji({ name: '💡' }),
-        new UnsafeSelectMenuOptionBuilder()
+          .setEmoji('💡'),
+        new SelectMenuOptionBuilder()
           .setDescription(t('command:config/suggestions/pages/categories'))
           .setLabel(t('command:config/suggestions/pages/categories/title'))
           .setValue('categorias')
-          .setEmoji({ name: '📰' }),
-        new UnsafeSelectMenuOptionBuilder()
+          .setEmoji('📰'),
+        new SelectMenuOptionBuilder()
           .setDescription(t('command:config/suggestions/pages/reactions'))
           .setLabel(t('command:config/suggestions/pages/reactions/title'))
           .setValue('reacoes')
-          .setEmoji({ name: '👍' }),
-        new UnsafeSelectMenuOptionBuilder()
+          .setEmoji('👍'),
+        new SelectMenuOptionBuilder()
           .setDescription(t('command:config/suggestions/pages/cooldowns'))
           .setLabel(t('command:config/suggestions/pages/cooldowns/title'))
           .setValue('cooldown')
-          .setEmoji({ name: '⏲️' }),
-        new UnsafeSelectMenuOptionBuilder()
-          .setDescription(t('command:config/suggestions/pages/threads'))
-          .setLabel(t('command:config/suggestions/pages/threads/title'))
-          .setValue('threads')
-          .setEmoji({ name: '💭' })
+          .setEmoji('⏲️'),
+        new SelectMenuOptionBuilder().setDescription(t('command:config/suggestions/pages/threads')).setLabel(t('command:config/suggestions/pages/threads/title')).setValue('threads').setEmoji('💭')
       ]);
 
     selectRow.setComponents([paginationSelect]);
@@ -202,7 +187,7 @@ export default class SuggestionsSubCommand extends Command {
     });
   }
 
-  updateMessage(page: PageTypes, message: Message | null, selectRow: ActionRowBuilder<UnsafeSelectMenuBuilder>, interaction: ChatInputCommandInteraction, config: any, t: CommandLocale) {
+  updateMessage(page: PageTypes, message: Message | null, selectRow: ActionRowBuilder<SelectMenuBuilder>, interaction: ChatInputCommandInteraction, config: any, t: CommandLocale) {
     const embed = this.generateEmbedPage(page, interaction, config, t);
     const buttons = this.generateButtonsFromPage(page, config, t);
     message?.edit({ components: [selectRow, buttons], embeds: [embed] });
@@ -249,16 +234,16 @@ export default class SuggestionsSubCommand extends Command {
 
   generateButtonsFromPage(page: PageTypes, configStatus: any, t: CommandLocale) {
     if (page === 'cooldown') {
-      const selectRow = new ActionRowBuilder<UnsafeSelectMenuBuilder>();
-      const selectMenu = new UnsafeSelectMenuBuilder()
+      const selectRow = new ActionRowBuilder<SelectMenuBuilder>();
+      const selectMenu = new SelectMenuBuilder()
         .setCustomId('set_cooldown')
         .setPlaceholder('Escolha o tempo do cooldown')
         .setOptions([
-          new UnsafeSelectMenuOptionBuilder().setLabel('Sem cooldown').setDescription('Membros não deverão esperar para sugerir consecutivamente').setValue('0'),
-          new UnsafeSelectMenuOptionBuilder().setLabel('15 segundos').setDescription('Membros deverão esperar 15 segundos para sugerir consecutivamente').setValue('15000'),
-          new UnsafeSelectMenuOptionBuilder().setLabel('30 segundos').setDescription('Membros deverão esperar 30 segundos para sugerir consecutivamente').setValue('30000'),
-          new UnsafeSelectMenuOptionBuilder().setLabel('1 minuto').setDescription('Membros deverão esperar 1 minuto para sugerir consecutivamente').setValue('60000'),
-          new UnsafeSelectMenuOptionBuilder().setLabel('15 minutos').setDescription('Membros deverão esperar 15 minutos para sugerir consecutivamente').setValue('900000')
+          new SelectMenuOptionBuilder().setLabel('Sem cooldown').setDescription('Membros não deverão esperar para sugerir consecutivamente').setValue('0'),
+          new SelectMenuOptionBuilder().setLabel('15 segundos').setDescription('Membros deverão esperar 15 segundos para sugerir consecutivamente').setValue('15000'),
+          new SelectMenuOptionBuilder().setLabel('30 segundos').setDescription('Membros deverão esperar 30 segundos para sugerir consecutivamente').setValue('30000'),
+          new SelectMenuOptionBuilder().setLabel('1 minuto').setDescription('Membros deverão esperar 1 minuto para sugerir consecutivamente').setValue('60000'),
+          new SelectMenuOptionBuilder().setLabel('15 minutos').setDescription('Membros deverão esperar 15 minutos para sugerir consecutivamente').setValue('900000')
         ]);
       return selectRow.setComponents([selectMenu]);
     }
