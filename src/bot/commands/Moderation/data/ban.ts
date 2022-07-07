@@ -72,6 +72,7 @@ export default class BanData extends CommandDataStructure {
           descriptionLocalizations: {
             'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/reason')
           },
+          minLength: 1,
           maxLength: 100
         }
       ]
