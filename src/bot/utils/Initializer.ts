@@ -127,12 +127,11 @@ export class Initializer {
           format: format.combine(
             format.timestamp(),
             format.colorize(),
-            format.printf(
-              (info) => {
-                const tags = info.tags?.map(t => `\x1B[36m${t}\x1B[39m`).join(', ') ?? '';
-                const shardPrefix = ` --- [\x1B[36mShard ${shardId}\x1B[39m, ${tags}]:`
-                return `${info.timestamp} ${shardPrefix} ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`
-              })
+            format.printf(info => {
+              const tags = info.tags?.map(t => `\x1B[36m${t}\x1B[39m`).join(', ') ?? '';
+              const shardPrefix = ` --- [\x1B[36mShard ${shardId}\x1B[39m, ${tags}]:`;
+              return `${info.timestamp} ${shardPrefix} ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`;
+            })
           )
         })
       )
