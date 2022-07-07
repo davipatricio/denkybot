@@ -154,7 +154,7 @@ export class Initializer {
 
   async peformPreInitialization(client: DenkyClient) {
     client.logger = createLogger({ handleExceptions: true, handleRejections: true, exitOnError: false });
-    Initializer.loadWinstonLogger(client.logger, client.shard?.ids[0]);
+    Initializer.loadWinstonLogger(client.logger, client.shard?.ids[0] ?? 0);
     await this.loadBotConfiguration(client);
     this.loadWebserver(client);
   }
