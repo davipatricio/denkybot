@@ -22,8 +22,8 @@ export default class PingCommand extends Command {
     const deleteMessageDays = Number(interaction.options.getString('delete_messages') ?? 0);
     const reason = interaction.options.getString('reason') ?? t('command:ban/no-reason');
 
-    const membro = interaction.options.getMember('user');
-    const user = membro?.user ?? interaction.options.getUser('user', true);
+    const member = interaction.options.getMember('user');
+    const user = member?.user ?? interaction.options.getUser('user', true);
 
     if (user.id === this.client.user?.id) {
       interaction.reply(`❌ ${interaction.user} **|** ${t('command:ban/error/ban-bot')}`);
@@ -34,12 +34,12 @@ export default class PingCommand extends Command {
       return;
     }
 
-    if (membro?.roles) {
-      if (!membro.bannable || membro.roles.highest?.position >= interaction.guild.members.me.roles.highest.position) {
+    if (member?.roles) {
+      if (!member.bannable || member.roles.highest?.position >= interaction.guild.members.me.roles.highest.position) {
         interaction.reply(`❌ ${interaction.user} **|** ${t('command:ban/error/not-bannable')}`);
         return;
       }
-      if (interaction.member.roles.highest?.position <= membro.roles.highest?.position) {
+      if (interaction.member.roles.highest?.position <= member.roles.highest?.position) {
         interaction.reply(`❌ ${interaction.user} **|** ${t('command:ban/error/no-permissions')}`);
         return;
       }
