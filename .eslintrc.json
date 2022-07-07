@@ -30,8 +30,26 @@
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/require-await": "error",
         "@typescript-eslint/no-use-before-define": "error",
+        "@typescript-eslint/no-misused-promises": [
+            "error",
+            {
+                "checksVoidReturn": {
+                    "arguments": false,
+                    "variables": false
+                },
+                "checksSpreads": true,
+                "checksConditionals": true
+            }
+        ],
+        "@typescript-eslint/no-empty-function": [
+            "error",
+            {
+                "allow": [
+                    "arrowFunctions"
+                ]
+            }
+        ],
         "no-empty-function": "off",
-        "@typescript-eslint/no-empty-function": ["error", { "allow": ["arrowFunctions"] }],
         "class-methods-use-this": "off",
         "default-case": "off",
         "default-param-last": "off",
@@ -57,16 +75,21 @@
         "no-continue": "off",
         "no-console": "off",
         "no-use-before-define": "off",
-        "no-plusplus": [
+        "no-plusplus": "off",
+        "require-await": "error",
+        "quotes": [
             "error",
+            "single",
             {
-                "allowForLoopAfterthoughts": true
+                "avoidEscape": true
             }
         ],
-        "require-await": "error",
-        "quotes": ["error", "single", {"avoidEscape": true}],
-        "prettier/prettier": ["error", {}, {
-          "usePrettierrc": true
-        }]
+        "prettier/prettier": [
+            "error",
+            {},
+            {
+                "usePrettierrc": true
+            }
+        ]
     }
 }

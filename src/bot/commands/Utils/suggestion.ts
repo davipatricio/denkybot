@@ -12,12 +12,13 @@ import {
   ModalBuilder,
   ModalSubmitInteraction,
   PermissionFlagsBits,
+  PermissionsBitField,
+  SelectMenuBuilder,
   SelectMenuInteraction,
+  SelectMenuOptionBuilder,
   TextChannel,
   TextInputBuilder,
   TextInputStyle,
-  UnsafeSelectMenuBuilder,
-  UnsafeSelectMenuOptionBuilder,
   User
 } from 'discord.js';
 import ms from 'ms';
@@ -56,31 +57,42 @@ export default class PingCommand extends Command {
         this.editSuggestion(t, interaction);
         break;
       case 'accept':
-        this.acceptSuggestion(t, interaction);
+        if (this.#verifyMemberPermissions(interaction, t)) this.acceptSuggestion(t, interaction);
+        break;
     }
   }
 
   async acceptSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
-    const config = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-    if (!config) return interaction.reply({ content: `❌ **|** ${t('command:suggestions/not-enabled')}`, ephemeral: true });
-    if (config.categories.length === 0) return interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
+    if (!interaction.inCachedGuild()) return;
+    const config = await this.client.databases.getSuggestion(interaction.guild.id);
+    if (!config) {
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/not-enabled')}`, ephemeral: true });
+      return;
+    }
+    if (config.categories.length === 0) {
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
+      return;
+    }
 
     const reason = interaction.options.getString('reason');
     const suggestionId = interaction.options.getString('id_suggestion', true);
     if (!this.#isValidId(suggestionId)) {
-      return interaction.reply({ content: `❌ **|** ${t('command:suggestions/invalid-id')}`, ephemeral: true });
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/invalid-id')}`, ephemeral: true });
+      return;
     }
 
     const categoriesName = this.#generateCategoriesArray(config, interaction);
-    if (categoriesName.length === 0) return interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
+    if (categoriesName.length === 0) {
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
+      return;
+    }
 
     await interaction.deferReply();
 
     const categoriesRow = this.#generateCategoriesRow(categoriesName);
     const msg = (await interaction.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] })) as Message;
-    const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === interaction.user.id, max: 1, time: 60000 });
-    return collector.on('collect', async i => {
-      if (!i.isSelectMenu()) return;
+    const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === interaction.user.id && m.isSelectMenu(), max: 1, time: 60000 });
+    collector.on('collect', async (i: SelectMenuInteraction) => {
       await i.deferUpdate();
       const channelId = i.values[0] as string;
 
@@ -128,14 +140,23 @@ export default class PingCommand extends Command {
     });
   }
 
-  editSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
-    const config = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-    if (!config) return interaction.reply({ content: `❌ **|** ${t('command:suggestions/not-enabled')}`, ephemeral: true });
-    if (config.categories.length === 0) return interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
+  async editSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
+    if (!interaction.inCachedGuild()) return;
+    const config = await this.client.databases.getSuggestion(interaction.guild.id);
+    if (!config) {
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/not-enabled')}`, ephemeral: true });
+      return;
+    }
+
+    if (config.categories.length === 0) {
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
+      return;
+    }
 
     const suggestionId = interaction.options.getString('id', true);
     if (!this.#isValidId(suggestionId)) {
-      return interaction.reply({ content: `❌ **|** ${t('command:suggestions/invalid-id')}`, ephemeral: true });
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/invalid-id')}`, ephemeral: true });
+      return;
     }
 
     this.#generateAndShowModal(interaction, t, false);
@@ -161,9 +182,8 @@ export default class PingCommand extends Command {
       const categoriesRow = this.#generateCategoriesRow(categoriesName);
 
       const msg = (await int.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] })) as Message;
-      const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id, max: 1, time: 60000 });
-      collector.on('collect', async i => {
-        if (!i.isSelectMenu()) return;
+      const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id && m.isSelectMenu(), max: 1, time: 60000 });
+      collector.on('collect', async (i: SelectMenuInteraction) => {
         await i.deferUpdate();
         const channelId = i.values[0] as string;
 
@@ -200,13 +220,21 @@ export default class PingCommand extends Command {
       });
     };
 
-    return this.client.on('interactionCreate', eventFn);
+    this.client.on('interactionCreate', eventFn);
   }
 
-  sendSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
-    const config = this.client.databases.config.get(`suggestions.${interaction.guild?.id}`);
-    if (!config) return interaction.reply({ content: t('command:suggestions/not-enabled'), ephemeral: true });
-    if (config.categories.length === 0) return interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+  async sendSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
+    if (!interaction.inCachedGuild()) return;
+    const config = await this.client.databases.getSuggestion(interaction.guild.id);
+    if (!config) {
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/not-enabled')}`, ephemeral: true });
+      return;
+    }
+
+    if (config.categories.length === 0) {
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
+      return;
+    }
 
     this.#generateAndShowModal(interaction, t, false);
     const eventFn = async (int: ModalSubmitInteraction) => {
@@ -231,9 +259,8 @@ export default class PingCommand extends Command {
       const categoriesRow = this.#generateCategoriesRow(categoriesName);
 
       const msg = (await int.editReply({ content: `📥 **|** ${t('command:suggestions/send/choose-a-category')}`, components: [categoriesRow] })) as Message;
-      const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id, max: 1, time: 60000 });
-      collector.on('collect', async i => {
-        if (!i.isSelectMenu()) return;
+      const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id && m.isSelectMenu(), max: 1, time: 60000 });
+      collector.on('collect', async (i: SelectMenuInteraction) => {
         await i.deferUpdate();
         const channelId = i.values[0] as string;
 
@@ -274,7 +301,7 @@ export default class PingCommand extends Command {
       });
     };
 
-    return this.client.on('interactionCreate', eventFn);
+    this.client.on('interactionCreate', eventFn);
   }
 
   #askStaffToMove(t: CommandLocale, i: SelectMenuInteraction, finalEmbed: EmbedBuilder) {
@@ -299,9 +326,9 @@ export default class PingCommand extends Command {
           i.editReply({ content: `✅ **|** ${t('command:suggestions/management/accept/accepted')}`, components: [] });
         })
         .catch(() => {
-          resolve(false);
-
           i.editReply({ content: `✅ **|** ${t('command:suggestions/management/accept/accepted')}`, components: [] });
+
+          resolve(false);
         });
     });
   }
@@ -345,15 +372,12 @@ export default class PingCommand extends Command {
   }
 
   #generateCategoriesRow(categories: CategoriesStructure[]) {
-    const categoriesRow = new ActionRowBuilder<UnsafeSelectMenuBuilder>().setComponents([
-      new UnsafeSelectMenuBuilder().setCustomId('categorias').setOptions(
-        categories.map(cat =>
-          new UnsafeSelectMenuOptionBuilder()
-            .setLabel(cat.name)
-            .setValue(cat.id)
-            .setEmoji({ name: '💬' })
-            .setDescription(cat.topic ?? '')
-        )
+    const categoriesRow = new ActionRowBuilder<SelectMenuBuilder>().setComponents([
+      new SelectMenuBuilder().setCustomId('categorias').setOptions(
+        categories.map(cat => {
+          const d = new SelectMenuOptionBuilder().setLabel(cat.name).setValue(cat.id).setEmoji('💬');
+          return cat.topic ? d.setDescription(cat.topic) : d;
+        })
       )
     ]);
 
@@ -368,5 +392,17 @@ export default class PingCommand extends Command {
     }
 
     return categories;
+  }
+
+  #verifyMemberPermissions(interaction: ChatInputCommandInteraction, t: CommandLocale) {
+    if (!interaction.appPermissions?.has([PermissionFlagsBits.ManageMessages])) {
+      const permissions = new PermissionsBitField([PermissionFlagsBits.ManageMessages])
+        .toArray()
+        .map(p => t(`permissions:${p}`))
+        .join(', ');
+      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:permissions/bot/missing', permissions)}`, ephemeral: true });
+      return false;
+    }
+    return true;
   }
 }

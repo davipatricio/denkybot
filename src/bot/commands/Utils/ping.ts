@@ -20,7 +20,7 @@ export default class PingCommand extends Command {
     await interaction.editReply(`🤔 ${t('command:ping/calculating')}`);
     const apiPing = Date.now() - start;
 
-    const dbPing = await this.client.databases.config.ping();
+    const dbPing = await this.client.databases.getPing(interaction.user.id);
     interaction.editReply(`${t('command:ping/result', interaction.user, Math.round(this.client.ws.ping), apiPing, dbPing)}`);
   }
 }

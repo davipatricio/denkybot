@@ -1,104 +1,120 @@
-import { existsSync } from 'node:fs';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { Afk, PrismaClient, Suggestion } from '@prisma/client';
 
-export class DatabaseManager {
-  content!: { [key: string]: any };
-  local: string;
-  constructor(local: string) {
-    this.local = local;
-    this.prepareDatabase();
+export type SuggestionConfig = Partial<Suggestion> & Pick<Suggestion, 'guildId'>;
+export type FullSuggestionConfig = Suggestion;
+
+export type AFKConfig = Partial<Afk> & Pick<Afk, 'userId' | 'startTime'>;
+export type FullAFKConfig = Afk;
+
+export class DatabaseManager extends PrismaClient {
+  constructor() {
+    super();
+    this.$connect();
   }
 
-  async prepareDatabase() {
-    const { local } = this;
-    if (!existsSync('./databases')) {
-      await mkdir('./databases');
-    }
-    if (!existsSync(`./databases/${local}.json`)) {
-      await writeFile(`./databases/${local}.json`, '{}');
-    }
+  // #region Suggestion
+  createSuggestion(config: SuggestionConfig) {
+    return this.suggestion.create({
+      data: {
+        guildId: config.guildId,
+        addReactions: config.addReactions,
+        categories: config.categories,
+        cooldown: config.cooldown,
+        useThreads: config.useThreads
+      }
+    });
+  }
+
+  getSuggestion(guildId: string) {
+    return this.suggestion
+      .findFirst({
+        where: {
+          guildId
+        }
+      })
+      .catch(() => undefined);
+  }
+
+  deleteSuggestion(guildId: string) {
+    return this.suggestion
+      .delete({
+        where: {
+          guildId
+        }
+      })
+      .catch(() => {});
+  }
+
+  updateSuggestion(config: SuggestionConfig) {
+    return this.suggestion.update({
+      where: {
+        guildId: config.guildId
+      },
+      data: {
+        addReactions: config.addReactions,
+        categories: config.categories,
+        cooldown: config.cooldown,
+        useThreads: config.useThreads
+      }
+    });
+  }
+  // #endregion
+
+  // #region Afk
+  createAfk(config: AFKConfig) {
+    return this.afk.create({
+      data: {
+        userId: config.userId,
+        guildId: config.guildId,
+        reason: config.reason,
+        originalNick: config.originalNick,
+        startTime: config.startTime
+      }
+    });
+  }
+
+  getAfk(userId: string) {
+    return this.afk
+      .findFirst({
+        where: {
+          userId
+        }
+      })
+      .catch(() => undefined);
+  }
+
+  deleteAfk(userId: string) {
+    return this.afk
+      .delete({
+        where: {
+          userId
+        }
+      })
+      .catch(() => {});
+  }
+
+  updateAfk(config: AFKConfig) {
+    return this.afk.update({
+      where: {
+        userId: config.userId
+      },
+      data: {
+        guildId: config.guildId,
+        reason: config.reason,
+        originalNick: config.originalNick,
+        startTime: config.startTime
+      }
+    });
+  }
+  // #endregion
+
+  async getPing(userId: string) {
+    const date = Date.now();
     try {
-      const data = await readFile(`databases/${local}.json`);
-      this.content = JSON.parse(data.toString());
-    } catch (e) {
-      throw new Error(`Error loading database ${this.local}\n${e}`);
+      await this.getAfk(userId);
+      return Date.now() - date;
+    } catch {
+      return Date.now() - date;
     }
-  }
-
-  // Listing
-  get storage() {
-    return this.content;
-  }
-
-  get length() {
-    return Object.keys(this.storage).length;
-  }
-
-  all() {
-    return Object.keys(this.storage).map(i => ({ ID: i, data: this.storage[i] }));
-  }
-
-  keyArray() {
-    return Object.keys(this.storage);
-  }
-
-  // General
-  set(name: string, value: any) {
-    this.content[name] = value;
-    return this.#write();
-  }
-
-  delete(name: string) {
-    delete this.content[name];
-    return this.#write();
-  }
-
-  get(name: string) {
-    return this.#get(name);
-  }
-
-  // Array
-  push(name: string, value: any) {
-    if (!Array.isArray(this.content[name])) {
-      throw new Error('The value already set is not an Array or has not been set.');
-    }
-    (this.content[name] as any[]).push(value);
-    this.#write();
-  }
-
-  pull(name: string, value: any) {
-    if (!Array.isArray(this.content[name])) {
-      throw new Error('The value already set is not an Array or has not been set.');
-    }
-    this.content[name] = (this.content[name] as any[]).filter((val: any) => val !== value);
-    this.#write();
-  }
-
-  includes(name: string, value: any) {
-    if (!Array.isArray(this.content[name])) {
-      throw new Error('The value already set is not an Array or has not been set.');
-    }
-    return this.#get(name).includes(value);
-  }
-
-  // Others
-  async ping() {
-    const start = Date.now();
-    await this.set(`((((((PING))))))_internal_denkydb${start}`, 0);
-    this.delete(`((((((PING))))))_internal_denkydb${start}`);
-    return Date.now() - start;
-  }
-
-  deleteAll() {
-    this.content = {};
-    this.#write();
-  }
-
-  #write() {
-    return writeFile(`./databases/${this.local}.json`, JSON.stringify(this.content));
-  }
-
-  #get(name: string) {
-    return this.content[name];
   }
 }

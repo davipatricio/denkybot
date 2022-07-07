@@ -1,5 +1,5 @@
 import type { Client, Collection } from 'discord.js';
-import type Database from '../bot/modules/Database';
+import type { DatabaseManager } from '../bot/managers/DatabaseManager';
 import type Helpers from '../bot/modules/Helpers';
 import type Languages from '../bot/modules/Languages';
 import type { Logger } from '../bot/utils/Logger';
@@ -12,7 +12,7 @@ export interface DenkyClient extends Client<boolean> {
   /** Bot configuration */
   config: typeof import('../../config.example.json');
   /** Bot databases */
-  databases: Database;
+  databases: DatabaseManager;
   /** Cached bot tasks */
   tasks: Collection<string, Task>;
   /** Bot languages */
