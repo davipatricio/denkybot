@@ -119,7 +119,7 @@ export class Initializer {
     }
   }
 
-  static loadWinstonLogger(logger: Logger, shardId: number) {
+  static loadWinstonLogger(logger: Logger, shardId?: number) {
     logger
       .add(
         new Console({
