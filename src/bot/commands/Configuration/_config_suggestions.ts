@@ -240,22 +240,10 @@ export default class SuggestionsSubCommand extends Command {
         .setPlaceholder('Escolha o tempo do cooldown')
         .setOptions([
           new SelectMenuOptionBuilder().setLabel(t('command:config/suggestions/cooldowns/no-cooldown')).setDescription(t('command:config/suggestions/cooldowns/no-cooldown/about')).setValue('0'),
-          new SelectMenuOptionBuilder()
-            .setLabel(t('command:config/suggestions/cooldowns/15s-cooldown'))
-            .setDescription(t('command:config/suggestions/cooldowns/15s-cooldown/about'))
-            .setValue('15000'),
-          new SelectMenuOptionBuilder()
-            .setLabel(t('command:config/suggestions/cooldowns/30s-cooldown'))
-            .setDescription(t('command:config/suggestions/cooldowns/30s-cooldown/about'))
-            .setValue('30000'),
-          new SelectMenuOptionBuilder()
-            .setLabel(t('command:config/suggestions/cooldowns/1m-cooldown'))
-            .setDescription(t('command:config/suggestions/cooldowns/1m-cooldown/about'))
-            .setValue('60000'),
-          new SelectMenuOptionBuilder()
-            .setLabel(t('command:config/suggestions/cooldowns/15m-cooldown'))
-            .setDescription(t('command:config/suggestions/cooldowns/15m-cooldown/about'))
-            .setValue('900000')
+          new SelectMenuOptionBuilder().setLabel(t('command:config/suggestions/cooldowns/15s-cooldown')).setDescription(t('command:config/suggestions/cooldowns/15s-cooldown/about')).setValue('15000'),
+          new SelectMenuOptionBuilder().setLabel(t('command:config/suggestions/cooldowns/30s-cooldown')).setDescription(t('command:config/suggestions/cooldowns/30s-cooldown/about')).setValue('30000'),
+          new SelectMenuOptionBuilder().setLabel(t('command:config/suggestions/cooldowns/1m-cooldown')).setDescription(t('command:config/suggestions/cooldowns/1m-cooldown/about')).setValue('60000'),
+          new SelectMenuOptionBuilder().setLabel(t('command:config/suggestions/cooldowns/15m-cooldown')).setDescription(t('command:config/suggestions/cooldowns/15m-cooldown/about')).setValue('900000')
         ]);
       return selectRow.setComponents([selectMenu]);
     }
