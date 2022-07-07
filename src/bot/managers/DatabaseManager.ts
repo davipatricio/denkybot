@@ -1,10 +1,7 @@
 import { Afk, PrismaClient, Suggestion } from '@prisma/client';
 
 export type SuggestionConfig = Partial<Suggestion> & Pick<Suggestion, 'guildId'>;
-export type FullSuggestionConfig = Suggestion;
-
 export type AFKConfig = Partial<Afk> & Pick<Afk, 'userId' | 'startTime'>;
-export type FullAFKConfig = Afk;
 
 export class DatabaseManager extends PrismaClient {
   constructor() {
