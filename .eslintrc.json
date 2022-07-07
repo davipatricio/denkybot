@@ -75,6 +75,7 @@
         "no-continue": "off",
         "no-console": "off",
         "no-use-before-define": "off",
+        "no-plusplus": "off",
         "require-await": "error",
         "quotes": [
             "error",

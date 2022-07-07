@@ -5,17 +5,17 @@ jobs:
     if:
       github.event_name == 'push' || github.event.pull_request.head.repo.full_name !=
       github.repository
-    name: tsc
+    name: TypeScript Transpile
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: install node v18
+    - name: Install node v18
       uses: actions/setup-node@v3
       with:
         node-version: 18
     - name: Install dependencies
       run: yarn install
     - name: Generate prisma schema
-      run: yarn generate
+      run: yarn generate:postgre
     - name: tsc
       uses: icrawl/action-tsc@v1
