@@ -20,6 +20,9 @@
 'type: events':
 - src/bot/events/**/*
 
+'type: github':
+- .github/**/*
+
 'meta: types':
 - src/types/**/*
 
