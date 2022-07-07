@@ -1,12 +1,14 @@
 import { ShardingManager } from 'discord.js';
 import { config } from 'dotenv';
+import { createLogger } from 'winston';
 // @ts-ignore When running GitHub Actions, the config file isnt available
 import Configuration from '../../config.json';
-import { Logger } from '../bot/utils/Logger';
+import { Initializer } from '../bot/utils/Initializer';
 
 config({ path: '../.env' });
 
-const logger = new Logger();
+const logger = createLogger({ handleRejections: true, handleExceptions: true });
+Initializer.loadWinstonLogger(logger, 0);
 
 const sharder = new ShardingManager('./bot/index.js', {
   totalShards: Configuration.shardCount,
@@ -17,8 +19,14 @@ const sharder = new ShardingManager('./bot/index.js', {
 
 sharder.spawn().then(shards => {
   shards.forEach(shard => {
-    shard.on('ready', () => logger.log(`Shard ${shard.id} has been spawned.`, 'SHARDS'));
-    shard.on('disconnect', () => logger.error(`Shard ${shard.id} disconnected from Discord Websocket.`, 'SHARDS'));
-    shard.on('death', () => logger.error(`Shard ${shard.id} died! Respawning...`, 'SHARDS'));
+    shard.on('ready', () => {
+      logger.debug(`Shard ${shard.id} has been spawned.`);
+    });
+    shard.on('disconnect', () => {
+      logger.error(`Shard ${shard.id} disconnected from Discord Websocket.`);
+    });
+    shard.on('death', () => {
+      logger.error(`Shard ${shard.id} died! Respawning...`);
+    });
   });
 });

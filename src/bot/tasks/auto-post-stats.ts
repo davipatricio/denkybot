@@ -15,25 +15,25 @@ export default class ExampleTask extends Task {
 
   override run(client: DenkyClient) {
     if (!client.config.features.publishStats) {
-      client.logger.log(`Cancelling task ${this.name} because 'shouldPublishBotStats' is disabled.`, 'TASKS');
+      client.logger.warn(`Cancelling task ${this.name} because 'shouldPublishBotStats' is disabled.`, { tags: ['Tasks'] });
       if (this.interval) clearInterval(this.interval);
       client.tasks.delete(this.name);
       return;
     }
 
     if (!global.IS_MAIN_PROCESS) return;
-    client.logger.log(`Running task ${this.name} now!`, 'TASKS');
+    client.logger.debug(`Running task ${this.name} now!`, { tags: ['Tasks'] });
     if (!this.poster) this.poster = new Poster(client);
 
     if (!client.isReady() && !this.#isPedingReadyRetry) {
       client.once('ready', () => {
         this.#isPedingReadyRetry = false;
-        this.poster.post().catch(err => client.logger.error(`Failed to post bot stats: ${err}`, 'TASKS'));
+        this.poster.post().catch(err => client.logger.error(`Failed to post bot stats: ${err}`, { tags: ['Tasks'] }));
       });
       this.#isPedingReadyRetry = true;
       return;
     }
 
-    this.poster.post().catch(err => client.logger.error(`Failed to post bot stats: ${err}`, 'TASKS'));
+    this.poster.post().catch(err => client.logger.error(`Failed to post bot stats: ${err}`, { tags: ['Tasks'] }));
   }
 }

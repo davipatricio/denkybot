@@ -24,13 +24,13 @@ export class Poster {
   }
 
   logError(message: any) {
-    if (this.client.config.logs.debug) this.client.logger.error(message, 'VOTES');
+    if (this.client.config.logs.debug) this.client.logger.error(message, { tags: ['Votes'] });
   }
 
   async #postStatsToTopGG({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.TOPGG_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) this.client.logger.error('No top.gg API key found! Ignoring...', 'VOTES');
+      if (this.client.config.logs.debug) this.client.logger.warn('No top.gg API key found! Ignoring...', { tags: ['Votes'] });
       return false;
     }
 
@@ -47,13 +47,14 @@ export class Poster {
     });
 
     if (req.statusCode >= 400) throw new Error('Failed to post stats to top.gg!');
+    if (this.client.config.logs.debug) this.client.logger.debug('Posted stats to top.gg successfully!', { tags: ['Votes'] });
     return true;
   }
 
   async #postStatsToDiscordBots({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.BOTSGG_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) this.client.logger.error('No bots.gg API key found! Ignoring...', 'VOTES');
+      if (this.client.config.logs.debug) this.client.logger.warn('No bots.gg API key found! Ignoring...', { tags: ['Votes'] });
       return false;
     }
 
@@ -70,14 +71,14 @@ export class Poster {
     });
 
     if (req.statusCode >= 400) throw new Error('Failed to post stats to bots.gg!');
-    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to bots.gg successfully!', 'VOTES');
+    if (this.client.config.logs.debug) this.client.logger.debug('Posted stats to bots.gg successfully!', { tags: ['Votes'] });
     return true;
   }
 
   async #postStatsToDiscords({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.DISCORDS_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) this.client.logger.error('No discords.com API key found! Ignoring...', 'VOTES');
+      if (this.client.config.logs.debug) this.client.logger.warn('No discords.com API key found! Ignoring...', { tags: ['Votes'] });
       return false;
     }
 
@@ -93,14 +94,14 @@ export class Poster {
     });
 
     if (req.statusCode >= 400) throw new Error('Failed to post stats to discords!');
-    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to discords.com successfully!', 'VOTES');
+    if (this.client.config.logs.debug) this.client.logger.debug('Posted stats to discords.com successfully!', { tags: ['Votes'] });
     return true;
   }
 
   async #postStatsToDisforge({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.DISFORGE_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) this.client.logger.error('No disforge.com API key found! Ignoring...', 'VOTES');
+      if (this.client.config.logs.debug) this.client.logger.warn('No disforge.com API key found! Ignoring...', { tags: ['Votes'] });
       return false;
     }
 
@@ -116,14 +117,14 @@ export class Poster {
     });
 
     if (req.statusCode >= 400) throw new Error('Failed to post stats to disforge!');
-    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to disforge.com successfully!', 'VOTES');
+    if (this.client.config.logs.debug) this.client.logger.debug('Posted stats to disforge.com successfully!', { tags: ['Votes'] });
     return true;
   }
 
   async #postStatsToDiscordBotList({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.DISCORDBOTLIST_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) this.client.logger.error('No discordbotlist.com API key found! Ignoring...', 'VOTES');
+      if (this.client.config.logs.debug) this.client.logger.warn('No discordbotlist.com API key found! Ignoring...', { tags: ['Votes'] });
       return false;
     }
 
@@ -139,14 +140,14 @@ export class Poster {
     });
 
     if (req.statusCode >= 400) throw new Error('Failed to post stats to discordbotlist.com!');
-    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to discordbotlist.com successfully!', 'VOTES');
+    if (this.client.config.logs.debug) this.client.logger.debug('Posted stats to discordbotlist.com successfully!', { tags: ['Votes'] });
     return true;
   }
 
   async #postStatsToBladeList({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.BLADELIST_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) this.client.logger.error('No bladelist.gg API key found! Ignoring...', 'VOTES');
+      if (this.client.config.logs.debug) this.client.logger.warn('No bladelist.gg API key found! Ignoring...', { tags: ['Votes'] });
       return false;
     }
 
@@ -163,14 +164,14 @@ export class Poster {
     });
 
     if (req.statusCode >= 400) throw new Error('Failed to post stats to bladelist.gg!');
-    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to bladelist.gg successfully!', 'VOTES');
+    if (this.client.config.logs.debug) this.client.logger.debug('Posted stats to bladelist.gg successfully!', { tags: ['Votes'] });
     return true;
   }
 
   async #postStatsToFatesList({ totalGuilds }: { totalGuilds: number }) {
     const Authorization = process.env.FATESLIST_STATS_KEY;
     if (!Authorization) {
-      if (this.client.config.logs.debug) this.client.logger.error('No fateslist.xyz API key found! Ignoring...', 'VOTES');
+      if (this.client.config.logs.debug) this.client.logger.warn('No fateslist.xyz API key found! Ignoring...', { tags: ['Votes'] });
       return false;
     }
 
@@ -186,7 +187,7 @@ export class Poster {
     });
 
     if (req.statusCode >= 400) throw new Error('Failed to post stats to fateslist.xyz!');
-    if (this.client.config.logs.debug) this.client.logger.log('Posted stats to fateslist.xyz successfully!', 'VOTES');
+    if (this.client.config.logs.debug) this.client.logger.debug('Posted stats to fateslist.xyz successfully!', { tags: ['Votes'] });
     return true;
   }
 }

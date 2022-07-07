@@ -1,8 +1,8 @@
 import type { Client, Collection } from 'discord.js';
+import type { Logger } from 'winston';
 import type { DatabaseManager } from '../bot/managers/DatabaseManager';
 import type Helpers from '../bot/modules/Helpers';
 import type Languages from '../bot/modules/Languages';
-import type { Logger } from '../bot/utils/Logger';
 import type { Command } from '../structures/Command';
 import type { Task } from '../structures/Task';
 
