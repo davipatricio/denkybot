@@ -7,6 +7,11 @@ export type AFKConfig = Partial<Afk> & Pick<Afk, 'userId' | 'startTime'>;
 export type FullAFKConfig = Afk;
 
 export class DatabaseManager extends PrismaClient {
+  constructor() {
+    super();
+    this.$connect();
+  }
+
   // #region Suggestion
   createSuggestion(config: SuggestionConfig) {
     return this.suggestion.create({
