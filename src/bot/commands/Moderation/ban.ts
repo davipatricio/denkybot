@@ -10,8 +10,7 @@ export default class PingCommand extends Command {
     this.config = {
       autoDefer: true,
       ephemeral: true,
-      showInHelp: true,
-      guildOnly: true
+      showInHelp: true
     };
     this.permissions = { bot: [PermissionFlagsBits.BanMembers] };
   }
