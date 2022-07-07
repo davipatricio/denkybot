@@ -6,7 +6,7 @@
   "private": true,
   "type": "commonjs",
   "prisma": {
-    "schema": "./src/prisma/schema.prisma"
+    "schema": "./src/prisma/postgres.prisma"
   },
   "repository": {
     "type": "git",

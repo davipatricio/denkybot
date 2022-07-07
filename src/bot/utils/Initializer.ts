@@ -1,20 +1,22 @@
 /* eslint-disable no-await-in-loop */
 import { Collection } from 'discord.js';
 import { readdir, readFile } from 'node:fs/promises';
+import { inspect } from 'node:util';
+import { createLogger, format, Logger } from 'winston';
+import { Console, File } from 'winston/lib/winston/transports';
 import type { Command } from '../../structures/Command';
 import type { CommandDataStructure } from '../../structures/CommandDataStructure';
 import type { Event } from '../../structures/Event';
 import type { Task } from '../../structures/Task';
 import type { DenkyClient } from '../../types/Client';
 import { InteractionsWebserver } from '../webserver/server';
-import { Logger } from './Logger';
 
 type DefaultClass<T> = { default: new (...args: any[]) => T };
 
 export class Initializer {
   constructor(client: DenkyClient) {
     this.peformPreInitialization(client).then(() => {
-      if (global.IS_MAIN_PROCESS) client.logger.log('Starting bot...', 'BOT');
+      if (global.IS_MAIN_PROCESS) client.logger.debug('Starting bot...', { tags: ['Bot'] });
       this.init(client);
     });
   }
@@ -46,7 +48,7 @@ export class Initializer {
       }
     }
 
-    if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded ${totalCommands} commands successfully.`, 'COMMANDS');
+    if (global.IS_MAIN_PROCESS) client.logger.info(`Loaded ${totalCommands} commands successfully.`, { tags: ['Commands'] });
   }
 
   async loadCommandData(client: DenkyClient) {
@@ -72,7 +74,7 @@ export class Initializer {
       client.on(evt.eventName, (...rest) => evt.run(client, ...rest));
     }
 
-    if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded ${events.length} events successfully.`, 'EVENTS');
+    if (global.IS_MAIN_PROCESS) client.logger.info(`Loaded ${events.length} events successfully.`, { tags: ['Events'] });
   }
 
   async loadModules(client: DenkyClient) {
@@ -83,7 +85,7 @@ export class Initializer {
       new Module(client);
     }
 
-    if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded ${modules.length} modules successfully.`, 'MODULES');
+    if (global.IS_MAIN_PROCESS) client.logger.info(`Loaded ${modules.length} modules successfully.`, { tags: ['Modules'] });
   }
 
   async loadTasks(client: DenkyClient) {
@@ -97,28 +99,69 @@ export class Initializer {
       client.tasks.set(createdTask.name, createdTask);
     }
 
-    if (global.IS_MAIN_PROCESS) client.logger.log(`Loaded ${tasks.length} tasks successfully.`, 'TASKS');
+    if (global.IS_MAIN_PROCESS) client.logger.info(`Loaded ${tasks.length} tasks successfully.`, { tags: ['Tasks'] });
   }
 
   async loadBotConfiguration(client: DenkyClient) {
     const configData = await readFile('../config.json');
     client.config = JSON.parse(configData.toString());
-    if (global.IS_MAIN_PROCESS) client.logger.log('Loaded bot configuration file.', 'CONFIGURATION');
+    if (global.IS_MAIN_PROCESS) client.logger.info('Loaded bot configuration file.', { tags: ['Configuration'] });
   }
 
   loadWebserver(client: DenkyClient) {
     if (global.IS_MAIN_PROCESS) {
       const { port, publicKey, useHttpServer } = client.config.interactions;
       if (useHttpServer && publicKey && port) {
-        client.logger.log('Starting webserver to listen to interactions...', 'INTERACTIONS');
+        client.logger.info('Starting webserver to listen to interactions...', { tags: ['Interactions'] });
         const webserver = new InteractionsWebserver(client);
         webserver.start({ port, publicKey });
       }
     }
   }
 
+  static loadWinstonLogger(logger: Logger, shardId?: number) {
+    logger
+      .add(
+        new Console({
+          level: 'silly',
+          format: format.combine(
+            format.timestamp(),
+            format.colorize(),
+            format.printf(
+              info =>
+                `${info.timestamp} ${info.level.includes('info') || info.level.includes('warn') ? `${info.level} ` : info.level} ${process.pid}${
+                  info.tags && info.tags.length > 0
+                    ? ` --- [${typeof shardId === 'number' ? `\x1B[36mShard ${shardId}\x1B[39m, ` : '\x1B[36mShard Manager\x1B[39m, '}${info.tags.map(t => `\x1B[36m${t}\x1B[39m`).join(', ')}]:`
+                    : ` --- [${typeof shardId === 'number' ? `\x1B[36mShard ${shardId}\x1B[39m` : '\x1B[36mShard Manager\x1B[39m'}]`
+                } ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`
+            )
+          )
+        })
+      )
+      .add(
+        new File({
+          level: 'debug',
+          filename: typeof shardId === 'number' ? `shard${shardId}.log` : 'manager.log',
+          dirname: './logs',
+          format: format.combine(
+            format.timestamp(),
+            format.uncolorize(),
+            format.printf(
+              info =>
+                `${info.timestamp} ${info.level.includes('info') || info.level.includes('warn') ? `${info.level} ` : info.level} ${process.pid}${
+                  info.tags && info.tags.length > 0
+                    ? ` --- [${typeof shardId === 'number' ? `Shard ${shardId}, ` : 'Shard Manager, '}${info.tags.join(', ')}]:`
+                    : ` --- [${typeof shardId === 'number' ? `Shard ${shardId}` : 'Shard Manager'}]`
+                } ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`
+            )
+          )
+        })
+      );
+  }
+
   async peformPreInitialization(client: DenkyClient) {
-    client.logger = new Logger();
+    client.logger = createLogger({ handleExceptions: true, handleRejections: true });
+    Initializer.loadWinstonLogger(client.logger, client.shard?.ids[0]);
     await this.loadBotConfiguration(client);
     this.loadWebserver(client);
   }

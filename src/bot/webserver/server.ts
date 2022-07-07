@@ -17,7 +17,7 @@ export class InteractionsWebserver {
 
     this.router.listen({ port, host: '0.0.0.0' }, err => {
       if (err) throw err;
-      this.client.logger.log(`Started webserver to listen to interactions on port ${port}`, 'INTERACTIONS');
+      this.client.logger.info(`Started webserver to listen to interactions on port ${port}`, { tags: ['Interactions'] });
     });
   }
 
