@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Message, PermissionFlagsBits, SelectMenuInteraction, UnsafeSelectMenuBuilder, UnsafeSelectMenuOptionBuilder } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Message, PermissionFlagsBits, SelectMenuBuilder, SelectMenuInteraction, SelectMenuOptionBuilder } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys } from '../../managers/LanguageManager';
@@ -35,9 +35,8 @@ export default class HelpCommand extends Command {
       .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
       .setColor('Blurple');
 
-    // TODO: use SelectMenuBuilder when it works again
-    const Row = new ActionRowBuilder<UnsafeSelectMenuBuilder>();
-    const finalSelect = new UnsafeSelectMenuBuilder().setCustomId('help').setPlaceholder(t('command:help/menu/placeholder'));
+    const Row = new ActionRowBuilder<SelectMenuBuilder>();
+    const finalSelect = new SelectMenuBuilder().setCustomId('help').setPlaceholder(t('command:help/menu/placeholder'));
 
     for (const command of this.client.commands.values()) {
       if (!command.config.showInHelp) continue;
@@ -55,8 +54,7 @@ export default class HelpCommand extends Command {
 
       if (!categories[localizedCommandCategory]) {
         categories[localizedCommandCategory] = [];
-        // TODO: use SelectMenuOptionBuilder when it works again
-        finalSelect.addOptions([new UnsafeSelectMenuOptionBuilder().setValue(categoryWithoutEmoji).setLabel(categoryWithoutEmoji).setEmoji({ name: categoryEmoji })]);
+        finalSelect.addOptions([new SelectMenuOptionBuilder().setValue(categoryWithoutEmoji).setLabel(categoryWithoutEmoji).setEmoji(categoryEmoji)]);
       }
 
       categories[localizedCommandCategory].push(` → \`${localizedCommandName}\` ${localizedCommandDescription}`);
