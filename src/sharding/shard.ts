@@ -19,14 +19,8 @@ const sharder = new ShardingManager('./bot/index.js', {
 
 sharder.spawn().then(shards => {
   shards.forEach(shard => {
-    shard.on('ready', () => {
-      logger.debug(`Shard ${shard.id} has been spawned.`);
-    });
-    shard.on('disconnect', () => {
-      logger.error(`Shard ${shard.id} disconnected from Discord Websocket.`);
-    });
-    shard.on('death', () => {
-      logger.error(`Shard ${shard.id} died! Respawning...`);
-    });
+    shard.on('ready', () => logger.debug(`Shard ${shard.id} has been spawned.`));
+    shard.on('disconnect', () => logger.error(`Shard ${shard.id} disconnected from Discord Websocket.`));
+    shard.on('death', () => logger.error(`Shard ${shard.id} died! Respawning...`));
   });
 });
