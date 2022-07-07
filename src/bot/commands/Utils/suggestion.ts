@@ -91,9 +91,8 @@ export default class PingCommand extends Command {
 
     const categoriesRow = this.#generateCategoriesRow(categoriesName);
     const msg = (await interaction.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] })) as Message;
-    const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === interaction.user.id, max: 1, time: 60000 });
-    collector.on('collect', async i => {
-      if (!i.isSelectMenu()) return;
+    const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === interaction.user.id && m.isSelectMenu(), max: 1, time: 60000 });
+    collector.on('collect', async (i: SelectMenuInteraction) => {
       await i.deferUpdate();
       const channelId = i.values[0] as string;
 
@@ -183,9 +182,8 @@ export default class PingCommand extends Command {
       const categoriesRow = this.#generateCategoriesRow(categoriesName);
 
       const msg = (await int.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] })) as Message;
-      const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id, max: 1, time: 60000 });
-      collector.on('collect', async i => {
-        if (!i.isSelectMenu()) return;
+      const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id && m.isSelectMenu(), max: 1, time: 60000 });
+      collector.on('collect', async (i: SelectMenuInteraction) => {
         await i.deferUpdate();
         const channelId = i.values[0] as string;
 
@@ -229,11 +227,12 @@ export default class PingCommand extends Command {
     if (!interaction.inCachedGuild()) return;
     const config = await this.client.databases.getSuggestion(interaction.guild.id);
     if (!config) {
-      interaction.reply({ content: t('command:suggestions/not-enabled'), ephemeral: true });
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/not-enabled')}`, ephemeral: true });
       return;
     }
+
     if (config.categories.length === 0) {
-      interaction.reply({ content: t('command:suggestions/no-categories'), ephemeral: true });
+      interaction.reply({ content: `❌ **|** ${t('command:suggestions/no-categories')}`, ephemeral: true });
       return;
     }
 
@@ -260,9 +259,8 @@ export default class PingCommand extends Command {
       const categoriesRow = this.#generateCategoriesRow(categoriesName);
 
       const msg = (await int.editReply({ content: `📥 **|** ${t('command:suggestions/send/choose-a-category')}`, components: [categoriesRow] })) as Message;
-      const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id, max: 1, time: 60000 });
-      collector.on('collect', async i => {
-        if (!i.isSelectMenu()) return;
+      const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id && m.isSelectMenu(), max: 1, time: 60000 });
+      collector.on('collect', async (i: SelectMenuInteraction) => {
         await i.deferUpdate();
         const channelId = i.values[0] as string;
 
@@ -328,9 +326,9 @@ export default class PingCommand extends Command {
           i.editReply({ content: `✅ **|** ${t('command:suggestions/management/accept/accepted')}`, components: [] });
         })
         .catch(() => {
-          resolve(false);
-
           i.editReply({ content: `✅ **|** ${t('command:suggestions/management/accept/accepted')}`, components: [] });
+
+          resolve(false);
         });
     });
   }
