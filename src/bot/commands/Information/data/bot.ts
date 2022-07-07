@@ -8,6 +8,7 @@ export default class BotData extends CommandDataStructure {
     this.data = {
       name: 'bot',
       type: ApplicationCommandType.ChatInput,
+      dmPermission: true,
       description: client.languages.manager.get('en_US', 'commandDescriptions:bot'),
       descriptionLocalizations: {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:bot')

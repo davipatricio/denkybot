@@ -9,8 +9,7 @@ export default class TextCommand extends Command {
     this.config = {
       autoDefer: false,
       ephemeral: false,
-      showInHelp: true,
-      guildOnly: false
+      showInHelp: true
     };
     this.permissions = { bot: [] };
   }

@@ -9,8 +9,7 @@ export default class PingCommand extends Command {
     this.config = {
       autoDefer: true,
       ephemeral: false,
-      showInHelp: true,
-      guildOnly: false
+      showInHelp: true
     };
     this.permissions = { bot: [] };
   }

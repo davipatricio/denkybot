@@ -22,8 +22,7 @@ export default class PollCommand extends Command {
     this.config = {
       autoDefer: true,
       ephemeral: false,
-      showInHelp: true,
-      guildOnly: true
+      showInHelp: true
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
   }
