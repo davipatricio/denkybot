@@ -55,8 +55,7 @@ export default class TextEmojifySubCommand extends Command {
     this.config = {
       autoDefer: true,
       ephemeral: false,
-      showInHelp: false,
-      guildOnly: true
+      showInHelp: false
     };
     this.permissions = { bot: [] };
   }

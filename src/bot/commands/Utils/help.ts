@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Message, PermissionFlagsBits, SelectMenuBuilder, SelectMenuInteraction, SelectMenuOptionBuilder } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, SelectMenuBuilder, SelectMenuInteraction, SelectMenuOptionBuilder } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys } from '../../managers/LanguageManager';
@@ -11,8 +11,7 @@ export default class HelpCommand extends Command {
     this.config = {
       autoDefer: true,
       ephemeral: false,
-      showInHelp: true,
-      guildOnly: false
+      showInHelp: true
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
   }
@@ -63,7 +62,9 @@ export default class HelpCommand extends Command {
 
     Row.setComponents([finalSelect]);
 
-    const message = (await interaction.editReply({ embeds: [initialEmbed], components: [Row, Row1] })) as Message;
+    const message = interaction.inGuild()
+      ? await interaction.editReply({ embeds: [initialEmbed], components: [Row, Row1] })
+      : await interaction.editReply({ content: t('command:help/warn/guildonly-commands'), embeds: [initialEmbed], components: [Row, Row1] });
     const collector = message.createMessageComponentCollector({
       filter: int => int.user.id === interaction.user.id,
       time: 300000 /* 5 minutes */
@@ -76,11 +77,13 @@ export default class HelpCommand extends Command {
       const embed = new EmbedBuilder().setTitle(rawCategory).setColor('Yellow');
 
       embed.setDescription(categories[rawCategory].join('\n'));
-      interaction.editReply({ embeds: [embed] });
+      interaction.inGuild() ? interaction.editReply({ embeds: [embed] }) : interaction.editReply({ content: t('command:help/warn/guildonly-commands'), embeds: [embed] });
     });
 
     collector.on('end', () => {
-      interaction.editReply({ embeds: [initialEmbed], components: [Row1] }).catch(() => {});
+      interaction.inGuild()
+        ? interaction.editReply({ embeds: [initialEmbed], components: [Row1] })
+        : interaction.editReply({ content: t('command:help/warn/guildonly-commands'), embeds: [initialEmbed], components: [Row1] });
     });
   }
 }

@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, GuildMember, Message, PermissionFlagsBits } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, GuildMember, PermissionFlagsBits } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
@@ -9,8 +9,7 @@ export default class UserAvatarSubCommand extends Command {
     this.config = {
       autoDefer: true,
       ephemeral: false,
-      showInHelp: false,
-      guildOnly: true
+      showInHelp: false
     };
     this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
   }
@@ -38,7 +37,7 @@ export default class UserAvatarSubCommand extends Command {
       .setTitle(t('command:user/avatar/title', user.username))
       .setImage(guildAvatar ?? userAvatar)
       .setColor('Green');
-    const message = (await interaction.editReply({ content: interaction.user.toString(), embeds: [embed], components: [row, row2] })) as Message;
+    const message = await interaction.editReply({ content: interaction.user.toString(), embeds: [embed], components: [row, row2] });
 
     if (guildAvatar) {
       const collector = message.createMessageComponentCollector({ time: 30000, filter: m => m.user.id === interaction.user.id });

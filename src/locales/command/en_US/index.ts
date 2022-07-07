@@ -4,7 +4,6 @@ export default {
   // General errors
   'permissions/bot/missing': (perms: string) => `I don't have the required permissions: ${perms}`,
   'permissions/user/missing': (perms: string) => `You don't have the required permissions: ${perms}`,
-  'errors/commandGuildOnly': 'This command can only be used in servers.',
 
   // Ping
   'ping/calculating': 'Calculating...',
@@ -31,6 +30,7 @@ export default {
   'help/embed/description': (supportClick: string, addClick: string, totalCommands: number) =>
     `❔ My prefix on this server is: \`/\`.\n🚪 Join my support server: [click here](${supportClick}).\n🎉 Add me to your server: [click here](${addClick}).\n\nCurrently I have \`${totalCommands}\` commands.`,
   'help/menu/placeholder': 'Click here to choose the command category.',
+  'help/warn/guildonly-commands': '⚠️ **|** Some commands may be restricted to run only on servers and are therefore not available here.',
 
   // User info
   'user/info/userTag': 'Discord Tag',
@@ -169,5 +169,17 @@ export default {
   'suggestions/management/accept/embed/title': 'New suggestion sent [accepted]',
   'suggestions/management/accept/accepted': 'The suggestion was successfully accepted!',
   'suggestions/management/accept/accepted/move': '✅ **|** The suggestion was successfully accepted\n➡️ **|** Do you want to move the suggestion to this channel?',
-  'suggestions/management/accept/accepted/moved': 'The suggestion was successfully accepted and moved to this channel!'
+  'suggestions/management/accept/accepted/moved': 'The suggestion was successfully accepted and moved to this channel!',
+
+  // Ban
+  'ban/no-reason': 'No reason.',
+  'ban/punished-by': 'Punished by:',
+  'ban/complete': (user: User | string) => `The user ${user} was banned from the server.`,
+  'ban/error/ban-bot': 'I can not ban myself.',
+  'ban/error/ban-self': 'You can not ban yourself.',
+  'ban/error/not-bannable': "I can not punish this user because my highest role is below or equal to the user's highest role.",
+  'ban/error/no-permissions': "You cannot punish this user as their highest rank is below or in the same rank as the member's highest role.",
+  'ban/error/unknown-member': 'Unknown member.',
+  'ban/error/unknown-error': 'There was an error banning the user.',
+  'ban/error/maximum-bans': 'This server has already banned many members who never joined the server.'
 } as const;

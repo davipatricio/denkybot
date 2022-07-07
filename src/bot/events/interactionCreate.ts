@@ -24,11 +24,6 @@ export default class InteractionCreateEvent extends Event {
       return client.languages.manager.get(userLocale, path, ...args);
     };
 
-    if (!interaction.inGuild() && botCommand.config.guildOnly) {
-      interaction.reply({ content: `❌ ${interaction.user} **|** ${t('command:errors/commandGuildOnly')}`, ephemeral: true });
-      return;
-    }
-
     if (interaction.inGuild()) {
       if (!InteractionCreateEvent.checkBotPermissions(interaction, botCommand, t)) return;
     }

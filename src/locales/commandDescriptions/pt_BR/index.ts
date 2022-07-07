@@ -64,5 +64,11 @@ export default {
   'suggestions/edit/id': 'ID da sua sugestão',
   'suggestions/accept': 'Aceite uma sugestão que foi enviada',
   'suggestions/accept/id': 'ID da sugestão para aceitar',
-  'suggestions/accept/reason': 'A razão para aceitar a sugestão'
+  'suggestions/accept/reason': 'A razão para aceitar a sugestão',
+
+  // Ban
+  ban: 'Bane um usuário do servidor',
+  'ban/user': 'O usuário para banir',
+  'ban/delete_messages': 'Se devo ou não excluir as mensagens do usuário banido',
+  'ban/reason': 'O motivo do banimento'
 } as const;

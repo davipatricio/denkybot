@@ -4,7 +4,6 @@ export default {
   // General errors
   'permissions/bot/missing': (perms: string) => `Eu não tenho as permissões necessárias: \`${perms}\``,
   'permissions/user/missing': (perms: string) => `Você não tem as permissões necessárias: \`${perms}\``,
-  'errors/commandGuildOnly': 'Este comando só pode ser executado em servidores.',
 
   // Ping
   'ping/calculating': 'Calculando...',
@@ -31,6 +30,7 @@ export default {
   'help/embed/description': (supportClick: string, addClick: string, totalCommands: string) =>
     `❔ Meu prefixo neste servidor é: \`/.\`\n🚪 Entre em meu servidor de suporte: [clique aqui](${supportClick}).\n🎉 Me adicione em seu servidor: [clique aqui](${addClick}).\n\nAtualmente eu possuo \`${totalCommands}\` comandos.`,
   'help/menu/placeholder': 'Clique aqui para escolher a categoria de comandos.',
+  'help/warn/guildonly-commands': '⚠️ **|** Alguns comandos podem estar restringidos para serem executados apenas em servidores e por isso não estão disponíveis aqui.',
 
   // User info
   'user/info/userTag': 'Tag do Discord',
@@ -171,5 +171,17 @@ export default {
   'suggestions/management/accept/embed/title': 'Nova sugestão enviada [aceita]',
   'suggestions/management/accept/accepted': 'A sugestão foi aceita com sucesso!',
   'suggestions/management/accept/accepted/move': '✅ **|** A sugestão foi aceita com sucesso!\n➡️ **|** Você deseja mover a sugestão para este canal?',
-  'suggestions/management/accept/accepted/moved': 'A sugestão foi aceita com sucesso e movida para este canal!'
+  'suggestions/management/accept/accepted/moved': 'A sugestão foi aceita com sucesso e movida para este canal!',
+
+  // Ban
+  'ban/no-reason': 'Sem motivo.',
+  'ban/punished-by': 'Punido por:',
+  'ban/complete': (user: User | string) => `O usuário ${user} foi banido do servidor.`,
+  'ban/error/ban-bot': 'Eu não posso me banir.',
+  'ban/error/ban-self': 'Você não pode se banir.',
+  'ban/error/not-bannable': 'Não posso punir este usuário, pois meu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'ban/error/no-permissions': 'Você não pode punir este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'ban/error/unknown-member': 'Membro desconhecido.',
+  'ban/error/unknown-error': 'Ocorreu um erro ao banir o usuário.',
+  'ban/error/maximum-bans': 'Este servidor já baniu muitos membros que nunca entraram no servidor.'
 } as const;
