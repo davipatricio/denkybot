@@ -40,23 +40,23 @@ export default class BanData extends CommandDataStructure {
           type: ApplicationCommandOptionType.String,
           choices: [
             {
-              name: `1 ${client.languages.manager.get('en_US', 'commandNames:ban/delete_messages/day')}`,
+              name: `🗑️ 1 ${client.languages.manager.get('en_US', 'commandNames:ban/delete_messages/day')}`,
               nameLocalizations: {
-                'pt-BR': `1 ${client.languages.manager.get('pt_BR', 'commandNames:ban/delete_messages/day')}`
+                'pt-BR': `🗑️ 1 ${client.languages.manager.get('pt_BR', 'commandNames:ban/delete_messages/day')}`
               },
               value: '1'
             },
             {
-              name: `5 ${client.languages.manager.get('en_US', 'commandNames:ban/delete_messages/days')}`,
+              name: `🗑️ 5 ${client.languages.manager.get('en_US', 'commandNames:ban/delete_messages/days')}`,
               nameLocalizations: {
-                'pt-BR': `5 ${client.languages.manager.get('pt_BR', 'commandNames:ban/delete_messages/days')}`
+                'pt-BR': `🗑️ 5 ${client.languages.manager.get('pt_BR', 'commandNames:ban/delete_messages/days')}`
               },
               value: '5'
             },
             {
-              name: `7 ${client.languages.manager.get('en_US', 'commandNames:ban/delete_messages/days')}`,
+              name: `🗑️ 7 ${client.languages.manager.get('en_US', 'commandNames:ban/delete_messages/days')}`,
               nameLocalizations: {
-                'pt-BR': `7 ${client.languages.manager.get('pt_BR', 'commandNames:ban/delete_messages/days')}`
+                'pt-BR': `🗑️ 7 ${client.languages.manager.get('pt_BR', 'commandNames:ban/delete_messages/days')}`
               },
               value: '7'
             }
