@@ -1,0 +1,28 @@
+'type: sharding':
+- src/sharding/**/*
+
+'type: database':
+- src/prisma/**/*
+- src/bot/managers/DatabaseManager.ts
+- src/bot/modules/Database.ts
+
+'type: localization':
+- src/locales/**/*
+- src/bot/managers/LanguageManager.ts
+
+'type: interactions':
+- src/bot/events/interactionCreate.ts
+- src/bot/webserver/**/*
+
+'type: tasks':
+- src/bot/tasks/**/*
+
+'type: events':
+- src/bot/events/**/*
+
+'meta: types':
+- src/types/**/*
+
+'meta: dependencies':
+- package.json
+- yarn.lock

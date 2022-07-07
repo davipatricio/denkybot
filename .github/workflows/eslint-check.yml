@@ -5,7 +5,7 @@ jobs:
     if:
       github.event_name == 'push' || github.event.pull_request.head.repo.full_name !=
       github.repository
-    name: eslint
+    name: Run ESLint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
