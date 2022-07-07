@@ -8,7 +8,6 @@ import {
   Embed,
   EmbedBuilder,
   GuildTextBasedChannel,
-  Message,
   ModalBuilder,
   ModalSubmitInteraction,
   PermissionFlagsBits,
@@ -90,7 +89,7 @@ export default class PingCommand extends Command {
     await interaction.deferReply();
 
     const categoriesRow = this.#generateCategoriesRow(categoriesName);
-    const msg = (await interaction.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] })) as Message;
+    const msg = await interaction.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] });
     const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === interaction.user.id && m.isSelectMenu(), max: 1, time: 60000 });
     collector.on('collect', async (i: SelectMenuInteraction) => {
       await i.deferUpdate();
@@ -181,7 +180,7 @@ export default class PingCommand extends Command {
 
       const categoriesRow = this.#generateCategoriesRow(categoriesName);
 
-      const msg = (await int.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] })) as Message;
+      const msg = await int.editReply({ content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`, components: [categoriesRow] });
       const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id && m.isSelectMenu(), max: 1, time: 60000 });
       collector.on('collect', async (i: SelectMenuInteraction) => {
         await i.deferUpdate();
@@ -258,7 +257,7 @@ export default class PingCommand extends Command {
 
       const categoriesRow = this.#generateCategoriesRow(categoriesName);
 
-      const msg = (await int.editReply({ content: `📥 **|** ${t('command:suggestions/send/choose-a-category')}`, components: [categoriesRow] })) as Message;
+      const msg = await int.editReply({ content: `📥 **|** ${t('command:suggestions/send/choose-a-category')}`, components: [categoriesRow] });
       const collector = msg.createMessageComponentCollector({ filter: m => m.user.id === int.user.id && m.isSelectMenu(), max: 1, time: 60000 });
       collector.on('collect', async (i: SelectMenuInteraction) => {
         await i.deferUpdate();

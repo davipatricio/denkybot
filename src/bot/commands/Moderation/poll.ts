@@ -1,4 +1,4 @@
-import { EmbedBuilder, Message, PermissionFlagsBits } from 'discord.js';
+import { EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
 
@@ -52,7 +52,7 @@ export default class PollCommand extends Command {
           .setFooter({ text: t('command:poll/create/footer', interaction.user.tag), iconURL: interaction.user.displayAvatarURL() })
           .setDescription(`**${t('command:poll/create/options')}:**\n${pollOptions.map((opt, index) => `${MappedNumericEmojis[index + 1]} **-** ${opt.slice(0, 200)}`).join('\n')}`);
 
-        const message = (await interaction.editReply({ embeds: [embed] })) as Message;
+        const message = await interaction.editReply({ embeds: [embed] });
         if (duplicatedOptionsDetected) interaction.followUp({ content: `⚠️ **|** ${t('command:poll/create/duplicatedWarning')}`, ephemeral: true });
 
         // eslint-disable-next-line no-await-in-loop
