@@ -75,12 +75,6 @@
         "no-continue": "off",
         "no-console": "off",
         "no-use-before-define": "off",
-        "no-plusplus": [
-            "error",
-            {
-                "allowForLoopAfterthoughts": true
-            }
-        ],
         "require-await": "error",
         "quotes": [
             "error",
