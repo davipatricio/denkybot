@@ -55,5 +55,13 @@ export default {
   'suggestion/edit': 'edit',
   'suggestion/accept': 'accept',
   'suggestion/accept/id': 'id_suggestion',
-  'suggestion/accept/reason': 'reason'
+  'suggestion/accept/reason': 'reason',
+
+  // Ban
+  ban: 'ban',
+  'ban/user': 'user',
+  'ban/delete_messages': 'delete_messages',
+  'ban/delete_messages/day': 'day',
+  'ban/delete_messages/days': 'days',
+  'ban/reason': 'reason'
 } as const;

@@ -171,5 +171,17 @@ export default {
   'suggestions/management/accept/embed/title': 'Nova sugestão enviada [aceita]',
   'suggestions/management/accept/accepted': 'A sugestão foi aceita com sucesso!',
   'suggestions/management/accept/accepted/move': '✅ **|** A sugestão foi aceita com sucesso!\n➡️ **|** Você deseja mover a sugestão para este canal?',
-  'suggestions/management/accept/accepted/moved': 'A sugestão foi aceita com sucesso e movida para este canal!'
+  'suggestions/management/accept/accepted/moved': 'A sugestão foi aceita com sucesso e movida para este canal!',
+
+  // Ban
+  'ban/no-reason': 'Sem motivo.',
+  'ban/punished-by': 'Punido por:',
+  'ban/complete': (user: User | string) => `O usuário ${user} foi banido do servidor.`,
+  'ban/error/ban-bot': 'Eu não posso me banir.',
+  'ban/error/ban-self': 'Você não pode se banir.',
+  'ban/error/not-bannable': 'Não posso punir este usuário, pois meu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'ban/error/no-permissions': 'Você não pode punir este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'ban/error/unknown-member': 'Membro desconhecido.',
+  'ban/error/unknown-error': 'Ocorreu um erro ao banir o usuário.',
+  'ban/error/maximum-bans': 'Este servidor já baniu muitos membros que nunca entraram no servidor.'
 } as const;
