@@ -1,5 +1,5 @@
 import Transport from 'winston-transport';
-import Sentry from '@sentry/node';
+import * as Sentry from '@sentry/node';
 import type { LogCallback, LogEntry } from 'winston';
 
 export class SentryTransporter extends Transport {
