@@ -1,9 +1,11 @@
 {
     "defaultLanguage": "pt_BR",
     "shardCount": 1,
+    "useSentry": true,
     "webhooks": {
         "commandLogs": true,
-        "serverLogs": true
+        "serverLogs": true,
+        "errorLogs": true
     },
     "interactions": {
         "useHttpServer": false,

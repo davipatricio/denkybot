@@ -10,6 +10,8 @@ import type { Event } from '../../structures/Event';
 import type { Task } from '../../structures/Task';
 import type { DenkyClient } from '../../types/Client';
 import { InteractionsWebserver } from '../webserver/server';
+import { SentryTransporter } from './logger/Sentry';
+import { WebhookTransporter } from './logger/Webhook';
 
 type DefaultClass<T> = { default: new (...args: any[]) => T };
 
@@ -119,7 +121,7 @@ export class Initializer {
     }
   }
 
-  static loadWinstonLogger(logger: Logger, shardId: string | number = 'Manager') {
+  static loadWinstonLogger(logger: Logger, shardId: string | number = 'Manager', config: typeof import('../../../config.example.json')) {
     logger
       .add(
         new Console({
@@ -150,12 +152,16 @@ export class Initializer {
           )
         })
       );
+
+    if (!config.useSentry) logger.warn('useSentry config is set to false. Skipping Sentry configuration.', { tags: ['Sentry'] });
+    if (config.useSentry && process.env.SENTRY_DSN) logger.add(new SentryTransporter(process.env.SENTRY_DSN));
+    if (config.webhooks.errorLogs && process.env.DISCORD_ERRORLOGS_WEBHOOK_URL) logger.add(new WebhookTransporter(process.env.DISCORD_ERRORLOGS_WEBHOOK_URL));
   }
 
   async peformPreInitialization(client: DenkyClient) {
     client.logger = createLogger({ handleExceptions: true, handleRejections: true, exitOnError: false });
-    Initializer.loadWinstonLogger(client.logger, client.shard?.ids[0] ?? 'Manager');
     await this.loadBotConfiguration(client);
+    Initializer.loadWinstonLogger(client.logger, client.shard?.ids[0] ?? 'Manager', client.config);
     this.loadWebserver(client);
   }
 }
