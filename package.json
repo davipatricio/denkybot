@@ -1,7 +1,7 @@
 {
-  "name": "denky-rewrite",
-  "version": "1.0.0",
-  "description": "",
+  "name": "denkybot",
+  "version": "1.0.0-rc4",
+  "description": "Denky is a multipurpose Discord bot used in +3000 servers. Built with Node.js, TypeScript and discord.js.",
   "main": "./build/sharding/shard.js",
   "private": true,
   "type": "commonjs",
@@ -12,6 +12,7 @@
   "bugs": {
     "url": "https://github.com/denkylabs/denkybot/issues"
   },
+  "homepage": "https://github.com/denkylabs/denkybot#readme",
   "scripts": {
     "build": "npx sucrase ./src -d ./build --esModuleInterop --transforms typescript,imports",
     "build:check": "yarn types:check && yarn build",
@@ -29,7 +30,11 @@
     "migrate:cr:create": "prisma migrate dev --name production --schema=./src/prisma/cockroachdb.prisma --create-only"
   },
   "keywords": [],
-  "author": "Davi Patricio",
+  "author": "Davi Patricio <veric@denkylabs.com>",
+  "contributors": [
+    "Nicolas Ribeiro <niskii@denkylabs.com>",
+    "Weariful <guiguifeuser@gmail.com>"
+  ],
   "license": "GPL-3.0 license",
   "devDependencies": {
     "@types/node": "18.0.1",
