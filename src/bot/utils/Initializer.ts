@@ -152,7 +152,7 @@ export class Initializer {
         })
       );
 
-    if (!config.logs.sentry) logger.warn('useSentry config is set to false. Skipping Sentry configuration.', { tags: ['Sentry'] });
+    if (!config.logs.sentry) logger.warn('Sentry config is set to false. Skipping Sentry configuration.', { tags: ['Sentry'] });
     if (config.logs.sentry && process.env.SENTRY_DSN) logger.add(new SentryTransporter(process.env.SENTRY_DSN));
     if (config.webhooks.errorLogs && process.env.DISCORD_ERRORLOGS_WEBHOOK_URL) logger.add(new WebhookTransporter(process.env.DISCORD_ERRORLOGS_WEBHOOK_URL));
   }
@@ -160,8 +160,8 @@ export class Initializer {
   async peformPreInitialization(client: DenkyClient) {
     await this.loadBotConfiguration(client);
     client.logger = createLogger({ handleExceptions: true, handleRejections: true, exitOnError: !client.config.features.preventCrashes });
-    if (global.IS_MAIN_PROCESS) client.logger.info('Loaded bot configuration file.', { tags: ['Configuration'] });
     Initializer.loadWinstonLogger(client.logger, client.shard?.ids[0] ?? 'Manager', client.config);
+    if (global.IS_MAIN_PROCESS) client.logger.info('Loaded bot configuration file.', { tags: ['Configuration'] });
     this.loadWebserver(client);
   }
 }
