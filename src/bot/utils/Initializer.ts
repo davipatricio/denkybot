@@ -153,8 +153,8 @@ export class Initializer {
         })
       );
 
-    if (!config.useSentry) logger.warn('useSentry config is set to false. Skipping Sentry configuration.', { tags: ['Sentry'] });
-    if (config.useSentry && process.env.SENTRY_DSN) logger.add(new SentryTransporter(process.env.SENTRY_DSN));
+    if (!config.logs.sentry) logger.warn('useSentry config is set to false. Skipping Sentry configuration.', { tags: ['Sentry'] });
+    if (config.logs.sentry && process.env.SENTRY_DSN) logger.add(new SentryTransporter(process.env.SENTRY_DSN));
     if (config.webhooks.errorLogs && process.env.DISCORD_ERRORLOGS_WEBHOOK_URL) logger.add(new WebhookTransporter(process.env.DISCORD_ERRORLOGS_WEBHOOK_URL));
   }
 
