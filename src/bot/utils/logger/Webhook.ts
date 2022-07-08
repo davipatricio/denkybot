@@ -1,7 +1,7 @@
 import { EmbedBuilder, WebhookClient } from 'discord.js';
-import Transport from 'winston-transport';
-import type { LogCallback, LogEntry } from 'winston';
 import { inspect } from 'util';
+import type { LogCallback, LogEntry } from 'winston';
+import Transport from 'winston-transport';
 
 export class WebhookTransporter extends Transport {
   private readonly webhook: WebhookClient;
@@ -17,11 +17,11 @@ export class WebhookTransporter extends Transport {
   override log(info: LogEntry, callback: LogCallback) {
     setImmediate(async () => {
       const embed = new EmbedBuilder()
-        .setColor('Blurple')
-        .setTimestamp(info.timestamp)
+        .setColor('Purple')
+        .setAuthor({ name: info.level.includes('warn') ? '⚠ WARN' : '❌ ERROR' })
+        .setDescription(`\`\`\`js\n${inspect(info.message, { depth: 0 })}\`\`\``)
         .setFooter({ text: 'Denky Logger' })
-        .setAuthor({ name: info.level.includes('warn') ? 'WARN' : 'ERROR' })
-        .setDescription(`\`\`\`js\n${inspect(info.message, { depth: 0 })}\`\`\``);
+        .setTimestamp(info.timestamp);
 
       await this.webhook.send({ embeds: [embed] });
       this.emit('logged', info);
