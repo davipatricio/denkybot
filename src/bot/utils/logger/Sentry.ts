@@ -4,11 +4,7 @@ import type { LogCallback, LogEntry } from 'winston';
 
 export class SentryTransporter extends Transport {
   constructor(dsn: string) {
-    super({
-      handleExceptions: true,
-      handleRejections: true,
-      level: 'warn'
-    });
+    super({ level: 'warn' });
 
     if (!dsn) throw new TypeError('Missing Sentry dsn.');
 

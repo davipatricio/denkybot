@@ -7,11 +7,7 @@ export class WebhookTransporter extends Transport {
   private readonly webhook: WebhookClient;
 
   constructor(url: string) {
-    super({
-      handleExceptions: true,
-      handleRejections: true,
-      level: 'error'
-    });
+    super({ level: 'error' });
 
     if (!url) throw new TypeError('Missing webhook url.');
 
@@ -24,8 +20,8 @@ export class WebhookTransporter extends Transport {
         .setColor('Blurple')
         .setTimestamp(info.timestamp)
         .setFooter({ text: 'Denky Logger' })
-        .setAuthor({ name: 'ERROR' })
-        .setDescription(`\`\`\`xl\n${inspect(info.message, { depth: 0 })}\`\`\``);
+        .setAuthor({ name: info.level.includes('warn') ? 'WARN' : 'ERROR' })
+        .setDescription(`\`\`\`js\n${inspect(info.message, { depth: 0 })}\`\`\``);
 
       await this.webhook.send({ embeds: [embed] });
       this.emit('logged', info);

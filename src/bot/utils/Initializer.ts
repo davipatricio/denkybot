@@ -130,8 +130,9 @@ export class Initializer {
             format.colorize(),
             format.printf(info => {
               const tags = info.tags?.map(t => `\x1B[36m${t}\x1B[39m`).join(', ') ?? '';
-              const shardPrefix = ` --- [\x1B[36mShard ${shardId}\x1B[39m, ${tags}]:`;
-              return `${info.timestamp} ${shardPrefix} ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`;
+              const shardPrefix = `--- [\x1B[36mShard ${shardId}\x1B[39m, ${tags}]:`;
+              const levelPrefix = info.level.includes('info') || info.level.includes('warn') ? `${info.level} ` : info.level;
+              return `${info.timestamp} ${levelPrefix} ${shardPrefix} ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`;
             })
           )
         })
@@ -146,14 +147,18 @@ export class Initializer {
             format.uncolorize(),
             format.printf(info => {
               const tags = info.tags?.map(t => `\x1B[36m${t}\x1B[39m`).join(', ') ?? '';
-              return `${info.timestamp} --- [Shard ${shardId}, ${tags}]: ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`;
+              const levelPrefix = info.level.includes('info') || info.level.includes('warn') ? `${info.level} ` : info.level;
+              return `${info.timestamp} ${levelPrefix} --- [Shard ${shardId}, ${tags}]: ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`;
             })
           )
         })
       );
 
     if (!config.logs.sentry) logger.warn('Sentry config is set to false. Skipping Sentry configuration.', { tags: ['Sentry'] });
-    if (config.logs.sentry && process.env.SENTRY_DSN) logger.add(new SentryTransporter(process.env.SENTRY_DSN));
+    if (config.logs.sentry && process.env.SENTRY_DSN) {
+      logger.add(new SentryTransporter(process.env.SENTRY_DSN));
+      logger.info('Sentry loaded.', { tags: ['Sentry'] });
+    }
     if (config.webhooks.errorLogs && process.env.DISCORD_ERRORLOGS_WEBHOOK_URL) logger.add(new WebhookTransporter(process.env.DISCORD_ERRORLOGS_WEBHOOK_URL));
   }
 
