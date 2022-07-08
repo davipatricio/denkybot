@@ -20,10 +20,13 @@
     "lint": "npx eslint src",
     "lint:fix": "yarn lint:prettier && npx eslint src --fix",
     "lint:prettier": "npx prettier -w src",
-    "generate:postgre": "prisma generate --schema=./src/prisma/postgres.prisma",
+    "generate:cockroachdb": "prisma generate --schema=./src/prisma/cockroachdb.prisma",
+    "generate:postgres": "prisma generate --schema=./src/prisma/postgres.prisma",
     "generate:mongodb": "prisma generate --schema=./src/prisma/mongodb.prisma",
-    "migrate": "prisma migrate dev --schema=./src/prisma/postgres.prisma",
-    "migrate:create": "prisma migrate dev --name production --schema=./src/prisma/postgres.prisma --create-only"
+    "migrate:pg": "prisma migrate dev --schema=./src/prisma/postgres.prisma",
+    "migrate:pg:create": "prisma migrate dev --name production --schema=./src/prisma/postgres.prisma --create-only",
+    "migrate:cr": "prisma migrate dev --schema=./src/prisma/cockroachdb.prisma",
+    "migrate:cr:create": "prisma migrate dev --name production --schema=./src/prisma/cockroachdb.prisma --create-only"
   },
   "keywords": [],
   "author": "Davi Patricio",
