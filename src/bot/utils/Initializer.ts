@@ -15,8 +15,6 @@ import { WebhookTransporter } from './logger/Webhook';
 
 type DefaultClass<T> = { default: new (...args: any[]) => T };
 
-type Config = typeof import('../../../config.example.json');
-
 export class Initializer {
   constructor(client: DenkyClient) {
     this.peformPreInitialization(client).then(() => {
@@ -122,7 +120,7 @@ export class Initializer {
     }
   }
 
-  static loadWinstonLogger(logger: Logger, shardId: string | number = 'Manager', config: Config) {
+  static loadWinstonLogger(logger: Logger, config: typeof import('../../../config.example.json'), shardId: string | number = 'Manager') {
     logger
       .add(
         new Console({
@@ -167,7 +165,7 @@ export class Initializer {
   async peformPreInitialization(client: DenkyClient) {
     await this.loadBotConfiguration(client);
     client.logger = createLogger({ handleExceptions: true, handleRejections: true, exitOnError: !client.config.features.preventCrashes });
-    Initializer.loadWinstonLogger(client.logger, client.shard?.ids[0] ?? 'Manager', client.config);
+    Initializer.loadWinstonLogger(client.logger, client.config, client.shard?.ids[0] ?? 'Manager');
     if (global.IS_MAIN_PROCESS) client.logger.info('Loaded bot configuration file.', { tags: ['Configuration'] });
     this.loadWebserver(client);
   }
