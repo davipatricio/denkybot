@@ -1,5 +1,5 @@
 import Transport from 'winston-transport';
-import * as Sentry from '@sentry/node';
+import { init, captureException, captureMessage } from '@sentry/node';
 import type { LogCallback, LogEntry } from 'winston';
 
 export class SentryTransporter extends Transport {
@@ -8,13 +8,13 @@ export class SentryTransporter extends Transport {
 
     if (!dsn) throw new TypeError('Missing Sentry dsn.');
 
-    Sentry.init({ dsn });
+    init({ dsn });
   }
 
   override log(info: LogEntry & { message: any }, callback: LogCallback) {
     setImmediate(() => {
-      if (info.message instanceof Error) Sentry.captureException(info.message);
-      else Sentry.captureMessage(String(info.message));
+      if (info.message instanceof Error) captureException(info.message);
+      else captureMessage(String(info.message));
       this.emit('logged', info);
     });
 

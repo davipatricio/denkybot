@@ -15,6 +15,8 @@ import { WebhookTransporter } from './logger/Webhook';
 
 type DefaultClass<T> = { default: new (...args: any[]) => T };
 
+type Config = typeof import('../../../config.example.json');
+
 export class Initializer {
   constructor(client: DenkyClient) {
     this.peformPreInitialization(client).then(() => {
@@ -120,7 +122,7 @@ export class Initializer {
     }
   }
 
-  static loadWinstonLogger(logger: Logger, shardId: string | number = 'Manager', config: typeof import('../../../config.example.json')) {
+  static loadWinstonLogger(logger: Logger, shardId: string | number = 'Manager', config: Config) {
     logger
       .add(
         new Console({
