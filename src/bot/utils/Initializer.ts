@@ -107,7 +107,6 @@ export class Initializer {
   async loadBotConfiguration(client: DenkyClient) {
     const configData = await readFile('../config.json');
     client.config = JSON.parse(configData.toString());
-    if (global.IS_MAIN_PROCESS) client.logger.info('Loaded bot configuration file.', { tags: ['Configuration'] });
   }
 
   loadWebserver(client: DenkyClient) {
@@ -161,6 +160,7 @@ export class Initializer {
   async peformPreInitialization(client: DenkyClient) {
     await this.loadBotConfiguration(client);
     client.logger = createLogger({ handleExceptions: true, handleRejections: true, exitOnError: !client.config.features.preventCrashes });
+    if (global.IS_MAIN_PROCESS) client.logger.info('Loaded bot configuration file.', { tags: ['Configuration'] });
     Initializer.loadWinstonLogger(client.logger, client.shard?.ids[0] ?? 'Manager', client.config);
     this.loadWebserver(client);
   }
