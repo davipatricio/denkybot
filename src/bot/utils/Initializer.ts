@@ -10,6 +10,8 @@ import type { Event } from '../../structures/Event';
 import type { Task } from '../../structures/Task';
 import type { DenkyClient } from '../../types/Client';
 import { InteractionsWebserver } from '../webserver/server';
+import { SentryTransporter } from './logger/Sentry';
+import { WebhookTransporter } from './logger/Webhook';
 
 type DefaultClass<T> = { default: new (...args: any[]) => T };
 
@@ -105,7 +107,6 @@ export class Initializer {
   async loadBotConfiguration(client: DenkyClient) {
     const configData = await readFile('../config.json');
     client.config = JSON.parse(configData.toString());
-    if (global.IS_MAIN_PROCESS) client.logger.info('Loaded bot configuration file.', { tags: ['Configuration'] });
   }
 
   loadWebserver(client: DenkyClient) {
@@ -119,7 +120,7 @@ export class Initializer {
     }
   }
 
-  static loadWinstonLogger(logger: Logger, shardId: string | number = 'Manager') {
+  static loadWinstonLogger(logger: Logger, config: typeof import('../../../config.example.json'), shardId: string | number = 'Manager') {
     logger
       .add(
         new Console({
@@ -129,8 +130,9 @@ export class Initializer {
             format.colorize(),
             format.printf(info => {
               const tags = info.tags?.map(t => `\x1B[36m${t}\x1B[39m`).join(', ') ?? '';
-              const shardPrefix = ` --- [\x1B[36mShard ${shardId}\x1B[39m, ${tags}]:`;
-              return `${info.timestamp} ${shardPrefix} ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`;
+              const shardPrefix = `--- [\x1B[36mShard ${shardId}\x1B[39m, ${tags}]:`;
+              const levelPrefix = info.level.includes('info') || info.level.includes('warn') ? `${info.level} ` : info.level;
+              return `${info.timestamp} ${levelPrefix} ${shardPrefix} ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`;
             })
           )
         })
@@ -145,17 +147,26 @@ export class Initializer {
             format.uncolorize(),
             format.printf(info => {
               const tags = info.tags?.map(t => `\x1B[36m${t}\x1B[39m`).join(', ') ?? '';
-              return `${info.timestamp} --- [Shard ${shardId}, ${tags}]: ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`;
+              const levelPrefix = info.level.includes('info') || info.level.includes('warn') ? `${info.level} ` : info.level;
+              return `${info.timestamp} ${levelPrefix} --- [Shard ${shardId}, ${tags}]: ${info.message instanceof Error ? inspect(info.message, { depth: 0 }) : info.message}`;
             })
           )
         })
       );
+
+    if (!config.logs.sentry) logger.warn('Sentry config is set to false. Skipping Sentry configuration.', { tags: ['Sentry'] });
+    if (config.logs.sentry && process.env.SENTRY_DSN) {
+      logger.add(new SentryTransporter(process.env.SENTRY_DSN));
+      logger.info('Sentry loaded.', { tags: ['Sentry'] });
+    }
+    if (config.webhooks.errorLogs && process.env.DISCORD_ERRORLOGS_WEBHOOK_URL) logger.add(new WebhookTransporter(process.env.DISCORD_ERRORLOGS_WEBHOOK_URL));
   }
 
   async peformPreInitialization(client: DenkyClient) {
-    client.logger = createLogger({ handleExceptions: true, handleRejections: true, exitOnError: false });
-    Initializer.loadWinstonLogger(client.logger, client.shard?.ids[0] ?? 'Manager');
     await this.loadBotConfiguration(client);
+    client.logger = createLogger({ handleExceptions: true, handleRejections: true, exitOnError: !client.config.features.preventCrashes });
+    Initializer.loadWinstonLogger(client.logger, client.config, client.shard?.ids[0] ?? 'Manager');
+    if (global.IS_MAIN_PROCESS) client.logger.info('Loaded bot configuration file.', { tags: ['Configuration'] });
     this.loadWebserver(client);
   }
 }

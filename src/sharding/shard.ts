@@ -8,7 +8,7 @@ import { Initializer } from '../bot/utils/Initializer';
 config({ path: '../.env' });
 
 const logger = createLogger({ handleRejections: true, handleExceptions: true });
-Initializer.loadWinstonLogger(logger, 'Manager');
+Initializer.loadWinstonLogger(logger, Configuration, 'Manager');
 
 const sharder = new ShardingManager('./bot/index.js', {
   totalShards: Configuration.shardCount,

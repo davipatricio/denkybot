@@ -3,7 +3,8 @@
     "shardCount": 1,
     "webhooks": {
         "commandLogs": true,
-        "serverLogs": true
+        "serverLogs": true,
+        "errorLogs": true
     },
     "interactions": {
         "useHttpServer": false,
@@ -11,7 +12,8 @@
         "publicKey": "f3ea146e5618e7ca59e0a39bc70e4b4bae2109755f2de5910b69e35a744e2188"
     },
     "logs": {
-        "debug": true
+        "debug": true,
+        "sentry": true
     },
     "features": {
         "publishStats": true,
