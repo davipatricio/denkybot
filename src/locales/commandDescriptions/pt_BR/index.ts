@@ -73,5 +73,7 @@ export default {
   'ban/reason': 'O motivo do banimento',
 
   // Wikipedia
-  wikipedia: 'Veja informações sobre uma página da Wikipedia'
+  wikipedia: 'Veja informações sobre uma página da Wikipedia',
+  'wikipedia/search': 'Termo para buscar na Wikipedia',
+  'wikipedia/language': 'Linguagem da Wikipedia'
 } as const;

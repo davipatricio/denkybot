@@ -73,5 +73,7 @@ export default {
   'ban/reason': 'The reason for the ban',
 
   // Wikipedia
-  wikipedia: 'Search Wikipedia for a term'
+  wikipedia: 'Search Wikipedia for a term',
+  'wikipedia/search': 'Term to search for',
+  'wikipedia/language': 'The language to search in'
 } as const;
