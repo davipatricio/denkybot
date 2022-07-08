@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@prisma/client": "4.0.0",
-    "@sentry/node": "^7.5.1",
+    "@sentry/node": "7.5.1",
     "discord.js": "14.0.0-dev.1657152699-10ba008",
     "dotenv": "16.0.1",
     "fastify": "4.2.0",
