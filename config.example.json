@@ -13,7 +13,7 @@
     },
     "logs": {
         "debug": true,
-        "sentry": true
+        "sentry": false
     },
     "features": {
         "publishStats": true,
