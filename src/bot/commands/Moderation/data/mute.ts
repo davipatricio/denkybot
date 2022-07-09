@@ -42,6 +42,34 @@ export default class MuteData extends CommandDataStructure {
           type: ApplicationCommandOptionType.String,
           choices: [
             {
+              name: `🤐 1 ${client.languages.manager.get('en_US', 'commandNames:mute/time/minute')}`,
+              nameLocalizations: {
+                'pt-BR': `🤐 1 ${client.languages.manager.get('pt_BR', 'commandNames:mute/time/minute')}`
+              },
+              value: '1m'
+            },
+            {
+              name: `🤐 5 ${client.languages.manager.get('en_US', 'commandNames:mute/time/minutes')}`,
+              nameLocalizations: {
+                'pt-BR': `🤐 5 ${client.languages.manager.get('pt_BR', 'commandNames:mute/time/minutes')}`
+              },
+              value: '5m'
+            },
+            {
+              name: `🤐 10 ${client.languages.manager.get('en_US', 'commandNames:mute/time/minutes')}`,
+              nameLocalizations: {
+                'pt-BR': `🤐 10 ${client.languages.manager.get('pt_BR', 'commandNames:mute/time/minutes')}`
+              },
+              value: '10m'
+            },
+            {
+              name: `🤐 1 ${client.languages.manager.get('en_US', 'commandNames:mute/time/hour')}`,
+              nameLocalizations: {
+                'pt-BR': `🤐 1 ${client.languages.manager.get('pt_BR', 'commandNames:mute/time/hour')}`
+              },
+              value: '1h'
+            },
+            {
               name: `🤐 5 ${client.languages.manager.get('en_US', 'commandNames:mute/time/hours')}`,
               nameLocalizations: {
                 'pt-BR': `🤐 5 ${client.languages.manager.get('pt_BR', 'commandNames:mute/time/hours')}`
@@ -56,11 +84,11 @@ export default class MuteData extends CommandDataStructure {
               value: '1d'
             },
             {
-              name: `🤐 1 ${client.languages.manager.get('en_US', 'commandNames:mute/time/month')}`,
+              name: `🤐 28 ${client.languages.manager.get('en_US', 'commandNames:mute/time/days')}`,
               nameLocalizations: {
-                'pt-BR': `🤐 1 ${client.languages.manager.get('pt_BR', 'commandNames:mute/time/month')}`
+                'pt-BR': `🤐 28 ${client.languages.manager.get('pt_BR', 'commandNames:mute/time/days')}`
               },
-              value: '30d'
+              value: '28d'
             }
           ]
         },
