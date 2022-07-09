@@ -63,5 +63,11 @@ export default {
   'ban/delete_messages': 'deletar_mensagens',
   'ban/delete_messages/day': 'dia',
   'ban/delete_messages/days': 'dias',
-  'ban/reason': 'motivo'
+  'ban/reason': 'motivo',
+
+  // Mute
+  mute: 'silenciar',
+  'mute/user': 'usuario',
+  'mute/time': 'tempo',
+  'mute/reason': 'motivo'
 } as const;
