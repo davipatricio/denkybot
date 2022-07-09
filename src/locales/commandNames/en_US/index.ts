@@ -72,5 +72,8 @@ export default {
   mute: 'mute',
   'mute/user': 'user',
   'mute/time': 'time',
+  'mute/time/day': 'day',
+  'mute/time/hours': 'hour',
+  'mute/time/month': 'month',
   'mute/reason': 'reason'
 } as const;

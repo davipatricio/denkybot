@@ -40,7 +40,29 @@ export default class MuteData extends CommandDataStructure {
           },
           required: true,
           type: ApplicationCommandOptionType.String,
-          choices: []
+          choices: [
+            {
+              name: `🤐 5 ${client.languages.manager.get('en_US', 'commandNames:mute/time/hours')}`,
+              nameLocalizations: {
+                'pt-BR': `🤐 5 ${client.languages.manager.get('pt_BR', 'commandNames:mute/time/hours')}`
+              },
+              value: '5h'
+            },
+            {
+              name: `🤐 1 ${client.languages.manager.get('en_US', 'commandNames:mute/time/day')}`,
+              nameLocalizations: {
+                'pt-BR': `🤐 1 ${client.languages.manager.get('pt_BR', 'commandNames:mute/time/day')}`
+              },
+              value: '1d'
+            },
+            {
+              name: `🤐 1 ${client.languages.manager.get('en_US', 'commandNames:mute/time/month')}`,
+              nameLocalizations: {
+                'pt-BR': `🤐 1 ${client.languages.manager.get('pt_BR', 'commandNames:mute/time/month')}`
+              },
+              value: '30d'
+            }
+          ]
         },
         {
           name: client.languages.manager.get('en_US', 'commandNames:mute/reason'),
