@@ -19,6 +19,11 @@
         "publishStats": true,
         "preventCrashes": true
     },
+    "cache": {
+        "prismaQueries": false,
+        "lifetime": 120,
+        "type": "memory/redis"
+    },
     "links": {
         "invite": "https://discord.com/oauth2/authorize?client_id=123456789123456789&scope=bot+applications.commands&permissions=8",
         "vote": "https://top.gg/bot/704517722100465746/vote",
