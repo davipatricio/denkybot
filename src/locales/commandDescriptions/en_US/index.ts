@@ -77,4 +77,8 @@ export default {
   'mute/user': 'The user to mute',
   'mute/time': 'The time for the mute',
   'mute/reason': 'The reason for the mute'
+
+  // Wikipedia
+  wikipedia: 'Search Wikipedia for a term',
+  'wikipedia/search': 'Term to search for'
 } as const;

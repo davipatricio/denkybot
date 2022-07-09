@@ -73,4 +73,7 @@ export default {
   'mute/time/hours': 'hour',
   'mute/time/month': 'month',
   'mute/reason': 'reason'
+
+  // Wikipedia
+  'wikipedia/search': 'search'
 } as const;

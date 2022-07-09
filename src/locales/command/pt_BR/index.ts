@@ -183,5 +183,11 @@ export default {
   'ban/error/no-permissions': 'Você não pode punir este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
   'ban/error/unknown-member': 'Membro desconhecido.',
   'ban/error/unknown-error': 'Ocorreu um erro ao banir o usuário.',
-  'ban/error/maximum-bans': 'Este servidor já baniu muitos membros que nunca entraram no servidor.'
+  'ban/error/maximum-bans': 'Este servidor já baniu muitos membros que nunca entraram no servidor.',
+
+  // Wikipedia
+  'wikipedia/error/no-results': '❌ **|** Nenhum resultado encontrado.',
+  'wikipedia/error/disambiguation': '❌ **|** A sua pesquisa é uma desambiguação.',
+  'wikipedia/embeds/fields/title': '📖 Mais informações',
+  'wikipedia/embeds/fields/value': (pageUrl: string, pageId: number) => `🔗 Clique **[aqui](${pageUrl})** para acessar a página na Wikipedia.\n🔢 Id da Página: **${pageId}**`
 } as const;

@@ -181,5 +181,11 @@ export default {
   'ban/error/no-permissions': "You cannot punish this user as their highest rank is below or in the same rank as the member's highest role.",
   'ban/error/unknown-member': 'Unknown member.',
   'ban/error/unknown-error': 'There was an error banning the user.',
-  'ban/error/maximum-bans': 'This server has already banned many members who never joined the server.'
+  'ban/error/maximum-bans': 'This server has already banned many members who never joined the server.',
+
+  // Wikipedia
+  'wikipedia/error/no-results': '❌ **|** No results found.',
+  'wikipedia/error/disambiguation': '❌ **|** Your search is a disambiguation.',
+  'wikipedia/embeds/fields/title': '📖 More information',
+  'wikipedia/embeds/fields/value': (pageUrl: string, pageId: number) => `🔗 Click **[here](${pageUrl})** to access the Wikipedia page.\n🔢 Page Id: **${pageId}**`
 } as const;

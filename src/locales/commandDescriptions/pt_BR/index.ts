@@ -77,4 +77,8 @@ export default {
   'mute/user': 'O usuário para silenciar',
   'mute/time': 'Tempo de silenciamento',
   'mute/reason': 'O motivo do silenciamento'
+
+  // Wikipedia
+  wikipedia: 'Veja informações sobre uma página da Wikipedia',
+  'wikipedia/search': 'Termo para buscar na Wikipedia'
 } as const;
