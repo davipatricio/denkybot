@@ -1,4 +1,4 @@
-import { EmbedBuilder } from 'discord.js';
+import { EmbedBuilder, Locale } from 'discord.js';
 import { request } from 'undici';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
@@ -18,9 +18,9 @@ export default class WikipediaCommand extends Command {
 
   override async run({ t, interaction }: CommandRunOptions) {
     const option = interaction.options.getString('search', true);
-    const locale = interaction.options.getString('language') ?? 'en';
+    const locale = this.#getWikipediaLocale(interaction.locale);
 
-    const res = await request(`https://${locale}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(option)}`, { maxRedirections: 2 }).then(x => x.body.json());
+    const res = await request(`https://${locale}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(option)}`, { maxRedirections: 5 }).then(x => x.body.json());
 
     if (!res || !res.title || res.title === 'Not found.') {
       interaction.editReply(t('command:wikipedia/error/no-results'));
@@ -46,5 +46,9 @@ export default class WikipediaCommand extends Command {
       ]);
 
     interaction.editReply({ embeds: [embed] });
+  }
+
+  #getWikipediaLocale(locale: Locale) {
+    return locale.includes('-') ? locale.split('-')[0] : locale;
   }
 }
