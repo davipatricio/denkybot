@@ -70,5 +70,10 @@ export default {
   ban: 'Bane um usuário do servidor',
   'ban/user': 'O usuário para banir',
   'ban/delete_messages': 'Se devo ou não excluir as mensagens do usuário banido',
-  'ban/reason': 'O motivo do banimento'
+  'ban/reason': 'O motivo do banimento',
+
+  // Wikipedia
+  wikipedia: 'Veja informações sobre uma página da Wikipedia',
+  'wikipedia/search': 'Termo para buscar na Wikipedia',
+  'wikipedia/language': 'Linguagem da Wikipedia'
 } as const;

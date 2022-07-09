@@ -70,5 +70,10 @@ export default {
   ban: 'Bans a user from the server',
   'ban/user': 'The user to ban',
   'ban/delete_messages': 'Whether or not to delete the messages of the banned user',
-  'ban/reason': 'The reason for the ban'
+  'ban/reason': 'The reason for the ban',
+
+  // Wikipedia
+  wikipedia: 'Search Wikipedia for a term',
+  'wikipedia/search': 'Term to search for',
+  'wikipedia/language': 'The language to search in'
 } as const;

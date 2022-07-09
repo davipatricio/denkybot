@@ -63,5 +63,9 @@ export default {
   'ban/delete_messages': 'delete_messages',
   'ban/delete_messages/day': 'day',
   'ban/delete_messages/days': 'days',
-  'ban/reason': 'reason'
+  'ban/reason': 'reason',
+
+  // Wikipedia
+  'wikipedia/search': 'search',
+  'wikipedia/language': 'language'
 } as const;
