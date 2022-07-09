@@ -80,6 +80,8 @@ export default {
   'config/suggestions/buttons/delCategory': 'Remove category',
   'config/suggestions/buttons/enableReact': 'Enable reactions',
   'config/suggestions/buttons/disableReact': 'Disable reactions',
+  'config/suggestions/buttons/enableThreads': 'Enable threads',
+  'config/suggestions/buttons/disableThreads': 'Disable threads',
 
   'config/suggestions/pages/suggestions': 'Enable or disable the suggestion system',
   'config/suggestions/pages/categories': 'Add or delete suggestion categories',
