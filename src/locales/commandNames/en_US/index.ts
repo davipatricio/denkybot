@@ -66,5 +66,11 @@ export default {
   'ban/reason': 'reason',
 
   // Wikipedia
-  'wikipedia/search': 'search'
+  'wikipedia/search': 'search',
+
+  // Mute
+  mute: 'mute',
+  'mute/user': 'user',
+  'mute/time': 'time',
+  'mute/reason': 'reason'
 } as const;

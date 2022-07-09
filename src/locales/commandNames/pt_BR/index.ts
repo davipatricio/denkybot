@@ -67,5 +67,11 @@ export default {
 
   // Wikipedia
   wikipedia: 'wikipedia',
-  'wikipedia/search': 'pesquisa'
+  'wikipedia/search': 'pesquisa',
+
+  // Mute
+  mute: 'silenciar',
+  'mute/user': 'usuario',
+  'mute/time': 'tempo',
+  'mute/reason': 'motivo'
 } as const;
