@@ -67,6 +67,5 @@ export default {
 
   // Wikipedia
   wikipedia: 'wikipedia',
-  'wikipedia/search': 'pesquisa',
-  'wikipedia/language': 'idioma'
+  'wikipedia/search': 'pesquisa'
 } as const;

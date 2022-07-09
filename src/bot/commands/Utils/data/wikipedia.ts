@@ -25,17 +25,6 @@ export default class WikipediaData extends CommandDataStructure {
           },
           required: true,
           type: ApplicationCommandOptionType.String
-        },
-        {
-          name: client.languages.manager.get('en_US', 'commandNames:wikipedia/language'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:wikipedia/language')
-          },
-          description: client.languages.manager.get('en_US', 'commandDescriptions:wikipedia/language'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:wikipedia/language')
-          },
-          type: ApplicationCommandOptionType.String
         }
       ]
     };

@@ -66,6 +66,5 @@ export default {
   'ban/reason': 'reason',
 
   // Wikipedia
-  'wikipedia/search': 'search',
-  'wikipedia/language': 'language'
+  'wikipedia/search': 'search'
 } as const;

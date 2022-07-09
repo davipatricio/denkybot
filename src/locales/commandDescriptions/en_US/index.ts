@@ -74,6 +74,5 @@ export default {
 
   // Wikipedia
   wikipedia: 'Search Wikipedia for a term',
-  'wikipedia/search': 'Term to search for',
-  'wikipedia/language': 'The language to search in'
+  'wikipedia/search': 'Term to search for'
 } as const;

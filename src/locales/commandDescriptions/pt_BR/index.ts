@@ -74,6 +74,5 @@ export default {
 
   // Wikipedia
   wikipedia: 'Veja informações sobre uma página da Wikipedia',
-  'wikipedia/search': 'Termo para buscar na Wikipedia',
-  'wikipedia/language': 'Linguagem da Wikipedia'
+  'wikipedia/search': 'Termo para buscar na Wikipedia'
 } as const;
