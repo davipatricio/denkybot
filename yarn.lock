@@ -1223,7 +1223,7 @@ internal-slot@^1.0.3:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-ioredis@5.1.0, ioredis@^5.1.0:
+ioredis@5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/ioredis/-/ioredis-5.1.0.tgz#17bc0bc40f164ef26910ca6e56981c2a9bfdf57e"
   integrity sha512-HYHnvwxFwefeUBj0hZFejLvd8Q/YNAfnZlZG/hSRxkRhXMs1H8soMEVccHd1WlLrKkynorXBsAtqDGskOdAfVQ==
@@ -1713,7 +1713,7 @@ prettier@2.7.1:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.7.1.tgz#e235806850d057f97bb08368a4f7d899f7760c64"
   integrity sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==
 
-prisma-redis-middleware@^4.0.6:
+prisma-redis-middleware@4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/prisma-redis-middleware/-/prisma-redis-middleware-4.0.6.tgz#0a2127fa37192caef078f838c7002f903dbb1190"
   integrity sha512-dVxvCICJs7nsa9UI2BnRa1yJosX1/rP0trC38IcrQDysBr3cLn/LsxG+R/jcWv7Qnmz6iWO+MjsN0BP5B3oKxw==
