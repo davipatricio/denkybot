@@ -72,12 +72,6 @@ export default {
   'ban/delete_messages': 'Se devo ou não excluir as mensagens do usuário banido',
   'ban/reason': 'O motivo do banimento',
 
-  // Mute
-  mute: 'Silencia um usuário do servidor',
-  'mute/user': 'O usuário para silenciar',
-  'mute/time': 'Tempo de silenciamento',
-  'mute/reason': 'O motivo do silenciamento'
-
   // Wikipedia
   wikipedia: 'Veja informações sobre uma página da Wikipedia',
   'wikipedia/search': 'Termo para buscar na Wikipedia',

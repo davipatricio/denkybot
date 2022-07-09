@@ -65,15 +65,6 @@ export default {
   'ban/delete_messages/days': 'dias',
   'ban/reason': 'motivo',
 
-  // Mute
-  mute: 'silenciar',
-  'mute/user': 'usuario',
-  'mute/time': 'tempo',
-  'mute/time/day': 'dias',
-  'mute/time/hours': 'hora',
-  'mute/time/month': 'mes',
-  'mute/reason': 'motivo'
-
   // Wikipedia
   wikipedia: 'wikipedia',
   'wikipedia/search': 'pesquisa',

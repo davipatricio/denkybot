@@ -72,12 +72,6 @@ export default {
   'ban/delete_messages': 'Whether or not to delete the messages of the banned user',
   'ban/reason': 'The reason for the ban',
 
-  // Mute
-  mute: 'Mutes a user from the server',
-  'mute/user': 'The user to mute',
-  'mute/time': 'The time for the mute',
-  'mute/reason': 'The reason for the mute'
-
   // Wikipedia
   wikipedia: 'Search Wikipedia for a term',
   'wikipedia/search': 'Term to search for',
