@@ -189,5 +189,17 @@ export default {
   'wikipedia/error/no-results': '❌ **|** Nenhum resultado encontrado.',
   'wikipedia/error/disambiguation': '❌ **|** A sua pesquisa é uma desambiguação.',
   'wikipedia/embeds/fields/title': '📖 Mais informações',
-  'wikipedia/embeds/fields/value': (pageUrl: string, pageId: number) => `🔗 Clique **[aqui](${pageUrl})** para acessar a página na Wikipedia.\n🔢 Id da Página: **${pageId}**`
+  'wikipedia/embeds/fields/value': (pageUrl: string, pageId: number) => `🔗 Clique **[aqui](${pageUrl})** para acessar a página na Wikipedia.\n🔢 Id da Página: **${pageId}**`,
+
+  // Mute
+  'mute/no-reason': 'Sem motivo.',
+  'mute/punished-by': 'Silenciado por:',
+  'mute/complete': (user: User | string) => `O usuário ${user} foi silenciado com sucesso.`,
+  'mute/error/mute-bot': 'Eu não posso me silenciar.',
+  'mute/error/mute-self': 'Você não pode se silenciar.',
+  'mute/error/not-member': 'Este usuário não é um membro do servidor.',
+  'mute/error/not-moderatable': 'Não posso silenciar este usuário, pois meu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'mute/error/no-permissions': 'Você não pode silenciar este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'mute/error/unknown-member': 'Membro desconhecido.',
+  'mute/error/unknown-error': 'Ocorreu um erro ao silenciar o usuário.'
 } as const;

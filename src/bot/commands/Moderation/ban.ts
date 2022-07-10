@@ -25,21 +25,21 @@ export default class PingCommand extends Command {
     const user = member?.user ?? interaction.options.getUser('user', true);
 
     if (user.id === this.client.user?.id) {
-      interaction.reply(`❌ ${interaction.user} **|** ${t('command:ban/error/ban-bot')}`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/ban-bot')}`);
       return;
     }
     if (user.id === interaction.user.id) {
-      interaction.reply(`❌ ${interaction.user} **|** ${t('command:ban/error/ban-self')}`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/ban-self')}`);
       return;
     }
 
     if (member?.roles) {
-      if (!member.bannable || member.roles.highest?.position >= interaction.guild.members.me.roles.highest.position) {
-        interaction.reply(`❌ ${interaction.user} **|** ${t('command:ban/error/not-bannable')}`);
+      if (!member.bannable || member.roles.highest.position >= interaction.guild.members.me.roles.highest.position) {
+        interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/not-bannable')}`);
         return;
       }
-      if (interaction.member.roles.highest?.position <= member.roles.highest?.position) {
-        interaction.reply(`❌ ${interaction.user} **|** ${t('command:ban/error/no-permissions')}`);
+      if (interaction.member.roles.highest.position <= member.roles.highest.position) {
+        interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/no-permissions')}`);
         return;
       }
     }

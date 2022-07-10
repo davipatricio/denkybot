@@ -74,5 +74,11 @@ export default {
 
   // Wikipedia
   wikipedia: 'Veja informações sobre uma página da Wikipedia',
-  'wikipedia/search': 'Termo para buscar na Wikipedia'
+  'wikipedia/search': 'Termo para buscar na Wikipedia',
+
+  // Mute
+  mute: 'Silencia um usuário do servidor',
+  'mute/user': 'O usuário para silenciar',
+  'mute/time': 'Tempo de silenciamento',
+  'mute/reason': 'O motivo do silenciamento'
 } as const;

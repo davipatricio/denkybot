@@ -74,5 +74,11 @@ export default {
 
   // Wikipedia
   wikipedia: 'Search Wikipedia for a term',
-  'wikipedia/search': 'Term to search for'
+  'wikipedia/search': 'Term to search for',
+
+  // Mute
+  mute: 'Mutes a user from the server',
+  'mute/user': 'The user to mute',
+  'mute/time': 'The time for the mute',
+  'mute/reason': 'The reason for the mute'
 } as const;
