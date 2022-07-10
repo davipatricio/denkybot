@@ -1,14 +1,15 @@
 datasource db {
-  url      = env("DATABASE_URL_PG")
-  provider = "postgres"
+  url      = env("DATABASE_URL_MB")
+  provider = "mongodb"
 }
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../bot/node_modules/.prisma/client"
 }
 
 model Suggestion {
-  guildId String @id @default("")
+  guildId String @id @default("") @map("_id")
   addReactions Boolean @default(true)
   categories String[] @default([])
   cooldown Int @default(0)
@@ -16,7 +17,7 @@ model Suggestion {
 }
 
 model Afk {
-  userId String @id @default("")
+  userId String @id @default("") @map("_id")
   guildId String?
   reason String?
   originalNick String?

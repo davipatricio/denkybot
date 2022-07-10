@@ -1,5 +1,5 @@
 {
-  "name": "denkybot",
+  "name": "@denkylabs/bot",
   "version": "1.0.0-rc4",
   "description": "Denky is a multipurpose Discord bot used in +3000 servers. Built with Node.js, TypeScript and discord.js.",
   "main": "./build/sharding/shard.js",
@@ -20,14 +20,7 @@
     "start": "cd ./build && node sharding/shard.js",
     "lint": "npx eslint src",
     "lint:fix": "yarn lint:prettier && npx eslint src --fix",
-    "lint:prettier": "npx prettier -w src",
-    "generate:cockroachdb": "prisma generate --schema=./src/prisma/cockroachdb.prisma",
-    "generate:postgres": "prisma generate --schema=./src/prisma/postgres.prisma",
-    "generate:mongodb": "prisma generate --schema=./src/prisma/mongodb.prisma",
-    "migrate:pg": "prisma migrate dev --schema=./src/prisma/postgres.prisma",
-    "migrate:pg:create": "prisma migrate dev --name production --schema=./src/prisma/postgres.prisma --create-only",
-    "migrate:cr": "prisma migrate dev --schema=./src/prisma/cockroachdb.prisma",
-    "migrate:cr:create": "prisma migrate dev --name production --schema=./src/prisma/cockroachdb.prisma --create-only"
+    "lint:prettier": "npx prettier -w src"
   },
   "keywords": [],
   "author": "Davi Patricio <veric@denkylabs.com>",
@@ -39,10 +32,10 @@
   "devDependencies": {
     "@types/ioredis": "4.28.10",
     "@types/node": "workspace:^",
-    "prisma": "4.0.0"
+    "prisma": "workspace:^"
   },
   "dependencies": {
-    "@prisma/client": "4.0.0",
+    "@prisma/client": "workspace:^",
     "@sentry/node": "7.6.0",
     "dayjs": "1.11.3",
     "discord.js": "14.0.0-dev.1657325401-33ae7df",
