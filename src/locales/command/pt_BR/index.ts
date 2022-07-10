@@ -82,6 +82,8 @@ export default {
   'config/suggestions/buttons/disableReact': 'Desabilitar reações',
   'config/suggestions/buttons/enableThreads': 'Habilitar tópicos',
   'config/suggestions/buttons/disableThreads': 'Desabilitar tópicos',
+  'config/suggestions/buttons/enableNotices': 'Habilitar notificações',
+  'config/suggestions/buttons/disableNotices': 'Desabilitar notificações',
 
   'config/suggestions/pages': 'Páginas',
   'config/suggestions/pages/suggestions': 'Ative ou desativar o sistema de sugestões',
@@ -89,17 +91,21 @@ export default {
   'config/suggestions/pages/reactions': 'Habilite ou desabilite reações em sugestões',
   'config/suggestions/pages/cooldowns': 'Gerencie cooldowns de sugestões',
   'config/suggestions/pages/threads': "Ative ou desative o uso de tópicos 'threads' em sugestões",
+  'config/suggestions/pages/notices': 'Avise membros na DM quando suas sugestões forem aceitas e recusadas',
 
   'config/suggestions/pages/suggestions/title': 'Sugestões',
   'config/suggestions/pages/categories/title': 'Categorias',
   'config/suggestions/pages/reactions/title': 'Reações',
   'config/suggestions/pages/cooldowns/title': 'Cooldowns',
   'config/suggestions/pages/threads/title': 'Tópicos',
+  'config/suggestions/pages/notices/title': 'Notificações',
 
   'config/suggestions/disabled': 'O sistema de sugestões está atualmente desativado.',
   'config/suggestions/enabled': 'O sistema de sugestões está atualmente habilitado.',
   'config/suggestions/reactions': (status: boolean) => `As reações estão atualmente: ${status ? 'ativadas' : 'desativadas'}.`,
   'config/suggestions/threads': (status: boolean) => `Os tópicos estão atualmente: ${status ? 'ativados' : 'desativados'}.`,
+  'config/suggestions/notices': (status: boolean) =>
+    status ? 'Estou notificando membros quando suas sugestões são aceitas ou recusadas.' : 'Não estou notificando membros quando suas sugestões são aceitas ou recusadas.',
   'config/suggestions/cooldowns': 'O cooldown atualmente está em:',
   'config/suggestions/cooldowns/no-cooldown': 'Sem cooldown',
   'config/suggestions/cooldowns/no-cooldown/about': 'Membros não deverão esperar para sugerir consecutivamente',
@@ -132,6 +138,9 @@ export default {
   'config/suggestions/actions/threads/disabled': 'Tópicos desabilitados com sucesso!',
 
   'config/suggestions/actions/cooldowns/set': 'Cooldown definido com sucesso para',
+
+  'config/suggestions/actions/notices/enabled': 'Agora quando um membro da equipe aceitar ou recusar uma sugestão, eu notificarei o membro pela DM.',
+  'config/suggestions/actions/notices/disabled': 'Agora quando um membro da equipe aceitar ou recusar uma sugestão, eu não notificarei o membro pela DM.',
 
   // Server Banner
   'server/banner/noBanner': 'Este servidor não tem um banner.',
