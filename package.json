@@ -55,7 +55,7 @@
     "@prisma/client": "4.0.0",
     "@sentry/node": "7.6.0",
     "dayjs": "1.11.3",
-    "discord.js": "14.0.0-dev.1657325401-33ae7df",
+    "discord.js": "14.0.0-dev.1657411900-f0b68d5",
     "dotenv": "16.0.1",
     "fastify": "4.2.0",
     "ioredis": "5.1.0",
