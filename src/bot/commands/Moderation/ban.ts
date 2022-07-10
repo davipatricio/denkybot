@@ -34,11 +34,11 @@ export default class PingCommand extends Command {
     }
 
     if (member?.roles) {
-      if (!member.bannable || member.roles.highest?.position >= interaction.guild.members.me.roles.highest.position) {
+      if (!member.bannable || member.roles.highest.position >= interaction.guild.members.me.roles.highest.position) {
         interaction.reply(`❌ ${interaction.user} **|** ${t('command:ban/error/not-bannable')}`);
         return;
       }
-      if (interaction.member.roles.highest?.position <= member.roles.highest?.position) {
+      if (interaction.member.roles.highest.position <= member.roles.highest.position) {
         interaction.reply(`❌ ${interaction.user} **|** ${t('command:ban/error/no-permissions')}`);
         return;
       }
