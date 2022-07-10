@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandType } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
 import { CommandDataStructure } from '../../../../structures/CommandDataStructure';
 import type { DenkyClient } from '../../../../types/Client';
 
@@ -12,6 +12,7 @@ export default class MuteData extends CommandDataStructure {
       },
       type: ApplicationCommandType.ChatInput,
       dmPermission: false,
+      defaultMemberPermissions: [PermissionFlagsBits.ModerateMembers],
       description: client.languages.manager.get('en_US', 'commandDescriptions:mute'),
       descriptionLocalizations: {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:mute')
