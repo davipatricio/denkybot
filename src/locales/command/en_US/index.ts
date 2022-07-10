@@ -187,5 +187,17 @@ export default {
   'wikipedia/error/no-results': '❌ **|** No results found.',
   'wikipedia/error/disambiguation': '❌ **|** Your search is a disambiguation.',
   'wikipedia/embeds/fields/title': '📖 More information',
-  'wikipedia/embeds/fields/value': (pageUrl: string, pageId: number) => `🔗 Click **[here](${pageUrl})** to access the Wikipedia page.\n🔢 Page Id: **${pageId}**`
+  'wikipedia/embeds/fields/value': (pageUrl: string, pageId: number) => `🔗 Click **[here](${pageUrl})** to access the Wikipedia page.\n🔢 Page Id: **${pageId}**`,
+
+  // Mute
+  'mute/no-reason': 'No reason.',
+  'mute/punished-by': 'Punished by:',
+  'mute/complete': (user: User | string) => `The user ${user} was muted successfully.`,
+  'mute/error/mute-bot': 'I can not mute myself.',
+  'mute/error/mute-self': 'You can not mute yourself.',
+  'mute/error/not-member': 'You can not mute a user who is not a member of this server.',
+  'mute/error/not-moderatable': "I can not mute this user because my highest role is below or equal to the user's highest role.",
+  'mute/error/no-permissions': "You cannot mute this user as their highest rank is below or in the same rank as the member's highest role.",
+  'mute/error/unknown-member': 'Unknown member.',
+  'mute/error/unknown-error': 'There was an error muting the user.'
 } as const;
