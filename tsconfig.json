@@ -40,14 +40,12 @@
         "useUnknownInCatchVariables": true
     },
     "exclude": [
-        "build",
+        "packages/**/build",
+        "packages/**/node_modules",
         "node_modules",
-        "package-lock.json",
-        "package.json",
-        ".git/",
-        ".vscode/"
+        "package.json"
     ],
     "include": [
-        "src/**/*.ts"
+        "packages/**/*.ts"
     ]
 }

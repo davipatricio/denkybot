@@ -10,10 +10,10 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "ignorePatterns": [
+        "packages/**/build",
+        "packages/**/node_modules",
         "node_modules/",
-        "build/",
-        ".git/",
-        ".vscode/"
+        ".git/"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {

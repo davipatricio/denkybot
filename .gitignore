@@ -1,5 +1,12 @@
-node_modules
-build
-*-lock.json
-.env
+# Files
 config.json
+*-lock.json
+
+# Folders
+node_modules
+packages/**/build
+
+# Dot files
+.env
+.turbo
+*.log
