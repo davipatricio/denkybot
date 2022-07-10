@@ -34,7 +34,7 @@ export default class MessageCreateEvent extends Event {
   async verifyAFKMention(client: DenkyClient, message: Message) {
     if (message.mentions.users.size === 0) return;
 
-    const t = (path: AllLocalePaths, ...args: unknown[]) => {
+    const t = (path: string, ...args: unknown[]) => {
       return client.languages.manager.get(client.helpers.recommendLocale(message.guild?.preferredLocale), path, ...args);
     };
 

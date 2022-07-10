@@ -1,5 +1,6 @@
 import type { Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
-import type { AllLocalePaths, CommandCategoriesKeys, CommandNamesKeys } from '../bot/managers/LanguageManager';
+import type { FunctionKeys, NonFunctionKeys } from 'utility-types';
+import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandLocaleKeysObject, CommandLocaleKeysObjectGeneric, CommandNamesKeys, PermissionLocaleKeys } from '../bot/managers/LanguageManager';
 import type { DenkyClient } from '../types/Client';
 
 class Command {
@@ -49,8 +50,18 @@ class Command {
   }
 }
 
-export type CommandLocale = (path: AllLocalePaths, ...args: unknown[]) => string;
+function t<K extends FunctionKeys<CommandLocaleKeysObject>>(path: `command:${K}`, ...rest: Parameters<CommandLocaleKeysObjectGeneric<K>>): string;
+function t<K extends NonFunctionKeys<CommandLocaleKeysObject>>(path: `command:${K}`): string;
+function t(path: `commandDescriptions:${CommandDescriptionsKeys}`): string;
+function t(path: `commandCategories:${CommandCategoriesKeys}`): string;
+function t(path: `commandNames:${CommandNamesKeys}`): string;
+function t(path: `permissions:${PermissionLocaleKeys}`): string;
 
-export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
+function t(path: string, ...rest: unknown[]) {
+  return `${path}${rest}`;
+}
+
+export type CommandLocale = typeof t;
+export type CommandRunOptions = { t: typeof t; interaction: ChatInputCommandInteraction };
 
 export { Command };

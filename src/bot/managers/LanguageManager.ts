@@ -1,15 +1,22 @@
 /* eslint-disable no-await-in-loop */
 import { readdir } from 'node:fs/promises';
+import type { FunctionKeys, NonFunctionKeys } from 'utility-types';
 import type { DenkyClient } from '../../types/Client';
 
 export type LocaleCategories = 'command' | 'commandNames' | 'commandDescriptions' | 'commandCategories';
 export type SupportedLocales = 'en_US' | 'pt_BR';
 
-export type CommandLocaleKeys = keyof typeof import('../../locales/command/pt_BR/index').default;
-export type CommandNamesKeys = keyof typeof import('../../locales/commandNames/pt_BR/index').default;
-export type CommandDescriptionsKeys = keyof typeof import('../../locales/commandDescriptions/pt_BR/index').default;
-export type CommandCategoriesKeys = keyof typeof import('../../locales/commandCategories/pt_BR/index').default;
-export type PermissionLocaleKeys = keyof typeof import('../../locales/permissions/pt_BR/index').default;
+export type CommandLocaleKeysObject = typeof import('../../locales/command/pt_BR/index').default;
+type CommandNamesKeysObject = typeof import('../../locales/commandNames/pt_BR/index').default;
+type CommandDescriptionsKeysObject = typeof import('../../locales/commandDescriptions/pt_BR/index').default;
+type CommandCategoriesKeysObject = typeof import('../../locales/commandCategories/pt_BR/index').default;
+type PermissionLocaleKeysObject = typeof import('../../locales/permissions/pt_BR/index').default;
+
+export type CommandLocaleKeys = keyof CommandLocaleKeysObject;
+export type CommandNamesKeys = keyof CommandNamesKeysObject;
+export type CommandDescriptionsKeys = keyof CommandDescriptionsKeysObject;
+export type CommandCategoriesKeys = keyof CommandCategoriesKeysObject;
+export type PermissionLocaleKeys = keyof PermissionLocaleKeysObject;
 
 export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys | PermissionLocaleKeys;
 export type AllLocalePaths =
@@ -18,6 +25,8 @@ export type AllLocalePaths =
   | `commandCategories:${CommandCategoriesKeys}`
   | `commandNames:${CommandNamesKeys}`
   | `permissions:${PermissionLocaleKeys}`;
+
+export type CommandLocaleKeysObjectGeneric<K extends FunctionKeys<CommandLocaleKeysObject>> = CommandLocaleKeysObject[K];
 
 export class LanguageManager {
   /** The client that instantiated this manager */
@@ -44,7 +53,13 @@ export class LanguageManager {
     }
   }
 
-  get(lang: SupportedLocales, path: AllLocalePaths, ...args: unknown[]) {
+  get<K extends FunctionKeys<CommandLocaleKeysObject>>(locale: SupportedLocales, path: `command:${K}`, ...rest: Parameters<CommandLocaleKeysObjectGeneric<K>>): string;
+  get<K extends NonFunctionKeys<CommandLocaleKeysObject>>(locale: SupportedLocales, path: `command:${K}`): string;
+  get(locale: SupportedLocales, path: `commandDescriptions:${CommandDescriptionsKeys}`): string;
+  get(locale: SupportedLocales, path: `commandCategories:${CommandCategoriesKeys}`): string;
+  get(locale: SupportedLocales, path: `commandNames:${CommandNamesKeys}`): string;
+  get(locale: SupportedLocales, path: `permissions:${PermissionLocaleKeys}`): string;
+  get(lang: SupportedLocales, path: string, ...args: unknown[]) {
     const [category, key] = path.split(':');
     if (!this.cache[category]) return `!!{${category}.${key}}!!`;
 

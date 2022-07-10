@@ -2,7 +2,6 @@ import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, Interaction, Pe
 import type { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
-import type { AllLocalePaths } from '../managers/LanguageManager';
 
 export default class InteractionCreateEvent extends Event {
   /** Webhook used to log commands */
@@ -20,7 +19,7 @@ export default class InteractionCreateEvent extends Event {
 
     const userLocale = client.helpers.recommendLocale(interaction.locale);
 
-    const t = (path: AllLocalePaths, ...args: unknown[]) => {
+    const t = (path: any, ...args: any) => {
       return client.languages.manager.get(userLocale, path, ...args);
     };
 
