@@ -37,7 +37,7 @@
   ],
   "license": "GPL-3.0 license",
   "devDependencies": {
-    "@types/ioredis": "^4.28.10",
+    "@types/ioredis": "4.28.10",
     "@types/node": "18.0.1",
     "@typescript-eslint/eslint-plugin": "5.30.5",
     "@typescript-eslint/parser": "5.30.5",
@@ -54,6 +54,7 @@
   "dependencies": {
     "@prisma/client": "4.0.0",
     "@sentry/node": "7.6.0",
+    "dayjs": "1.11.3",
     "discord.js": "14.0.0-dev.1657325401-33ae7df",
     "dotenv": "16.0.1",
     "fastify": "4.2.0",
