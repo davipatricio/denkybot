@@ -14,6 +14,7 @@ model Suggestion {
   categories String[] @default([])
   cooldown Int @default(0)
   useThreads Boolean @default(false)
+  sendNotices Boolean @default(false)
 }
 
 model Afk {
