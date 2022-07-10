@@ -17,6 +17,6 @@ jobs:
     - name: Install dependencies
       run: yarn install
     - name: Generate Prisma schema
-      run: npx turbo run prisma
+      run: npx turbo run generate:postgres
     - name: tsc
       uses: icrawl/action-tsc@v1
