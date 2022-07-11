@@ -34,7 +34,7 @@
     "@types/ioredis": "4.28.10",
     "@types/node": "workspace:^",
     "prisma": "workspace:^",
-    "tsc-alias": "^1.6.11"
+    "tsc-alias": "1.6.11"
   },
   "dependencies": {
     "@prisma/client": "workspace:^",
