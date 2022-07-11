@@ -4,7 +4,8 @@
   "private": true,
   "license": "GPL-3.0 license",
   "scripts": {
-    "build": "npx tsc --project tsconfig.json"
+    "build": "npx tsc --project tsconfig.json",
+    "types:check": "npx tsc --noEmit --incremental false"
   },
   "author": "Davi Patricio <veric@denkylabs.com>",
   "contributors": [

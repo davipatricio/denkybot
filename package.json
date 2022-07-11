@@ -16,6 +16,7 @@
     "deploy": "npx turbo run build lint:fix types:check deploy",
     "lint": "npx turbo run lint:fix",
     "build": "npx turbo run build",
+    "check": "npx turbo run types:check",
     "prisma": "npx turbo run generate:postgres",
     "types:check": "npx turbo run types:check"
   },
