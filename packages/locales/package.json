@@ -1,5 +1,6 @@
 {
   "name": "@denkylabs/locales",
+  "description": "Module to store and manage Denky locales.",
   "version": "0.0.0",
   "private": true,
   "license": "GPL-3.0 license",

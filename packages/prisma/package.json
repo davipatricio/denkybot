@@ -1,5 +1,6 @@
 {
   "name": "@denkylabs/prisma",
+  "description": "Module to manage Prisma schemas.",
   "version": "0.0.0",
   "private": true,
   "license": "GPL-3.0 license",
