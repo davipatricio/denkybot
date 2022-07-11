@@ -5,6 +5,8 @@
 		"paths": {
 			"@locales": ["../locales/data"],
 			"@locales/*": ["../locales/data/*"],
+			"@webserver": ["../webserver"],
+			"@webserver/*": ["../webserver/*"],
 			"@prisma-client": ["../../node_modules/.prisma/client"],
 			"@prisma-client/*": ["../../node_modules/.prisma/client/*"]
 		}

@@ -1,0 +1,16 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"@bot": ["../bot/src"],
+			"@bot/*": ["../bot/src/*"],
+		}
+	},
+  "tsc-alias": {
+    "verbose": false,
+    "resolveFullPaths": true,
+	},
+	"include": ["*.ts", "*.json"],
+	"exclude": ["tsconfig.json"]
+}

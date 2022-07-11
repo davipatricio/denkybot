@@ -1,0 +1,42 @@
+{
+  "name": "@denkylabs/webserver",
+  "version": "0.0.0",
+  "description": "Module to handle Denky interactions.",
+  "main": "./src/sharding/shard.js",
+  "private": true,
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/denkylabs/denkybot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/denkylabs/denkybot/issues"
+  },
+  "homepage": "https://github.com/denkylabs/denkybot#readme",
+  "scripts": {
+    "build": "npx tsc --project tsconfig.json && npx tsc-alias -p tsconfig.json && yarn posttranspile",
+    "build:check": "yarn types:check && yarn build",
+    "types:check": "npx tsc --noEmit --incremental false",
+    "start": "cd ./src && node ./sharding/shard.js",
+    "posttranspile": "cd scripts && node copyEnv",
+    "lint": "npx eslint src",
+    "lint:fix": "yarn lint:prettier && npx eslint src --fix",
+    "lint:prettier": "npx prettier -w src"
+  },
+  "keywords": [],
+  "author": "Davi Patricio <veric@denkylabs.com>",
+  "contributors": [
+    "Nicolas Ribeiro <niskii@denkylabs.com>"
+  ],
+  "license": "GPL-3.0 license",
+  "devDependencies": {
+    "@types/node": "workspace:^",
+    "tsc-alias": "1.6.11"
+  },
+  "dependencies": {
+    "discord.js": "14.0.0-dev.1657325401-33ae7df",
+    "fastify": "4.2.0",
+    "tslib": "2.4.0",
+    "tweetnacl": "1.0.3"
+  }
+}
