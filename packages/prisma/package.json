@@ -18,7 +18,8 @@
     "Nicolas Ribeiro <niskii@denkylabs.com>"
   ],
   "devDependencies": {
-    "prisma": "workspace:^"
+    "prisma": "workspace:^",
+    "typescript": "workspace:^"
   },
   "dependencies": {
     "@prisma/client": "workspace:^"

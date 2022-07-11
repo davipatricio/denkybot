@@ -16,6 +16,7 @@
     "typescript": "workspace:^"
   },
   "dependencies": {
-    "discord.js": "14.0.0-dev.1657325401-33ae7df"
+    "discord.js": "workspace:^",
+    "tslib": "workspace:^"
   }
 }
