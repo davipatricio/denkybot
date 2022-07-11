@@ -1,16 +1,16 @@
 {
   "name": "@denkylabs/prisma",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
   "license": "GPL-3.0 license",
   "scripts": {
-    "generate:cockroachdb": "prisma generate --schema=./schemas/cockroachdb.prisma",
-    "generate:postgres": "prisma generate --schema=./schemas/postgres.prisma",
-    "generate:mongodb": "prisma generate --schema=./schemas/mongodb.prisma",
-    "migrate:pg": "prisma migrate dev --schema=./schemas/postgres.prisma",
-    "migrate:pg:create": "prisma migrate dev --name production --schema=./schemas/postgres.prisma --create-only",
-    "migrate:cr": "prisma migrate dev --schema=./schemas/cockroachdb.prisma",
-    "migrate:cr:create": "prisma migrate dev --name production --schema=./schemas/cockroachdb.prisma --create-only"
+    "generate:cockroachdb": "npx prisma generate --schema=./schemas/cockroachdb.prisma",
+    "generate:postgres": "npx prisma generate --schema=./schemas/postgres.prisma",
+    "generate:mongodb": "npx prisma generate --schema=./schemas/mongodb.prisma",
+    "migrate:pg": "npx prisma migrate dev --schema=./schemas/postgres.prisma",
+    "migrate:pg:create": "npx prisma migrate dev --name production --schema=./schemas/postgres.prisma --create-only",
+    "migrate:cr": "npx prisma migrate dev --schema=./schemas/cockroachdb.prisma",
+    "migrate:cr:create": "npx prisma migrate dev --name production --schema=./schemas/cockroachdb.prisma --create-only"
   },
   "author": "Davi Patricio <veric@denkylabs.com>",
   "contributors": [

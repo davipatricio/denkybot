@@ -1,3 +1,18 @@
 {
 	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"@locales": ["../locales/data"],
+			"@locales/*": ["../locales/data/*"],
+			"@prisma-client": ["../../node_modules/.prisma/client"],
+			"@prisma-client/*": ["../../node_modules/.prisma/client/*"]
+		}
+	},
+  "tsc-alias": {
+    "verbose": false,
+    "resolveFullPaths": true,
+	},
+	"include": ["src/**/*.ts", "*.json"],
+	"exclude": ["tsconfig.json", "scripts"]
 }

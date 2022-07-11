@@ -1,15 +1,16 @@
 /* eslint-disable no-await-in-loop */
 import { readdir } from 'node:fs/promises';
+import nodePath from 'node:path';
 import type { DenkyClient } from '../../types/Client';
 
 export type LocaleCategories = 'command' | 'commandNames' | 'commandDescriptions' | 'commandCategories';
 export type SupportedLocales = 'en_US' | 'pt_BR';
 
-export type CommandLocaleKeys = keyof typeof import('../../locales/command/pt_BR/index').default;
-export type CommandNamesKeys = keyof typeof import('../../locales/commandNames/pt_BR/index').default;
-export type CommandDescriptionsKeys = keyof typeof import('../../locales/commandDescriptions/pt_BR/index').default;
-export type CommandCategoriesKeys = keyof typeof import('../../locales/commandCategories/pt_BR/index').default;
-export type PermissionLocaleKeys = keyof typeof import('../../locales/permissions/pt_BR/index').default;
+export type CommandLocaleKeys = keyof typeof import('@locales/command/pt_BR/index').default;
+export type CommandNamesKeys = keyof typeof import('@locales/commandNames/pt_BR/index').default;
+export type CommandDescriptionsKeys = keyof typeof import('@locales/commandDescriptions/pt_BR/index').default;
+export type CommandCategoriesKeys = keyof typeof import('@locales/commandCategories/pt_BR/index').default;
+export type PermissionLocaleKeys = keyof typeof import('@locales/permissions/pt_BR/index').default;
 
 export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys | PermissionLocaleKeys;
 export type AllLocalePaths =
@@ -18,6 +19,8 @@ export type AllLocalePaths =
   | `commandCategories:${CommandCategoriesKeys}`
   | `commandNames:${CommandNamesKeys}`
   | `permissions:${PermissionLocaleKeys}`;
+
+const BASE_LOCALE_DIR = nodePath.resolve(__dirname, '../../../../locales/data/');
 
 export class LanguageManager {
   /** The client that instantiated this manager */
@@ -30,11 +33,12 @@ export class LanguageManager {
   }
 
   async loadLocales() {
-    const localeCategories = (await readdir('./locales')) as LocaleCategories[];
+    const localeCategories = (await readdir(BASE_LOCALE_DIR)) as LocaleCategories[];
     for (const category of localeCategories) {
-      const categoryLocales = (await readdir(`./locales/${category}`)) as SupportedLocales[];
+      const categoryLocales = (await readdir(`${BASE_LOCALE_DIR}/${category}`)) as SupportedLocales[];
       for (const locale of categoryLocales) {
-        const { default: localeData } = await import(`../../locales/${category}/${locale}`);
+        // HACK: tsc-alias doesn't support dynamic imports
+        const { default: localeData } = await import(`../../../../locales/data/${category}/${locale}`);
         // @ts-ignore
         if (!this.cache[category]) this.cache[category] = {};
         // @ts-ignore

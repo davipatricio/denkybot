@@ -1,0 +1,19 @@
+{
+  "name": "@denkylabs/locales",
+  "version": "0.0.0",
+  "private": true,
+  "license": "GPL-3.0 license",
+  "scripts": {
+    "build": "npx tsc --project tsconfig.json"
+  },
+  "author": "Davi Patricio <veric@denkylabs.com>",
+  "contributors": [
+    "Nicolas Ribeiro <niskii@denkylabs.com>"
+  ],
+  "devDependencies": {
+    "typescript": "workspace:^"
+  },
+  "dependencies": {
+    "discord.js": "14.0.0-dev.1657325401-33ae7df"
+  }
+}

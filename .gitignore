@@ -5,6 +5,7 @@ config.json
 # Folders
 node_modules
 packages/**/build
+build
 
 # Dot files
 .env

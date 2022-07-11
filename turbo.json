@@ -3,21 +3,19 @@
   "baseBranch": "origin/main",
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "^build",
-        "^lint:fix"
-      ],
       "outputs": [
         "build/**"
-      ]
+      ],
+      "cache": false
     },
     "lint": {
       "outputs": []
     },
     "lint:fix": {
       "outputs": [
-        "src/**"
-      ]
+        "packages/**"
+      ],
+      "cache": false
     },
     "types:check": {
       "outputs": []
@@ -25,17 +23,19 @@
     "deploy": {
       "dependsOn": [
         "^build",
-        "^lint:fix"
+        "^lint:fix",
+        "^generate:postgres"
       ],
       "outputs": [
         "build/**"
-      ]
+      ],
+      "cache": false
     },
     "generate:postgres": {
-      "dependsOn": ["^generate:postgres"],
       "outputs": [
         "node_modules/**"
-      ]
+      ],
+      "cache": false
     }
   }
 }

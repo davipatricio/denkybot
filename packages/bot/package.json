@@ -2,7 +2,7 @@
   "name": "@denkylabs/bot",
   "version": "1.0.0-rc4",
   "description": "Denky is a multipurpose Discord bot used in +3000 servers. Built with Node.js, TypeScript and discord.js.",
-  "main": "./build/sharding/shard.js",
+  "main": "./src/sharding/shard.js",
   "private": true,
   "type": "commonjs",
   "repository": {
@@ -14,10 +14,11 @@
   },
   "homepage": "https://github.com/denkylabs/denkybot#readme",
   "scripts": {
-    "build": "npx sucrase ./src -d ./build --esModuleInterop --transforms typescript,imports",
+    "build": "npx tsc --project tsconfig.json && npx tsc-alias -p tsconfig.json && yarn posttranspile",
     "build:check": "yarn types:check && yarn build",
     "types:check": "npx tsc --noEmit --incremental false",
-    "start": "cd ./build && node sharding/shard.js",
+    "start": "cd ./src && node ./sharding/shard.js",
+    "posttranspile": "cd scripts && node copyEnv",
     "lint": "npx eslint src",
     "lint:fix": "yarn lint:prettier && npx eslint src --fix",
     "lint:prettier": "npx prettier -w src"
@@ -32,7 +33,8 @@
   "devDependencies": {
     "@types/ioredis": "4.28.10",
     "@types/node": "workspace:^",
-    "prisma": "workspace:^"
+    "prisma": "workspace:^",
+    "tsc-alias": "^1.6.11"
   },
   "dependencies": {
     "@prisma/client": "workspace:^",
