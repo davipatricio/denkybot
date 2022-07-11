@@ -1,6 +1,6 @@
 {
   "name": "@denkylabs/bot",
-  "version": "1.0.0-rc4",
+  "version": "0.0.0",
   "description": "Denky is a multipurpose Discord bot used in +3000 servers. Built with Node.js, TypeScript and discord.js.",
   "main": "./src/sharding/shard.js",
   "private": true,
