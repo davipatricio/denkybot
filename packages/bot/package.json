@@ -21,7 +21,7 @@
   "scripts": {
     "build": "npx tsc --project tsconfig.json",
     "postbuild": "npx tsc-alias && node scripts/copyEnv.js",
-    "check": "npx tsc --noEmit --incremental false"
+    "types:check": "npx tsc --noEmit --incremental false"
   },
   "devDependencies": {
     "@types/ioredis": "4.28.10",
