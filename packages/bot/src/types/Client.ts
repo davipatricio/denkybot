@@ -1,7 +1,7 @@
 import type { Logger } from '@logger';
 import type { Client, Collection } from 'discord.js';
-import type { DatabaseManager } from '../bot/managers/DatabaseManager';
-import type Languages from '../bot/modules/Languages';
+import type { DatabaseManager } from '../lib/managers/DatabaseManager';
+import type Languages from '../lib/modules/Languages';
 import type { Command } from '../structures/Command';
 import type { Task } from '../structures/Task';
 

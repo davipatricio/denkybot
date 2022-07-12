@@ -40,5 +40,5 @@
       "useDefineForClassFields": false,
       "useUnknownInCatchVariables": true
   },
-  "include": ["packages/**/*.ts", "packages/**/package.json"]
+  "include": ["packages/**/*.ts"]
 }
