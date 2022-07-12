@@ -1,0 +1,41 @@
+{
+	"extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": "../",
+        "paths": {
+            "#bot": [
+                "./bot"
+            ],
+            "#bot/*": [
+                "./bot/*"
+            ],
+            "#locales": [
+                "./locales"
+            ],
+            "#locales/*": [
+                "./locales/*"
+            ],
+            "#webserver": [
+                "./webserver"
+            ],
+            "#webserver/*": [
+                "./webserver/*"
+            ],
+            "#logger": [
+                "./logger"
+            ],
+            "#logger/*": [
+                "./logger/*"
+            ],
+            "#prisma-client": [
+                "../node_modules/.prisma/client"
+            ]
+        },
+    },
+	"include": [
+		"src/**/*.ts"
+	],
+	"exclude": [
+		"tsconfig.json"
+	]
+}

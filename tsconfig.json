@@ -1,53 +1,44 @@
 {
-    "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
-        "allowUnreachableCode": false,
-        "allowUnusedLabels": false,
-        "alwaysStrict": true,
-        "checkJs": false,
-        "declaration": false,
-        "esModuleInterop": true,
-        // if true: conflicts with discord-api-types
-        "exactOptionalPropertyTypes": false,
-        "forceConsistentCasingInFileNames": false,
-        "importHelpers": true,
-        "importsNotUsedAsValues": "error",
-        "inlineSources": false,
-        "isolatedModules": false,
-        "module": "CommonJS",
-        "moduleResolution": "Node",
-        "newLine": "lf",
-        "noEmitHelpers": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitOverride": true,
-        "noImplicitReturns": false,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "outDir": "build",
-        "pretty": true,
-        "preserveConstEnums": true,
-        "removeComments": false,
-        "resolveJsonModule": true,
-        "skipDefaultLibCheck": true,
-        "skipLibCheck": true,
-        "strictNullChecks": true,
-        "sourceMap": false,
-        "target": "ESNext",
-        "lib": [
-            "ESNext"
-        ],
-        "useDefineForClassFields": false,
-        "useUnknownInCatchVariables": true
-    },
-    "exclude": [
-        "build",
-        "node_modules",
-        "package-lock.json",
-        "package.json",
-        ".git/",
-        ".vscode/"
-    ],
-    "include": [
-        "src/**/*.ts"
-    ]
+  "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "allowUnreachableCode": false,
+      "allowUnusedLabels": false,
+      "alwaysStrict": true,
+      "checkJs": false,
+      "declaration": false,
+      "esModuleInterop": true,
+      // if true: conflicts with discord-api-types
+      "exactOptionalPropertyTypes": false,
+      "forceConsistentCasingInFileNames": false,
+      "importHelpers": true,
+      "importsNotUsedAsValues": "error",
+      "inlineSources": false,
+      "isolatedModules": false,
+      "module": "CommonJS",
+      "moduleResolution": "Node",
+      "newLine": "lf",
+      "noEmitHelpers": true,
+      "noFallthroughCasesInSwitch": true,
+      "noImplicitOverride": true,
+      "noImplicitReturns": false,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "outDir": "dist",
+      "rootDir": "packages",
+      "pretty": true,
+      "preserveConstEnums": true,
+      "removeComments": false,
+      "resolveJsonModule": true,
+      "skipDefaultLibCheck": true,
+      "skipLibCheck": true,
+      "strictNullChecks": true,
+      "sourceMap": false,
+      "target": "ESNext",
+      "lib": [
+          "ESNext"
+      ],
+      "useDefineForClassFields": false,
+      "useUnknownInCatchVariables": true
+  },
+  "include": ["packages/**/*.ts", "packages/**/package.json"]
 }

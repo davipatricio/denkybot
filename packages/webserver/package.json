@@ -1,0 +1,36 @@
+{
+  "name": "@denky/webserver",
+  "version": "0.0.0",
+  "main": "src/index.js",
+  "description": "Module to handle Denky interactions.",
+  "type": "commonjs",
+  "license": "GPL-3.0",
+  "author": "Davi Patricio <veric@denkylabs.com>",
+  "contributors": [
+    "Nicolas Ribeiro <niskii@denkylabs.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/denkylabs/denkybot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/denkylabs/denkybot/issues"
+  },
+  "homepage": "https://github.com/denkylabs/denkybot/packages/webserver",
+  "scripts": {
+    "build": "npx tsc --project tsconfig.json",
+    "postbuild": "npx tsc-alias",
+    "types:check": "npx tsc --noEmit --incremental false"
+  },
+  "devDependencies": {
+    "@types/node": "workspace:^",
+    "tsc-alias": "workspace:^",
+    "typescript": "workspace:^"
+  },
+  "dependencies": {
+    "discord.js": "workspace:^",
+    "fastify": "4.2.0",
+    "tslib": "workspace:^",
+    "tweetnacl": "1.0.3"
+  }
+}

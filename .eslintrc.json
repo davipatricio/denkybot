@@ -10,10 +10,10 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "ignorePatterns": [
+        "dist",
+        "packages/**/node_modules",
         "node_modules/",
-        "build/",
-        ".git/",
-        ".vscode/"
+        ".git/"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -76,7 +76,12 @@
         "no-console": "off",
         "no-use-before-define": "off",
         "no-plusplus": "off",
-        "no-unused-expressions": ["error", {"allowTernary": true}],
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowTernary": true
+            }
+        ],
         "require-await": "error",
         "quotes": [
             "error",

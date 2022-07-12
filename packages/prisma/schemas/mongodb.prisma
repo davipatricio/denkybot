@@ -1,0 +1,25 @@
+datasource db {
+  url      = env("DATABASE_URL_MB")
+  provider = "mongodb"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../node_modules/.prisma/client"
+}
+
+model Suggestion {
+  guildId String @id @default("") @map("_id")
+  addReactions Boolean @default(true)
+  categories String[] @default([])
+  cooldown Int @default(0)
+  useThreads Boolean @default(false)
+}
+
+model Afk {
+  userId String @id @default("") @map("_id")
+  guildId String?
+  reason String?
+  originalNick String?
+  startTime Int
+}
