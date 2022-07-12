@@ -80,5 +80,10 @@ export default {
   mute: 'Mutes a user from the server',
   'mute/user': 'The user to mute',
   'mute/time': 'The time for the mute',
-  'mute/reason': 'The reason for the mute'
+  'mute/reason': 'The reason for the mute',
+
+  // Kick
+  kick: 'Kicks a user from the server',
+  'kick/user': 'The user to kick',
+  'kick/reason': 'The reason for the kick'
 } as const;
