@@ -50,14 +50,6 @@ class Command {
 }
 
 export type CommandLocale = (path: AllLocalePaths, ...args: unknown[]) => string;
-
-<<<<<<< Updated upstream:src/structures/Command.ts
 export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
-=======
-export type CommandRunOptions = {
-  t: CommandLocale;
-  interaction: ChatInputCommandInteraction;
-};
->>>>>>> Stashed changes:packages/bot/src/structures/Command.ts
 
 export { Command };

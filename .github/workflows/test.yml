@@ -14,8 +14,9 @@ jobs:
       with:
         node-version: 18
         cache: 'yarn'
+        cache-dependency-path: yarn.lock
     - name: Install dependencies
-      run: yarn --force
+      run: yarn --immutable
     - name: Run ESLint
       uses: icrawl/action-eslint@v1
       with:
@@ -33,9 +34,10 @@ jobs:
       with:
         node-version: 18
         cache: 'yarn'
+        cache-dependency-path: yarn.lock
     - name: Install dependencies
-      run: yarn --force
+      run: yarn --immutable
     - name: Generate Prisma schema
       run: yarn prisma
     - name: TypeScript Test
-      run: yarn check
+      run: yarn typecheck

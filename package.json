@@ -25,7 +25,7 @@
   "scripts": {
     "build": "npx turbo run build --no-cache --parallel",
     "lint": "npx turbo run lint:fix --no-cache --parallel",
-    "check": "npx turbo run types:check --no-cache --parallel",
+    "typecheck": "npx turbo run types:check --no-cache --parallel",
     "prisma": "npx turbo run generate:postgres --no-cache --parallel"
   },
   "devDependencies": {
