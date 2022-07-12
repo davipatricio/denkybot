@@ -35,13 +35,15 @@
     "dayjs": "1.11.3",
     "discord.js": "workspace:^",
     "dotenv": "16.0.1",
-    "erlpack": "0.1.4",
     "ioredis": "5.1.0",
     "ms": "2.1.3",
     "prisma-redis-middleware": "4.0.6",
     "tslib": "workspace:^",
     "undici": "5.6.1",
-    "utf-8-validate": "5.0.9",
+    "utf-8-validate": "5.0.9"
+  },
+  "optionalDependencies": {
+    "erlpack": "0.1.4",
     "zlib-sync": "0.1.7"
   }
 }
