@@ -23,10 +23,10 @@
     "node": ">=16.9.0"
   },
   "scripts": {
-    "build": "npx turbo run build --no-cache --parallel",
-    "format": "npx turbo run lint:fix --no-cache --parallel",
-    "typecheck": "npx turbo run types:check --no-cache --parallel",
-    "prisma": "npx turbo run generate:postgres --no-cache --parallel"
+    "build": "npx turbo run build --parallel",
+    "format": "npx turbo run lint:fix --parallel",
+    "typecheck": "npx turbo run types:check --parallel",
+    "prisma": "npx turbo run generate:postgres --parallel"
   },
   "devDependencies": {
     "@types/node": "18.0.3",
