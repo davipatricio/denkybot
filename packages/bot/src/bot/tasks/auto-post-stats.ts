@@ -1,6 +1,6 @@
 import { Task } from '../../structures/Task';
 import type { DenkyClient } from '../../types/Client';
-import { Poster } from '../utils/Poster';
+import { Poster } from '../helpers/Poster';
 
 export default class ExampleTask extends Task {
   poster: Poster;

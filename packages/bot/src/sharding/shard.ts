@@ -1,8 +1,8 @@
 import { createLogger } from '@logger';
 import { ShardingManager } from 'discord.js';
 import { config } from 'dotenv';
-// @ts-ignore When running GitHub Actions, the config file isnt available
-import Configuration from '../../config.json';
+// @ts-ignore When running GitHub Actions, the config file isn't available
+import Configuration from '@bot/config';
 
 config({ path: '../.env' });
 

@@ -2,7 +2,7 @@ import type { DenkyClient } from '@bot/src/types/Client';
 import { inspect } from 'node:util';
 import { createLogger as createWinstonLogger, format, Logger, LoggerOptions } from 'winston';
 import { Console, File } from 'winston/lib/winston/transports';
-// @ts-ignore When running GitHub Actions, the config file isnt available
+// @ts-ignore When running GitHub Actions, the config file isn't available
 import Configuration from '@bot/config.json';
 import { SentryTransporter } from './transporters/Sentry';
 import { WebhookTransporter } from './transporters/Webhook';

@@ -1,7 +1,6 @@
 import type { Logger } from '@logger';
 import type { Client, Collection } from 'discord.js';
 import type { DatabaseManager } from '../bot/managers/DatabaseManager';
-import type Helpers from '../bot/modules/Helpers';
 import type Languages from '../bot/modules/Languages';
 import type { Command } from '../structures/Command';
 import type { Task } from '../structures/Task';
@@ -19,6 +18,4 @@ export interface DenkyClient extends Client<boolean> {
   languages: Languages;
   /** Logger to send useful information to the console */
   logger: Logger;
-  /** Bot helpers (internal API) */
-  helpers: Helpers;
 }

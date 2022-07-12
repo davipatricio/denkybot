@@ -2,6 +2,7 @@ import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, Interaction, Pe
 import type { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
+import { recommendLocale } from '../helpers/Locale';
 import type { AllLocalePaths } from '../managers/LanguageManager';
 
 export default class InteractionCreateEvent extends Event {
@@ -18,7 +19,7 @@ export default class InteractionCreateEvent extends Event {
     const botCommand = client.commands.get(interaction.commandName);
     if (!botCommand) return;
 
-    const userLocale = client.helpers.recommendLocale(interaction.locale);
+    const userLocale = recommendLocale(interaction.locale);
 
     const t = (path: AllLocalePaths, ...args: unknown[]) => {
       return client.languages.manager.get(userLocale, path, ...args);

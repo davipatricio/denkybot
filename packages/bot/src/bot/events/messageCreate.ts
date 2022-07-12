@@ -1,6 +1,7 @@
 import type { Message } from 'discord.js';
 import { Event } from '../../structures/Event';
 import type { DenkyClient } from '../../types/Client';
+import { recommendLocale } from '../helpers/Locale';
 import type { AllLocalePaths } from '../managers/LanguageManager';
 
 export default class MessageCreateEvent extends Event {
@@ -21,7 +22,7 @@ export default class MessageCreateEvent extends Event {
     if (!data) return;
 
     const t = (path: AllLocalePaths, ...args: unknown[]) => {
-      return client.languages.manager.get(client.helpers.recommendLocale(message.guild?.preferredLocale), path, ...args);
+      return client.languages.manager.get(recommendLocale(message.guild?.preferredLocale), path, ...args);
     };
 
     await client.databases.deleteAfk(message.author.id);
@@ -35,7 +36,7 @@ export default class MessageCreateEvent extends Event {
     if (message.mentions.users.size === 0) return;
 
     const t = (path: AllLocalePaths, ...args: unknown[]) => {
-      return client.languages.manager.get(client.helpers.recommendLocale(message.guild?.preferredLocale), path, ...args);
+      return client.languages.manager.get(recommendLocale(message.guild?.preferredLocale), path, ...args);
     };
 
     for await (const user of message.mentions.users.first(5).values()) {

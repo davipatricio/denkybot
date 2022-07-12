@@ -1,6 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, SelectMenuBuilder, SelectMenuInteraction, SelectMenuOptionBuilder } from 'discord.js';
 import { Command, CommandRunOptions } from '../../../structures/Command';
 import type { DenkyClient } from '../../../types/Client';
+import { recommendLocale } from '../../helpers/Locale';
 import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys } from '../../managers/LanguageManager';
 
 export default class HelpCommand extends Command {
@@ -27,7 +28,7 @@ export default class HelpCommand extends Command {
     const categories: Record<string, string[]> = {};
     const categoriesEmoji: Record<string, string> = {};
 
-    const language = this.client.helpers.recommendLocale(interaction.locale);
+    const language = recommendLocale(interaction.locale);
 
     const initialEmbed = new EmbedBuilder()
       .setDescription(t('command:help/embed/description', this.client.config.links.support, this.client.config.links.invite, this.client.commands.size))
