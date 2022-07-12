@@ -1,0 +1,36 @@
+{
+    "$schema": "https://turborepo.org/schema.json",
+    "baseBranch": "origin/main",
+    "pipeline": {
+        "build": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                "dist/**"
+            ]
+        },
+        "types:check": {
+            "dependsOn": [
+                "^types:check"
+            ],
+            "outputs": []
+        },
+        "lint:fix": {
+            "dependsOn": [
+                "^lint:fix"
+            ],
+            "outputs": [
+                "packages/**"
+            ]
+        },
+        "generate:postgres": {
+            "dependsOn": [
+                "^generate:postgres"
+            ],
+            "outputs": [
+                "node_modules/**"
+            ]
+        }
+    }
+}

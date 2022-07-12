@@ -1,0 +1,35 @@
+{
+  "name": "@denky/prisma",
+  "version": "0.0.0",
+  "description": "Module to store & manage Prisma schemas.",
+  "type": "commonjs",
+  "license": "GPL-3.0",
+  "author": "Davi Patricio <veric@denkylabs.com>",
+  "contributors": [
+    "Nicolas Ribeiro <niskii@denkylabs.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/denkylabs/denkybot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/denkylabs/denkybot/issues"
+  },
+  "homepage": "https://github.com/denkylabs/denkybot/packages/prisma",
+  "scripts": {
+    "generate:cockroachdb": "npx prisma generate --schema=./schemas/cockroachdb.prisma",
+    "generate:postgres": "npx prisma generate --schema=./schemas/postgres.prisma",
+    "generate:mongodb": "npx prisma generate --schema=./schemas/mongodb.prisma",
+    "migrate:pg": "npx prisma migrate dev --schema=./schemas/postgres.prisma",
+    "migrate:pg:create": "npx prisma migrate dev --name production --schema=./schemas/postgres.prisma --create-only",
+    "migrate:cr": "npx prisma migrate dev --schema=./schemas/cockroachdb.prisma",
+    "migrate:cr:create": "npx prisma migrate dev --name production --schema=./schemas/cockroachdb.prisma --create-only"
+  },
+  "devDependencies": {
+    "prisma": "workspace:^",
+    "typescript": "workspace:^"
+  },
+  "dependencies": {
+    "@prisma/client": "workspace:^"
+  }
+}
