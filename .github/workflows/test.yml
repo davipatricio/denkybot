@@ -9,6 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    
+   - name: Turbo cache
+      id: turbo-cache
+      uses: actions/cache@v3
+      with:
+        path: .turbo
+        key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
+        restore-keys: |
+          turbo-${{ github.job }}-${{ github.ref_name }}-
+
     - name: Install Node v18
       uses: actions/setup-node@v3
       with:
@@ -18,9 +28,7 @@ jobs:
     - name: Install dependencies
       run: yarn --immutable
     - name: Run ESLint
-      uses: icrawl/action-eslint@v1
-      with:
-        custom-glob: packages
+      run: yarn format --cache-dir=".turbo"
   typescript:
     if:
       github.event_name == 'push' || github.event.pull_request.head.repo.full_name !=
@@ -38,6 +46,6 @@ jobs:
     - name: Install dependencies
       run: yarn --immutable
     - name: Generate Prisma schema
-      run: yarn prisma
+      run: yarn prisma --cache-dir=".turbo"
     - name: TypeScript Test
-      run: yarn typecheck
+      run: yarn typecheck --cache-dir=".turbo"
