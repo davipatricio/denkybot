@@ -132,10 +132,13 @@ export class Initializer {
 
   async peformPreInitialization(client: DenkyClient) {
     await this.loadBotConfiguration(client);
-    client.logger = createLogger({
-      handleExceptions: true,
-      handleRejections: true,
-    }, client);
+    client.logger = createLogger(
+      {
+        handleExceptions: true,
+        handleRejections: true
+      },
+      client
+    );
     if (global.IS_MAIN_PROCESS)
       client.logger.info('Loaded bot configuration file.', {
         tags: ['Configuration']

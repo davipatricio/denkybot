@@ -6,7 +6,7 @@ import Configuration from '../../config.json';
 
 config({ path: '../.env' });
 
-const logger = createLogger()
+const logger = createLogger();
 
 const sharder = new ShardingManager('./bot/index.js', {
   totalShards: Configuration.shardCount,
