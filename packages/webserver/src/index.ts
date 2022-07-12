@@ -1,4 +1,4 @@
-import type { DenkyClient } from '#bot/src/types/Client';
+import type { DenkyClient } from '@bot/src/types/Client';
 import { APIInteraction, InteractionResponseType, InteractionType } from 'discord.js';
 import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import nacl from 'tweetnacl';

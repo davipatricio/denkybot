@@ -6,11 +6,11 @@ import type { DenkyClient } from '../../types/Client';
 export type LocaleCategories = 'command' | 'commandNames' | 'commandDescriptions' | 'commandCategories';
 export type SupportedLocales = 'en_US' | 'pt_BR';
 
-export type CommandLocaleKeys = keyof typeof import('#locales/assets/command/pt_BR').default;
-export type CommandNamesKeys = keyof typeof import('#locales/assets/commandNames/pt_BR').default;
-export type CommandDescriptionsKeys = keyof typeof import('#locales/assets/commandDescriptions/pt_BR').default;
-export type CommandCategoriesKeys = keyof typeof import('#locales/assets/commandCategories/pt_BR').default;
-export type PermissionLocaleKeys = keyof typeof import('#locales/assets/permissions/pt_BR').default;
+export type CommandLocaleKeys = keyof typeof import('@locales/assets/command/pt_BR').default;
+export type CommandNamesKeys = keyof typeof import('@locales/assets/commandNames/pt_BR').default;
+export type CommandDescriptionsKeys = keyof typeof import('@locales/assets/commandDescriptions/pt_BR').default;
+export type CommandCategoriesKeys = keyof typeof import('@locales/assets/commandCategories/pt_BR').default;
+export type PermissionLocaleKeys = keyof typeof import('@locales/assets/permissions/pt_BR').default;
 
 export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys | PermissionLocaleKeys;
 export type AllLocalePaths =

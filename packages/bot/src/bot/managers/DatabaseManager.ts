@@ -1,7 +1,7 @@
+import { Afk, PrismaClient, Suggestion } from '@prisma-client';
 import Redis from 'ioredis';
 import type Prisma from 'prisma';
 import { createPrismaRedisCache } from 'prisma-redis-middleware';
-import { Afk, PrismaClient, Suggestion } from '#prisma-client';
 import type { DenkyClient } from '../../types/Client';
 
 export type SuggestionConfig = Partial<Suggestion> & Pick<Suggestion, 'guildId'>;

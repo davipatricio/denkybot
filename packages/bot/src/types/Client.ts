@@ -1,4 +1,4 @@
-import type { Logger } from '#logger';
+import type { Logger } from '@logger';
 import type { Client, Collection } from 'discord.js';
 import type { DatabaseManager } from '../bot/managers/DatabaseManager';
 import type Helpers from '../bot/modules/Helpers';

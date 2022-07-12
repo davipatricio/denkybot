@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
-import { createLogger } from '#logger';
-import { InteractionsWebserver } from '#webserver';
+import { createLogger } from '@logger';
+import { InteractionsWebserver } from '@webserver';
 import { Collection } from 'discord.js';
 import { readdir, readFile } from 'node:fs/promises';
 import type { Command } from '../../structures/Command';

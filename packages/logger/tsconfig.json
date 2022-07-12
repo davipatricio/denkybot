@@ -3,31 +3,31 @@
     "compilerOptions": {
         "baseUrl": "../",
         "paths": {
-            "#bot": [
+            "@bot": [
                 "./bot"
             ],
-            "#bot/*": [
+            "@bot/*": [
                 "./bot/*"
             ],
-            "#locales": [
+            "@locales": [
                 "./locales"
             ],
-            "#locales/*": [
+            "@locales/*": [
                 "./locales/*"
             ],
-            "#webserver": [
+            "@webserver": [
                 "./webserver"
             ],
-            "#webserver/*": [
+            "@webserver/*": [
                 "./webserver/*"
             ],
-            "#logger": [
+            "@logger": [
                 "./logger"
             ],
-            "#logger/*": [
+            "@logger/*": [
                 "./logger/*"
             ],
-            "#prisma-client": [
+            "@prisma-client": [
                 "../node_modules/.prisma/client"
             ]
         },

@@ -1,4 +1,4 @@
-import { createLogger } from '#logger';
+import { createLogger } from '@logger';
 import { ShardingManager } from 'discord.js';
 import { config } from 'dotenv';
 // @ts-ignore When running GitHub Actions, the config file isnt available
