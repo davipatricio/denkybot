@@ -1,5 +1,5 @@
 import type { Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
-import type { AllLocalePaths, CommandCategoriesKeys, CommandNamesKeys } from '../bot/managers/LanguageManager';
+import type { AllLocalePaths, CommandCategoriesKeys, CommandNamesKeys } from '../lib/managers/LanguageManager';
 import type { DenkyClient } from '../types/Client';
 
 class Command {

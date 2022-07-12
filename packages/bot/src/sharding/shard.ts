@@ -8,7 +8,7 @@ config({ path: '../.env' });
 
 const logger = createLogger();
 
-const sharder = new ShardingManager('./bot/index.js', {
+const sharder = new ShardingManager('./Denky.js', {
   totalShards: Configuration.shardCount,
   mode: 'process',
   token: process.env.BOT_TOKEN,
