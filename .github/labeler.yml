@@ -1,0 +1,14 @@
+"package: bot":
+- packages/bot/**/*.ts
+
+"package: locales":
+- packages/locales/**/*.ts
+
+"package: logger":
+- packages/logger/**/*.ts
+
+"package: prisma":
+- packages/prisma/**/*.ts
+
+"package: webserver":
+- packages/webserver/**/*.ts
