@@ -12,10 +12,7 @@ const client = new Client({
     parse: ['users'],
     repliedUser: true
   },
-  partials: [Partials.Channel, Partials.User, Partials.GuildMember, Partials.Message, Partials.Reaction],
-  ws: {
-    compress: true
-  }
+  partials: [Partials.Channel, Partials.User, Partials.GuildMember, Partials.Message, Partials.Reaction]
 }) as DenkyClient;
 
 // We should set this, so tasks won't duplicate (giveaways, reminders, etc)
