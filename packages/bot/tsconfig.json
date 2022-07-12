@@ -33,7 +33,8 @@
         },
     },
     "include": [
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "package.json"
     ],
     "exclude": [
         "tsconfig.json"

@@ -26,7 +26,7 @@
     "build": "npx turbo run build --parallel",
     "format": "npx turbo run lint:fix --parallel",
     "typecheck": "npx turbo run types:check --parallel",
-    "prisma": "npx turbo run generate:postgres --parallel"
+    "prisma": "npx turbo run generate:postgres --scope=\"prisma\""
   },
   "devDependencies": {
     "@types/node": "18.0.3",
