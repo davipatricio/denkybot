@@ -55,7 +55,7 @@ function createLogger(options?: LoggerOptions, client?: DenkyClient) {
   const logger = createWinstonLogger({
     handleExceptions: options?.handleExceptions ?? true,
     handleRejections: options?.handleRejections ?? true,
-    exitOnError: !client?.config.features.preventCrashes ?? Configuration.features.preventCrashes
+    exitOnError: !(client?.config.features.preventCrashes ?? Configuration.features.preventCrashes)
   });
   loadWinstonLogger(logger, client?.config ?? Configuration, client?.shard?.ids[0] ?? 'Manager');
 
