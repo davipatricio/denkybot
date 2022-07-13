@@ -175,6 +175,7 @@ export default {
   'suggestions/management/buttons/move/no': "Don't move",
   'suggestions/management/answered': 'This suggestion has been answered previously by a team member',
   'suggestions/management/accept/embed/title': 'New suggestion sent [accepted]',
+  'suggestions/management/accept/memberdm': (desc: string, user: User, url: string) => `Your suggestion \`${desc}\` was accepted by ${user}! Check it out [here](${url}).`,
   'suggestions/management/accept/accepted': 'The suggestion was successfully accepted!',
   'suggestions/management/accept/accepted/move': '✅ **|** The suggestion was successfully accepted\n➡️ **|** Do you want to move the suggestion to this channel?',
   'suggestions/management/accept/accepted/moved': 'The suggestion was successfully accepted and moved to this channel!',

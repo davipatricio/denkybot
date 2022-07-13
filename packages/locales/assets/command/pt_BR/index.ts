@@ -178,6 +178,7 @@ export default {
   'suggestions/management/buttons/move/no': 'Não over',
   'suggestions/management/answered': 'Essa sugestão já foi respondida anteriormente por um membro da equipe',
   'suggestions/management/accept/embed/title': 'Nova sugestão enviada [aceita]',
+  'suggestions/management/accept/memberdm': (desc: string, user: User, url: string) => `Sua sugestão \`${desc}\` foi aceita por ${user}! Confira-a [aqui](${url}).`,
   'suggestions/management/accept/accepted': 'A sugestão foi aceita com sucesso!',
   'suggestions/management/accept/accepted/move': '✅ **|** A sugestão foi aceita com sucesso!\n➡️ **|** Você deseja mover a sugestão para este canal?',
   'suggestions/management/accept/accepted/moved': 'A sugestão foi aceita com sucesso e movida para este canal!',
