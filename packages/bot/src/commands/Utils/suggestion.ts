@@ -169,11 +169,15 @@ export default class PingCommand extends Command {
       }
 
       if (config.sendNotices && suggesterId) {
+        const noticeEmbed = new EmbedBuilder()
+          .setColor('Green')
+          .setTimestamp()
+          .setDescription(`✅ **|** ${t('command:suggestions/management/accept/memberdm', embed.data.description?.replace('> ', '').slice(0, 15), interaction.user, suggestionMessage.url)}`);
         interaction.guild.members
           .fetch(suggesterId)
           .then(m => {
             m.send({
-              content: `✅ **|** ${t('command:suggestions/management/accept/memberdm', embed.data.description?.replace('> ', '').slice(0, 15), interaction.user, suggestionMessage.url)}`
+              embeds: [noticeEmbed]
             }).catch(() => {});
           })
           .catch(() => {});
