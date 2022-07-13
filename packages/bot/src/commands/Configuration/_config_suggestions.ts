@@ -99,7 +99,8 @@ export default class SuggestionsSubCommand extends Command {
               addReactions: true,
               categories: [],
               cooldown: 0,
-              useThreads: false
+              useThreads: false,
+              sendNotices: false
             });
             this.updateMessage('categorias', message, selectRow, interaction, updatedConfig, t);
             int.followUp({
@@ -237,7 +238,10 @@ export default class SuggestionsSubCommand extends Command {
               sendNotices: true
             });
             this.updateMessage('notices', message, selectRow, interaction, updatedConfig, t);
-            int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/notices/enabled')}`, ephemeral: true });
+            int.followUp({
+              content: `✅ **|** ${t('command:config/suggestions/actions/notices/enabled')}`,
+              ephemeral: true
+            });
             break;
           }
           // Disable notices
@@ -247,7 +251,10 @@ export default class SuggestionsSubCommand extends Command {
               sendNotices: false
             });
             this.updateMessage('notices', message, selectRow, interaction, updatedConfig, t);
-            int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/notices/disabled')}`, ephemeral: true });
+            int.followUp({
+              content: `✅ **|** ${t('command:config/suggestions/actions/notices/disabled')}`,
+              ephemeral: true
+            });
             break;
           }
         }
@@ -263,7 +270,12 @@ export default class SuggestionsSubCommand extends Command {
   }
 
   generateEmbedPage(page: PageTypes, { user }: ChatInputCommandInteraction, configStatus: Suggestion | undefined, t: CommandLocale) {
-    const embed = new EmbedBuilder({ timestamp: Date.now(), footer: { text: user.tag, iconURL: user.displayAvatarURL() } }).setColor('Blurple').setTitle(`🔧 ${t('command:config/suggestions/title')}`);
+    const embed = new EmbedBuilder({
+      timestamp: Date.now(),
+      footer: { text: user.tag, iconURL: user.displayAvatarURL() }
+    })
+      .setColor('Blurple')
+      .setTitle(`🔧 ${t('command:config/suggestions/title')}`);
     switch (page) {
       case 'sugestoes':
         return embed.setDescription(configStatus ? `✅ **|** ${t('command:config/suggestions/enabled')}` : `❌ **|** ${t('command:config/suggestions/disabled')}`);
@@ -338,19 +350,19 @@ export default class SuggestionsSubCommand extends Command {
         const enableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enableReact')).setStyle(ButtonStyle.Success).setCustomId('enable_reactions');
         const disableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disableReact')).setStyle(ButtonStyle.Danger).setCustomId('disable_reactions');
         if (!configStatus) return buttonRow.setComponents([enableReact.setDisabled(true), disableReact.setDisabled(true)]);
-        return buttonRow.setComponents([enableReact.setDisabled(!!configStatus.addReactions), disableReact.setDisabled(!configStatus.addReactions)]);
+        return buttonRow.setComponents([enableReact.setDisabled(configStatus.addReactions), disableReact.setDisabled(!configStatus.addReactions)]);
       }
       case 'threads': {
         const enableThreads = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enableThreads')).setStyle(ButtonStyle.Success).setCustomId('enable_threads');
         const disableThreads = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disableThreads')).setStyle(ButtonStyle.Danger).setCustomId('disable_threads');
         if (!configStatus) return buttonRow.setComponents([enableThreads.setDisabled(true), disableThreads.setDisabled(true)]);
-        return buttonRow.setComponents([enableThreads.setDisabled(!!configStatus.useThreads), disableThreads.setDisabled(!configStatus.useThreads)]);
+        return buttonRow.setComponents([enableThreads.setDisabled(configStatus.useThreads), disableThreads.setDisabled(!configStatus.useThreads)]);
       }
       case 'notices': {
         const enableNotices = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enableNotices')).setStyle(ButtonStyle.Success).setCustomId('enable_notices');
         const disableNotices = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disableNotices')).setStyle(ButtonStyle.Danger).setCustomId('disable_notices');
         if (!configStatus) return buttonRow.setComponents([enableNotices.setDisabled(true), disableNotices.setDisabled(true)]);
-        return buttonRow.setComponents([enableNotices.setDisabled(!!configStatus.sendNotices), disableNotices.setDisabled(!configStatus.sendNotices)]);
+        return buttonRow.setComponents([enableNotices.setDisabled(configStatus.sendNotices), disableNotices.setDisabled(!configStatus.sendNotices)]);
       }
       default:
         return buttonRow;

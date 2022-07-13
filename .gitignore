@@ -6,6 +6,7 @@ config.json
 node_modules
 packages/**/node_modules
 dist
+.idea
 
 # Dot files
 .env
