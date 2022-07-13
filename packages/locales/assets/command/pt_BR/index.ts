@@ -175,7 +175,7 @@ export default {
   'suggestions/management/embed/answer': 'Resposta',
   'suggestions/management/embed/answer/empty': 'Nenhuma resposta inserida.',
   'suggestions/management/buttons/move/yes': 'Sim, mover',
-  'suggestions/management/buttons/move/no': 'Não over',
+  'suggestions/management/buttons/move/no': 'Não mover',
   'suggestions/management/answered': 'Essa sugestão já foi respondida anteriormente por um membro da equipe',
   'suggestions/management/accept/embed/title': 'Nova sugestão enviada [aceita]',
   'suggestions/management/accept/memberdm': (desc: string, user: User, url: string) => `Sua sugestão \`${desc}\` foi aceita por ${user}! Confira-a [aqui](${url}).`,
