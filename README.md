@@ -16,17 +16,11 @@ Denky is totally modular, you can enable or disable features that you don't want
 2. Install Node.js v16.9.0 or newer.
 3. Fork or clone this repository.
 4. Install dependecies using `yarn`.
-5. Go to `packages/bot` and rename `.env.example` to `.env` and fill out the values.
-6. Go to `packages/bot` and rename `config.example.json` to `config.josn` and fill out the values.
-7. Generate the Prisma Client using `yarn prisma`.
-8. Transpile the TypeScript code using `yarn build`.
+5. Generate the Prisma Client using `yarn prisma`.
+6. Build the entire project using `yarn build`
+7. Go to `packages/bot`, `packages/logger` & `packages/prisma` and rename `.env.example` to `.env` and fill out the values.
+8. Go to `packages/bot` and rename `config.example.json` to `config.json` and fill out the values.
 9. Go to `dist/bot` and start the bot using `yarn start`.
-
-## 🌎 Locales
-Currently available locales are:
-
-- English (en)
-- Brazilian Portuguese (pt_BR)
 
 ## License
 This project is licensed under the [GPL-3.0](LICENSE) license.
