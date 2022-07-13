@@ -1,4 +1,4 @@
-import { ChannelType, EmbedBuilder, Locale } from 'discord.js';
+import { EmbedBuilder, Locale } from 'discord.js';
 import { request } from 'undici';
 import { Command, CommandRunOptions } from '../../structures/Command';
 import type { DenkyClient } from '../../types/Client';
