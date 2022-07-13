@@ -1,6 +1,6 @@
 {
-  "name": "@denky/locales",
-  "version": "0.0.0",
+  "name": "@denkylabs/locales",
+  "version": "0.6.0-dev",
   "description": "Module to store Denky locale files.",
   "type": "commonjs",
   "license": "GPL-3.0",

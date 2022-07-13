@@ -80,5 +80,10 @@ export default {
   mute: 'Silencia um usuário do servidor',
   'mute/user': 'O usuário para silenciar',
   'mute/time': 'Tempo de silenciamento',
-  'mute/reason': 'O motivo do silenciamento'
+  'mute/reason': 'O motivo do silenciamento',
+
+  // Kick
+  kick: 'Expulsa um usuário do servidor',
+  'kick/user': 'O usuário para expulsar',
+  'kick/reason': 'O motivo da expulsão'
 } as const;

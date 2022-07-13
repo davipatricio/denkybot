@@ -1,7 +1,7 @@
 {
-  "name": "@denky/logger",
+  "name": "@denkylabs/logger",
   "main": "src/index.js",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Module to log messages to the console and report errors to Sentry.",
   "type": "commonjs",
   "license": "GPL-3.0",

@@ -211,5 +211,16 @@ export default {
   'mute/error/not-moderatable': 'Não posso silenciar este usuário, pois meu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
   'mute/error/no-permissions': 'Você não pode silenciar este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
   'mute/error/unknown-member': 'Membro desconhecido.',
-  'mute/error/unknown-error': 'Ocorreu um erro ao silenciar o usuário.'
+  'mute/error/unknown-error': 'Ocorreu um erro ao silenciar o usuário.',
+
+  // Kick
+  'kick/no-reason': 'Sem motivo.',
+  'kick/punished-by': 'Expulso por:',
+  'kick/complete': (user: User | GuildMember | string) => `O usuário ${user} foi expulso do servidor com sucesso.`,
+  'kick/error/kick-bot': 'Eu não posso me expulsar.',
+  'kick/error/kick-self': 'Você não pode se expulsar.',
+  'kick/error/not-member': 'Este usuário não é um membro do servidor.',
+  'kick/error/not-kickable': 'Não posso expulsar este usuário, pois meu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'kick/error/no-permissions': 'Você não pode expulsar este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'kick/error/unknown-error': 'Ocorreu um erro ao expulsar o usuário.'
 } as const;

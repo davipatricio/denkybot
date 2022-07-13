@@ -22,7 +22,7 @@ const PERMISSIONS: Record<PermissionsString, string> = {
   SendMessages: 'Enviar mensagens',
   Speak: 'Falar',
   Stream: 'Transmitir',
-  ViewAuditLog: 'Ver log de auditoria',
+  ViewAuditLog: 'Ver registro de auditoria',
   ViewChannel: 'Ver canais',
   Administrator: 'Administrador',
   AttachFiles: 'Anexar arquivos',

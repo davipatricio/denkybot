@@ -4,6 +4,8 @@ import { Initializer } from './lib/utils/Initializer';
 import type { DenkyClient } from './types/Client';
 
 config({ path: '../.env' });
+config({ path: '../../prisma/.env' });
+config({ path: '../../logger/.env' });
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages],
@@ -22,5 +24,5 @@ const initializer = new Initializer(client);
 
 initializer.peformPreInitialization().then(() => {
   if (global.IS_MAIN_PROCESS) client.logger.debug('Starting bot...', { tags: ['Bot'] });
-  initializer.init();
+  initializer.init().catch(() => {});
 });
