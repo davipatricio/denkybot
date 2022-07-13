@@ -24,5 +24,5 @@ const initializer = new Initializer(client);
 
 initializer.peformPreInitialization().then(() => {
   if (global.IS_MAIN_PROCESS) client.logger.debug('Starting bot...', { tags: ['Bot'] });
-  initializer.init();
+  initializer.init().catch(() => {});
 });

@@ -3,12 +3,12 @@ import type { AllLocalePaths, CommandCategoriesKeys, CommandNamesKeys } from '..
 import type { DenkyClient } from '../types/Client';
 
 class Command {
-  /** The client that instantied this command */
+  /** The client that instanced this command */
   client: DenkyClient;
 
-  /** The raw command name. A user-friedly name will be shown through i18n. */
+  /** The raw command name. A user-friendly name will be shown through i18n. */
   rawName: Uppercase<CommandNamesKeys | ''>;
-  /** The raw category name, uppercase. A user-friedly name will be shown through i18n. */
+  /** The raw category name, uppercase. A user-friendly name will be shown through i18n. */
   rawCategory: CommandCategoriesKeys | '';
   /** Required permissions to execute the command. */
   permissions: {
@@ -18,7 +18,7 @@ class Command {
 
   /** Internal command configuration */
   config: {
-    /** If `autoDefer` is true, whether this command will be a ephemeral message */
+    /** If `autoDefer` is true, whether this command will be an ephemeral message */
     ephemeral: boolean;
     /** Whether the bot should automatically call `interaction.deferReply()` */
     autoDefer: boolean;
