@@ -53,7 +53,8 @@ export class DatabaseManager extends PrismaClient {
         addReactions: config.addReactions,
         categories: config.categories,
         cooldown: config.cooldown,
-        useThreads: config.useThreads
+        useThreads: config.useThreads,
+        sendNotices: config.sendNotices
       }
     });
   }
@@ -87,7 +88,8 @@ export class DatabaseManager extends PrismaClient {
         addReactions: config.addReactions,
         categories: config.categories,
         cooldown: config.cooldown,
-        useThreads: config.useThreads
+        useThreads: config.useThreads,
+        sendNotices: config.sendNotices
       }
     });
   }
