@@ -250,6 +250,26 @@ export default class SuggestionsSubCommand extends Command {
             int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/notices/disabled')}`, ephemeral: true });
             break;
           }
+          // Enable notices
+          case 'enable_notices': {
+            updatedConfig = await this.client.databases.updateSuggestion({
+              ...updatedConfig,
+              sendNotices: true
+            });
+            this.updateMessage('notices', message, selectRow, interaction, updatedConfig, t);
+            int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/notices/enabled')}`, ephemeral: true });
+            break;
+          }
+          // Disable notices
+          case 'disable_notices': {
+            updatedConfig = await this.client.databases.updateSuggestion({
+              ...updatedConfig,
+              sendNotices: false
+            });
+            this.updateMessage('notices', message, selectRow, interaction, updatedConfig, t);
+            int.followUp({ content: `✅ **|** ${t('command:config/suggestions/actions/notices/disabled')}`, ephemeral: true });
+            break;
+          }
         }
       }
     });
