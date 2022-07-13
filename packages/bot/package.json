@@ -21,7 +21,8 @@
   "scripts": {
     "build": "npx tsc --project tsconfig.json",
     "postbuild": "npx tsc-alias && node scripts/copyEnv.js",
-    "types:check": "npx tsc --noEmit --incremental false"
+    "types:check": "npx tsc --noEmit --incremental false",
+    "start": "cd src && node sharding/shard.js"
   },
   "devDependencies": {
     "@types/ioredis": "4.28.10",
