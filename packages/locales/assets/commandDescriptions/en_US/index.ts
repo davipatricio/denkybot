@@ -65,6 +65,9 @@ export default {
   'suggestions/accept': 'Accepts a suggestion that was previously submitted',
   'suggestions/accept/id': 'ID of the suggestion to accept',
   'suggestions/accept/reason': 'The reason for accepting the suggestion',
+  'suggestions/deny': 'Denies a suggestion that was previously submitted',
+  'suggestions/deny/id': 'ID of the suggestion to deny',
+  'suggestions/deny/reason': 'The reason for denying the suggestion',
 
   // Ban
   ban: 'Bans a user from the server',

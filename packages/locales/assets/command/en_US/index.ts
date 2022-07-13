@@ -180,6 +180,12 @@ export default {
   'suggestions/management/accept/accepted/move': '✅ **|** The suggestion was successfully accepted\n➡️ **|** Do you want to move the suggestion to this channel?',
   'suggestions/management/accept/accepted/moved': 'The suggestion was successfully accepted and moved to this channel!',
 
+  'suggestions/management/deny/embed/title': 'New suggestion sent [denied]',
+  'suggestions/management/deny/memberdm': (desc: string, user: User, url: string) => `Your suggestion \`${desc}\` was denied by ${user}. Check it out [here](${url}).`,
+  'suggestions/management/deny/denied': 'The suggestion was successfully denied!',
+  'suggestions/management/deny/denied/move': '✅ **|** The suggestion was successfully denied\n➡️ **|** Do you want to move the suggestion to this channel?',
+  'suggestions/management/deny/denied/moved': 'The suggestion was successfully denied and moved to this channel!',
+
   // Ban
   'ban/no-reason': 'No reason.',
   'ban/punished-by': 'Punished by:',

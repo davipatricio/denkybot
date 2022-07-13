@@ -183,6 +183,12 @@ export default {
   'suggestions/management/accept/accepted/move': '✅ **|** A sugestão foi aceita com sucesso!\n➡️ **|** Você deseja mover a sugestão para este canal?',
   'suggestions/management/accept/accepted/moved': 'A sugestão foi aceita com sucesso e movida para este canal!',
 
+  'suggestions/management/deny/embed/title': 'Nova sugestão enviada [recusada]',
+  'suggestions/management/deny/memberdm': (desc: string, user: User, url: string) => `Sua sugestão \`${desc}\` foi recusada por ${user}. Confira-a [aqui](${url}).`,
+  'suggestions/management/deny/denied': 'A sugestão foi recusada com sucesso!',
+  'suggestions/management/deny/denied/move': '✅ **|** A sugestão foi recusada com sucesso!\n➡️ **|** Você deseja mover a sugestão para este canal?',
+  'suggestions/management/deny/denied/moved': 'A sugestão foi recusada com sucesso e movida para este canal!',
+
   // Ban
   'ban/no-reason': 'Sem motivo.',
   'ban/punished-by': 'Punido por:',

@@ -57,7 +57,137 @@ export default class PingCommand extends Command {
       case 'accept':
         if (this.#verifyMemberPermissions(interaction, t)) this.acceptSuggestion(t, interaction);
         break;
+      case 'deny':
+        if (this.#verifyMemberPermissions(interaction, t)) this.denySuggestion(t, interaction);
+        break;
     }
+  }
+
+  async denySuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
+    if (!interaction.inCachedGuild()) return;
+    const config = await this.client.databases.getSuggestion(interaction.guild.id);
+    if (!config) {
+      interaction.reply({
+        content: `❌ **|** ${t('command:suggestions/not-enabled')}`,
+        ephemeral: true
+      });
+      return;
+    }
+    if (config.categories.length === 0) {
+      interaction.reply({
+        content: `❌ **|** ${t('command:suggestions/no-categories')}`,
+        ephemeral: true
+      });
+      return;
+    }
+
+    const reason = interaction.options.getString('reason');
+    const suggestionId = interaction.options.getString('id_suggestion', true);
+    if (!this.#isValidId(suggestionId)) {
+      interaction.reply({
+        content: `❌ **|** ${t('command:suggestions/invalid-id')}`,
+        ephemeral: true
+      });
+      return;
+    }
+
+    const categoriesName = this.#generateCategoriesArray(config, interaction);
+    if (categoriesName.length === 0) {
+      interaction.reply({
+        content: `❌ **|** ${t('command:suggestions/no-categories')}`,
+        ephemeral: true
+      });
+      return;
+    }
+
+    await interaction.deferReply();
+
+    const categoriesRow = this.#generateCategoriesRow(categoriesName);
+    const msg = await interaction.editReply({
+      content: `📥 **|** ${t('command:suggestions/edit/choose-category')}`,
+      components: [categoriesRow]
+    });
+    const collector = msg.createMessageComponentCollector({
+      filter: m => m.user.id === interaction.user.id && m.isSelectMenu(),
+      max: 1,
+      time: 60000
+    });
+    collector.on('collect', async (i: SelectMenuInteraction) => {
+      await i.deferUpdate();
+      const channelId = i.values[0] as string;
+
+      let shouldContinue = true;
+
+      const suggestionChannel = interaction.guild?.channels.cache.get(channelId) as GuildTextBasedChannel;
+      if (!suggestionChannel) {
+        i.editReply({
+          content: `❌ **|** ${t('command:suggestions/unknown-category')}`,
+          components: []
+        });
+        return;
+      }
+
+      const suggestionMessage = await suggestionChannel.messages.fetch(suggestionId).catch(() => {
+        i.editReply({
+          content: `❌ **|** ${t('command:suggestions/invalid-id')}`,
+          components: []
+        });
+        shouldContinue = false;
+      });
+      if (!shouldContinue || !suggestionMessage || suggestionMessage.embeds.length !== 1 || !this.#getIdFromFooter(suggestionMessage.embeds[0].footer?.text)) {
+        i.editReply({
+          content: `❌ **|** ${t('command:suggestions/invalid-id')}`,
+          components: []
+        });
+        return;
+      }
+
+      if (this.#alreadyAnswered(suggestionMessage.embeds[0])) {
+        i.editReply({
+          content: `❌ **|** ${t('command:suggestions/management/answered')}`,
+          components: []
+        });
+        return;
+      }
+
+      const suggesterId = this.#getIdFromFooter(suggestionMessage.embeds[0].footer?.text);
+
+      const embed = new EmbedBuilder(suggestionMessage.embeds[0].toJSON())
+        .setTitle(`❌ • ${t('command:suggestions/management/deny/embed/title')}`)
+        .setColor('Green')
+        .addFields([
+          {
+            name: t('command:suggestions/management/embed/answer'),
+            value: `> ${interaction.user}: ${reason ?? t('command:suggestions/management/embed/answer/empty')}`
+          }
+        ]);
+      await suggestionMessage.edit({ embeds: [embed] });
+      suggestionMessage.reactions.removeAll().catch(() => {});
+      if (i.channelId === suggestionMessage.channel.id) {
+        i.editReply({
+          content: `❌ **|** ${t('command:suggestions/management/deny/denied')}`,
+          components: []
+        });
+        return;
+      }
+
+      if (config.sendNotices && suggesterId) {
+        const noticeEmbed = new EmbedBuilder()
+          .setColor('Red')
+          .setTimestamp()
+          .setDescription(`❌ **|** ${t('command:suggestions/management/deny/memberdm', embed.data.description?.replace('> ', '').slice(0, 15), interaction.user, suggestionMessage.url)}`);
+        interaction.guild.members
+          .fetch(suggesterId)
+          .then(m => {
+            m.send({
+              embeds: [noticeEmbed]
+            }).catch(() => {});
+          })
+          .catch(() => {});
+      }
+
+      this.#askStaffToMoveDeny(t, i, embed);
+    });
   }
 
   async acceptSuggestion(t: CommandLocale, interaction: ChatInputCommandInteraction) {
@@ -457,6 +587,50 @@ export default class PingCommand extends Command {
         .catch(() => {
           i.editReply({
             content: `✅ **|** ${t('command:suggestions/management/accept/accepted')}`,
+            components: []
+          });
+
+          resolve(false);
+        });
+    });
+  }
+
+  #askStaffToMoveDeny(t: CommandLocale, i: SelectMenuInteraction, finalEmbed: EmbedBuilder) {
+    return new Promise<boolean>(resolve => {
+      const buttonRow = new ActionRowBuilder<ButtonBuilder>().setComponents([
+        new ButtonBuilder().setCustomId('sim').setEmoji('✅').setLabel(t('command:suggestions/management/buttons/move/yes')).setStyle(ButtonStyle.Success),
+        new ButtonBuilder().setCustomId('nao').setEmoji('❌').setLabel(t('command:suggestions/management/buttons/move/no')).setStyle(ButtonStyle.Danger)
+      ]);
+
+      i.editReply({
+        content: t('command:suggestions/management/deny/denied/move'),
+        components: [buttonRow]
+      });
+      i.message
+        .awaitMessageComponent({
+          time: 30000,
+          filter: m => m.user.id === i.user.id
+        })
+        .then(async m => {
+          await m.deferUpdate();
+          resolve(true);
+          if (m.customId === 'sim') {
+            i.editReply({
+              content: `✅ **|** ${t('command:suggestions/management/deny/denied/moved')}`,
+              components: []
+            });
+            i.channel?.send({ embeds: [finalEmbed] });
+            return;
+          }
+
+          i.editReply({
+            content: `✅ **|** ${t('command:suggestions/management/deny/denied')}`,
+            components: []
+          });
+        })
+        .catch(() => {
+          i.editReply({
+            content: `✅ **|** ${t('command:suggestions/management/deny/denied')}`,
             components: []
           });
 
