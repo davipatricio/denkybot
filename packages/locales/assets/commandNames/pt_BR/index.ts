@@ -56,6 +56,9 @@ export default {
   'suggestion/accept': 'aceitar',
   'suggestion/accept/id': 'id_sugestao',
   'suggestion/accept/reason': 'motivo',
+  'suggestion/deny': 'recusar',
+  'suggestion/deny/id': 'id_sugestao',
+  'suggestion/deny/reason': 'motivo',
 
   // Ban
   ban: 'ban',

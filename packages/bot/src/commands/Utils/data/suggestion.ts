@@ -86,6 +86,43 @@ export default class PingData extends CommandDataStructure {
               required: false
             }
           ]
+        },
+        {
+          name: client.languages.manager.get('en_US', 'commandNames:suggestion/deny'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/deny')
+          },
+          type: ApplicationCommandOptionType.Subcommand,
+          description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/deny'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/deny')
+          },
+          options: [
+            {
+              name: client.languages.manager.get('en_US', 'commandNames:suggestion/deny/id'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/deny/id')
+              },
+              description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/deny/id'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/deny/id')
+              },
+              type: ApplicationCommandOptionType.String,
+              required: true
+            },
+            {
+              name: client.languages.manager.get('en_US', 'commandNames:suggestion/deny/reason'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/deny/reason')
+              },
+              description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/deny/reason'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/deny/reason')
+              },
+              type: ApplicationCommandOptionType.String,
+              required: false
+            }
+          ]
         }
       ]
     };

@@ -65,6 +65,9 @@ export default {
   'suggestions/accept': 'Aceite uma sugestão que foi enviada',
   'suggestions/accept/id': 'ID da sugestão para aceitar',
   'suggestions/accept/reason': 'A razão para aceitar a sugestão',
+  'suggestions/deny': 'Recuse uma sugestão que foi enviada',
+  'suggestions/deny/id': 'ID da sugestão para recusar',
+  'suggestions/deny/reason': 'A razão para recusar a sugestão',
 
   // Ban
   ban: 'Bane um usuário do servidor',
