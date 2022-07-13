@@ -201,5 +201,16 @@ export default {
   'mute/error/not-moderatable': "I can not mute this user because my highest role is below or equal to the user's highest role.",
   'mute/error/no-permissions': "You cannot mute this user as their highest rank is below or in the same rank as the member's highest role.",
   'mute/error/unknown-member': 'Unknown member.',
-  'mute/error/unknown-error': 'There was an error muting the user.'
+  'mute/error/unknown-error': 'There was an error muting the user.',
+
+  // Kick
+  'kick/no-reason': 'No reason.',
+  'kick/punished-by': 'Punished by:',
+  'kick/complete': (user: User | GuildMember | string) => `The user ${user} was kicked successfully.`,
+  'kick/error/kick-bot': 'I can not kick myself.',
+  'kick/error/kick-self': 'You can not kick yourself.',
+  'kick/error/not-member': 'You can not kick a user who is not a member of this server.',
+  'kick/error/not-kickable': "I can not kick this user because my highest role is below or equal to the user's highest role.",
+  'kick/error/no-permissions': "You cannot kick this user as their highest rank is below or in the same rank as the member's highest role.",
+  'kick/error/unknown-error': 'There was an error kicking the user.'
 } as const;

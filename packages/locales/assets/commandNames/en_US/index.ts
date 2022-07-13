@@ -78,5 +78,10 @@ export default {
   'mute/time/days': 'days',
   'mute/time/hour': 'hour',
   'mute/time/hours': 'hours',
-  'mute/reason': 'reason'
+  'mute/reason': 'reason',
+
+  // Kick
+  kick: 'kick',
+  'kick/user': 'user',
+  'kick/reason': 'reason'
 } as const;
