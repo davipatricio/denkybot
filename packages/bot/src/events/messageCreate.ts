@@ -45,7 +45,7 @@ export default class MessageCreateEvent extends Event {
       if (!data) return;
       message
         .reply({
-          content: t('command:afk/mentioned', user, data.startTime, data.reason),
+          content: t('command:afk/mentioned', user, data.startTime, data.reason ?? undefined),
           allowedMentions: {
             parse: [],
             users: [message.author.id]

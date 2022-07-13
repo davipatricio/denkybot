@@ -72,6 +72,7 @@ export default class SuggestionsSubCommand extends Command {
     });
 
     collector.on('collect', async int => {
+      if (!interaction.channel) return;
       let updatedConfig = (await this.client.databases.getSuggestion(interaction.guild.id)) as Suggestion;
       await int.deferUpdate();
       if (int.isSelectMenu()) {
