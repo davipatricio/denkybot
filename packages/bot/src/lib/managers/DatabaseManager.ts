@@ -46,17 +46,8 @@ export class DatabaseManager extends PrismaClient {
   }
 
   // #region Suggestion
-  createSuggestion(config: SuggestionConfig) {
-    return this.suggestion.create({
-      data: {
-        guildId: config.guildId,
-        addReactions: config.addReactions,
-        categories: config.categories,
-        cooldown: config.cooldown,
-        useThreads: config.useThreads,
-        sendNotices: config.sendNotices
-      }
-    });
+  createSuggestion(data: SuggestionConfig) {
+    return this.suggestion.create({ data });
   }
 
   getSuggestion(guildId: string) {
@@ -79,33 +70,19 @@ export class DatabaseManager extends PrismaClient {
       .catch(() => {});
   }
 
-  updateSuggestion(config: SuggestionConfig) {
+  updateSuggestion(data: SuggestionConfig) {
     return this.suggestion.update({
       where: {
-        guildId: config.guildId
+        guildId: data.guildId
       },
-      data: {
-        addReactions: config.addReactions,
-        categories: config.categories,
-        cooldown: config.cooldown,
-        useThreads: config.useThreads,
-        sendNotices: config.sendNotices
-      }
+      data
     });
   }
   // #endregion
 
   // #region Afk
-  createAfk(config: AFKConfig) {
-    return this.afk.create({
-      data: {
-        userId: config.userId,
-        guildId: config.guildId,
-        reason: config.reason,
-        originalNick: config.originalNick,
-        startTime: config.startTime
-      }
-    });
+  createAfk(data: AFKConfig) {
+    return this.afk.create({ data });
   }
 
   getAfk(userId: string) {
@@ -128,17 +105,12 @@ export class DatabaseManager extends PrismaClient {
       .catch(() => {});
   }
 
-  updateAfk(config: AFKConfig) {
+  updateAfk(data: AFKConfig) {
     return this.afk.update({
       where: {
-        userId: config.userId
+        userId: data.userId
       },
-      data: {
-        guildId: config.guildId,
-        reason: config.reason,
-        originalNick: config.originalNick,
-        startTime: config.startTime
-      }
+      data
     });
   }
   // #endregion
