@@ -1,4 +1,4 @@
-import { EmbedBuilder, Locale } from 'discord.js';
+import { ChannelType, EmbedBuilder, Locale } from 'discord.js';
 import { request } from 'undici';
 import { Command, CommandRunOptions } from '../../structures/Command';
 import type { DenkyClient } from '../../types/Client';
@@ -47,6 +47,10 @@ export default class WikipediaCommand extends Command {
           value: t('command:wikipedia/embeds/fields/value', res.content_urls.desktop.page, res.pageid)
         }
       ]);
+
+    if (interaction.inGuild() && interaction.channel && !interaction.channel.isThread()) {
+      if (interaction.channel.nsfw) embed.setImage(res.originalimage?.source ?? null);
+    }
 
     interaction.editReply({ embeds: [embed] });
   }
