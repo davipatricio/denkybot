@@ -690,7 +690,24 @@ discord-api-types@^0.36.1:
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.36.1.tgz#f6df24c090535bf2e5aea577f906f9aa4a9fe63b"
   integrity sha512-PTDinUU574hXA9Ko9wrftL1iww1raNiRVKjuPIWQ5Li1g7vQPArpZWw9x01kh/IXLPdzSAJ6H8T0eAYzxzFzIg==
 
-discord.js@14.0.0-dev.1657411900-f0b68d5, "discord.js@workspace:^":
+discord.js@14.0.0-dev.1657713879-30a8d32:
+  version "14.0.0-dev.1657713879-30a8d32"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-14.0.0-dev.1657713879-30a8d32.tgz#e1cfad54b382a0f89cdb0e398b737e82068a250a"
+  integrity sha512-uc9dTZpB15ebu/5TTHXQm+1R3lkJRxqtJugN/ODYD9LPNjwMtVzQlsiFsS4HXhk8E5JURuBEWTNIEm7g+rjDeQ==
+  dependencies:
+    "@discordjs/builders" "^0.16.0-dev"
+    "@discordjs/collection" "^0.8.0-dev"
+    "@discordjs/rest" "^0.6.0-dev"
+    "@sapphire/snowflake" "^3.2.2"
+    "@types/ws" "^8.5.3"
+    discord-api-types "^0.36.1"
+    fast-deep-equal "^3.1.3"
+    lodash.snakecase "^4.1.1"
+    tslib "^2.4.0"
+    undici "^5.6.0"
+    ws "^8.8.0"
+
+"discord.js@workspace:^":
   version "14.0.0-dev.1657411900-f0b68d5"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-14.0.0-dev.1657411900-f0b68d5.tgz#aedca6c41fc64aacfd9f9d9ddd4b7ee57926eec0"
   integrity sha512-mPeIaxthGZEc4qKi6HzWnMIbHOh63qJHr37qFWMoDZpYOPht7Q1V2w3eGh7e30kCoh1BNrLGaeYqwRxpYENjsg==
