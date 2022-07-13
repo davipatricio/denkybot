@@ -175,7 +175,7 @@ export default class PingCommand extends Command {
         const noticeEmbed = new EmbedBuilder()
           .setColor('Red')
           .setTimestamp()
-          .setDescription(`❌ **|** ${t('command:suggestions/management/deny/memberdm', embed.data.description?.replace('> ', '').slice(0, 15), interaction.user, suggestionMessage.url)}`);
+          .setDescription(`❌ **|** ${t('command:suggestions/management/deny/memberdm', embed.data.description?.replace('> ', '').slice(0, 15) ?? '', interaction.user, suggestionMessage.url)}`);
         interaction.guild.members
           .fetch(suggesterId)
           .then(m => {
@@ -302,7 +302,7 @@ export default class PingCommand extends Command {
         const noticeEmbed = new EmbedBuilder()
           .setColor('Green')
           .setTimestamp()
-          .setDescription(`✅ **|** ${t('command:suggestions/management/accept/memberdm', embed.data.description?.replace('> ', '').slice(0, 15), interaction.user, suggestionMessage.url)}`);
+          .setDescription(`✅ **|** ${t('command:suggestions/management/accept/memberdm', embed.data.description?.replace('> ', '').slice(0, 15) ?? '', interaction.user, suggestionMessage.url)}`);
         interaction.guild.members
           .fetch(suggesterId)
           .then(m => {

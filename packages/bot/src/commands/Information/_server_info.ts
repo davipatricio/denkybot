@@ -61,7 +61,7 @@ export default class ServerInfoSubCommand extends Command {
         },
         {
           name: 'Boosts',
-          value: t('command:server/info/embed/boosts', interaction.guild.premiumSubscriptionCount, interaction.guild.premiumTier),
+          value: t('command:server/info/embed/boosts', interaction.guild.premiumSubscriptionCount ?? 0, interaction.guild.premiumTier),
           inline: true
         }
       ])

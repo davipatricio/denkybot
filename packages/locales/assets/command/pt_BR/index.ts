@@ -1,4 +1,4 @@
-import type { Guild, GuildMember, TextChannel, User } from 'discord.js';
+import type { Guild, GuildMember, GuildTextBasedChannel, User } from 'discord.js';
 
 export default {
   // General errors
@@ -27,8 +27,8 @@ export default {
   'help/button/add': 'Ne adicione',
   'help/button/support': 'Servidor de Suporte',
   'help/button/vote': 'Vote',
-  'help/embed/description': (supportClick: string, addClick: string, totalCommands: string) =>
-    `❔ Meu prefixo neste servidor é: \`/.\`\n🚪 Entre em meu servidor de suporte: [clique aqui](${supportClick}).\n🎉 Me adicione em seu servidor: [clique aqui](${addClick}).\n\nAtualmente eu possuo \`${totalCommands}\` comandos.`,
+  'help/embed/description': (support: string, add: string, totalCommands: number) =>
+    `❔ Meu prefixo neste servidor é: \`/.\`\n🚪 Entre em meu servidor de suporte: [clique aqui](${support}).\n🎉 Me adicione em seu servidor: [clique aqui](${add}).\n\nAtualmente eu possuo \`${totalCommands}\` comandos.`,
   'help/menu/placeholder': 'Clique aqui para escolher a categoria de comandos.',
   'help/warn/guildonly-commands': '⚠️ **|** Alguns comandos podem estar restringidos para serem executados apenas em servidores e por isso não estão disponíveis aqui.',
 
@@ -39,18 +39,18 @@ export default {
   'user/info/memberJoinedAt': 'Entrou em',
 
   // User avatar
-  'user/avatar/title': (user: User) => `Avatar de ${user}`,
+  'user/avatar/title': (user: string) => `Avatar de ${user}`,
   'user/avatar/browser': 'Abrir avatar no navegador',
   'user/avatar/seeGuildAvatar': 'Ver o avatar do usuário neste servidor',
   'user/avatar/seeGlobalAvatar': 'Ver o avatar do usuário neste servidor',
 
   // User Banner
   'user/banner/noBanner': 'Este usuário não tem um banner.',
-  'user/banner/title': (user: User) => `Banner de ${user}`,
+  'user/banner/title': (user: string) => `Banner de ${user}`,
   'user/banner/browser': 'Abrir banner no navegador',
 
   // Server icon
-  'server/icon/title': (guild: Guild) => `Ícone do servidor ${guild}`,
+  'server/icon/title': (guild: string) => `Ícone do servidor ${guild}`,
   'server/icon/browser': 'Abrir ícone no navegador',
   'server/icon/noIcon': 'Este servidor não tem um ícone.',
 
@@ -122,11 +122,11 @@ export default {
 
   'config/suggestions/actions/enabled': 'O sistema de sugestões foi habilitado com sucesso! Agora, você precisa adicionar categorias para finalizar o processo.',
 
-  'config/suggestions/actions/category/askToAdd': (channel: TextChannel) => `Envie uma mensagem mencionando um canal para o adicionar a lista de categorias. Exemplo: ${channel}`,
+  'config/suggestions/actions/category/askToAdd': (channel: GuildTextBasedChannel) => `Envie uma mensagem mencionando um canal para o adicionar a lista de categorias. Exemplo: ${channel}`,
   'config/suggestions/actions/category/added': 'Categoria adicionada com sucesso!',
   'config/suggestions/actions/category/addError': 'Não foi possível adicionar a categoria pois você não enviou uma mensagem mencionando um canal!',
 
-  'config/suggestions/actions/category/askToRemove': (channel: TextChannel) => `Envie uma mensagem mencionando um canal para o remover da lista de categorias. Exemplo: ${channel}`,
+  'config/suggestions/actions/category/askToRemove': (channel: GuildTextBasedChannel) => `Envie uma mensagem mencionando um canal para o remover da lista de categorias. Exemplo: ${channel}`,
   'config/suggestions/actions/category/removed': 'Categoria removida com sucesso!',
   'config/suggestions/actions/category/delError': 'Não foi possível remover a categoria pois você não enviou uma mensagem mencionando um canal!',
 
@@ -144,7 +144,7 @@ export default {
 
   // Server Banner
   'server/banner/noBanner': 'Este servidor não tem um banner.',
-  'server/banner/title': (guild: Guild) => `Banner do servidor ${guild}`,
+  'server/banner/title': (guild: string) => `Banner do servidor ${guild}`,
   'server/banner/browser': 'Abrir banner no navegador',
 
   // Suggestions
