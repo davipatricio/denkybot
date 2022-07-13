@@ -1,8 +1,8 @@
 import type { Message } from 'discord.js';
+import { recommendLocale } from '../helpers/Locale';
+import type { CommandLocale } from '../structures/Command';
 import { Event } from '../structures/Event';
 import type { DenkyClient } from '../types/Client';
-import { recommendLocale } from '../helpers/Locale';
-import type { AllLocalePaths } from '../lib/managers/LanguageManager';
 
 export default class MessageCreateEvent extends Event {
   constructor() {
@@ -21,7 +21,7 @@ export default class MessageCreateEvent extends Event {
     const data = await client.databases.getAfk(message.author.id);
     if (!data) return;
 
-    const t = (path: AllLocalePaths, ...args: unknown[]) => {
+    const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
       return client.languages.manager.get(recommendLocale(message.guild?.preferredLocale), path, ...args);
     };
 
@@ -35,7 +35,7 @@ export default class MessageCreateEvent extends Event {
   async verifyAFKMention(client: DenkyClient, message: Message) {
     if (message.mentions.users.size === 0) return;
 
-    const t = (path: AllLocalePaths, ...args: unknown[]) => {
+    const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
       return client.languages.manager.get(recommendLocale(message.guild?.preferredLocale), path, ...args);
     };
 

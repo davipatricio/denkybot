@@ -1,6 +1,5 @@
 import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, Interaction, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
 import { recommendLocale } from '../helpers/Locale';
-import type { AllLocalePaths } from '../lib/managers/LanguageManager';
 import type { Command, CommandLocale, CommandRunOptions } from '../structures/Command';
 import { Event } from '../structures/Event';
 import type { DenkyClient } from '../types/Client';
@@ -21,7 +20,7 @@ export default class InteractionCreateEvent extends Event {
 
     const userLocale = recommendLocale(interaction.locale);
 
-    const t = (path: AllLocalePaths, ...args: unknown[]) => {
+    const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
       return client.languages.manager.get(userLocale, path, ...args);
     };
 

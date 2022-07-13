@@ -1,24 +1,33 @@
 /* eslint-disable no-await-in-loop */
 import { readdir } from 'node:fs/promises';
 import nodePath from 'node:path';
+import type { FunctionKeys, NonFunctionKeys } from 'utility-types';
 import type { DenkyClient } from '../../types/Client';
 
-export type LocaleCategories = 'command' | 'commandNames' | 'commandDescriptions' | 'commandCategories';
+type LocaleCategories = 'command' | 'commandNames' | 'commandDescriptions' | 'commandCategories';
 export type SupportedLocales = 'en_US' | 'pt_BR';
 
-export type CommandLocaleKeys = keyof typeof import('@locales/assets/command/pt_BR').default;
-export type CommandNamesKeys = keyof typeof import('@locales/assets/commandNames/pt_BR').default;
-export type CommandDescriptionsKeys = keyof typeof import('@locales/assets/commandDescriptions/pt_BR').default;
-export type CommandCategoriesKeys = keyof typeof import('@locales/assets/commandCategories/pt_BR').default;
-export type PermissionLocaleKeys = keyof typeof import('@locales/assets/permissions/pt_BR').default;
+type CommandLocaleKeysObject = typeof import('@locales/assets/command/pt_BR').default;
+type CommandNamesKeysObject = typeof import('@locales/assets/commandNames/pt_BR').default;
+type CommandDescriptionsKeysObject = typeof import('@locales/assets/commandDescriptions/pt_BR').default;
+type CommandCategoriesKeysObject = typeof import('@locales/assets/commandCategories/pt_BR').default;
+type PermissionLocaleKeysObject = typeof import('@locales/assets/permissions/pt_BR').default;
 
-export type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys | PermissionLocaleKeys;
+export type CommandLocaleKeys = keyof CommandLocaleKeysObject;
+export type CommandNamesKeys = keyof CommandNamesKeysObject;
+export type CommandDescriptionsKeys = keyof CommandDescriptionsKeysObject;
+export type CommandCategoriesKeys = keyof CommandCategoriesKeysObject;
+export type PermissionLocaleKeys = keyof PermissionLocaleKeysObject;
+
+type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys | PermissionLocaleKeys;
 export type AllLocalePaths =
   | `command:${CommandLocaleKeys}`
   | `commandDescriptions:${CommandDescriptionsKeys}`
   | `commandCategories:${CommandCategoriesKeys}`
   | `commandNames:${CommandNamesKeys}`
   | `permissions:${PermissionLocaleKeys}`;
+
+type CommandLocaleKeysObjectGeneric<K extends FunctionKeys<CommandLocaleKeysObject>> = CommandLocaleKeysObject[K];
 
 const BASE_LOCALE_DIR = nodePath.resolve(__dirname, '../../../../locales/assets/');
 
@@ -48,7 +57,13 @@ export class LanguageManager {
     }
   }
 
-  get(lang: SupportedLocales, path: AllLocalePaths, ...args: unknown[]) {
+  get<K extends FunctionKeys<CommandLocaleKeysObject>>(locale: SupportedLocales, path: `command:${K}`, ...rest: Parameters<CommandLocaleKeysObjectGeneric<K>>): string;
+  get<K extends NonFunctionKeys<CommandLocaleKeysObject>>(locale: SupportedLocales, path: `command:${K}`): string;
+  get(locale: SupportedLocales, path: `commandDescriptions:${CommandDescriptionsKeys}`): string;
+  get(locale: SupportedLocales, path: `commandCategories:${CommandCategoriesKeys}`): string;
+  get(locale: SupportedLocales, path: `commandNames:${CommandNamesKeys}`): string;
+  get(locale: SupportedLocales, path: `permissions:${PermissionLocaleKeys}`): string;
+  get(lang: SupportedLocales, path: string, ...args: unknown[]) {
     const [category, key] = path.split(':');
     if (!this.cache[category]) return `!!{${category}.${key}}!!`;
 
@@ -62,4 +77,15 @@ export class LanguageManager {
     if (typeof locale === 'function') return locale(...args);
     return `!!{${category}.${key}}!!`;
   }
+}
+
+export function translateTuple<K extends FunctionKeys<CommandLocaleKeysObject>>(...args: [path: `command:${K}`, ...args: Parameters<CommandLocaleKeysObjectGeneric<K>>]): string;
+export function translateTuple<K extends NonFunctionKeys<CommandLocaleKeysObject>>(...args: [path: `command:${K}`]): string;
+export function translateTuple(...args: [path: `commandDescriptions:${CommandDescriptionsKeys}`]): string;
+export function translateTuple(...args: [path: `commandCategories:${CommandCategoriesKeys}`]): string;
+export function translateTuple(...args: [path: `commandNames:${CommandNamesKeys}`]): string;
+export function translateTuple(...args: [path: `permissions:${PermissionLocaleKeys}`]): string;
+export function translateTuple(...args: [path: never]): string;
+export function translateTuple(args: never): never {
+  return args;
 }
