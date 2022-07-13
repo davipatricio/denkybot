@@ -73,13 +73,13 @@ export class LanguageManager {
   }
 }
 
-export function translateTuple<K extends FunctionKeys<CommandLocaleKeysObject>>(...args: [path: `command:${K}`, ...args: Parameters<CommandLocaleKeysObjectGeneric<K>>]): string;
-export function translateTuple<K extends NonFunctionKeys<CommandLocaleKeysObject>>(...args: [path: `command:${K}`]): string;
-export function translateTuple(...args: [path: `commandDescriptions:${CommandDescriptionsKeys}`]): string;
-export function translateTuple(...args: [path: `commandCategories:${CommandCategoriesKeys}`]): string;
-export function translateTuple(...args: [path: `commandNames:${CommandNamesKeys}`]): string;
-export function translateTuple(...args: [path: `permissions:${PermissionLocaleKeys}`]): string;
-export function translateTuple(...args: [path: never]): string;
-export function translateTuple(args: never): never {
+export function translateTuple<K extends FunctionKeys<CommandLocaleKeysObject>>(...path: [path: `command:${K}`, ...args: Parameters<CommandLocaleKeysObjectGeneric<K>>]): string;
+export function translateTuple<K extends NonFunctionKeys<CommandLocaleKeysObject>>(...path: [path: `command:${K}`]): string;
+export function translateTuple(...path: [path: `commandDescriptions:${CommandDescriptionsKeys}`]): string;
+export function translateTuple(...path: [path: `commandCategories:${CommandCategoriesKeys}`]): string;
+export function translateTuple(...path: [path: `commandNames:${CommandNamesKeys}`]): string;
+export function translateTuple(...path: [path: `permissions:${PermissionLocaleKeys}`]): string;
+export function translateTuple(...path: ['Unknown key.' | 'Chave desconhecida.']): string;
+export function translateTuple(...args: never): string {
   return args;
 }
