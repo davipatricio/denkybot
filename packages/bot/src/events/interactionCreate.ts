@@ -1,9 +1,9 @@
 import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, Interaction, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
+import { recommendLocale } from '../helpers/Locale';
+import type { AllLocalePaths } from '../lib/managers/LanguageManager';
 import type { Command, CommandLocale, CommandRunOptions } from '../structures/Command';
 import { Event } from '../structures/Event';
 import type { DenkyClient } from '../types/Client';
-import { recommendLocale } from '../helpers/Locale';
-import type { AllLocalePaths } from '../lib/managers/LanguageManager';
 
 export default class InteractionCreateEvent extends Event {
   /** Webhook used to log commands */
@@ -59,7 +59,7 @@ export default class InteractionCreateEvent extends Event {
         {
           name: 'Channel information',
           value: `Channel: ${(interaction.channel as TextChannel)?.name ?? 'Unknown name.'} (${interaction.channel?.id ?? 'Unknown ID.'})\nChannel Type: ${
-            ChannelType[(interaction.channel as TextChannel).type] ?? 'UNKNOWN'
+            ChannelType[(interaction.channel as TextChannel)?.type] ?? 'UNKNOWN'
           }`
         }
       ]);
