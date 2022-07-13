@@ -24,7 +24,7 @@ export class Initializer {
     await this.loadEvents();
     await this.loadTasks();
     // Log bot in after loading everything
-    this.client.login(process.env.BOT_TOKEN).then(() => console.log('logado'));
+    this.client.login(process.env.BOT_TOKEN).then(() => this.client.logger.info('Bot successfully started.', { tags: ['Bot'] }));
   }
 
   async loadCommands() {
