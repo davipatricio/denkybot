@@ -5,6 +5,8 @@ import { config } from 'dotenv';
 import Configuration from '@bot/config';
 
 config({ path: '../.env' });
+config({ path: '../../prisma/.env' });
+config({ path: '../../logger/.env' });
 
 const logger = createLogger();
 

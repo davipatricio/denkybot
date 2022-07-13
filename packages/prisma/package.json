@@ -1,6 +1,6 @@
 {
-  "name": "@denky/prisma",
-  "version": "0.0.0",
+  "name": "@denkylabs/prisma",
+  "version": "0.0.2-dev",
   "description": "Module to store & manage Prisma schemas.",
   "type": "commonjs",
   "license": "GPL-3.0",
