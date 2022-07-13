@@ -4,6 +4,8 @@ import { Initializer } from './lib/utils/Initializer';
 import type { DenkyClient } from './types/Client';
 
 config({ path: '../.env' });
+config({ path: '../../prisma/.env' });
+config({ path: '../../logger/.env' });
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages],
