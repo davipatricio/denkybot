@@ -20,12 +20,6 @@ export type CommandCategoriesKeys = keyof CommandCategoriesKeysObject;
 export type PermissionLocaleKeys = keyof PermissionLocaleKeysObject;
 
 type AllLocaleKeys = CommandLocaleKeys | CommandNamesKeys | CommandDescriptionsKeys | CommandCategoriesKeys | PermissionLocaleKeys;
-export type AllLocalePaths =
-  | `command:${CommandLocaleKeys}`
-  | `commandDescriptions:${CommandDescriptionsKeys}`
-  | `commandCategories:${CommandCategoriesKeys}`
-  | `commandNames:${CommandNamesKeys}`
-  | `permissions:${PermissionLocaleKeys}`;
 
 type CommandLocaleKeysObjectGeneric<K extends FunctionKeys<CommandLocaleKeysObject>> = CommandLocaleKeysObject[K];
 
