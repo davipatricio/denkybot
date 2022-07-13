@@ -43,12 +43,16 @@ function loadWinstonLogger(logger: Logger, config: BotConfiguration, shardId: st
       })
     );
 
-  if (!config.logs.sentry) logger.warn('Sentry config is set to false. Skipping Sentry configuration.', { tags: ['Sentry'] });
-  if (config.logs.sentry && process.env.SENTRY_DSN) {
-    logger.add(new SentryTransporter(process.env.SENTRY_DSN));
-    logger.info('Sentry loaded.', { tags: ['Sentry'] });
+  if (!config.logs.sentry) {
+    logger.warn('Skipping Sentry configuration because it is not enabled.', { tags: ['Sentry'] });
+    return;
   }
-  if (config.webhooks.errorLogs && process.env.DISCORD_ERRORLOGS_WEBHOOK_URL) logger.add(new WebhookTransporter(process.env.DISCORD_ERRORLOGS_WEBHOOK_URL));
+  const { DISCORD_ERRORLOGS_WEBHOOK_URL, SENTRY_DSN } = process.env;
+  if (SENTRY_DSN) {
+    logger.add(new SentryTransporter(SENTRY_DSN));
+    logger.info('Sentry was loaded.', { tags: ['Sentry'] });
+  }
+  if (config.webhooks.errorLogs && DISCORD_ERRORLOGS_WEBHOOK_URL) logger.add(new WebhookTransporter(DISCORD_ERRORLOGS_WEBHOOK_URL));
 }
 
 function createLogger(options?: LoggerOptions, client?: DenkyClient) {
