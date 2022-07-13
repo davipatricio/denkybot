@@ -79,7 +79,7 @@ export function translateTuple(...path: [path: `commandDescriptions:${CommandDes
 export function translateTuple(...path: [path: `commandCategories:${CommandCategoriesKeys}`]): string;
 export function translateTuple(...path: [path: `commandNames:${CommandNamesKeys}`]): string;
 export function translateTuple(...path: [path: `permissions:${PermissionLocaleKeys}`]): string;
-export function translateTuple(...path: ['Unknown key.' | 'Chave desconhecida.']): string;
+export function translateTuple(...path: [path: never]): string;
 export function translateTuple(...args: never): string {
   return args;
 }
