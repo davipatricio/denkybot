@@ -82,12 +82,15 @@ export default {
   'config/suggestions/buttons/disableReact': 'Disable reactions',
   'config/suggestions/buttons/enableThreads': 'Enable threads',
   'config/suggestions/buttons/disableThreads': 'Disable threads',
+  'config/suggestions/buttons/enableNotices': 'Enable notifications',
+  'config/suggestions/buttons/disableNotices': 'Disable notifications',
 
   'config/suggestions/pages/suggestions': 'Enable or disable the suggestion system',
   'config/suggestions/pages/categories': 'Add or delete suggestion categories',
   'config/suggestions/pages/reactions': 'Enable or disable reactions on suggestions',
   'config/suggestions/pages/cooldowns': 'Manage suggestion cooldowns',
   'config/suggestions/pages/threads': 'Enable or disable the use of threads',
+  'config/suggestions/pages/notices': 'Notify members in DM when their suggestions are accepted and declined',
 
   'config/suggestions/pages': 'Pages',
   'config/suggestions/pages/suggestions/title': 'Suggestions',
@@ -95,11 +98,14 @@ export default {
   'config/suggestions/pages/reactions/title': 'Reactions',
   'config/suggestions/pages/cooldowns/title': 'Cooldowns',
   'config/suggestions/pages/threads/title': 'Threads',
+  'config/suggestions/pages/notices/title': 'Notifications',
 
   'config/suggestions/disabled': 'The suggestion system is currently disabled.',
   'config/suggestions/enabled': 'The suggestion system is currently enabled.',
   'config/suggestions/reactions': (status: boolean) => `Reactions are currently: ${status ? 'enabled' : 'disabled'}.`,
   'config/suggestions/threads': (status: boolean) => `Threads are currently: ${status ? 'enabled' : 'disabled'}.`,
+  'config/suggestions/notices': (status: boolean) =>
+    status ? "I'm notifying members when their suggestions are accepted or declined." : "I'm not notifying members when their suggestions are accepted or declined.",
   'config/suggestions/cooldowns': 'The cooldown is currently at:',
   'config/suggestions/cooldowns/no-cooldown': 'No cooldown',
   'config/suggestions/cooldowns/no-cooldown/about': 'Members will not need to wait for a cooldown before making a suggestion',
@@ -169,6 +175,7 @@ export default {
   'suggestions/management/buttons/move/no': "Don't move",
   'suggestions/management/answered': 'This suggestion has been answered previously by a team member',
   'suggestions/management/accept/embed/title': 'New suggestion sent [accepted]',
+  'suggestions/management/accept/memberdm': (desc: string, user: User, url: string) => `Your suggestion \`${desc}\` was accepted by ${user}! Check it out [here](${url}).`,
   'suggestions/management/accept/accepted': 'The suggestion was successfully accepted!',
   'suggestions/management/accept/accepted/move': '✅ **|** The suggestion was successfully accepted\n➡️ **|** Do you want to move the suggestion to this channel?',
   'suggestions/management/accept/accepted/moved': 'The suggestion was successfully accepted and moved to this channel!',

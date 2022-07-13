@@ -147,7 +147,7 @@ export default class PingCommand extends Command {
         return;
       }
 
-      // const suggesterId = this.#getIdFromFooter(suggestionMessage.embeds[0].footer?.text);
+      const suggesterId = this.#getIdFromFooter(suggestionMessage.embeds[0].footer?.text);
 
       const embed = new EmbedBuilder(suggestionMessage.embeds[0].toJSON())
         .setTitle(`✅ • ${t('command:suggestions/management/accept/embed/title')}`)
@@ -166,6 +166,21 @@ export default class PingCommand extends Command {
           components: []
         });
         return;
+      }
+
+      if (config.sendNotices && suggesterId) {
+        const noticeEmbed = new EmbedBuilder()
+          .setColor('Green')
+          .setTimestamp()
+          .setDescription(`✅ **|** ${t('command:suggestions/management/accept/memberdm', embed.data.description?.replace('> ', '').slice(0, 15), interaction.user, suggestionMessage.url)}`);
+        interaction.guild.members
+          .fetch(suggesterId)
+          .then(m => {
+            m.send({
+              embeds: [noticeEmbed]
+            }).catch(() => {});
+          })
+          .catch(() => {});
       }
 
       this.#askStaffToMove(t, i, embed);

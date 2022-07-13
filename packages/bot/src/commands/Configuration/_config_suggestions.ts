@@ -4,7 +4,7 @@ import ms from 'ms';
 import { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
 import type { DenkyClient } from '../../types/Client';
 
-type PageTypes = 'sugestoes' | 'categorias' | 'reacoes' | 'cooldown' | 'threads';
+type PageTypes = 'sugestoes' | 'categorias' | 'reacoes' | 'cooldown' | 'threads' | 'notices';
 
 export default class SuggestionsSubCommand extends Command {
   constructor(client: DenkyClient) {
@@ -21,10 +21,10 @@ export default class SuggestionsSubCommand extends Command {
 
   override async run({ t, interaction }: CommandRunOptions) {
     if (!interaction.inCachedGuild()) return;
-    const configStatus = await this.client.databases.getSuggestion(interaction.guild.id);
+    const configStatus = (await this.client.databases.getSuggestion(interaction.guild.id)) ?? undefined;
 
     const selectRow = new ActionRowBuilder<SelectMenuBuilder>();
-    const { embed, buttons: buttonRow } = this.updateMessage('sugestoes', null, selectRow, interaction, configStatus, t);
+    const { embed, buttonRow } = this.updateMessage('sugestoes', null, selectRow, interaction, configStatus, t);
 
     const CATEGORY_MANAGE_FILTER = (m: Message) =>
       m.author.id === interaction.user.id &&
@@ -56,7 +56,8 @@ export default class SuggestionsSubCommand extends Command {
           .setLabel(t('command:config/suggestions/pages/cooldowns/title'))
           .setValue('cooldown')
           .setEmoji('⏲️'),
-        new SelectMenuOptionBuilder().setDescription(t('command:config/suggestions/pages/threads')).setLabel(t('command:config/suggestions/pages/threads/title')).setValue('threads').setEmoji('💭')
+        new SelectMenuOptionBuilder().setDescription(t('command:config/suggestions/pages/threads')).setLabel(t('command:config/suggestions/pages/threads/title')).setValue('threads').setEmoji('💭'),
+        new SelectMenuOptionBuilder().setDescription(t('command:config/suggestions/pages/notices')).setLabel(t('command:config/suggestions/pages/notices/title')).setValue('notices').setEmoji('🗣️')
       ]);
 
     selectRow.setComponents([paginationSelect]);
@@ -98,7 +99,8 @@ export default class SuggestionsSubCommand extends Command {
               addReactions: true,
               categories: [],
               cooldown: 0,
-              useThreads: false
+              useThreads: false,
+              sendNotices: false
             });
             this.updateMessage('categorias', message, selectRow, interaction, updatedConfig, t);
             int.followUp({
@@ -229,19 +231,45 @@ export default class SuggestionsSubCommand extends Command {
             });
             break;
           }
+          // Enable notices
+          case 'enable_notices': {
+            updatedConfig = await this.client.databases.updateSuggestion({
+              ...updatedConfig,
+              sendNotices: true
+            });
+            this.updateMessage('notices', message, selectRow, interaction, updatedConfig, t);
+            int.followUp({
+              content: `✅ **|** ${t('command:config/suggestions/actions/notices/enabled')}`,
+              ephemeral: true
+            });
+            break;
+          }
+          // Disable notices
+          case 'disable_notices': {
+            updatedConfig = await this.client.databases.updateSuggestion({
+              ...updatedConfig,
+              sendNotices: false
+            });
+            this.updateMessage('notices', message, selectRow, interaction, updatedConfig, t);
+            int.followUp({
+              content: `✅ **|** ${t('command:config/suggestions/actions/notices/disabled')}`,
+              ephemeral: true
+            });
+            break;
+          }
         }
       }
     });
   }
 
-  updateMessage(page: PageTypes, message: Message | null, selectRow: ActionRowBuilder<SelectMenuBuilder>, interaction: ChatInputCommandInteraction, config: any, t: CommandLocale) {
+  updateMessage(page: PageTypes, message: Message | null, selectRow: ActionRowBuilder<SelectMenuBuilder>, interaction: ChatInputCommandInteraction, config: Suggestion | undefined, t: CommandLocale) {
     const embed = this.generateEmbedPage(page, interaction, config, t);
-    const buttons = this.generateButtonsFromPage(page, config, t);
-    message?.edit({ components: [selectRow, buttons], embeds: [embed] });
-    return { embed, buttons };
+    const buttonRow = this.generateButtonsFromPage(page, config, t);
+    message?.edit({ components: [selectRow, buttonRow], embeds: [embed] });
+    return { embed, buttonRow };
   }
 
-  generateEmbedPage(page: PageTypes, { user }: ChatInputCommandInteraction, configStatus: any, t: CommandLocale) {
+  generateEmbedPage(page: PageTypes, { user }: ChatInputCommandInteraction, configStatus: Suggestion | undefined, t: CommandLocale) {
     const embed = new EmbedBuilder({
       timestamp: Date.now(),
       footer: { text: user.tag, iconURL: user.displayAvatarURL() }
@@ -279,12 +307,18 @@ export default class SuggestionsSubCommand extends Command {
             ? `✅ **|** ${t('command:config/suggestions/enabled')}\n👍 **|** ${t('command:config/suggestions/threads', configStatus.useThreads)}`
             : `❌ **|** ${t('command:config/suggestions/disabled')}`
         );
+      case 'notices':
+        return embed.setDescription(
+          configStatus
+            ? `✅ **|** ${t('command:config/suggestions/enabled')}\n🗣️ **|** ${t('command:config/suggestions/notices', configStatus.sendNotices)}`
+            : `❌ **|** ${t('command:config/suggestions/disabled')}`
+        );
       default:
         return embed;
     }
   }
 
-  generateButtonsFromPage(page: PageTypes, configStatus: any, t: CommandLocale) {
+  generateButtonsFromPage(page: PageTypes, configStatus: Suggestion | undefined, t: CommandLocale) {
     if (page === 'cooldown') {
       const selectRow = new ActionRowBuilder<SelectMenuBuilder>();
       const selectMenu = new SelectMenuBuilder()
@@ -316,13 +350,19 @@ export default class SuggestionsSubCommand extends Command {
         const enableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enableReact')).setStyle(ButtonStyle.Success).setCustomId('enable_reactions');
         const disableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disableReact')).setStyle(ButtonStyle.Danger).setCustomId('disable_reactions');
         if (!configStatus) return buttonRow.setComponents([enableReact.setDisabled(true), disableReact.setDisabled(true)]);
-        return buttonRow.setComponents([enableReact.setDisabled(!!configStatus.addReactions), disableReact.setDisabled(!configStatus.addReactions)]);
+        return buttonRow.setComponents([enableReact.setDisabled(configStatus.addReactions), disableReact.setDisabled(!configStatus.addReactions)]);
       }
       case 'threads': {
-        const enableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enableThreads')).setStyle(ButtonStyle.Success).setCustomId('enable_threads');
-        const disableReact = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disableThreads')).setStyle(ButtonStyle.Danger).setCustomId('disable_threads');
-        if (!configStatus) return buttonRow.setComponents([enableReact.setDisabled(true), disableReact.setDisabled(true)]);
-        return buttonRow.setComponents([enableReact.setDisabled(!!configStatus.useThreads), disableReact.setDisabled(!configStatus.useThreads)]);
+        const enableThreads = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enableThreads')).setStyle(ButtonStyle.Success).setCustomId('enable_threads');
+        const disableThreads = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disableThreads')).setStyle(ButtonStyle.Danger).setCustomId('disable_threads');
+        if (!configStatus) return buttonRow.setComponents([enableThreads.setDisabled(true), disableThreads.setDisabled(true)]);
+        return buttonRow.setComponents([enableThreads.setDisabled(configStatus.useThreads), disableThreads.setDisabled(!configStatus.useThreads)]);
+      }
+      case 'notices': {
+        const enableNotices = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/enableNotices')).setStyle(ButtonStyle.Success).setCustomId('enable_notices');
+        const disableNotices = new ButtonBuilder().setLabel(t('command:config/suggestions/buttons/disableNotices')).setStyle(ButtonStyle.Danger).setCustomId('disable_notices');
+        if (!configStatus) return buttonRow.setComponents([enableNotices.setDisabled(true), disableNotices.setDisabled(true)]);
+        return buttonRow.setComponents([enableNotices.setDisabled(configStatus.sendNotices), disableNotices.setDisabled(!configStatus.sendNotices)]);
       }
       default:
         return buttonRow;
