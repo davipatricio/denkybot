@@ -34,7 +34,8 @@
     },
 	"include": [
 		"src/**/*.ts",
-        "package.json"
+        "package.json",
+        ".env"
 	],
 	"exclude": [
 		"tsconfig.json"
