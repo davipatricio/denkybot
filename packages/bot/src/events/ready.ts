@@ -9,20 +9,12 @@ export default class ReadyEvent extends Event {
   }
 
   override async run(client: DenkyClient) {
-    client.logger.info(`Shard ${client.shard?.ids[0]} connected.`);
+    client.logger.info(`Shard ${client.shard?.ids[0]} connected.`, { tags: ['Bot'] });
 
     if (client.config.features.preventCrashes) {
-      client.on('error', (err: any) => {
-        client.logger.error(err, { tags: ['Bot'] });
-      });
-
-      process.on('unhandledRejection', (err: any) => {
-        client.logger.error(err, { tags: ['Process'] });
-      });
-
-      process.on('uncaughtException', (err: any) => {
-        client.logger.error(err, { tags: ['Process'] });
-      });
+      client.on('error', (err): any => client.logger.error(err as unknown as any, { tags: ['Bot'] }));
+      process.on('unhandledRejection', err => client.logger.error(err as any, { tags: ['Process'] }));
+      process.on('uncaughtException', err => client.logger.error(err as any, { tags: ['Process'] }));
     }
 
     // Publish cached commands to Discord

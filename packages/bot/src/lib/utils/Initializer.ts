@@ -137,7 +137,7 @@ export class Initializer {
       this.client
     );
     if (global.IS_MAIN_PROCESS)
-      this.client.logger.info('Loaded bot configuration file.', {
+      this.client.logger.info('Loaded Bot configuration file.', {
         tags: ['Configuration']
       });
     this.loadWebserver();
