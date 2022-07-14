@@ -1,5 +1,5 @@
 import { parseTime } from '@bot/src/helpers/Timestamp';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 import { Command, CommandRunOptions } from '../../structures/Command';
 import type { DenkyClient } from '../../types/Client';
 
@@ -34,15 +34,6 @@ export default class GiveawayCommand extends Command {
       new ButtonBuilder().setCustomId('giveaway_participate').setEmoji('📥').setLabel('Participar').setStyle(ButtonStyle.Success),
       new ButtonBuilder().setCustomId('giveaway_desist').setEmoji('📤').setLabel('Desistir').setStyle(ButtonStyle.Danger)
     ]);
-    const row2 = new ActionRowBuilder<SelectMenuBuilder>().setComponents([
-      new SelectMenuBuilder()
-        .setCustomId('dropdown')
-        .setPlaceholder('Opções adicionais')
-        .addOptions([
-          new SelectMenuOptionBuilder().setEmoji('🚫').setLabel('Sair do sorteio').setValue('sair').setDescription('Clique para sair do sorteio'),
-          new SelectMenuOptionBuilder().setEmoji('❌').setLabel('Encerrar sorteio').setValue('encerrar').setDescription('Clique para encerrar o sorteio e sortear os ganhadores')
-        ])
-    ]);
 
     const { valid, type, value } = parseTime(interaction.options.getString('duracao', true));
     if (!valid || !value) {
@@ -58,7 +49,7 @@ export default class GiveawayCommand extends Command {
       .setDescription(`${description}\n\n🔢 **Ganhadores**: ${winnerAmount}\n⏲️ **Acaba**: <t:${Math.round(endTimestamp / 1000)}:R>`)
       .setColor('Yellow');
 
-    const message = await interaction.editReply({ embeds: [embed], components: [row, row2] });
+    const message = await interaction.editReply({ embeds: [embed], components: [row] });
 
     this.client.databases.createGiveaway({
       messageId: message.id,
