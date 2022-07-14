@@ -27,12 +27,11 @@ model Afk {
 
 model Giveaway {
   messageId String @id @default("") @map("_id") @db.ObjectId
-  guildId String @default("")
   channelId String @default("")
   authorId String @default("")
   title String @default("")
   description String @default("")
-  endTimestamp Int @default(0)
+  endTimestamp BigInt @default(0)
   winnerAmount Int @default(0)
   participants String[] @default([])
   ended Boolean @default(false)
