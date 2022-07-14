@@ -1,7 +1,7 @@
 export default ({
-  UTILS: '⚙️ Utilidades',
-  MODERATION: '🛠️ Moderação',
-  INFO: '💁 Informações',
-  TEXT: '💬 Texto',
-  CONFIG: '🔧 Configurações'
+  UTILS: '⚙️ Utilities',
+  MODERATION: '🛠️ Moderation',
+  INFO: '💁 Information',
+  TEXT: '💬 Text',
+  CONFIG: '🔧 Configuration'
 } as const);
