@@ -1,4 +1,5 @@
 import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, Interaction, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
+import { handleInteraction as handleGiveawayInteraction } from '../helpers/Giveaway';
 import { recommendLocale } from '../helpers/Locale';
 import type { Command, CommandLocale, CommandRunOptions } from '../structures/Command';
 import { Event } from '../structures/Event';
@@ -13,6 +14,8 @@ export default class InteractionCreateEvent extends Event {
   }
 
   override async run(client: DenkyClient, interaction: Interaction) {
+    handleGiveawayInteraction(client, interaction);
+
     if (!interaction.isChatInputCommand()) return;
 
     const botCommand = client.commands.get(interaction.commandName);
