@@ -33,12 +33,7 @@ export async function checkEndedGiveaways(client: DenkyClient) {
       continue;
     }
     const message = await channel.messages.fetch(messageId).catch(() => {});
-    if (!message) {
-      client.databases.deleteGiveaway(messageId);
-      continue;
-    }
-
-    if (!message.embeds[0]) {
+    if (!message || !message.embeds[0]) {
       client.databases.deleteGiveaway(messageId);
       continue;
     }
