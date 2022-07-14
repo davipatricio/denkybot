@@ -88,5 +88,15 @@ export default {
   // Kick
   kick: 'Kicks a user from the server',
   'kick/user': 'The user to kick',
-  'kick/reason': 'The reason for the kick'
+  'kick/reason': 'The reason for the kick',
+
+  // Animal
+  animal: 'See a random image of an animal',
+  'animal/panda': 'See a random image of a panda',
+  'animal/cat': 'See a random image of a cat',
+  'animal/dog': 'See a random image of a dog',
+  'animal/foxy': 'See a random image of a foxy',
+  'animal/bunny': 'See a random image of a bunny',
+  'animal/koala': 'See a random image of a koala',
+  'animal/duck': 'See a random image of a duck'
 } as const;

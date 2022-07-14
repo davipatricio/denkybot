@@ -87,5 +87,14 @@ export default {
   // Kick
   kick: 'expulsar',
   'kick/user': 'usuario',
-  'kick/reason': 'motivo'
+  'kick/reason': 'motivo',
+
+  // Animal
+  animal: 'animal',
+  'animal/dog': 'cachorro',
+  'animal/koala': 'coala',
+  'animal/bunny': 'coelho',
+  'animal/cat': 'gato',
+  'animal/duck': 'pato',
+  'animal/foxy': 'raposa'
 } as const;
