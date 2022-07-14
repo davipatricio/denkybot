@@ -1,5 +1,6 @@
 import type { Guild, GuildMember, GuildTextBasedChannel, User } from 'discord.js';
-export default ({
+
+export default {
   // General errors
   'permissions/bot/missing': (perms: string) => `Eu não tenho as permissões necessárias: \`${perms}\``,
   'permissions/user/missing': (perms: string) => `Você não tem as permissões necessárias: \`${perms}\``,
@@ -22,7 +23,8 @@ export default ({
   'help/button/add': 'Ne adicione',
   'help/button/support': 'Servidor de Suporte',
   'help/button/vote': 'Vote',
-  'help/embed/description': (support: string, add: string, totalCommands: number) => `❔ Meu prefixo neste servidor é: \`/.\`\n🚪 Entre em meu servidor de suporte: [clique aqui](${support}).\n🎉 Me adicione em seu servidor: [clique aqui](${add}).\n\nAtualmente eu possuo \`${totalCommands}\` comandos.`,
+  'help/embed/description': (support: string, add: string, totalCommands: number) =>
+    `❔ Meu prefixo neste servidor é: \`/.\`\n🚪 Entre em meu servidor de suporte: [clique aqui](${support}).\n🎉 Me adicione em seu servidor: [clique aqui](${add}).\n\nAtualmente eu possuo \`${totalCommands}\` comandos.`,
   'help/menu/placeholder': 'Clique aqui para escolher a categoria de comandos.',
   'help/warn/guildonly-commands': '⚠️ **|** Alguns comandos podem estar restringidos para serem executados apenas em servidores e por isso não estão disponíveis aqui.',
   // User info
@@ -86,7 +88,8 @@ export default ({
   'config/suggestions/enabled': 'O sistema de sugestões está atualmente habilitado.',
   'config/suggestions/reactions': (status: boolean) => `As reações estão atualmente: ${status ? 'ativadas' : 'desativadas'}.`,
   'config/suggestions/threads': (status: boolean) => `Os tópicos estão atualmente: ${status ? 'ativados' : 'desativados'}.`,
-  'config/suggestions/notices': (status: boolean) => status ? 'Estou notificando membros quando suas sugestões são aceitas ou recusadas.' : 'Não estou notificando membros quando suas sugestões são aceitas ou recusadas.',
+  'config/suggestions/notices': (status: boolean) =>
+    status ? 'Estou notificando membros quando suas sugestões são aceitas ou recusadas.' : 'Não estou notificando membros quando suas sugestões são aceitas ou recusadas.',
   'config/suggestions/cooldowns': 'O cooldown atualmente está em:',
   'config/suggestions/cooldowns/no-cooldown': 'Sem cooldown',
   'config/suggestions/cooldowns/no-cooldown/about': 'Membros não deverão esperar para sugerir consecutivamente',
@@ -200,4 +203,4 @@ export default ({
   'animal/cat': 'Aqui está uma imagem de um gato 🐱',
   'animal/duck': 'Aqui está uma imagem de um pato 🦆',
   'animal/foxy': 'Aqui está uma imagem de um raposa 🦊'
-} as const);
+} as const;

@@ -1,5 +1,6 @@
 import type { Guild, GuildMember, GuildTextBasedChannel, User } from 'discord.js';
-export default ({
+
+export default {
   // General errors
   'permissions/bot/missing': (perms: string) => `I don't have the required permissions: ${perms}`,
   'permissions/user/missing': (perms: string) => `You don't have the required permissions: ${perms}`,
@@ -22,7 +23,8 @@ export default ({
   'help/button/add': 'Add me',
   'help/button/support': 'Support Server',
   'help/button/vote': 'Vote',
-  'help/embed/description': (support: string, add: string, totalCommands: number) => `❔ My prefix on this server is: \`/\`.\n🚪 Join my support server: [click here](${support}).\n🎉 Add me to your server: [click here](${add}).\n\nCurrently I have \`${totalCommands}\` commands.`,
+  'help/embed/description': (support: string, add: string, totalCommands: number) =>
+    `❔ My prefix on this server is: \`/\`.\n🚪 Join my support server: [click here](${support}).\n🎉 Add me to your server: [click here](${add}).\n\nCurrently I have \`${totalCommands}\` commands.`,
   'help/menu/placeholder': 'Click here to choose the command category.',
   'help/warn/guildonly-commands': '⚠️ **|** Some commands may be restricted to run only on servers and are therefore not available here.',
   // User info
@@ -86,7 +88,8 @@ export default ({
   'config/suggestions/enabled': 'The suggestion system is currently enabled.',
   'config/suggestions/reactions': (status: boolean) => `Reactions are currently: ${status ? 'enabled' : 'disabled'}.`,
   'config/suggestions/threads': (status: boolean) => `Threads are currently: ${status ? 'enabled' : 'disabled'}.`,
-  'config/suggestions/notices': (status: boolean) => status ? "I'm notifying members when their suggestions are accepted or declined." : "I'm not notifying members when their suggestions are accepted or declined.",
+  'config/suggestions/notices': (status: boolean) =>
+    status ? "I'm notifying members when their suggestions are accepted or declined." : "I'm not notifying members when their suggestions are accepted or declined.",
   'config/suggestions/cooldowns': 'The cooldown is currently at:',
   'config/suggestions/cooldowns/no-cooldown': 'No cooldown',
   'config/suggestions/cooldowns/no-cooldown/about': 'Members will not need to wait for a cooldown before making a suggestion',
@@ -198,4 +201,4 @@ export default ({
   'animal/cat': "Here's a picture of a cat 🐱",
   'animal/duck': "Here's a picture of a duck 🦆",
   'animal/foxy': "Here's a picture of a foxy 🦊"
-} as const);
+} as const;

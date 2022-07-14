@@ -1,4 +1,4 @@
-export default ({
+export default {
   // Ping
   ping: 'Get the ping for Denky in your server',
   // AFK
@@ -85,4 +85,4 @@ export default ({
   'animal/bunny': 'See a random image of a bunny',
   'animal/koala': 'See a random image of a koala',
   'animal/duck': 'See a random image of a duck'
-} as const);
+} as const;

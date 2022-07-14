@@ -1,4 +1,5 @@
 import type { PermissionsString } from 'discord.js';
+
 const PERMISSIONS: Record<PermissionsString, string> = {
   AddReactions: 'Add Reactions',
   BanMembers: 'Ban Members',
