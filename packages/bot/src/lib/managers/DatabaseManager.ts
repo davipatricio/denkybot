@@ -27,13 +27,13 @@ export class DatabaseManager extends PrismaClient {
               type: 'redis' as const,
               options: {
                 client: new Redis(process.env.REDIS_CACHE_URL),
-                invalidation: { referencesTTL: 120 }
+                invalidation: { referencesTTL: client.config.cache.lifetime }
               }
             }
           : { type: 'memory' as const, options: { invalidation: true } };
 
       const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
-        models: [{ model: 'Suggestion' }, { model: 'Afk' }],
+        models: [{ model: 'Suggestion' }, { model: 'Afk', cacheTime: 2500 }, { model: 'Giveaway' }],
         storage,
         cacheTime: client.config.cache.lifetime,
         onError: error => {
