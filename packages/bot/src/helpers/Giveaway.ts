@@ -79,15 +79,17 @@ export async function checkEndedGiveaways(client: DenkyClient) {
     ]);
 
     if (participants.length) {
-      // Get random X winners from participants
-      const winners: string[] = [];
-      // Shuffle participants 7 times to get a random order
-      for (let i = 0; i < 7; i++) participants.sort(() => Math.random() - 0.5);
+      if (participants.length >= winnerAmount) {
+        // Get random X winners from participants
+        const winners: string[] = [];
+        // Shuffle participants 7 times to get a random order
+        for (let i = 0; i < 7; i++) participants.sort(() => Math.random() - 0.5);
 
-      winners.push(...participants.slice(0, winnerAmount));
+        winners.push(...participants.slice(0, winnerAmount));
 
-      const winnerString = winners.length > 1 ? `${winners.map(m => `<@!${m}>`).join(', ')}` : `<@!${winners[0]}>`;
-      embed.addFields([{ name: '🌟 Ganhadores', value: winnerString }]);
+        const winnerString = winners.length > 1 ? `${winners.map(m => `<@!${m}>`).join(', ')}` : `<@!${winners[0]}>`;
+        embed.addFields([{ name: '🌟 Ganhadores', value: winnerString }]);
+      } else embed.addFields([{ name: '🌟 Ganhadores', value: 'Não houve participantes o suficiente.' }]).setColor('Red');
     } else embed.addFields([{ name: '🌟 Ganhadores', value: 'Não houve participantes neste sorteio.' }]).setColor('Red');
 
     message.edit({ embeds: [embed], components: [row] });
