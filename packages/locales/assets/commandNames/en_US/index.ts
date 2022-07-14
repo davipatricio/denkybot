@@ -1,85 +1,99 @@
 export default {
   // Ping
-  ping: false,
+  ping: 'ping',
+
   // AFK
-  afk: false,
-  'afk/on': false,
-  'afk/off': false,
-  'afk/reason': false,
+  afk: 'afk on | off',
+  'afk/on': 'on',
+  'afk/off': 'off',
+  'afk/reason': 'reason',
+
   // Poll
-  poll: false,
-  'poll/create': false,
-  'poll/create/permanent': false,
-  'poll/create/option1': false,
-  'poll/create/option2': false,
-  'poll/create/option3': false,
-  'poll/create/option4': false,
-  'poll/create/option5': false,
-  'poll/create/option6': false,
-  'poll/create/option7': false,
-  'poll/create/option8': false,
-  'poll/create/option9': false,
+  poll: 'poll',
+  'poll/create': 'create',
+  'poll/create/permanent': 'permanent',
+  'poll/create/option1': 'option1',
+  'poll/create/option2': 'option2',
+  'poll/create/option3': 'option3',
+  'poll/create/option4': 'option4',
+  'poll/create/option5': 'option5',
+  'poll/create/option6': 'option6',
+  'poll/create/option7': 'option7',
+  'poll/create/option8': 'option8',
+  'poll/create/option9': 'option9',
+
   // Help
-  help: false,
+  help: 'help',
+
   // User
-  user: false,
-  'user/info/user': false,
-  'user/avatar/user': false,
-  'user/banner/user': false,
+  user: 'user avatar | info | banner',
+  'user/info/user': 'user',
+  'user/avatar/user': 'user',
+  'user/banner/user': 'user',
+
   // Server
-  server: false,
+  server: 'server avatar | info | banner',
+
   // Bot
-  bot: false,
-  'bot/invite': false,
-  'bot/vote': false,
+  bot: 'bot info | convidar | votar',
+  'bot/invite': 'invite',
+  'bot/vote': 'vote',
+
   // Text
-  text: false,
-  'text/claps': false,
-  'text/invert': false,
+  text: 'text',
+  'text/claps': 'claps',
+  'text/invert': 'invert',
+
   // Config
-  config: false,
-  'config/suggestions': false,
+  config: 'config',
+  'config/suggestions': 'suggestions',
+
   // Suggestions
-  suggestions: false,
-  suggestion: false,
-  'suggestion/send': false,
-  'suggestion/edit': false,
-  'suggestion/accept': false,
-  'suggestion/accept/id': false,
-  'suggestion/accept/reason': false,
-  'suggestion/deny': false,
-  'suggestion/deny/id': false,
-  'suggestion/deny/reason': false,
+  suggestions: 'suggestions',
+  suggestion: 'suggestion',
+  'suggestion/send': 'send',
+  'suggestion/edit': 'edit',
+  'suggestion/accept': 'accept',
+  'suggestion/accept/id': 'id_suggestion',
+  'suggestion/accept/reason': 'reason',
+  'suggestion/deny': 'deny',
+  'suggestion/deny/id': 'id_suggestion',
+  'suggestion/deny/reason': 'reason',
+
   // Ban
-  ban: false,
-  'ban/user': false,
-  'ban/delete_messages': false,
-  'ban/delete_messages/day': false,
-  'ban/delete_messages/days': false,
-  'ban/reason': false,
+  ban: 'ban',
+  'ban/user': 'user',
+  'ban/delete_messages': 'delete_messages',
+  'ban/delete_messages/day': 'day',
+  'ban/delete_messages/days': 'days',
+  'ban/reason': 'reason',
+
   // Wikipedia
-  'wikipedia/search': false,
+  'wikipedia/search': 'search',
+
   // Mute
-  mute: false,
-  'mute/user': false,
-  'mute/time': false,
-  'mute/time/minute': false,
-  'mute/time/minutes': false,
-  'mute/time/day': false,
-  'mute/time/days': false,
-  'mute/time/hour': false,
-  'mute/time/hours': false,
-  'mute/reason': false,
+  mute: 'mute',
+  'mute/user': 'user',
+  'mute/time': 'time',
+  'mute/time/minute': 'minute',
+  'mute/time/minutes': 'minutes',
+  'mute/time/day': 'day',
+  'mute/time/days': 'days',
+  'mute/time/hour': 'hour',
+  'mute/time/hours': 'hours',
+  'mute/reason': 'reason',
+
   // Kick
-  kick: false,
-  'kick/user': false,
-  'kick/reason': false,
+  kick: 'kick',
+  'kick/user': 'user',
+  'kick/reason': 'reason',
+
   // Animal
-  animal: false,
-  'animal/dog': false,
-  'animal/koala': false,
-  'animal/bunny': false,
-  'animal/cat': false,
-  'animal/duck': false,
-  'animal/foxy': false
+  animal: 'animal | dog | koala | bunny | cat | duck | foxy',
+  'animal/dog': 'dog',
+  'animal/koala': 'koala',
+  'animal/bunny': 'bunny',
+  'animal/cat': 'cat',
+  'animal/duck': 'duck',
+  'animal/foxy': 'foxy'
 } as const;
