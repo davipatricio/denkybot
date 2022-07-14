@@ -30,7 +30,8 @@
             ],
             "outputs": [
                 "node_modules/.prisma/client/**"
-            ]
+            ],
+            "cache": false
         }
     }
 }
