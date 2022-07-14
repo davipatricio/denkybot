@@ -228,5 +228,8 @@ export default {
   'kick/error/not-member': 'Este usuário não é um membro do servidor.',
   'kick/error/not-kickable': 'Não posso expulsar este usuário, pois meu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
   'kick/error/no-permissions': 'Você não pode expulsar este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
-  'kick/error/unknown-error': 'Ocorreu um erro ao expulsar o usuário.'
+  'kick/error/unknown-error': 'Ocorreu um erro ao expulsar o usuário.',
+
+  // Animals
+  'animal/panda': 'Aqui está uma imagem de um panda 🐼'
 } as const;

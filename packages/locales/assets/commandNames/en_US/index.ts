@@ -89,7 +89,7 @@ export default {
   'kick/reason': 'reason',
 
   // Animal
-  animal: 'animal',
+  animal: 'animal | dog | koala | bunny | cat | duck | foxy',
   'animal/dog': 'dog',
   'animal/koala': 'koala',
   'animal/bunny': 'bunny',

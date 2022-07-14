@@ -17,40 +17,33 @@ export default class AnimalCommand extends Command {
 
   override run({ t, interaction }: CommandRunOptions) {
     switch (interaction.options.getSubcommand()) {
-      case 'panda': {
+      case 'panda':
         this.client.commands.get('_animal_panda')?.run({ t, interaction });
         break;
-      }
 
-      case 'dog': {
+      case 'dog':
         this.client.commands.get('_animal_dog')?.run({ t, interaction });
         break;
-      }
 
-      case 'koala': {
+      case 'koala':
         this.client.commands.get('_animal_koala')?.run({ t, interaction });
         break;
-      }
 
-      case 'bunny': {
+      case 'bunny':
         this.client.commands.get('_animal_bunny')?.run({ t, interaction });
         break;
-      }
 
-      case 'cat': {
+      case 'cat':
         this.client.commands.get('_animal_cat')?.run({ t, interaction });
         break;
-      }
 
-      case 'duck': {
+      case 'duck':
         this.client.commands.get('_animal_duck')?.run({ t, interaction });
         break;
-      }
 
-      case 'foxy': {
+      case 'foxy':
         this.client.commands.get('_animal_foxy')?.run({ t, interaction });
         break;
-      }
     }
   }
 }
