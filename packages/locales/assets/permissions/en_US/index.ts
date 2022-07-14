@@ -1,5 +1,4 @@
 import type { PermissionsString } from 'discord.js';
-
 const PERMISSIONS: Record<PermissionsString, string> = {
   AddReactions: 'Add Reactions',
   BanMembers: 'Ban Members',
@@ -43,5 +42,4 @@ const PERMISSIONS: Record<PermissionsString, string> = {
   UseVAD: 'Use Voice Activity',
   ViewGuildInsights: 'See guild insights'
 };
-
 export default PERMISSIONS;
