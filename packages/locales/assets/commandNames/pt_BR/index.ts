@@ -1,100 +1,85 @@
-export default {
+export default ({
   // Ping
-  ping: 'ping',
-
+  ping: false,
   // AFK
-  afk: 'afk ativar | desativar',
-  'afk/on': 'ativar',
-  'afk/off': 'desativar',
-  'afk/reason': 'motivo',
-
+  afk: false,
+  'afk/on': false,
+  'afk/off': false,
+  'afk/reason': false,
   // Poll
-  poll: 'enquete',
-  'poll/create': 'criar',
-  'poll/create/permanent': 'permanente',
-  'poll/create/option1': 'opcao1',
-  'poll/create/option2': 'opcao2',
-  'poll/create/option3': 'opcao3',
-  'poll/create/option4': 'opcao4',
-  'poll/create/option5': 'opcao5',
-  'poll/create/option6': 'opcao6',
-  'poll/create/option7': 'opcao7',
-  'poll/create/option8': 'opcao8',
-  'poll/create/option9': 'opcao9',
-
+  poll: false,
+  'poll/create': false,
+  'poll/create/permanent': false,
+  'poll/create/option1': false,
+  'poll/create/option2': false,
+  'poll/create/option3': false,
+  'poll/create/option4': false,
+  'poll/create/option5': false,
+  'poll/create/option6': false,
+  'poll/create/option7': false,
+  'poll/create/option8': false,
+  'poll/create/option9': false,
   // Help
-  help: 'ajuda',
-
+  help: false,
   // User
-  user: 'user avatar | info | banner',
-  'user/info/user': 'usuario',
-  'user/avatar/user': 'usuario',
-  'user/banner/user': 'usuario',
-
+  user: false,
+  'user/info/user': false,
+  'user/avatar/user': false,
+  'user/banner/user': false,
   // Server
-  server: 'server avatar | info | banner',
-
+  server: false,
   // Bot
-  bot: 'bot info | invite | vote',
-  'bot/invite': 'convidar',
-  'bot/vote': 'votar',
-
+  bot: false,
+  'bot/invite': false,
+  'bot/vote': false,
   // Text
-  text: 'texto',
-  'text/claps': 'palmas',
-  'text/invert': 'inverter',
-
+  text: false,
+  'text/claps': false,
+  'text/invert': false,
   // Config
-  config: 'config',
-  'config/suggestions': 'sugestoes',
-
+  config: false,
+  'config/suggestions': false,
   // Suggestions
-  suggestions: 'sugestoes',
-  suggestion: 'sugestao',
-  'suggestion/send': 'enviar',
-  'suggestion/edit': 'editar',
-  'suggestion/accept': 'aceitar',
-  'suggestion/accept/id': 'id_sugestao',
-  'suggestion/accept/reason': 'motivo',
-  'suggestion/deny': 'recusar',
-  'suggestion/deny/id': 'id_sugestao',
-  'suggestion/deny/reason': 'motivo',
-
+  suggestions: false,
+  suggestion: false,
+  'suggestion/send': false,
+  'suggestion/edit': false,
+  'suggestion/accept': false,
+  'suggestion/accept/id': false,
+  'suggestion/accept/reason': false,
+  'suggestion/deny': false,
+  'suggestion/deny/id': false,
+  'suggestion/deny/reason': false,
   // Ban
-  ban: 'ban',
-  'ban/user': 'usuario',
-  'ban/delete_messages': 'deletar_mensagens',
-  'ban/delete_messages/day': 'dia',
-  'ban/delete_messages/days': 'dias',
-  'ban/reason': 'motivo',
-
+  ban: false,
+  'ban/user': false,
+  'ban/delete_messages': false,
+  'ban/delete_messages/day': false,
+  'ban/delete_messages/days': false,
+  'ban/reason': false,
   // Wikipedia
-  wikipedia: 'wikipedia',
-  'wikipedia/search': 'pesquisa',
-
+  'wikipedia/search': false,
   // Mute
-  mute: 'silenciar',
-  'mute/user': 'usuario',
-  'mute/time': 'tempo',
-  'mute/time/minute': 'minuto',
-  'mute/time/minutes': 'minutos',
-  'mute/time/day': 'dia',
-  'mute/time/days': 'dias',
-  'mute/time/hour': 'hora',
-  'mute/time/hours': 'horas',
-  'mute/reason': 'motivo',
-
+  mute: false,
+  'mute/user': false,
+  'mute/time': false,
+  'mute/time/minute': false,
+  'mute/time/minutes': false,
+  'mute/time/day': false,
+  'mute/time/days': false,
+  'mute/time/hour': false,
+  'mute/time/hours': false,
+  'mute/reason': false,
   // Kick
-  kick: 'expulsar',
-  'kick/user': 'usuario',
-  'kick/reason': 'motivo',
-
+  kick: false,
+  'kick/user': false,
+  'kick/reason': false,
   // Animal
-  animal: 'animal | cachorro | coala | coelho | gato | pato | raposa',
-  'animal/dog': 'cachorro',
-  'animal/koala': 'coala',
-  'animal/bunny': 'coelho',
-  'animal/cat': 'gato',
-  'animal/duck': 'pato',
-  'animal/foxy': 'raposa'
-} as const;
+  animal: false,
+  'animal/dog': false,
+  'animal/koala': false,
+  'animal/bunny': false,
+  'animal/cat': false,
+  'animal/duck': false,
+  'animal/foxy': false
+} as const);
