@@ -26,9 +26,9 @@ model Afk {
 }
 
 model Giveaway {
-  guildId String @id @default("")
+  messageId String @id @default("") @unique
+  guildId String @default("")
   channelId String @default("")
-  messageId String @default("") @unique
   authorId String @default("")
   title String @default("")
   description String @default("")
