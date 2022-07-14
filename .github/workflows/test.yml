@@ -23,21 +23,6 @@ jobs:
         key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
         restore-keys: |
           turbo-${{ github.job }}-${{ github.ref_name }}-
-          
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
-
-    - uses: actions/cache@v3
-      id: yarn-cache
-      with:
-        path: |
-         **/node_modules/
-         ${{ steps.yarn-cache-dir-path.outputs.dir }}
-
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
 
     - name: Install Node v18
       uses: actions/setup-node@v3
@@ -47,7 +32,6 @@ jobs:
         cache-dependency-path: yarn.lock
 
     - name: Install dependencies
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn --frozen-lockfile
 
     - name: Run ESLint
@@ -70,21 +54,6 @@ jobs:
         key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
         restore-keys: |
           turbo-${{ github.job }}-${{ github.ref_name }}-
-          
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
-
-    - uses: actions/cache@v3
-      id: yarn-cache
-      with:
-        path: |
-         **/node_modules
-         ${{ steps.yarn-cache-dir-path.outputs.dir }}
-
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
 
     - name: Install Node v18
       uses: actions/setup-node@v3
@@ -94,11 +63,9 @@ jobs:
         cache-dependency-path: yarn.lock
 
     - name: Install dependencies
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn --frozen-lockfile
 
     - name: Generate Prisma schema
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn prisma --cache-dir=".turbo"
 
     - name: TypeScript Test
