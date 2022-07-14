@@ -11,6 +11,8 @@ export default class GiveawayTask extends Task {
   }
 
   override run(client: DenkyClient) {
+    if (!global.IS_MAIN_PROCESS) return;
+
     if (!client.isReady()) return;
     checkEndedGiveaways(client);
     deleteOldGiveaways(client);
