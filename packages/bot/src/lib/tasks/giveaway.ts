@@ -1,4 +1,4 @@
-import { checkEndedGiveaways } from '@bot/src/helpers/Giveaway';
+import { checkEndedGiveaways, deleteOldGiveaways } from '@bot/src/helpers/Giveaway';
 import { Task } from '../../structures/Task';
 import type { DenkyClient } from '../../types/Client';
 
@@ -13,5 +13,6 @@ export default class GiveawayTask extends Task {
   override run(client: DenkyClient) {
     if (!client.isReady()) return;
     checkEndedGiveaways(client);
+    deleteOldGiveaways(client);
   }
 }
