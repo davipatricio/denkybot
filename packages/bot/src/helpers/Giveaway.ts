@@ -23,10 +23,6 @@ export async function checkEndedGiveaways(client: DenkyClient) {
     const { winnerAmount, participants, channelId, description, messageId, endTimestamp } = giveaway;
     // If current timestamp is lower than end timestamp, the giveaway is not ended
     if (BigInt(Date.now()) < endTimestamp) continue;
-    await client.databases.updateGiveaway({
-      ...giveaway,
-      ended: true
-    });
     const channel = await client.channels.fetch(channelId).catch(() => {});
     if (!channel || !channel.isTextBased()) {
       client.databases.deleteGiveaway(messageId);
@@ -37,6 +33,12 @@ export async function checkEndedGiveaways(client: DenkyClient) {
       client.databases.deleteGiveaway(messageId);
       continue;
     }
+
+    await client.databases.updateGiveaway({
+      ...giveaway,
+      ended: true
+    });
+
     const embed = new EmbedBuilder(message.embeds[0].toJSON());
 
     embed
