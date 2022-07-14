@@ -39,9 +39,7 @@ export async function checkEndedGiveaways(client: DenkyClient) {
       ended: true
     });
 
-    const embed = new EmbedBuilder(message.embeds[0].toJSON());
-
-    embed
+    const embed = new EmbedBuilder(message.embeds[0].toJSON())
       .setDescription(`${description}\n\n🔢 **Ganhadores**: ${winnerAmount}\n⏲️ **Finalizado em**: <t:${Math.round(Date.now() / 1000)}:R>`)
       .setFooter({ text: '⏰ Sorteio finalizado!' })
       .setColor('Green');
@@ -57,17 +55,13 @@ export async function checkEndedGiveaways(client: DenkyClient) {
       // Get random X winners from participants
       const winners: string[] = [];
       // Shuffle participants 7 times to get a random order
-      for (let i = 0; i < 7; i++) {
-        participants.sort(() => Math.random() - 0.5);
-      }
+      for (let i = 0; i < 7; i++) participants.sort(() => Math.random() - 0.5);
 
       winners.push(...participants.slice(0, winnerAmount));
 
       const winnerString = winners.length > 1 ? `${winners.map(m => `<@!${m}>`).join(', ')}` : `<@!${winners[0]}>`;
       embed.addFields([{ name: '🌟 Ganhadores', value: winnerString }]);
-    } else {
-      embed.addFields([{ name: '🌟 Ganhadores', value: 'Não houve participantes neste sorteio.' }]).setColor('Red');
-    }
+    } else embed.addFields([{ name: '🌟 Ganhadores', value: 'Não houve participantes neste sorteio.' }]).setColor('Red');
 
     message.edit({ embeds: [embed], components: [row] });
   }
