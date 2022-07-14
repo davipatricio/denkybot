@@ -225,5 +225,14 @@ export default {
   'kick/error/not-member': 'You can not kick a user who is not a member of this server.',
   'kick/error/not-kickable': "I can not kick this user because my highest role is below or equal to the user's highest role.",
   'kick/error/no-permissions': "You cannot kick this user as their highest rank is below or in the same rank as the member's highest role.",
-  'kick/error/unknown-error': 'There was an error kicking the user.'
+  'kick/error/unknown-error': 'There was an error kicking the user.',
+
+  // Animals
+  'animal/panda': "Here's a picture of a panda 🐼",
+  'animal/dog': "Here's a picture of a dog 🐶",
+  'animal/koala': "Here's a picture of a koala 🐨",
+  'animal/bunny': "Here's a picture of a bunny 🐰",
+  'animal/cat': "Here's a picture of a cat 🐱",
+  'animal/duck': "Here's a picture of a duck 🦆",
+  'animal/foxy': "Here's a picture of a foxy 🦊"
 } as const;
