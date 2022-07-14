@@ -28,11 +28,20 @@ export async function checkEndedGiveaways(client: DenkyClient) {
       ended: true
     });
     const channel = await client.channels.fetch(channelId).catch(() => {});
-    if (!channel || !channel.isTextBased()) continue;
+    if (!channel || !channel.isTextBased()) {
+      client.databases.deleteGiveaway(messageId);
+      continue;
+    }
     const message = await channel.messages.fetch(messageId).catch(() => {});
-    if (!message) continue;
+    if (!message) {
+      client.databases.deleteGiveaway(messageId);
+      continue;
+    }
 
-    if (!message.embeds[0]) continue;
+    if (!message.embeds[0]) {
+      client.databases.deleteGiveaway(messageId);
+      continue;
+    }
     const embed = new EmbedBuilder(message.embeds[0].toJSON());
 
     embed
