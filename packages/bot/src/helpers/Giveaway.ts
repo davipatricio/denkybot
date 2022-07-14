@@ -57,7 +57,7 @@ export async function checkEndedGiveaways(client: DenkyClient) {
 
       winners.push(...participants.slice(0, winnerAmount));
 
-      const winnerString = winners.length > 1 ? `${winners.map(m => `<@!${m}>`).join(', ')}` : `<@${winners[0]}>`;
+      const winnerString = winners.length > 1 ? `${winners.map(m => `<@!${m}>`).join(', ')}` : `<@!${winners[0]}>`;
       embed.addFields([{ name: '🌟 Ganhadores', value: winnerString }]);
     } else {
       embed.addFields([{ name: '🌟 Ganhadores', value: 'Não houve participantes neste sorteio.' }]).setColor('Red');
