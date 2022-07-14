@@ -33,6 +33,17 @@ export default class GiveawayData extends CommandDataStructure {
               maxValue: 100
             },
             {
+              name: 'duracao',
+              nameLocalizations: {
+                'pt-BR': 'duração'
+              },
+              description: 'Duração do sorteio (1d, 5d 2h, 14/07 20:00, 05:00 etc)',
+              type: ApplicationCommandOptionType.String,
+              required: true,
+              minValue: 1,
+              maxValue: 20
+            },
+            {
               name: 'descricao',
               description: 'Descrição do sorteio',
               type: ApplicationCommandOptionType.String,
