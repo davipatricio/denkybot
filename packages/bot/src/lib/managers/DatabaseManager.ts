@@ -79,6 +79,15 @@ export class DatabaseManager extends PrismaClient {
       data
     });
   }
+
+  fetchGiveaways() {
+    return this.giveaway.findMany({
+      where: {
+        ended: false
+      },
+      take: 100
+    });
+  }
   // #endregion
 
   // #region Suggestion
