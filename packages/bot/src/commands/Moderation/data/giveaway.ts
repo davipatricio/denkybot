@@ -25,19 +25,19 @@ export default class GiveawayData extends CommandDataStructure {
               maxLength: 40
             },
             {
-              name: 'descricao',
-              description: 'Descrição do sorteio',
-              type: ApplicationCommandOptionType.String,
-              required: false,
-              maxLength: 300
-            },
-            {
               name: 'ganhadores',
               description: 'Número de ganhadores',
               type: ApplicationCommandOptionType.Number,
               required: true,
               minValue: 1,
               maxValue: 100
+            },
+            {
+              name: 'descricao',
+              description: 'Descrição do sorteio',
+              type: ApplicationCommandOptionType.String,
+              required: false,
+              maxLength: 300
             }
           ]
         }
