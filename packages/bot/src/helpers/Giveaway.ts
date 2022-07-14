@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 import dayjs from 'dayjs';
 import { ActionRowBuilder, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 import type { DenkyClient } from '../types/Client';
@@ -25,19 +24,19 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
 
 export async function checkEndedGiveaways(client: DenkyClient) {
   const giveawaysArray = await client.databases.fetchGiveaways();
-  for (const giveaway of giveawaysArray) {
+  giveawaysArray.forEach(async giveaway => {
     const { winnerAmount, participants, channelId, description, messageId, endTimestamp } = giveaway;
     // If current timestamp is lower than end timestamp, the giveaway is not ended
-    if (BigInt(Date.now()) < endTimestamp) continue;
+    if (BigInt(Date.now()) < endTimestamp) return;
     const channel = await client.channels.fetch(channelId).catch(() => {});
     if (!channel || !channel.isTextBased()) {
       client.databases.deleteGiveaway(messageId);
-      continue;
+      return;
     }
     const message = await channel.messages.fetch(messageId).catch(() => {});
     if (!message || !message.embeds[0]) {
       client.databases.deleteGiveaway(messageId);
-      continue;
+      return;
     }
 
     await client.databases.updateGiveaway({
@@ -70,7 +69,7 @@ export async function checkEndedGiveaways(client: DenkyClient) {
     } else embed.addFields([{ name: '🌟 Ganhadores', value: 'Não houve participantes neste sorteio.' }]).setColor('Red');
 
     message.edit({ embeds: [embed], components: [row] });
-  }
+  });
 }
 
 export async function deleteOldGiveaways(client: DenkyClient) {
@@ -85,7 +84,7 @@ export async function deleteOldGiveaways(client: DenkyClient) {
     const { endTimestamp, messageId } = giveaway;
     // If the giveaway is ended and if the giveaway is 2 months old, delete it
     if (Date.now() > dayjs(Number(endTimestamp)).add(2, 'month').valueOf()) {
-      await client.databases.deleteGiveaway(messageId);
+      client.databases.deleteGiveaway(messageId);
     }
   }
 }
