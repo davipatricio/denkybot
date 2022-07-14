@@ -46,7 +46,9 @@ export default class PingData extends CommandDataStructure {
                 'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/edit/id')
               },
               type: ApplicationCommandOptionType.String,
-              required: true
+              required: true,
+              minLength: 18,
+              maxLength: 21
             }
           ]
         },
@@ -71,7 +73,9 @@ export default class PingData extends CommandDataStructure {
                 'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/accept/id')
               },
               type: ApplicationCommandOptionType.String,
-              required: true
+              required: true,
+              minLength: 18,
+              maxLength: 21
             },
             {
               name: client.languages.manager.get('en_US', 'commandNames:suggestion/accept/reason'),
@@ -83,7 +87,8 @@ export default class PingData extends CommandDataStructure {
                 'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/accept/reason')
               },
               type: ApplicationCommandOptionType.String,
-              required: false
+              required: false,
+              maxLength: 1024
             }
           ]
         },
@@ -108,7 +113,9 @@ export default class PingData extends CommandDataStructure {
                 'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/deny/id')
               },
               type: ApplicationCommandOptionType.String,
-              required: true
+              required: true,
+              minLength: 18,
+              maxLength: 21
             },
             {
               name: client.languages.manager.get('en_US', 'commandNames:suggestion/deny/reason'),
@@ -120,7 +127,8 @@ export default class PingData extends CommandDataStructure {
                 'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/deny/reason')
               },
               type: ApplicationCommandOptionType.String,
-              required: false
+              required: false,
+              maxLength: 1024
             }
           ]
         }

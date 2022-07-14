@@ -599,7 +599,7 @@ export default class PingCommand extends Command {
   }
 
   #isValidId(id: string) {
-    return id.length >= 18 && id.length <= 20 && !isNaN(Number(id));
+    return !isNaN(Number(id));
   }
 
   #getIdFromFooter(footer?: string) {
