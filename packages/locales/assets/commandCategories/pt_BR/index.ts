@@ -1,7 +1,7 @@
-export default {
-  UTILS: '⚙️ Utilidades',
-  MODERATION: '🛠️ Moderação',
-  INFO: '💁 Informações',
-  TEXT: '💬 Texto',
-  CONFIG: '🔧 Configurações'
-} as const;
+export default ({
+  UTILS: false,
+  MODERATION: false,
+  INFO: false,
+  TEXT: false,
+  CONFIG: false
+} as const);
