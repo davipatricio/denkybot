@@ -31,7 +31,7 @@ jobs:
       id: yarn-cache
       with:
         path: |
-         **/node_modules
+         **/node_modules/**
          ${{ steps.yarn-cache-dir-path.outputs.dir }}
 
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -78,7 +78,7 @@ jobs:
       id: yarn-cache
       with:
         path: |
-         **/node_modules
+         **/node_modules/**
          ${{ steps.yarn-cache-dir-path.outputs.dir }}
 
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -97,6 +97,7 @@ jobs:
       run: yarn --frozen-lockfile
 
     - name: Generate Prisma schema
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn prisma --cache-dir=".turbo"
 
     - name: TypeScript Test
