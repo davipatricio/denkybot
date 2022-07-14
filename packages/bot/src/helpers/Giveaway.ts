@@ -23,11 +23,10 @@ export async function checkEndedGiveaways(client: DenkyClient) {
     const { winnerAmount, participants, channelId, description, messageId, endTimestamp } = giveaway;
     // If current timestamp is lower than end timestamp, the giveaway is not ended
     if (BigInt(Date.now()) < endTimestamp) continue;
-    const data = await client.databases.updateGiveaway({
+    await client.databases.updateGiveaway({
       ...giveaway,
       ended: true
     });
-    console.log(data);
     const channel = await client.channels.fetch(channelId).catch(() => {});
     if (!channel || !channel.isTextBased()) continue;
     const message = await channel.messages.fetch(messageId).catch(() => {});
