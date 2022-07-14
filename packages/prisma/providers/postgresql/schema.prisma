@@ -1,11 +1,11 @@
 datasource db {
-  url      = env("DATABASE_URL_CB")
-  provider = "cockroachdb"
+  url      = env("DATABASE_URL_PG")
+  provider = "postgres"
 }
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../../../node_modules/.prisma/client"
+  output   = "../../../../node_modules/.prisma/client"
 }
 
 model Suggestion {

@@ -17,13 +17,11 @@
   },
   "homepage": "https://github.com/denkylabs/denkybot/packages/prisma",
   "scripts": {
-    "generate:cockroachdb": "npx prisma generate --schema=./schemas/cockroachdb.prisma",
-    "generate:postgres": "npx prisma generate --schema=./schemas/postgres.prisma",
-    "generate:mongodb": "npx prisma generate --schema=./schemas/mongodb.prisma",
-    "migrate:pg": "npx prisma migrate dev --schema=./schemas/postgres.prisma",
-    "migrate:pg:create": "npx prisma migrate dev --name production --schema=./schemas/postgres.prisma --create-only",
-    "migrate:cr": "npx prisma migrate dev --schema=./schemas/cockroachdb.prisma",
-    "migrate:cr:create": "npx prisma migrate dev --name production --schema=./schemas/cockroachdb.prisma --create-only"
+    "generate:cockroachdb": "npx prisma generate --schema=./providers/cockroachdb/schema.prisma",
+    "generate:postgres": "npx prisma generate --schema=./providers/postgresql/schema.prisma",
+    "generate:mongodb": "npx prisma generate ---schema=./providers/mongodb/schema.prisma",
+    "migrate:pg": "npx prisma migrate dev --schema=./providers/postgresql/schema.prisma",
+    "migrate:cr": "npx prisma migrate dev --schema=./providers/cockroachdb/schema.prisma"
   },
   "devDependencies": {
     "prisma": "workspace:^",
