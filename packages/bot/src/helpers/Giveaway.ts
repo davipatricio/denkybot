@@ -5,16 +5,22 @@ import type { DenkyClient } from '../types/Client';
 
 export async function handleInteraction(client: DenkyClient, interaction: Interaction) {
   if (!interaction.isButton()) return;
+  if (interaction.customId !== 'participate') return;
+  await interaction.deferReply({ ephemeral: true });
 
-  if (interaction.customId === 'participate') {
-    interaction.reply({ content: '🎉 **|** Você está participando do sorteio. Boa sorte!', ephemeral: true });
-    const giveawayData = await client.databases.getGiveaway(interaction.message.id);
-    if (!giveawayData || giveawayData.ended) return;
-    await client.databases.updateGiveaway({
-      ...giveawayData,
-      participants: [...giveawayData.participants, interaction.user.id]
-    });
+  const giveawayData = await client.databases.getGiveaway(interaction.message.id);
+  if (!giveawayData || giveawayData.ended) return;
+
+  if (giveawayData.participants.includes(interaction.user.id)) {
+    interaction.editReply({ content: '❌ **|** Você está já está participando do sorteio.' });
+    return;
   }
+
+  await client.databases.updateGiveaway({
+    ...giveawayData,
+    participants: [...giveawayData.participants, interaction.user.id]
+  });
+  interaction.editReply({ content: '🎉 **|** Você está participando do sorteio. Boa sorte!' });
 }
 
 export async function checkEndedGiveaways(client: DenkyClient) {
