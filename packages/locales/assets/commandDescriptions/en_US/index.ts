@@ -1,88 +1,102 @@
 export default {
   // Ping
-  ping: false,
+  ping: 'Get the ping for Denky in your server',
+
   // AFK
-  afk: false,
-  'afk/on': false,
-  'afk/on/reason': false,
-  'afk/off': false,
+  afk: 'Set an AFK status to display when you are mentioned',
+  'afk/on': 'Set an AFK status to display when you are mentioned',
+  'afk/on/reason': 'Reason for being AFK',
+  'afk/off': 'Disables your AFK mode',
+
   // Poll
-  poll: false,
-  'poll/create': false,
-  'poll/create/permanent': false,
-  'poll/create/option1': false,
-  'poll/create/option2': false,
-  'poll/create/option3': false,
-  'poll/create/option4': false,
-  'poll/create/option5': false,
-  'poll/create/option6': false,
-  'poll/create/option7': false,
-  'poll/create/option8': false,
-  'poll/create/option9': false,
+  poll: 'Create polls with up to 9 options',
+  'poll/create': 'Creates a poll in this channel',
+  'poll/create/permanent': 'Should this poll be permanent?',
+  'poll/create/option1': '1st poll option',
+  'poll/create/option2': '2nd poll option',
+  'poll/create/option3': '3rd poll option',
+  'poll/create/option4': '4th poll option',
+  'poll/create/option5': '5th poll option',
+  'poll/create/option6': '6th poll option',
+  'poll/create/option7': '7th poll option',
+  'poll/create/option8': '8th poll option',
+  'poll/create/option9': '9th poll option',
+
   // Help
-  help: false,
+  help: 'Shows the bot commands',
+
   // User
-  user: false,
-  'user/avatar': false,
-  'user/avatar/user': false,
-  'user/info': false,
-  'user/info/user': false,
-  'user/banner': false,
-  'users/banner/user': false,
+  user: 'Shows user information',
+  'user/avatar': 'Shows the user avatar',
+  'user/avatar/user': 'The user to get the avatar of',
+  'user/info': 'Shows user information',
+  'user/info/user': 'The user to show information for',
+  'user/banner': 'Shows the user banner',
+  'users/banner/user': 'The user to get the banner of',
+
   // Server
-  server: false,
-  'server/info': false,
-  'server/icon': false,
-  'server/banner': false,
+  server: 'Shows server information',
+  'server/info': 'View information about a server',
+  'server/icon': 'See a server icon',
+  'server/banner': 'See a server banner',
+
   // Bot
-  bot: false,
-  'bot/invite': false,
-  'bot/vote': false,
+  bot: 'Shows bot information',
+  'bot/invite': 'Invite Denky to your server',
+  'bot/vote': 'Informs the link to vote for me',
+
   // Text
-  text: false,
-  'text/text': false,
-  'text/claps': false,
-  'text/invert': false,
-  'text/emojify': false,
-  'text/vaporwave': false,
+  text: 'Translates or edits text in different ways',
+  'text/text': 'Text to edit',
+  'text/claps': 'Sends 👏 a 👏 text 👏 with 👏 claps',
+  'text/invert': 'Inverts a text',
+  'text/emojify': 'Emojifies a text',
+  'text/vaporwave': 'Creates a V A P O R W A V E text',
+
   // Config
-  config: false,
-  'config/suggestions': false,
+  config: 'Configure Denky features on your server',
+  'config/suggestions': "Configure Denky's suggestion system",
+
   // Suggestions
-  suggestions: false,
-  'suggestions/send': false,
-  'suggestions/edit': false,
-  'suggestions/edit/id': false,
-  'suggestions/accept': false,
-  'suggestions/accept/id': false,
-  'suggestions/accept/reason': false,
-  'suggestions/deny': false,
-  'suggestions/deny/id': false,
-  'suggestions/deny/reason': false,
+  suggestions: 'Send suggestions to the server',
+  'suggestions/send': 'Send suggestions to the server',
+  'suggestions/edit': 'Edit a suggestion you previously submitted',
+  'suggestions/edit/id': 'ID of your suggestion',
+  'suggestions/accept': 'Accepts a suggestion that was previously submitted',
+  'suggestions/accept/id': 'ID of the suggestion to accept',
+  'suggestions/accept/reason': 'The reason for accepting the suggestion',
+  'suggestions/deny': 'Denies a suggestion that was previously submitted',
+  'suggestions/deny/id': 'ID of the suggestion to deny',
+  'suggestions/deny/reason': 'The reason for denying the suggestion',
+
   // Ban
-  ban: false,
-  'ban/user': false,
-  'ban/delete_messages': false,
-  'ban/reason': false,
+  ban: 'Bans a user from the server',
+  'ban/user': 'The user to ban',
+  'ban/delete_messages': 'Whether or not to delete the messages of the banned user',
+  'ban/reason': 'The reason for the ban',
+
   // Wikipedia
-  wikipedia: false,
-  'wikipedia/search': false,
+  wikipedia: 'Search Wikipedia for a term',
+  'wikipedia/search': 'Term to search for',
+
   // Mute
-  mute: false,
-  'mute/user': false,
-  'mute/time': false,
-  'mute/reason': false,
+  mute: 'Mutes a user from the server',
+  'mute/user': 'The user to mute',
+  'mute/time': 'The time for the mute',
+  'mute/reason': 'The reason for the mute',
+
   // Kick
-  kick: false,
-  'kick/user': false,
-  'kick/reason': false,
+  kick: 'Kicks a user from the server',
+  'kick/user': 'The user to kick',
+  'kick/reason': 'The reason for the kick',
+
   // Animal
-  animal: false,
-  'animal/panda': false,
-  'animal/cat': false,
-  'animal/dog': false,
-  'animal/foxy': false,
-  'animal/bunny': false,
-  'animal/koala': false,
-  'animal/duck': false
+  animal: 'See a random image of an animal',
+  'animal/panda': 'See a random image of a panda',
+  'animal/cat': 'See a random image of a cat',
+  'animal/dog': 'See a random image of a dog',
+  'animal/foxy': 'See a random image of a foxy',
+  'animal/bunny': 'See a random image of a bunny',
+  'animal/koala': 'See a random image of a koala',
+  'animal/duck': 'See a random image of a duck'
 } as const;
