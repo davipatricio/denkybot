@@ -4,22 +4,44 @@ import type { DenkyClient } from '../types/Client';
 
 export async function handleInteraction(client: DenkyClient, interaction: Interaction) {
   if (!interaction.isButton()) return;
-  if (interaction.customId !== 'participate') return;
-  await interaction.deferReply({ ephemeral: true });
+  switch (interaction.customId) {
+    case 'giveaway_participate': {
+      await interaction.deferReply({ ephemeral: true });
 
-  const giveawayData = await client.databases.getGiveaway(interaction.message.id);
-  if (!giveawayData || giveawayData.ended) return;
+      const giveawayData = await client.databases.getGiveaway(interaction.message.id);
+      if (!giveawayData || giveawayData.ended) return;
 
-  if (giveawayData.participants.includes(interaction.user.id)) {
-    interaction.editReply({ content: '❌ **|** Você está já está participando do sorteio.' });
-    return;
+      if (giveawayData.participants.includes(interaction.user.id)) {
+        interaction.editReply({ content: '❌ **|** Você está já está participando do sorteio.' });
+        return;
+      }
+
+      await client.databases.updateGiveaway({
+        ...giveawayData,
+        participants: [...giveawayData.participants, interaction.user.id]
+      });
+      interaction.editReply({ content: '🎉 **|** Você está participando do sorteio. Boa sorte!' });
+      break;
+    }
+    case 'giveaway_desist': {
+      await interaction.deferReply({ ephemeral: true });
+
+      const giveawayData = await client.databases.getGiveaway(interaction.message.id);
+      if (!giveawayData || giveawayData.ended) return;
+
+      if (!giveawayData.participants.includes(interaction.user.id)) {
+        interaction.editReply({ content: '❌ **|** Você não está participando do sorteio.' });
+        return;
+      }
+
+      await client.databases.updateGiveaway({
+        ...giveawayData,
+        participants: giveawayData.participants.filter(id => id !== interaction.user.id)
+      });
+      interaction.editReply({ content: '👋 **|** Você desistiu do sorteio.' });
+      break;
+    }
   }
-
-  await client.databases.updateGiveaway({
-    ...giveawayData,
-    participants: [...giveawayData.participants, interaction.user.id]
-  });
-  interaction.editReply({ content: '🎉 **|** Você está participando do sorteio. Boa sorte!' });
 }
 
 export async function checkEndedGiveaways(client: DenkyClient) {
@@ -45,7 +67,7 @@ export async function checkEndedGiveaways(client: DenkyClient) {
     });
 
     const embed = new EmbedBuilder(message.embeds[0].toJSON())
-      .setDescription(`${description}\n\n🔢 **Ganhadores**: ${winnerAmount}\n⏲️ **Finalizado em**: <t:${Math.round(Date.now() / 1000)}:R>`)
+      .setDescription(`${description}\n\n🔢 **Ganhadores**: ${winnerAmount}\n⏲️ **Finalizado**: <t:${Math.round(Date.now() / 1000)}:R>`)
       .setFooter({ text: '⏰ Sorteio finalizado!' })
       .setColor('Green');
 
