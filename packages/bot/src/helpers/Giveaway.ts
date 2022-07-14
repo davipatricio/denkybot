@@ -1,4 +1,5 @@
 /* eslint-disable no-await-in-loop */
+import dayjs from 'dayjs';
 import { ActionRowBuilder, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 import type { DenkyClient } from '../types/Client';
 
@@ -64,5 +65,22 @@ export async function checkEndedGiveaways(client: DenkyClient) {
     }
 
     message.edit({ embeds: [embed], components: [row] });
+  }
+}
+
+export async function deleteOldGiveaways(client: DenkyClient) {
+  const giveawaysArray = await client.databases.giveaway.findMany({
+    where: {
+      ended: true
+    },
+    take: 100
+  });
+
+  for (const giveaway of giveawaysArray) {
+    const { endTimestamp, messageId } = giveaway;
+    // If the giveaway is ended and if the giveaway is 2 months old, delete it
+    if (Date.now() > dayjs(Number(endTimestamp)).add(2, 'month').valueOf()) {
+      await client.databases.deleteGiveaway(messageId);
+    }
   }
 }
