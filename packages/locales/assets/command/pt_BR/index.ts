@@ -231,5 +231,11 @@ export default {
   'kick/error/unknown-error': 'Ocorreu um erro ao expulsar o usuário.',
 
   // Animals
-  'animal/panda': 'Aqui está uma imagem de um panda 🐼'
+  'animal/panda': 'Aqui está uma imagem de um panda 🐼',
+  'animal/dog': 'Aqui está uma imagem de um cachorro 🐶',
+  'animal/koala': 'Aqui está uma imagem de um coala 🐨',
+  'animal/bunny': 'Aqui está uma imagem de um coelho 🐰',
+  'animal/cat': 'Aqui está uma imagem de um gato 🐱',
+  'animal/duck': 'Aqui está uma imagem de um pato 🦆',
+  'animal/foxy': 'Aqui está uma imagem de um raposa 🦊'
 } as const;
