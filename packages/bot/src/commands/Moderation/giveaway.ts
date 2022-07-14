@@ -32,7 +32,7 @@ export default class GiveawayCommand extends Command {
 
     const row = new ActionRowBuilder<ButtonBuilder>().setComponents([
       new ButtonBuilder().setCustomId('giveaway_participate').setEmoji('📥').setLabel('Participar').setStyle(ButtonStyle.Success),
-      new ButtonBuilder().setCustomId('giveaway_desist').setEmoji('📤').setLabel('Desistir').setStyle(ButtonStyle.Danger)
+      new ButtonBuilder().setCustomId('giveaway_desist').setEmoji('📤').setLabel('Desistir').setStyle(ButtonStyle.Secondary)
     ]);
 
     const { valid, type, value } = parseTime(interaction.options.getString('duracao', true));
