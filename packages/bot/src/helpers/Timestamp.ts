@@ -55,7 +55,7 @@ export function parseTime(time: string): { valid: boolean; type: 'full' | 'milis
       const hhMMResult = toMs(time) as number | undefined;
       if (hhMMResult) return { valid: true, type: 'milisseconds', value: hhMMResult };
       // eslint-disable-next-line no-empty
-    } catch (_) {}
+    } catch {}
 
     if (time.trim().includes(' ')) {
       let final = 0;
@@ -67,12 +67,13 @@ export function parseTime(time: string): { valid: boolean; type: 'full' | 'milis
           const msResult = validMs(t);
           if (msResult) final = msResult + final;
         });
-      return { valid: final !== 0, type: 'milisseconds', value: final };
+      if (final) return { valid: true, type: 'milisseconds', value: final };
     }
 
     const msResult = validMs(time);
     return { valid: msResult !== undefined, type: 'milisseconds', value: msResult };
   }
 
-  return { valid: false, type: 'milisseconds', value: undefined };
+  const msResult = validMs(time);
+  return { valid: msResult !== undefined, type: 'milisseconds', value: msResult };
 }
