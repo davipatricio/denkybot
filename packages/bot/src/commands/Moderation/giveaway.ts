@@ -9,7 +9,7 @@ export default class GiveawayCommand extends Command {
     this.rawCategory = 'MODERATION';
     this.config = {
       autoDefer: true,
-      ephemeral: true,
+      ephemeral: false,
       showInHelp: true
     };
     this.permissions = { bot: [PermissionFlagsBits.BanMembers] };
@@ -26,13 +26,16 @@ export default class GiveawayCommand extends Command {
 
   async #createGiveaway({ interaction }: CommandRunOptions) {
     const title = interaction.options.getString('titulo', true);
-    const description = interaction.options.getString('descricao') ?? '🎉 Meu lindo sorteio.';
+    const description = interaction.options.getString('descricao') ?? 'Sorteio sem descrição.';
     const winnerAmount = interaction.options.getNumber('ganhadores', true);
 
     const endTimestamp = Date.now() + 15000;
 
-    const embed = new EmbedBuilder().setTitle(`🎉 ${title}`).setDescription(`${description}\n\n🎉 Ganhadores: ${winnerAmount}\nAcaba em: <t:${Math.round(endTimestamp / 1000)}:R>`);
-    const row = new ActionRowBuilder<ButtonBuilder>().setComponents([new ButtonBuilder().setCustomId('participate').setEmoji('🎉').setLabel('Participar').setStyle(ButtonStyle.Success)]);
+    const embed = new EmbedBuilder()
+      .setTitle(`🎁 ${title}`)
+      .setDescription(`${description}\n\n🔢 **Ganhadores**: ${winnerAmount}\n⏲️ **Acaba em**: <t:${Math.round(endTimestamp / 1000)}:R>`)
+      .setColor('Yellow');
+    const row = new ActionRowBuilder<ButtonBuilder>().setComponents([new ButtonBuilder().setCustomId('participate').setEmoji('🎁').setLabel('Participar').setStyle(ButtonStyle.Success)]);
     const row2 = new ActionRowBuilder<SelectMenuBuilder>().setComponents([
       new SelectMenuBuilder()
         .setCustomId('dropdown')
@@ -50,12 +53,11 @@ export default class GiveawayCommand extends Command {
       messageId: message.id,
       authorId: interaction.user.id,
       channelId: interaction.channel!.id,
-      guildId: interaction.guild!.id,
       title,
       description,
       winnerAmount,
       participants: [],
-      endTimestamp,
+      endTimestamp: BigInt(endTimestamp),
       ended: false
     });
   }
