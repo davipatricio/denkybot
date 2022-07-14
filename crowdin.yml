@@ -1,3 +1,0 @@
-files:
-  - source: /packages/locales/assets/**/en_US/index.ts
-    translation: /packages/locales/assets/**/%locale_with_underscore%/index.ts
