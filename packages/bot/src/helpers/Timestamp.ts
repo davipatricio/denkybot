@@ -29,12 +29,12 @@ function validMs(str: string) {
   try {
     return ms(str) as number | undefined;
   } catch {
-    return null;
+    return undefined;
   }
 }
 
 // Returns a timestamp in milliseconds. If the timestamp is invalid, returns null or undefined.
-export function parseTime(time: string) {
+export function parseTime(time: string): { valid: boolean; type: 'full' | 'milisseconds'; value: number | undefined } {
   const currentDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
   const dayjsObj = dayjs(time, formats, true);
 
@@ -47,13 +47,13 @@ export function parseTime(time: string) {
     if (dayjsObj.date() < currentDate.getDate()) dayjsObj.date(currentDate.getDate());
   }
 
-  const result = dayjsObj.valueOf();
-  if (dayjsObj.isValid()) return result;
+  if (dayjsObj.isValid()) return { valid: true, type: 'full', value: dayjsObj.valueOf() };
 
   // If the inserted time is in the HH:MM:SS or HH:MM format
   if (time.includes(':')) {
     try {
-      return toMs(time) as number;
+      const hhMMResult = toMs(time) as number | undefined;
+      if (hhMMResult) return { valid: true, type: 'milisseconds', value: hhMMResult };
       // eslint-disable-next-line no-empty
     } catch (_) {}
 
@@ -67,11 +67,12 @@ export function parseTime(time: string) {
           const msResult = validMs(t);
           if (msResult) final = msResult + final;
         });
-      return final;
+      return { valid: final !== 0, type: 'milisseconds', value: final };
     }
 
-    return validMs(time);
+    const msResult = validMs(time);
+    return { valid: msResult !== undefined, type: 'milisseconds', value: msResult };
   }
 
-  return null;
+  return { valid: false, type: 'milisseconds', value: undefined };
 }
