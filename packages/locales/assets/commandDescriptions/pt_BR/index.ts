@@ -1,4 +1,4 @@
-export default ({
+export default {
   // Ping
   ping: false,
   // AFK
@@ -85,4 +85,4 @@ export default ({
   'animal/bunny': false,
   'animal/koala': false,
   'animal/duck': false
-} as const);
+} as const;
