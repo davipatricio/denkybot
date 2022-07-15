@@ -7,46 +7,79 @@ export default class GiveawayData extends CommandDataStructure {
     super(client);
 
     this.data = {
-      name: 'giveaway',
+      name: client.languages.manager.get('en_US', 'commandNames:giveaway'),
+      nameLocalizations: {
+        'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:giveaway')
+      },
       type: ApplicationCommandType.ChatInput,
       dmPermission: false,
       defaultMemberPermissions: [PermissionFlagsBits.ManageGuild],
-      description: 'Crie, delete, edite ou encerre um sorteio',
+      description: client.languages.manager.get('en_US', 'commandDescriptions:giveaway'),
+      descriptionLocalizations: {
+        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:giveaway')
+      },
       options: [
         {
-          name: 'criar',
-          description: 'Cria um sorteio',
+          name: client.languages.manager.get('en_US', 'commandNames:giveaway/create'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:giveaway/create')
+          },
+          description: client.languages.manager.get('en_US', 'commandDescriptions:giveaway/create'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:giveaway/create')
+          },
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: 'titulo',
-              description: 'Título do sorteio',
+              name: client.languages.manager.get('en_US', 'commandNames:giveaway/create/title'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:giveaway/create/title')
+              },
+              description: client.languages.manager.get('en_US', 'commandDescriptions:giveaway/create/title'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:giveaway/create/title')
+              },
               type: ApplicationCommandOptionType.String,
               required: true,
               maxLength: 40
             },
             {
-              name: 'ganhadores',
-              description: 'Número de ganhadores',
+              name: client.languages.manager.get('en_US', 'commandNames:giveaway/create/winners'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:giveaway/create/winners')
+              },
+              description: client.languages.manager.get('en_US', 'commandDescriptions:giveaway/create/winners'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:giveaway/create/winners')
+              },
               type: ApplicationCommandOptionType.Number,
               required: true,
               minValue: 1,
               maxValue: 100
             },
             {
-              name: 'duracao',
+              name: client.languages.manager.get('en_US', 'commandNames:giveaway/create/duration'),
               nameLocalizations: {
-                'pt-BR': 'duração'
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:giveaway/create/duration')
               },
-              description: 'Duração do sorteio (1d, 5d 2h, 14/07 20:00, 05:00 etc)',
+              description: client.languages.manager.get('en_US', 'commandDescriptions:giveaway/create/duration'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:giveaway/create/duration')
+              },
               type: ApplicationCommandOptionType.String,
               required: true,
               minValue: 1,
               maxValue: 20
             },
             {
-              name: 'descricao',
-              description: 'Descrição do sorteio',
+              name: client.languages.manager.get('en_US', 'commandNames:giveaway/create/description'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:giveaway/create/description')
+              },
+              description: client.languages.manager.get('en_US', 'commandDescriptions:giveaway/create/description'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:giveaway/create/description')
+              },
               type: ApplicationCommandOptionType.String,
               required: false,
               maxLength: 300

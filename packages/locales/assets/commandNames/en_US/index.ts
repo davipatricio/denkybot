@@ -45,7 +45,7 @@ export default {
   'text/invert': 'invert',
 
   // Config
-  config: 'config',
+  config: 'config | suggestions',
   'config/suggestions': 'suggestions',
 
   // Suggestions
@@ -89,11 +89,19 @@ export default {
   'kick/reason': 'reason',
 
   // Animal
-  animal: 'animal | dog | koala | bunny | cat | duck | foxy',
+  animal: 'animal dog | koala | bunny | cat | duck | foxy',
   'animal/dog': 'dog',
   'animal/koala': 'koala',
   'animal/bunny': 'bunny',
   'animal/cat': 'cat',
   'animal/duck': 'duck',
-  'animal/foxy': 'foxy'
+  'animal/foxy': 'foxy',
+
+  // Giveaway
+  giveaway: 'giveaway',
+  'giveaway/create': 'create',
+  'giveaway/create/title': 'title',
+  'giveaway/create/winners': 'winners',
+  'giveaway/create/duration': 'duration',
+  'giveaway/create/description': 'description'
 } as const;
