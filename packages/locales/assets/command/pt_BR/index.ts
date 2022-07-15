@@ -237,5 +237,14 @@ export default {
   'animal/bunny': 'Aqui está uma imagem de um coelho 🐰',
   'animal/cat': 'Aqui está uma imagem de um gato 🐱',
   'animal/duck': 'Aqui está uma imagem de um pato 🦆',
-  'animal/foxy': 'Aqui está uma imagem de um raposa 🦊'
+  'animal/foxy': 'Aqui está uma imagem de um raposa 🦊',
+
+  // Ban Info
+  'ban/info/error/userNotFound': 'Usuário não encontrado.',
+  'ban/info/error/userNotBanned': 'Este usuário não está banido.',
+  'ban/noReason': 'Nenhum motivo informado',
+  'ban/embed/title': (user: User) => `Informações do banimento de ${user.username}`,
+  'ban/embed/description': (reason: string) => `📖 Motivo do banimento: **${reason}**`,
+  'ban/embed/field/name': '💁 Informações do usuário',
+  'ban/embed/field/value': (user: User) => `🔢 Id do usuário: **${user.id}**\n🏷 Tag no Discord: **${user.tag}**\n🤖 Bot: **${user.bot ? 'Sim' : 'Não'}**`
 } as const;

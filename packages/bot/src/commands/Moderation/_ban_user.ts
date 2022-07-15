@@ -8,7 +8,7 @@ export default class BanUserSubCommand extends Command {
     this.rawName = '';
     this.config = {
       autoDefer: true,
-      ephemeral: true,
+      ephemeral: false,
       showInHelp: false
     };
     this.permissions = { bot: [PermissionFlagsBits.BanMembers] };

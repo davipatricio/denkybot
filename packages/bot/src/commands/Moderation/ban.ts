@@ -9,7 +9,7 @@ export default class BanCommand extends Command {
     this.rawCategory = 'MODERATION';
     this.config = {
       autoDefer: true,
-      ephemeral: true,
+      ephemeral: false,
       showInHelp: true
     };
     this.permissions = { bot: [PermissionFlagsBits.BanMembers] };
