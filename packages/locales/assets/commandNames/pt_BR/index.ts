@@ -61,12 +61,13 @@ export default {
   'suggestion/deny/reason': 'motivo',
 
   // Ban
-  ban: 'ban',
-  'ban/user': 'usuario',
+  ban: 'ban usuario | informação | lista',
+  'ban/user/user': 'usuario',
   'ban/delete_messages': 'deletar_mensagens',
   'ban/delete_messages/day': 'dia',
   'ban/delete_messages/days': 'dias',
   'ban/reason': 'motivo',
+  'ban/info/user': 'usuario',
 
   // Wikipedia
   wikipedia: 'wikipedia',
