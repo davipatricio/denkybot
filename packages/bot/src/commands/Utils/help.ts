@@ -1,8 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, SelectMenuBuilder, SelectMenuInteraction, SelectMenuOptionBuilder } from 'discord.js';
+import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys } from '../../lib/managers/LanguageManager';
 import { Command, CommandRunOptions } from '../../structures/Command';
 import type { DenkyClient } from '../../types/Client';
-import { recommendLocale } from '../../helpers/Locale';
-import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys } from '../../lib/managers/LanguageManager';
 
 export default class HelpCommand extends Command {
   constructor(client: DenkyClient) {
@@ -28,8 +27,6 @@ export default class HelpCommand extends Command {
     const categories: Record<string, string[]> = {};
     const categoriesEmoji: Record<string, string> = {};
 
-    const language = recommendLocale(interaction.locale);
-
     const initialEmbed = new EmbedBuilder()
       .setDescription(t('command:help/embed/description', this.client.config.links.support, this.client.config.links.invite, this.client.commands.size))
       .setFooter({
@@ -44,9 +41,9 @@ export default class HelpCommand extends Command {
     for (const command of this.client.commands.values()) {
       if (!command.config.showInHelp) continue;
 
-      const localizedCommandName = this.client.languages.manager.get(language, `commandNames:${command.rawName.toLowerCase() as CommandNamesKeys}`);
-      const localizedCommandCategory = this.client.languages.manager.get(language, `commandCategories:${command.rawCategory as CommandCategoriesKeys}`);
-      const localizedCommandDescription = this.client.languages.manager.get(language, `commandDescriptions:${command.rawName.toLowerCase() as CommandDescriptionsKeys}`);
+      const localizedCommandName = t(`commandNames:${command.rawName.toLowerCase() as CommandNamesKeys}`);
+      const localizedCommandCategory = t(`commandCategories:${command.rawCategory as CommandCategoriesKeys}`);
+      const localizedCommandDescription = t(`commandDescriptions:${command.rawName.toLowerCase() as CommandDescriptionsKeys}`);
 
       const categoryWithoutEmoji = localizedCommandCategory.slice(2).trim();
 
