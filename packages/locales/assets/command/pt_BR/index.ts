@@ -190,16 +190,16 @@ export default {
   'suggestions/management/deny/denied/moved': 'A sugestão foi recusada com sucesso e movida para este canal!',
 
   // Ban
-  'ban/no-reason': 'Sem motivo.',
-  'ban/punished-by': 'Punido por:',
-  'ban/complete': (user: User | string) => `O usuário ${user} foi banido do servidor.`,
-  'ban/error/ban-bot': 'Eu não posso me banir.',
-  'ban/error/ban-self': 'Você não pode se banir.',
-  'ban/error/not-bannable': 'Não posso punir este usuário, pois meu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
-  'ban/error/no-permissions': 'Você não pode punir este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
-  'ban/error/unknown-member': 'Membro desconhecido.',
-  'ban/error/unknown-error': 'Ocorreu um erro ao banir o usuário.',
-  'ban/error/maximum-bans': 'Este servidor já baniu muitos membros que nunca entraram no servidor.',
+  'ban/user/no-reason': 'Sem motivo.',
+  'ban/user/punished-by': 'Punido por:',
+  'ban/user/complete': (user: User | string) => `O usuário ${user} foi banido do servidor.`,
+  'ban/user/error/ban-bot': 'Eu não posso me banir.',
+  'ban/user/error/ban-self': 'Você não pode se banir.',
+  'ban/user/error/not-bannable': 'Não posso punir este usuário, pois meu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'ban/user/error/no-permissions': 'Você não pode punir este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'ban/user/error/unknown-member': 'Membro desconhecido.',
+  'ban/user/error/unknown-error': 'Ocorreu um erro ao banir o usuário.',
+  'ban/user/error/maximum-bans': 'Este servidor já baniu muitos membros que nunca entraram no servidor.',
 
   // Wikipedia
   'wikipedia/error/no-results': '❌ **|** Nenhum resultado encontrado.',

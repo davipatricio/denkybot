@@ -18,27 +18,27 @@ export default class BanUserSubCommand extends Command {
     if (!interaction.inCachedGuild() || !interaction.guild.members.me) return;
 
     const deleteMessageDays = Number(interaction.options.getString('delete_messages') ?? 0);
-    const reason = interaction.options.getString('reason') ?? t('command:ban/no-reason');
+    const reason = interaction.options.getString('reason') ?? t('command:ban/user/no-reason');
 
     const member = interaction.options.getMember('user');
     const user = member?.user ?? interaction.options.getUser('user', true);
 
     if (user.id === this.client.user?.id) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/ban-bot')}`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/user/error/ban-bot')}`);
       return;
     }
     if (user.id === interaction.user.id) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/ban-self')}`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/user/error/ban-self')}`);
       return;
     }
 
     if (member?.roles) {
       if (!member.bannable || member.roles.highest.position >= interaction.guild.members.me.roles.highest.position) {
-        interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/not-bannable')}`);
+        interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/user/error/not-bannable')}`);
         return;
       }
       if (interaction.member.roles.highest.position <= member.roles.highest.position) {
-        interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/no-permissions')}`);
+        interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/user/error/no-permissions')}`);
         return;
       }
     }
@@ -46,24 +46,24 @@ export default class BanUserSubCommand extends Command {
     interaction.guild.bans
       .create(user.id, {
         deleteMessageDays,
-        reason: `${t('command:ban/punished-by')} ${interaction.user.tag} - ${reason}`
+        reason: `${t('command:ban/user/punished-by')} ${interaction.user.tag} - ${reason}`
       })
       .then(() => {
-        interaction.editReply(`✅ ${interaction.user} **|** ${t('command:ban/complete', user.tag ?? user.id ?? user)}`);
+        interaction.editReply(`✅ ${interaction.user} **|** ${t('command:ban/user/complete', user.tag ?? user.id ?? user)}`);
       })
       .catch(err => {
         const error = err.toString().toLowerCase();
         if (error.includes('missing permission')) {
-          return interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/not-bannable')}`);
+          return interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/user/error/not-bannable')}`);
         }
         if (error.includes('unknown')) {
-          return interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/unknown-member')}`);
+          return interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/user/error/unknown-member')}`);
         }
         if (error.includes('max')) {
-          return interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/maximum-bans')}`);
+          return interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/user/error/maximum-bans')}`);
         }
 
-        return interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/error/unknown-error')}`);
+        return interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/user/error/unknown-error')}`);
       });
   }
 }
