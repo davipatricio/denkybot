@@ -24,11 +24,11 @@ export default {
   'poll/create/duplicatedWarning': 'Algumas opções foram removidas automaticamente de sua enquete por serem repetidas.',
 
   // Help
-  'help/button/add': 'Ne adicione',
+  'help/button/add': 'Me adicione',
   'help/button/support': 'Servidor de Suporte',
   'help/button/vote': 'Vote',
   'help/embed/description': (support: string, add: string, totalCommands: number) =>
-    `❔ Meu prefixo neste servidor é: \`/.\`\n🚪 Entre em meu servidor de suporte: [clique aqui](${support}).\n🎉 Me adicione em seu servidor: [clique aqui](${add}).\n\nAtualmente eu possuo \`${totalCommands}\` comandos.`,
+    `❔ Meu prefixo neste servidor é: \`/\`.\n🚪 Entre em meu servidor de suporte: [clique aqui](${support}).\n🎉 Me adicione em seu servidor: [clique aqui](${add}).\n\nAtualmente eu possuo \`${totalCommands}\` comandos.`,
   'help/menu/placeholder': 'Clique aqui para escolher a categoria de comandos.',
   'help/warn/guildonly-commands': '⚠️ **|** Alguns comandos podem estar restringidos para serem executados apenas em servidores e por isso não estão disponíveis aqui.',
 
