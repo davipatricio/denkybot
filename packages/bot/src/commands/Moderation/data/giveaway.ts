@@ -1,6 +1,6 @@
 import { CommandDataStructure } from '@bot/src/structures/CommandDataStructure';
 import type { DenkyClient } from '@bot/src/types/Client';
-import { ApplicationCommandOptionType, ApplicationCommandType } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
 
 export default class GiveawayData extends CommandDataStructure {
   constructor(client: DenkyClient) {
@@ -10,6 +10,7 @@ export default class GiveawayData extends CommandDataStructure {
       name: 'giveaway',
       type: ApplicationCommandType.ChatInput,
       dmPermission: false,
+      defaultMemberPermissions: [PermissionFlagsBits.ManageGuild],
       description: 'Crie, delete, edite ou encerre um sorteio',
       options: [
         {
