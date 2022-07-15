@@ -1,14 +1,35 @@
 "package: bot":
-- packages/bot/**/*.ts
+  - packages/bot/**/*.ts
 
 "package: locales":
-- packages/locales/**/*.ts
+  - packages/locales/**/*.ts
 
 "package: logger":
-- packages/logger/**/*.ts
+  - packages/logger/**/*.ts
 
 "package: prisma":
-- packages/prisma/**/*.ts
+  - packages/prisma/**/*.ts
 
 "package: webserver":
-- packages/webserver/**/*.ts
+  - packages/webserver/**/*.ts
+
+"meta: apis":
+  - packages/bot/src/lib/apis/**/*.ts
+
+"meta: dependencies":
+  - packages/**/package.json
+  - package.json
+  - yarn.lock
+
+"meta: database":
+  - packages/prisma/providers/**
+  - packages/bot/**/Database*.ts
+
+"meta: github":
+  - .github/**/*
+
+"meta: tasks":
+  - packages/bot/src/lib/tasks/*.ts
+
+"meta: localization":
+  - packages/locales/assets/**

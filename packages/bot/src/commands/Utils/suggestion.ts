@@ -186,7 +186,7 @@ export default class PingCommand extends Command {
           .catch(() => {});
       }
 
-      this.#askStaffToMoveDeny(t, i, embed);
+      this.#askStaffToMove(t, i, embed, 'deny');
     });
   }
 
@@ -313,7 +313,7 @@ export default class PingCommand extends Command {
           .catch(() => {});
       }
 
-      this.#askStaffToMove(t, i, embed);
+      this.#askStaffToMove(t, i, embed, 'accept');
     });
   }
 
@@ -551,15 +551,17 @@ export default class PingCommand extends Command {
     this.client.on('interactionCreate', eventFn);
   }
 
-  #askStaffToMove(t: CommandLocale, i: SelectMenuInteraction, finalEmbed: EmbedBuilder) {
+  #askStaffToMove(t: CommandLocale, i: SelectMenuInteraction, finalEmbed: EmbedBuilder, type: 'deny' | 'accept') {
     return new Promise<boolean>(resolve => {
+      const suggestionKey = type === 'deny' ? 'deny/denied' : 'accept/accepted';
+
       const buttonRow = new ActionRowBuilder<ButtonBuilder>().setComponents([
         new ButtonBuilder().setCustomId('sim').setEmoji('✅').setLabel(t('command:suggestions/management/buttons/move/yes')).setStyle(ButtonStyle.Success),
         new ButtonBuilder().setCustomId('nao').setEmoji('❌').setLabel(t('command:suggestions/management/buttons/move/no')).setStyle(ButtonStyle.Danger)
       ]);
 
       i.editReply({
-        content: t('command:suggestions/management/accept/accepted/move'),
+        content: t(`command:suggestions/management/${suggestionKey}/move`),
         components: [buttonRow]
       });
       i.message
@@ -570,67 +572,16 @@ export default class PingCommand extends Command {
         .then(async m => {
           await m.deferUpdate();
           resolve(true);
-          if (m.customId === 'sim') {
-            i.editReply({
-              content: `✅ **|** ${t('command:suggestions/management/accept/accepted/moved')}`,
-              components: []
-            });
-            i.channel?.send({ embeds: [finalEmbed] });
-            return;
-          }
-
+          if (m.customId !== 'sim') return;
           i.editReply({
-            content: `✅ **|** ${t('command:suggestions/management/accept/accepted')}`,
+            content: `✅ **|** ${t(`command:suggestions/management/${suggestionKey}/moved`)}`,
             components: []
           });
+          i.channel?.send({ embeds: [finalEmbed] });
         })
         .catch(() => {
           i.editReply({
-            content: `✅ **|** ${t('command:suggestions/management/accept/accepted')}`,
-            components: []
-          });
-
-          resolve(false);
-        });
-    });
-  }
-
-  #askStaffToMoveDeny(t: CommandLocale, i: SelectMenuInteraction, finalEmbed: EmbedBuilder) {
-    return new Promise<boolean>(resolve => {
-      const buttonRow = new ActionRowBuilder<ButtonBuilder>().setComponents([
-        new ButtonBuilder().setCustomId('sim').setEmoji('✅').setLabel(t('command:suggestions/management/buttons/move/yes')).setStyle(ButtonStyle.Success),
-        new ButtonBuilder().setCustomId('nao').setEmoji('❌').setLabel(t('command:suggestions/management/buttons/move/no')).setStyle(ButtonStyle.Danger)
-      ]);
-
-      i.editReply({
-        content: t('command:suggestions/management/deny/denied/move'),
-        components: [buttonRow]
-      });
-      i.message
-        .awaitMessageComponent({
-          time: 30000,
-          filter: m => m.user.id === i.user.id
-        })
-        .then(async m => {
-          await m.deferUpdate();
-          resolve(true);
-          if (m.customId === 'sim') {
-            i.editReply({
-              content: `✅ **|** ${t('command:suggestions/management/deny/denied/moved')}`,
-              components: []
-            });
-            i.channel?.send({ embeds: [finalEmbed] });
-            return;
-          }
-
-          i.editReply({
-            content: `✅ **|** ${t('command:suggestions/management/deny/denied')}`,
-            components: []
-          });
-        })
-        .catch(() => {
-          i.editReply({
-            content: `✅ **|** ${t('command:suggestions/management/deny/denied')}`,
+            content: `✅ **|** ${t(`command:suggestions/management/${suggestionKey}`)}`,
             components: []
           });
 
@@ -648,7 +599,7 @@ export default class PingCommand extends Command {
   }
 
   #isValidId(id: string) {
-    return id.length >= 18 && id.length <= 20 && !isNaN(Number(id));
+    return !isNaN(Number(id));
   }
 
   #getIdFromFooter(footer?: string) {
