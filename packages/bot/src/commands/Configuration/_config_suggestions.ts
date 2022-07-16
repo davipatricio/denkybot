@@ -1,8 +1,8 @@
+import { Command, CommandLocale, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
 import type { Suggestion } from '@prisma-client';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ChatInputCommandInteraction, EmbedBuilder, Message, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 import ms from 'ms';
-import { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
 
 type PageTypes = 'sugestoes' | 'categorias' | 'reacoes' | 'cooldown' | 'threads' | 'notices';
 
@@ -130,10 +130,10 @@ export default class SuggestionsSubCommand extends Command {
               .then(async m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id as string;
-                updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel).slice(0, 5);
-                updatedConfig.categories.push(mentionedChannel);
+                const categories = updatedConfig.categories.filter(c => c !== mentionedChannel).slice(0, 5);
                 updatedConfig = await this.client.databases.updateSuggestion({
-                  ...updatedConfig
+                  ...updatedConfig,
+                  categories: [...categories, mentionedChannel]
                 });
                 int.followUp({
                   content: `✅ **|** ${t('command:config/suggestions/actions/category/added')}`,
@@ -324,7 +324,7 @@ export default class SuggestionsSubCommand extends Command {
       const selectRow = new ActionRowBuilder<SelectMenuBuilder>();
       const selectMenu = new SelectMenuBuilder()
         .setCustomId('set_cooldown')
-        .setPlaceholder('Escolha o tempo do cooldown')
+        .setPlaceholder(t('command:config/suggestions/cooldown'))
         .setOptions([
           new SelectMenuOptionBuilder().setLabel(t('command:config/suggestions/cooldowns/no-cooldown')).setDescription(t('command:config/suggestions/cooldowns/no-cooldown/about')).setValue('0'),
           new SelectMenuOptionBuilder().setLabel(t('command:config/suggestions/cooldowns/15s-cooldown')).setDescription(t('command:config/suggestions/cooldowns/15s-cooldown/about')).setValue('15000'),

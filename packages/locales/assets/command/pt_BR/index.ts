@@ -106,6 +106,7 @@ export default {
   'config/suggestions/threads': (status: boolean) => `Os tópicos estão atualmente: ${status ? 'ativados' : 'desativados'}.`,
   'config/suggestions/notices': (status: boolean) =>
     status ? 'Estou notificando membros quando suas sugestões são aceitas ou recusadas.' : 'Não estou notificando membros quando suas sugestões são aceitas ou recusadas.',
+  'config/suggestions/cooldown': 'Escolha o tempo do cooldown',
   'config/suggestions/cooldowns': 'O cooldown atualmente está em:',
   'config/suggestions/cooldowns/no-cooldown': 'Sem cooldown',
   'config/suggestions/cooldowns/no-cooldown/about': 'Membros não deverão esperar para sugerir consecutivamente',

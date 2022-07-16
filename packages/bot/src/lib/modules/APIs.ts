@@ -1,5 +1,5 @@
-import type { DenkyClient } from '../../types/Client';
-import Animals from '../apis/animals';
+import Animals from '#apis/animals';
+import type { DenkyClient } from '#types/Client';
 
 export default class APIs {
   client: DenkyClient;

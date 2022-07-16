@@ -1,8 +1,8 @@
 /* eslint-disable no-await-in-loop */
+import type { DenkyClient } from '#types/Client';
 import { readdir } from 'node:fs/promises';
 import nodePath from 'node:path';
 import type { FunctionKeys, NonFunctionKeys } from 'utility-types';
-import type { DenkyClient } from '../../types/Client';
 
 type LocaleCategories = 'command' | 'commandNames' | 'commandDescriptions' | 'commandCategories';
 export type SupportedLocales = 'en_US' | 'pt_BR';

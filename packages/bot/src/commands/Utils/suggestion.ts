@@ -1,3 +1,6 @@
+import { Command, CommandLocale, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
+import type { Suggestion } from '@prisma-client';
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -21,8 +24,6 @@ import {
   User
 } from 'discord.js';
 import ms from 'ms';
-import { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
 
 const cooldowns = new Map<string, boolean>();
 
@@ -641,7 +642,7 @@ export default class PingCommand extends Command {
     return categoriesRow;
   }
 
-  #generateCategoriesArray(config: any, int: ChatInputCommandInteraction) {
+  #generateCategoriesArray(config: Suggestion, int: ChatInputCommandInteraction) {
     const categories: CategoriesStructure[] = [];
     for (const categoryId of config.categories) {
       const channel = int.guild?.channels.cache.get(categoryId) as TextChannel;
