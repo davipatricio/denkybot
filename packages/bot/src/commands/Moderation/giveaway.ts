@@ -1,5 +1,6 @@
 import { parseTime } from '@bot/src/helpers/Timestamp';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import ms from 'ms';
 import { Command, CommandRunOptions } from '../../structures/Command';
 import type { DenkyClient } from '../../types/Client';
 
@@ -19,39 +20,56 @@ export default class GiveawayCommand extends Command {
   override run({ t, interaction }: CommandRunOptions) {
     if (!interaction.inCachedGuild()) return;
     switch (interaction.options.getSubcommand(true)) {
-      case 'criar':
+      case 'create':
         this.#createGiveaway({ t, interaction });
         break;
     }
   }
 
-  async #createGiveaway({ interaction }: CommandRunOptions) {
-    const title = interaction.options.getString('titulo', true);
-    const description = interaction.options.getString('descricao') ?? 'Sorteio sem descrição.';
-    const winnerAmount = interaction.options.getNumber('ganhadores', true);
+  async #createGiveaway({ t, interaction }: CommandRunOptions) {
+    const title = interaction.options.getString('title', true);
+    const description = interaction.options.getString('description') ?? t('command:giveaway/create/no-description');
+    const winnerAmount = interaction.options.getNumber('winners', true);
 
-    const row = new ActionRowBuilder<ButtonBuilder>().setComponents([
-      new ButtonBuilder().setCustomId('giveaway_participate').setEmoji('📥').setLabel('Participar').setStyle(ButtonStyle.Success),
-      new ButtonBuilder().setCustomId('giveaway_desist').setEmoji('📤').setLabel('Desistir').setStyle(ButtonStyle.Secondary)
-    ]);
-
-    const { valid, type, value } = parseTime(interaction.options.getString('duracao', true));
+    const { valid, type, value } = parseTime(interaction.options.getString('duration', true));
     if (!valid || !value) {
       interaction.editReply({
-        content: ''
+        content: t('command:giveaway/create/invalid-time')
+      });
+      return;
+    }
+    const now = Date.now();
+    const endTimestamp = type === 'full' ? value : now + value;
+
+    // allow giveaways with durations between 30 seconds and 1 year
+    if (endTimestamp - now <= 0 || endTimestamp - now < ms('30s')) {
+      interaction.editReply({
+        content: t('command:giveaway/create/time-low')
+      });
+      return;
+    }
+    if (endTimestamp - now > ms('1y')) {
+      interaction.editReply({
+        content: t('command:giveaway/create/time-big')
       });
       return;
     }
 
-    const endTimestamp = type === 'full' ? value : Date.now() + value;
+    const row = new ActionRowBuilder<ButtonBuilder>().setComponents([
+      new ButtonBuilder().setCustomId('giveaway_participate').setEmoji('📥').setLabel(t('command:giveaway/create/buttons/partipate')).setStyle(ButtonStyle.Success),
+      new ButtonBuilder().setCustomId('giveaway_desist').setEmoji('📤').setLabel(t('command:giveaway/create/buttons/desist')).setStyle(ButtonStyle.Secondary)
+    ]);
+
     const embed = new EmbedBuilder()
       .setTitle(`🎁 ${title}`)
-      .setDescription(`${description}\n\n🔢 **Ganhadores**: ${winnerAmount}\n⏲️ **Acaba**: <t:${Math.round(endTimestamp / 1000)}:R>`)
+      .setDescription(
+        `${description}\n\n🔢 **${t('command:giveaway/create/embed/winners')}**: ${winnerAmount}\n⏲️ **${t('command:giveaway/create/embed/ends-in')}**: <t:${Math.round(endTimestamp / 1000)}:R>`
+      )
       .setColor('Yellow');
 
     const message = await interaction.editReply({ embeds: [embed], components: [row] });
 
-    this.client.databases.createGiveaway({
+    await this.client.databases.createGiveaway({
       messageId: message.id,
       authorId: interaction.user.id,
       channelId: interaction.channel!.id,

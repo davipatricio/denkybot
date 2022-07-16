@@ -234,5 +234,15 @@ export default {
   'animal/bunny': "Here's a picture of a bunny 🐰",
   'animal/cat': "Here's a picture of a cat 🐱",
   'animal/duck': "Here's a picture of a duck 🦆",
-  'animal/foxy': "Here's a picture of a foxy 🦊"
+  'animal/foxy': "Here's a picture of a foxy 🦊",
+
+  // Giveaway
+  'giveaway/create/no-description': 'Giveaway without description.',
+  'giveaway/create/invalid-time': 'The entered duration is invalid, please try again.',
+  'giveaway/create/time-big': 'The entered duration is too long. Please choose a duration between 30 seconds and 1 year.',
+  'giveaway/create/time-low': 'The entered duration is too small. Please choose a duration between 30 seconds and 1 year.',
+  'giveaway/create/buttons/partipate': 'Participate',
+  'giveaway/create/buttons/desist': 'Desist',
+  'giveaway/create/embed/winners': 'Winners',
+  'giveaway/create/embed/ends-in': 'Ends'
 } as const;

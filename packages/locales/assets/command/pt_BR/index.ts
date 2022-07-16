@@ -237,5 +237,15 @@ export default {
   'animal/bunny': 'Aqui está uma imagem de um coelho 🐰',
   'animal/cat': 'Aqui está uma imagem de um gato 🐱',
   'animal/duck': 'Aqui está uma imagem de um pato 🦆',
-  'animal/foxy': 'Aqui está uma imagem de um raposa 🦊'
+  'animal/foxy': 'Aqui está uma imagem de um raposa 🦊',
+
+  // Giveaway
+  'giveaway/create/no-description': 'Sorteio sem descrição.',
+  'giveaway/create/invalid-time': 'O tempo inserido é invalido, por favor, tente novamente.',
+  'giveaway/create/time-big': 'O tempo inserido é muito grande. Por favor, escolha uma duração entre 30 segundos e 1 ano.',
+  'giveaway/create/time-low': 'O tempo inserido é muito pequeno. Por favor, escolha uma duração entre 30 segundos e 1 ano.',
+  'giveaway/create/buttons/partipate': 'Participar',
+  'giveaway/create/buttons/desist': 'Desistir',
+  'giveaway/create/embed/winners': 'Ganhadores',
+  'giveaway/create/embed/ends-in': 'Acaba'
 } as const;
