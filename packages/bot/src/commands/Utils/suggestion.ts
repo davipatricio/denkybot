@@ -1,28 +1,28 @@
+import { Command, CommandLocale, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
 import {
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  ChannelType,
-  ChatInputCommandInteraction,
-  Colors,
-  Embed,
-  EmbedBuilder,
-  GuildTextBasedChannel,
-  ModalBuilder,
-  ModalSubmitInteraction,
-  PermissionFlagsBits,
-  PermissionsBitField,
-  SelectMenuBuilder,
-  SelectMenuInteraction,
-  SelectMenuOptionBuilder,
-  TextChannel,
-  TextInputBuilder,
-  TextInputStyle,
-  User
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    ChannelType,
+    ChatInputCommandInteraction,
+    Colors,
+    Embed,
+    EmbedBuilder,
+    GuildTextBasedChannel,
+    ModalBuilder,
+    ModalSubmitInteraction,
+    PermissionFlagsBits,
+    PermissionsBitField,
+    SelectMenuBuilder,
+    SelectMenuInteraction,
+    SelectMenuOptionBuilder,
+    TextChannel,
+    TextInputBuilder,
+    TextInputStyle,
+    User
 } from 'discord.js';
 import ms from 'ms';
-import { Command, CommandLocale, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
 
 const cooldowns = new Map<string, boolean>();
 

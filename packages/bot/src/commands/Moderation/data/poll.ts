@@ -1,6 +1,6 @@
+import { CommandDataStructure } from '#structures/CommandDataStructure';
+import type { DenkyClient } from '#types/Client';
 import { ApplicationCommandOptionType, ApplicationCommandSubCommandData, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
-import { CommandDataStructure } from '../../../structures/CommandDataStructure';
-import type { DenkyClient } from '../../../types/Client';
 
 type PollAcceptableOptions = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 

@@ -1,6 +1,6 @@
+import type { CommandCategoriesKeys, CommandNamesKeys, translateTuple } from '#lib/managers/LanguageManager';
+import type { DenkyClient } from '#types/Client';
 import type { Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
-import type { translateTuple, CommandCategoriesKeys, CommandNamesKeys } from '../lib/managers/LanguageManager';
-import type { DenkyClient } from '../types/Client';
 
 class Command {
   /** The client that instanced this command */

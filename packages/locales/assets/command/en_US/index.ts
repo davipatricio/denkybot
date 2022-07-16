@@ -106,6 +106,7 @@ export default {
   'config/suggestions/threads': (status: boolean) => `Threads are currently: ${status ? 'enabled' : 'disabled'}.`,
   'config/suggestions/notices': (status: boolean) =>
     status ? "I'm notifying members when their suggestions are accepted or declined." : "I'm not notifying members when their suggestions are accepted or declined.",
+  'config/suggestions/cooldown': 'Choose cooldown time',
   'config/suggestions/cooldowns': 'The cooldown is currently at:',
   'config/suggestions/cooldowns/no-cooldown': 'No cooldown',
   'config/suggestions/cooldowns/no-cooldown/about': 'Members will not need to wait for a cooldown before making a suggestion',

@@ -1,7 +1,7 @@
+import { Initializer } from '#lib/utils/Initializer';
+import type { DenkyClient } from '#types/Client';
 import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { config } from 'dotenv';
-import { Initializer } from './lib/utils/Initializer';
-import type { DenkyClient } from './types/Client';
 
 config({ path: '../.env' });
 config({ path: '../../prisma/.env' });

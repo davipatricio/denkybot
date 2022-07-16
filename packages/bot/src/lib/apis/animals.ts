@@ -2,7 +2,6 @@ import { request } from 'undici';
 
 export default class AnimalsAPI {
   request: typeof request;
-
   constructor() {
     this.request = request;
   }
