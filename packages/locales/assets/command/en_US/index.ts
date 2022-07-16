@@ -244,5 +244,6 @@ export default {
   'giveaway/create/buttons/partipate': 'Participate',
   'giveaway/create/buttons/desist': 'Desist',
   'giveaway/create/embed/winners': 'Winners',
-  'giveaway/create/embed/ends-in': 'Ends'
+  'giveaway/create/embed/ends-in': 'Ends',
+  'giveaway/create/created': (url: string) => `Giveaway created successfully! Check it out [here](${url})`
 } as const;

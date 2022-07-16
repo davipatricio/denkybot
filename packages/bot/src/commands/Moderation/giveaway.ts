@@ -69,7 +69,7 @@ export default class GiveawayCommand extends Command {
       .setColor('Yellow');
 
     const message = await channel.send({ embeds: [embed], components: [row] });
-    if (channel.id !== interaction.channelId) interaction.editReply({ content: `✅ ${interaction.user} **|** Sorteio criado com sucesso! Confira-o aqui: ${message.url}` });
+    if (channel.id !== interaction.channelId) interaction.editReply({ content: `✅ ${interaction.user} **|** ${t('command:giveaway/create/created', message.url)}` });
 
     await this.client.databases.createGiveaway({
       messageId: message.id,

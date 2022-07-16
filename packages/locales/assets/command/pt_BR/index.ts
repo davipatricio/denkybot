@@ -247,5 +247,6 @@ export default {
   'giveaway/create/buttons/partipate': 'Participar',
   'giveaway/create/buttons/desist': 'Desistir',
   'giveaway/create/embed/winners': 'Ganhadores',
-  'giveaway/create/embed/ends-in': 'Acaba'
+  'giveaway/create/embed/ends-in': 'Acaba',
+  'giveaway/create/created': (url: string) => `Sorteio criado com sucesso! Confira-o [aqui](${url})`
 } as const;
