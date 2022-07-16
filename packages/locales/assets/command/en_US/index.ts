@@ -237,13 +237,16 @@ export default {
   'animal/foxy': "Here's a picture of a foxy 🦊",
 
   // Giveaway
-  'giveaway/create/no-description': 'Giveaway without description.',
-  'giveaway/create/invalid-time': 'The entered duration is invalid, please try again.',
-  'giveaway/create/time-big': 'The entered duration is too long. Please choose a duration between 30 seconds and 1 year.',
-  'giveaway/create/time-low': 'The entered duration is too small. Please choose a duration between 30 seconds and 1 year.',
-  'giveaway/create/buttons/partipate': 'Participate',
-  'giveaway/create/buttons/desist': 'Desist',
-  'giveaway/create/embed/winners': 'Winners',
-  'giveaway/create/embed/ends-in': 'Ends',
-  'giveaway/create/created': (url: string) => `Giveaway created successfully! Check it out [here](${url})`
+  'giveaway/helper/error/alreadyParticipating': 'You are already participating in the giveaway.',
+  'giveaway/helper/error/notParticipating': 'You are not participating in the giveaway.',
+  'giveaway/helper/participate': 'You are participating in the giveaway. Good luck!',
+  'giveaway/helper/exitGiveaway': 'You are no longer participating of the giveaway.',
+  'giveaway/helper/embed/description': (description: string, winnerAmount: number, date: number) => `${description}\n\n🔢 **Winners**: ${winnerAmount}\n⏲️ **Finalizado**: <t:${date}:R>`,
+  'giveaway/helper/embed/footer': 'Giveaway ended!',
+  'giveaway/helper/embed/field/name': 'Winners',
+  'giveaway/helper/embed/fieldTwo/value': 'There were not enough participants.',
+  'giveaway/helper/embed/fieldThree/value': 'There were no participants in this giveaway.',
+  'giveaway/helper/button/placeholder': 'Additional options',
+  'giveaway/helper/button/label': 'New winner',
+  'giveaway/helper/button/description': 'Click to choose a new winner'
 } as const;

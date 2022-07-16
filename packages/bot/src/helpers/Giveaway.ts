@@ -1,8 +1,16 @@
 import dayjs from 'dayjs';
 import { ActionRowBuilder, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
+import { recommendLocale } from '@bot/src/helpers/Locale';
+import type { CommandLocale } from '@bot/src/structures/Command';
 import type { DenkyClient } from '../types/Client';
 
 export async function handleInteraction(client: DenkyClient, interaction: Interaction) {
+  const guildLocale = recommendLocale(interaction.guild!.preferredLocale);
+
+  const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
+    return client.languages.manager.get(guildLocale, path, ...args);
+  };
+
   if (!interaction.isButton()) return;
   switch (interaction.customId) {
     case 'giveaway_participate': {
@@ -12,7 +20,7 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
       if (!giveawayData || giveawayData.ended) return;
 
       if (giveawayData.participants.includes(interaction.user.id)) {
-        interaction.editReply({ content: '❌ **|** Você está já está participando do sorteio.' });
+        interaction.editReply({ content: `❌ **|** ${t('command:giveaway/helper/error/alreadyParticipating')}` });
         return;
       }
 
@@ -20,7 +28,7 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
         ...giveawayData,
         participants: [...giveawayData.participants, interaction.user.id]
       });
-      interaction.editReply({ content: '🎉 **|** Você está participando do sorteio. Boa sorte!' });
+      interaction.editReply({ content: `🎉 **|** ${t('command:giveaway/helper/participate')}` });
       break;
     }
     case 'giveaway_desist': {
@@ -30,7 +38,7 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
       if (!giveawayData || giveawayData.ended) return;
 
       if (!giveawayData.participants.includes(interaction.user.id)) {
-        interaction.editReply({ content: '❌ **|** Você não está participando do sorteio.' });
+        interaction.editReply({ content: `❌ **|** ${t('command:giveaway/helper/error/notParticipating')}` });
         return;
       }
 
@@ -38,7 +46,7 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
         ...giveawayData,
         participants: giveawayData.participants.filter(id => id !== interaction.user.id)
       });
-      interaction.editReply({ content: '👋 **|** Você desistiu do sorteio.' });
+      interaction.editReply({ content: `👋 **|** ${t('command:giveaway/helper/exitGiveaway')}` });
       break;
     }
   }
@@ -61,21 +69,29 @@ export async function checkEndedGiveaways(client: DenkyClient) {
       return;
     }
 
+    const guildLocale = recommendLocale(message.guild!.preferredLocale);
+
+    const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
+      return client.languages.manager.get(guildLocale, path, ...args);
+    };
+
     await client.databases.updateGiveaway({
       ...giveaway,
       ended: true
     });
 
     const embed = new EmbedBuilder(message.embeds[0].toJSON())
-      .setDescription(`${description}\n\n🔢 **Ganhadores**: ${winnerAmount}\n⏲️ **Finalizado**: <t:${Math.round(Date.now() / 1000)}:R>`)
-      .setFooter({ text: '⏰ Sorteio finalizado!' })
+      .setDescription(t('command:giveaway/helper/embed/description', description, winnerAmount, Math.round(Date.now() / 1000)))
+      .setFooter({ text: `⏰ ${t('command:giveaway/helper/embed/footer')}` })
       .setColor('Green');
 
     const row = new ActionRowBuilder<SelectMenuBuilder>().setComponents([
       new SelectMenuBuilder()
         .setCustomId('dropdown')
-        .setPlaceholder('Opções adicionais')
-        .addOptions([new SelectMenuOptionBuilder().setEmoji('🔁').setLabel('Novo ganhador').setValue('reroll').setDescription('Clique para escolher um novo ganhador')])
+        .setPlaceholder(t('command:giveaway/helper/button/placeholder'))
+        .addOptions([
+          new SelectMenuOptionBuilder().setEmoji('🔁').setLabel(t('command:giveaway/helper/button/label')).setValue('reroll').setDescription(t('command:giveaway/helper/button/description'))
+        ])
     ]);
 
     if (participants.length) {
@@ -88,9 +104,25 @@ export async function checkEndedGiveaways(client: DenkyClient) {
         winners.push(...participants.slice(0, winnerAmount));
 
         const winnerString = winners.length > 1 ? `${winners.map(m => `<@!${m}>`).join(', ')}` : `<@!${winners[0]}>`;
-        embed.addFields([{ name: '🌟 Ganhadores', value: winnerString }]);
-      } else embed.addFields([{ name: '🌟 Ganhadores', value: 'Não houve participantes o suficiente.' }]).setColor('Red');
-    } else embed.addFields([{ name: '🌟 Ganhadores', value: 'Não houve participantes neste sorteio.' }]).setColor('Red');
+        embed.addFields([{ name: `🌟 ${t('command:giveaway/helper/embed/field/name')}`, value: winnerString }]);
+      } else
+        embed
+          .addFields([
+            {
+              name: `🌟 ${t('command:giveaway/helper/embed/field/name')}`,
+              value: t('command:giveaway/helper/embed/fieldTwo/value')
+            }
+          ])
+          .setColor('Red');
+    } else
+      embed
+        .addFields([
+          {
+            name: `🌟 ${t('command:giveaway/helper/embed/field/name')}`,
+            value: t('command:giveaway/helper/embed/fieldThree/value')
+          }
+        ])
+        .setColor('Red');
 
     message.edit({ embeds: [embed], components: [row] });
   });

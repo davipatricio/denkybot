@@ -240,13 +240,16 @@ export default {
   'animal/foxy': 'Aqui está uma imagem de um raposa 🦊',
 
   // Giveaway
-  'giveaway/create/no-description': 'Sorteio sem descrição.',
-  'giveaway/create/invalid-time': 'O tempo inserido é invalido, por favor, tente novamente.',
-  'giveaway/create/time-big': 'O tempo inserido é muito grande. Por favor, escolha uma duração entre 30 segundos e 1 ano.',
-  'giveaway/create/time-low': 'O tempo inserido é muito pequeno. Por favor, escolha uma duração entre 30 segundos e 1 ano.',
-  'giveaway/create/buttons/partipate': 'Participar',
-  'giveaway/create/buttons/desist': 'Desistir',
-  'giveaway/create/embed/winners': 'Ganhadores',
-  'giveaway/create/embed/ends-in': 'Acaba',
-  'giveaway/create/created': (url: string) => `Sorteio criado com sucesso! Confira-o [aqui](${url})`
+  'giveaway/helper/error/alreadyParticipating': 'Você já está participando deste sorteio.',
+  'giveaway/helper/error/notParticipating': 'Você não está participando do sorteio.',
+  'giveaway/helper/participate': 'Você está participando do sorteio. Boa sorte!',
+  'giveaway/helper/exitGiveaway': 'Você desistiu do sorteio.',
+  'giveaway/helper/embed/description': (description: string, winnerAmount: number, date: number) => `${description}\n\n🔢 **Ganhadores**: ${winnerAmount}\n⏲️ **Finalizado**: ${date}`,
+  'giveaway/helper/embed/footer': 'Sorteio finalizado!',
+  'giveaway/helper/embed/field/name': 'Ganhadores',
+  'giveaway/helper/embed/fieldTwo/value': 'Não houve participantes o suficiente.',
+  'giveaway/helper/embed/fieldThree/value': 'Não houve participantes neste sorteio.',
+  'giveaway/helper/button/placeholder': 'Opções adicionais',
+  'giveaway/helper/button/label': 'Novo ganhador',
+  'giveaway/helper/button/description': 'Clique para escolher um novo ganhador'
 } as const;
