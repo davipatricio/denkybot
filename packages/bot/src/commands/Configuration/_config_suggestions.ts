@@ -324,7 +324,7 @@ export default class SuggestionsSubCommand extends Command {
       const selectRow = new ActionRowBuilder<SelectMenuBuilder>();
       const selectMenu = new SelectMenuBuilder()
         .setCustomId('set_cooldown')
-        .setPlaceholder('Escolha o tempo do cooldown')
+        .setPlaceholder(t('command:config/suggestions/cooldown'))
         .setOptions([
           new SelectMenuOptionBuilder().setLabel(t('command:config/suggestions/cooldowns/no-cooldown')).setDescription(t('command:config/suggestions/cooldowns/no-cooldown/about')).setValue('0'),
           new SelectMenuOptionBuilder().setLabel(t('command:config/suggestions/cooldowns/15s-cooldown')).setDescription(t('command:config/suggestions/cooldowns/15s-cooldown/about')).setValue('15000'),
