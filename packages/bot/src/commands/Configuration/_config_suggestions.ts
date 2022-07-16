@@ -130,10 +130,10 @@ export default class SuggestionsSubCommand extends Command {
               .then(async m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id as string;
-                updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel).slice(0, 5);
-                updatedConfig.categories.push(mentionedChannel);
+                const categories = updatedConfig.categories.filter(c => c !== mentionedChannel).slice(0, 5);
                 updatedConfig = await this.client.databases.updateSuggestion({
-                  ...updatedConfig
+                  ...updatedConfig,
+                  categories: [...categories, mentionedChannel]
                 });
                 int.followUp({
                   content: `✅ **|** ${t('command:config/suggestions/actions/category/added')}`,
