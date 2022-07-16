@@ -1,6 +1,6 @@
 import { CommandDataStructure } from '@bot/src/structures/CommandDataStructure';
 import type { DenkyClient } from '@bot/src/types/Client';
-import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, ChannelType, PermissionFlagsBits } from 'discord.js';
 
 export default class GiveawayData extends CommandDataStructure {
   constructor(client: DenkyClient) {
@@ -83,6 +83,19 @@ export default class GiveawayData extends CommandDataStructure {
               type: ApplicationCommandOptionType.String,
               required: false,
               maxLength: 300
+            },
+            {
+              name: client.languages.manager.get('en_US', 'commandNames:giveaway/create/channel'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:giveaway/create/channel')
+              },
+              description: client.languages.manager.get('en_US', 'commandDescriptions:giveaway/create/channel'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:giveaway/create/channel')
+              },
+              type: ApplicationCommandOptionType.Channel,
+              required: false,
+              channelTypes: [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildVoice, ChannelType.GuildNewsThread, ChannelType.GuildPrivateThread, ChannelType.GuildPublicThread]
             }
           ]
         }

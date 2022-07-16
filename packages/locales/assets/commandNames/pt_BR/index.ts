@@ -104,5 +104,6 @@ export default {
   'giveaway/create/title': 'título',
   'giveaway/create/winners': 'ganhadores',
   'giveaway/create/duration': 'duração',
-  'giveaway/create/description': 'descrição'
+  'giveaway/create/description': 'descrição',
+  'giveaway/create/channel': 'canal'
 } as const;

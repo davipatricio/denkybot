@@ -1,5 +1,5 @@
 import { parseTime } from '@bot/src/helpers/Timestamp';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, TextBasedChannel } from 'discord.js';
 import ms from 'ms';
 import { Command, CommandRunOptions } from '../../structures/Command';
 import type { DenkyClient } from '../../types/Client';
@@ -30,6 +30,7 @@ export default class GiveawayCommand extends Command {
     const title = interaction.options.getString('title', true);
     const description = interaction.options.getString('description') ?? t('command:giveaway/create/no-description');
     const winnerAmount = interaction.options.getNumber('winners', true);
+    const channel = (interaction.options.getChannel('channel') ?? interaction.channel!) as TextBasedChannel;
 
     const { valid, type, value } = parseTime(interaction.options.getString('duration', true));
     if (!valid || !value) {
@@ -67,12 +68,13 @@ export default class GiveawayCommand extends Command {
       )
       .setColor('Yellow');
 
-    const message = await interaction.editReply({ embeds: [embed], components: [row] });
+    const message = await channel.send({ embeds: [embed], components: [row] });
+    if (channel.id !== interaction.channelId) interaction.editReply({ content: `✅ ${interaction.user} **|** Sorteio criado com sucesso! Confira-o aqui: ${message.url}` });
 
     await this.client.databases.createGiveaway({
       messageId: message.id,
       authorId: interaction.user.id,
-      channelId: interaction.channel!.id,
+      channelId: channel.id,
       title,
       description,
       winnerAmount,
