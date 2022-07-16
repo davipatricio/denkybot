@@ -2,6 +2,9 @@ import type { CommandCategoriesKeys, CommandNamesKeys, translateTuple } from '#l
 import type { DenkyClient } from '#types/Client';
 import type { Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
 
+export type CommandLocale = typeof translateTuple;
+export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
+
 class Command {
   /** The client that instanced this command */
   client: DenkyClient;
@@ -48,8 +51,5 @@ class Command {
     return { t, interaction };
   }
 }
-
-export type CommandLocale = typeof translateTuple;
-export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
 
 export { Command };
