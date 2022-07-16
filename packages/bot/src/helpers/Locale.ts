@@ -1,5 +1,5 @@
-// @ts-ignore When running GitHub Actions, the config file isn't available
 import type { SupportedLocales } from '#lib/managers/LanguageManager';
+// @ts-ignore When running GitHub Actions, the config file isn't available
 import Configuration from '@bot/config.json';
 import { Locale } from 'discord.js';
 
