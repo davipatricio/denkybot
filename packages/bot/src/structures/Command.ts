@@ -2,6 +2,10 @@ import type { AutocompleteInteraction, Awaitable, ChatInputApplicationCommandDat
 import type { CommandCategoriesKeys, CommandNamesKeys, translateTuple } from '#lib/managers/LanguageManager';
 import type { DenkyClient } from '#types/Client';
 
+export type CommandLocale = typeof translateTuple;
+export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
+export type AutocompleteRunOptions = { t: CommandLocale; interaction: AutocompleteInteraction };
+
 class Command {
   /** The client that instanced this command */
   client: DenkyClient;
@@ -52,9 +56,5 @@ class Command {
     return { t, interaction };
   }
 }
-
-export type CommandLocale = typeof translateTuple;
-export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
-export type AutocompleteRunOptions = { t: CommandLocale; interaction: AutocompleteInteraction };
 
 export { Command };
