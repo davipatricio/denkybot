@@ -1,8 +1,8 @@
-import dayjs from 'dayjs';
-import { ActionRowBuilder, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
+import type { DenkyClient } from '#types/Client';
 import { recommendLocale } from '@bot/src/helpers/Locale';
 import type { CommandLocale } from '@bot/src/structures/Command';
-import type { DenkyClient } from '#types/Client';
+import dayjs from 'dayjs';
+import { ActionRowBuilder, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 
 export async function handleInteraction(client: DenkyClient, interaction: Interaction) {
   const guildLocale = recommendLocale(interaction.guild!.preferredLocale);
@@ -55,7 +55,7 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
 export async function checkEndedGiveaways(client: DenkyClient) {
   const giveawaysArray = await client.databases.fetchGiveaways();
   giveawaysArray.forEach(async giveaway => {
-    const { winnerAmount, participants, channelId, description, messageId, endTimestamp } = giveaway;
+    const { title, winnerAmount, participants, channelId, description, messageId, endTimestamp } = giveaway;
     // If current timestamp is lower than end timestamp, the giveaway is not ended
     if (BigInt(Date.now()) < endTimestamp) return;
     const channel = await client.channels.fetch(channelId).catch(() => {});
@@ -94,6 +94,8 @@ export async function checkEndedGiveaways(client: DenkyClient) {
         ])
     ]);
 
+    let winnerString = '';
+
     if (participants.length) {
       if (participants.length >= winnerAmount) {
         // Get random X winners from participants
@@ -106,7 +108,7 @@ export async function checkEndedGiveaways(client: DenkyClient) {
 
         winners.push(...participants.slice(0, winnerAmount));
 
-        const winnerString = winners.length > 1 ? `${winners.map(m => `<@!${m}>`).join(', ')}` : `<@!${winners[0]}>`;
+        winnerString = winners.length > 1 ? `${winners.map(m => `<@!${m}>`).join(', ')}` : `<@!${winners[0]}>`;
         embed.addFields([{ name: `🌟 ${t('command:giveaway/helper/embed/field/name')}`, value: winnerString }]);
       } else
         embed
@@ -128,6 +130,7 @@ export async function checkEndedGiveaways(client: DenkyClient) {
         .setColor('Red');
 
     message.edit({ embeds: [embed], components: [row] });
+    message.channel.send(`⏲️ **|** O sorteio \`${title}\` acabou! ${participants.length >= winnerAmount ? `Os ganhadores foram: ${winnerString}. Parabéns! 🎉` : 'Não houve ganhadores 😢'}`);
   });
 }
 
