@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { ActionRowBuilder, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 import { recommendLocale } from '@bot/src/helpers/Locale';
 import type { CommandLocale } from '@bot/src/structures/Command';
-import type { DenkyClient } from '../types/Client';
+import type { DenkyClient } from '#types/Client';
 
 export async function handleInteraction(client: DenkyClient, interaction: Interaction) {
   const guildLocale = recommendLocale(interaction.guild!.preferredLocale);
