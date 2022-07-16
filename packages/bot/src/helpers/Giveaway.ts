@@ -52,12 +52,12 @@ export async function checkEndedGiveaways(client: DenkyClient) {
     if (BigInt(Date.now()) < endTimestamp) return;
     const channel = await client.channels.fetch(channelId).catch(() => {});
     if (!channel || !channel.isTextBased()) {
-      client.databases.deleteGiveaway(messageId);
+      await client.databases.deleteGiveaway(messageId);
       return;
     }
     const message = await channel.messages.fetch(messageId).catch(() => {});
     if (!message || !message.embeds[0]) {
-      client.databases.deleteGiveaway(messageId);
+      await client.databases.deleteGiveaway(messageId);
       return;
     }
 
@@ -104,11 +104,11 @@ export async function deleteOldGiveaways(client: DenkyClient) {
     take: 100
   });
 
-  for (const giveaway of giveawaysArray) {
+  giveawaysArray.forEach(async giveaway => {
     const { endTimestamp, messageId } = giveaway;
     // If the giveaway is ended and if the giveaway is 2 months old, delete it
     if (Date.now() > dayjs(Number(endTimestamp)).add(2, 'month').valueOf()) {
-      client.databases.deleteGiveaway(messageId);
+      await client.databases.deleteGiveaway(messageId);
     }
-  }
+  });
 }
