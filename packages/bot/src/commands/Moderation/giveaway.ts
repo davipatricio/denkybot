@@ -34,9 +34,7 @@ export default class GiveawayCommand extends Command {
 
     const { valid, type, value } = parseTime(interaction.options.getString('duration', true));
     if (!valid || !value) {
-      interaction.editReply({
-        content: t('command:giveaway/create/invalid-time')
-      });
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/create/invalid-time')}`);
       return;
     }
     const now = Date.now();
@@ -44,15 +42,11 @@ export default class GiveawayCommand extends Command {
 
     // allow giveaways with durations between 30 seconds and 1 year
     if (endTimestamp - now <= 0 || endTimestamp - now < ms('30s')) {
-      interaction.editReply({
-        content: t('command:giveaway/create/time-low')
-      });
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/create/time-low')}`);
       return;
     }
     if (endTimestamp - now > ms('1y')) {
-      interaction.editReply({
-        content: t('command:giveaway/create/time-big')
-      });
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/create/time-big')}`);
       return;
     }
 
@@ -69,7 +63,7 @@ export default class GiveawayCommand extends Command {
       .setColor('Yellow');
 
     const message = await channel.send({ embeds: [embed], components: [row] });
-    if (channel.id !== interaction.channelId) interaction.editReply({ content: `✅ ${interaction.user} **|** ${t('command:giveaway/create/created', message.url)}` });
+    if (channel.id !== interaction.channelId) interaction.editReply(`✅ ${interaction.user} **|** ${t('command:giveaway/create/created', message.url)}`);
 
     await this.client.databases.createGiveaway({
       messageId: message.id,
