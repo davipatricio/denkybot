@@ -7,18 +7,17 @@ import type { DenkyClient } from '../../types/Client';
 export default class GiveawayCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
-    this.rawName = 'BAN';
+    this.rawName = 'GIVEAWAY';
     this.rawCategory = 'MODERATION';
     this.config = {
       autoDefer: true,
       ephemeral: false,
       showInHelp: true
     };
-    this.permissions = { bot: [PermissionFlagsBits.BanMembers] };
+    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
   }
 
   override run({ t, interaction }: CommandRunOptions) {
-    if (!interaction.inCachedGuild()) return;
     switch (interaction.options.getSubcommand(true)) {
       case 'create':
         this.#createGiveaway({ t, interaction });
@@ -64,6 +63,7 @@ export default class GiveawayCommand extends Command {
 
     const message = await channel.send({ embeds: [embed], components: [row] });
     if (channel.id !== interaction.channelId) interaction.editReply(`✅ ${interaction.user} **|** ${t('command:giveaway/create/created', message.url)}`);
+    else interaction.editReply(`✅ ${interaction.user} **|** ${t('command:giveaway/create/created-same')}`);
 
     await this.client.databases.createGiveaway({
       messageId: message.id,

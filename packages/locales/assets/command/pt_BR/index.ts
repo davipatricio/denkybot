@@ -250,6 +250,7 @@ export default {
   'giveaway/create/embed/winners': 'Ganhadores',
   'giveaway/create/embed/ends-in': 'Acaba',
   'giveaway/create/created': (url: string) => `Sorteio criado com sucesso! Confira-o [aqui](${url})`,
+  'giveaway/create/created-same': 'Sorteio criado com sucesso!',
   'giveaway/helper/error/alreadyParticipating': 'Você já está participando deste sorteio.',
   'giveaway/helper/error/notParticipating': 'Você não está participando do sorteio.',
   'giveaway/helper/participate': 'Você está participando do sorteio. Boa sorte!',
