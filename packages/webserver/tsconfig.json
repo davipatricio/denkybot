@@ -26,6 +26,21 @@
             ],
             "@prisma-client": [
                 "../node_modules/.prisma/client"
+            ],
+            "#apis/*": [
+                "./bot/src/lib/apis/*"
+            ],
+            "#types/*": [
+                "./bot/src/types/*"
+            ],
+            "#lib/*": [
+                "./bot/src/lib/*"
+            ],
+            "#helpers/*": [
+                "./bot/src/helpers/*"
+            ],
+            "#structures/*": [
+                "./bot/src/structures/*"
             ]
         },
     },

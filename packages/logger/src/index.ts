@@ -1,4 +1,4 @@
-import type { DenkyClient } from '@bot/src/types/Client';
+import type { DenkyClient } from '#types/Client';
 import { inspect } from 'node:util';
 import { createLogger as createWinstonLogger, format, Logger, LoggerOptions } from 'winston';
 import { Console, File } from 'winston/lib/winston/transports';

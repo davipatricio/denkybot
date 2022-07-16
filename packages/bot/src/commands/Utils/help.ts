@@ -1,7 +1,7 @@
+import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys } from '#lib/managers/LanguageManager';
+import { Command, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, SelectMenuBuilder, SelectMenuInteraction, SelectMenuOptionBuilder } from 'discord.js';
-import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys } from '../../lib/managers/LanguageManager';
-import { Command, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
 
 export default class HelpCommand extends Command {
   constructor(client: DenkyClient) {

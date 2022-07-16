@@ -1,6 +1,6 @@
 // FIXME: Use Node 18.x fetch instead of undici when @types/node gets the fetch function added to the global namespace
+import type { DenkyClient } from '#types/Client';
 import { request } from 'undici';
-import type { DenkyClient } from '../types/Client';
 
 export class Poster {
   client: DenkyClient;

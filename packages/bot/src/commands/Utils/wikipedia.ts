@@ -1,7 +1,7 @@
+import { Command, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
 import { EmbedBuilder, Locale } from 'discord.js';
 import { request } from 'undici';
-import { Command, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
 
 export default class WikipediaCommand extends Command {
   constructor(client: DenkyClient) {

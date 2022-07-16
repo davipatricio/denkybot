@@ -1,13 +1,13 @@
 /* eslint-disable no-await-in-loop */
+import type { Command } from '#structures/Command';
+import type { CommandDataStructure } from '#structures/CommandDataStructure';
+import type { Event } from '#structures/Event';
+import type { Task } from '#structures/Task';
+import type { DenkyClient } from '#types/Client';
 import { createLogger } from '@logger';
 import { InteractionsWebserver } from '@webserver';
 import { Collection } from 'discord.js';
 import { readdir, readFile } from 'node:fs/promises';
-import type { Command } from '../../structures/Command';
-import type { CommandDataStructure } from '../../structures/CommandDataStructure';
-import type { Event } from '../../structures/Event';
-import type { Task } from '../../structures/Task';
-import type { DenkyClient } from '../../types/Client';
 
 type DefaultClass<T> = { default: new (...args: any[]) => T };
 

@@ -1,8 +1,8 @@
+import { Command, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
 import dayjs from 'dayjs';
 import { PermissionFlagsBits } from 'discord.js';
 import ms from 'ms';
-import { Command, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
 
 export default class MuteCommand extends Command {
   constructor(client: DenkyClient) {
