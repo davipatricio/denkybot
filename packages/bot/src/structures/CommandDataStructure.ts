@@ -1,5 +1,5 @@
+import type { DenkyClient } from '#types/Client';
 import type { ChatInputApplicationCommandData } from 'discord.js';
-import type { DenkyClient } from '../types/Client';
 
 export class CommandDataStructure {
   data: ChatInputApplicationCommandData;

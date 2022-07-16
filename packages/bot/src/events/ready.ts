@@ -1,6 +1,6 @@
+import { Event } from '#structures/Event';
+import type { DenkyClient } from '#types/Client';
 import type { ChatInputApplicationCommandData } from 'discord.js';
-import { Event } from '../structures/Event';
-import type { DenkyClient } from '../types/Client';
 
 export default class ReadyEvent extends Event {
   constructor() {

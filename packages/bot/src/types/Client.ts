@@ -1,10 +1,10 @@
+import type { DatabaseManager } from '#lib/managers/DatabaseManager';
+import type APIs from '#lib/modules/APIs';
+import type Languages from '#lib/modules/Languages';
+import type { Command } from '#structures/Command';
+import type { Task } from '#structures/Task';
 import type { Logger } from '@logger';
 import type { Client, Collection } from 'discord.js';
-import type { DatabaseManager } from '../lib/managers/DatabaseManager';
-import type APIs from '../lib/modules/APIs';
-import type Languages from '../lib/modules/Languages';
-import type { Command } from '../structures/Command';
-import type { Task } from '../structures/Task';
 
 export interface DenkyClient extends Client<boolean> {
   /** Cached bot commands */

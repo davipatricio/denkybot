@@ -4,6 +4,11 @@ on:
     paths:
       - 'packages/**/*.ts'
       - 'packages/**/*.prisma'
+      - 'packages/**/package.json'
+      - 'packages/**/tsconfig.json'
+      - 'tsconfig.json'
+      - 'package.json'
+      - 'turbo.json'
 
 jobs:
   eslint:
@@ -14,15 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
-    - name: Turbo cache
-      id: turbo-cache
-      uses: actions/cache@v3
-      with:
-        path: .turbo
-        key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
-        restore-keys: |
-          turbo-${{ github.job }}-${{ github.ref_name }}-
           
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
@@ -39,6 +35,17 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-yarn-
 
+    - uses: actions/checkout@v3
+    
+    - name: ESLint cache
+      id: eslint-cache
+      uses: actions/cache@v3
+      with:
+        path: .eslintcache
+        key: eslint-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
+        restore-keys: |
+          eslint-${{ github.job }}-${{ github.ref_name }}-
+
     - name: Install Node v18
       uses: actions/setup-node@v3
       with:
@@ -51,7 +58,7 @@ jobs:
       run: yarn --frozen-lockfile
 
     - name: Run ESLint
-      run: yarn format --cache-dir=".turbo"
+      run: npx eslint packages --cache
 
   typescript:
     if:

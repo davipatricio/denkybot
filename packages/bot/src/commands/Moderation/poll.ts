@@ -1,6 +1,6 @@
+import { Command, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
 import { EmbedBuilder, PermissionFlagsBits } from 'discord.js';
-import { Command, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
 
 const MappedNumericEmojis = {
   1: '1️⃣',

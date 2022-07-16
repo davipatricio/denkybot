@@ -1,6 +1,6 @@
+import { CommandDataStructure } from '#structures/CommandDataStructure';
+import type { DenkyClient } from '#types/Client';
 import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
-import { CommandDataStructure } from '../../../structures/CommandDataStructure';
-import type { DenkyClient } from '../../../types/Client';
 
 export default class MuteData extends CommandDataStructure {
   constructor(client: DenkyClient) {
