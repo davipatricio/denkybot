@@ -4,6 +4,11 @@ on:
     paths:
       - 'packages/**/*.ts'
       - 'packages/**/*.prisma'
+      - 'packages/**/package.json'
+      - 'packages/**/tsconfig.json'
+      - 'tsconfig.json'
+      - 'package.json'
+      - 'turbo.json'
 
 jobs:
   eslint:
