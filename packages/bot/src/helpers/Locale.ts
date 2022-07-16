@@ -1,7 +1,7 @@
 // @ts-ignore When running GitHub Actions, the config file isn't available
+import type { SupportedLocales } from '#lib/managers/LanguageManager';
 import Configuration from '@bot/config.json';
 import { Locale } from 'discord.js';
-import type { SupportedLocales } from '../lib/managers/LanguageManager';
 
 export function recommendLocale(locale?: Locale) {
   if (!locale) return Configuration.defaultLanguage as SupportedLocales;

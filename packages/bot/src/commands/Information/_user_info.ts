@@ -1,6 +1,6 @@
+import { Command, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
 import { EmbedBuilder, escapeMarkdown, GuildMember, PermissionFlagsBits } from 'discord.js';
-import { Command, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
 
 export default class UserInfoSubCommand extends Command {
   constructor(client: DenkyClient) {

@@ -52,10 +52,10 @@
         "no-empty-function": "off",
         "class-methods-use-this": "off",
         "default-case": "off",
-        "default-param-last": "off",
         "import/prefer-default-export": "off",
         "import/extensions": "off",
         "import/no-unresolved": "off",
+        "import/order": "off",
         "lines-between-class-members": [
             "error",
             "always",

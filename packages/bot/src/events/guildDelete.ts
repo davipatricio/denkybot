@@ -1,6 +1,6 @@
+import { Event } from '#structures/Event';
+import type { DenkyClient } from '#types/Client';
 import { EmbedBuilder, Guild, WebhookClient } from 'discord.js';
-import { Event } from '../structures/Event';
-import type { DenkyClient } from '../types/Client';
 
 export default class GuildDeleteEvent extends Event {
   /** Webhook used to log server deletions */

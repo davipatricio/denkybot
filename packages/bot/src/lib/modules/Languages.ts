@@ -1,4 +1,4 @@
-import type { DenkyClient } from '../../types/Client';
+import type { DenkyClient } from '#types/Client';
 import { LanguageManager } from '../managers/LanguageManager';
 
 export default class Languages {

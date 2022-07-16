@@ -1,5 +1,5 @@
-import { Command, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
+import { Command, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
 
 export default class TextInvertSubCommand extends Command {
   constructor(client: DenkyClient) {
