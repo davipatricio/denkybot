@@ -1,6 +1,7 @@
 import type { DenkyClient } from '#types/Client';
 import { recommendLocale } from '@bot/src/helpers/Locale';
 import type { CommandLocale } from '@bot/src/structures/Command';
+import type { Giveaway } from '@prisma-client';
 import dayjs from 'dayjs';
 import { ActionRowBuilder, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 
@@ -52,89 +53,89 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
   }
 }
 
-export async function checkEndedGiveaways(client: DenkyClient) {
-  const giveawaysArray = await client.databases.fetchGiveaways();
-  giveawaysArray.forEach(async giveaway => {
-    const { title, winnerAmount, participants, channelId, description, messageId, endTimestamp } = giveaway;
-    // If current timestamp is lower than end timestamp, the giveaway is not ended
-    if (BigInt(Date.now()) < endTimestamp) return;
-    const channel = await client.channels.fetch(channelId).catch(() => {});
-    if (!channel || !channel.isTextBased()) {
-      await client.databases.deleteGiveaway(messageId);
-      return;
-    }
-    const message = await channel.messages.fetch(messageId).catch(() => {});
-    if (!message || !message.embeds[0]) {
-      await client.databases.deleteGiveaway(messageId);
-      return;
-    }
+export async function checkSingleEndedGiveaway(client: DenkyClient, giveaway: Giveaway) {
+  const { title, winnerAmount, participants, channelId, description, messageId, endTimestamp } = giveaway;
+  // If current timestamp is lower than end timestamp, the giveaway is not ended
+  if (BigInt(Date.now()) < endTimestamp) return;
+  const channel = await client.channels.fetch(channelId).catch(() => {});
+  if (!channel || !channel.isTextBased()) {
+    await client.databases.deleteGiveaway(messageId);
+    return;
+  }
+  const message = await channel.messages.fetch(messageId).catch(() => {});
+  if (!message || !message.embeds[0]) {
+    await client.databases.deleteGiveaway(messageId);
+    return;
+  }
 
-    const guildLocale = recommendLocale(message.guild!.preferredLocale);
+  const guildLocale = recommendLocale(message.guild!.preferredLocale);
 
-    const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
-      return client.languages.manager.get(guildLocale, path, ...args);
-    };
+  const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
+    return client.languages.manager.get(guildLocale, path, ...args);
+  };
 
-    await client.databases.updateGiveaway({
-      ...giveaway,
-      ended: true
-    });
+  await client.databases.updateGiveaway({
+    ...giveaway,
+    ended: true
+  });
 
-    const embed = new EmbedBuilder(message.embeds[0].toJSON())
-      .setDescription(t('command:giveaway/helper/embed/description', description, winnerAmount, Math.round(Date.now() / 1000)))
-      .setFooter({ text: `⏰ ${t('command:giveaway/helper/embed/footer')}` })
-      .setColor('Green');
+  const embed = new EmbedBuilder(message.embeds[0].toJSON())
+    .setDescription(t('command:giveaway/helper/embed/description', description, winnerAmount, Math.round(Date.now() / 1000)))
+    .setFooter({ text: `⏰ ${t('command:giveaway/helper/embed/footer')}` })
+    .setColor('Green');
 
-    const row = new ActionRowBuilder<SelectMenuBuilder>().setComponents([
-      new SelectMenuBuilder()
-        .setCustomId('dropdown')
-        .setPlaceholder(t('command:giveaway/helper/button/placeholder'))
-        .addOptions([
-          new SelectMenuOptionBuilder().setEmoji('🔁').setLabel(t('command:giveaway/helper/button/label')).setValue('reroll').setDescription(t('command:giveaway/helper/button/description'))
-        ])
-    ]);
+  const row = new ActionRowBuilder<SelectMenuBuilder>().setComponents([
+    new SelectMenuBuilder()
+      .setCustomId('dropdown')
+      .setPlaceholder(t('command:giveaway/helper/button/placeholder'))
+      .addOptions([new SelectMenuOptionBuilder().setEmoji('🔁').setLabel(t('command:giveaway/helper/button/label')).setValue('reroll').setDescription(t('command:giveaway/helper/button/description'))])
+  ]);
 
-    let winnerString = '';
+  let winnerString = '';
 
-    if (participants.length) {
-      if (participants.length >= winnerAmount) {
-        // Get random X winners from participants
-        const winners: string[] = [];
-        // Avoid sorting a large array
-        if (participants.length >= 200) {
-          // Shuffle participants 7 times to get a random order
-          for (let i = 0; i < 7; i++) participants.sort(() => Math.random() - 0.5);
-        } else participants.sort(() => Math.random() - 0.5);
+  if (participants.length) {
+    if (participants.length >= winnerAmount) {
+      // Get random X winners from participants
+      const winners: string[] = [];
+      // Avoid sorting a large array
+      if (participants.length >= 200) {
+        // Shuffle participants 7 times to get a random order
+        for (let i = 0; i < 7; i++) participants.sort(() => Math.random() - 0.5);
+      } else participants.sort(() => Math.random() - 0.5);
 
-        winners.push(...participants.slice(0, winnerAmount));
+      winners.push(...participants.slice(0, winnerAmount));
 
-        winnerString = winners.length > 1 ? `${winners.map(m => `<@!${m}>`).join(', ')}` : `<@!${winners[0]}>`;
-        embed.addFields([{ name: `🌟 ${t('command:giveaway/helper/embed/field/name')}`, value: winnerString }]);
-      } else
-        embed
-          .addFields([
-            {
-              name: `🌟 ${t('command:giveaway/helper/embed/field/name')}`,
-              value: t('command:giveaway/helper/embed/fieldTwo/value')
-            }
-          ])
-          .setColor('Red');
+      winnerString = winners.length > 1 ? `${winners.map(m => `<@!${m}>`).join(', ')}` : `<@!${winners[0]}>`;
+      embed.addFields([{ name: `🌟 ${t('command:giveaway/helper/embed/field/name')}`, value: winnerString }]);
     } else
       embed
         .addFields([
           {
             name: `🌟 ${t('command:giveaway/helper/embed/field/name')}`,
-            value: t('command:giveaway/helper/embed/fieldThree/value')
+            value: t('command:giveaway/helper/embed/fieldTwo/value')
           }
         ])
         .setColor('Red');
+  } else
+    embed
+      .addFields([
+        {
+          name: `🌟 ${t('command:giveaway/helper/embed/field/name')}`,
+          value: t('command:giveaway/helper/embed/fieldThree/value')
+        }
+      ])
+      .setColor('Red');
 
-    const adaptedMsg = participants.length === 1 ? t('command:giveaway/helper/endmessage/singular', winnerString) : t('command:giveaway/helper/endmessage/plural', winnerString);
-    const avoidEmpty = participants.length === 0 ? t('command:giveaway/helper/endmessage/noWinners') : `${adaptedMsg} ${t('command:giveaway/helper/endmessage/congratiulations')}`;
+  const adaptedMsg = participants.length === 1 ? t('command:giveaway/helper/endmessage/singular', winnerString) : t('command:giveaway/helper/endmessage/plural', winnerString);
+  const avoidEmpty = participants.length === 0 ? t('command:giveaway/helper/endmessage/noWinners') : `${adaptedMsg} ${t('command:giveaway/helper/endmessage/congratiulations')}`;
 
-    message.edit({ embeds: [embed], components: [row] });
-    message.channel.send(`⏲️ **|** ${t('command:giveaway/helper/endmessage', title)}\n${avoidEmpty}`);
-  });
+  message.edit({ embeds: [embed], components: [row] });
+  message.channel.send(`⏲️ **|** ${t('command:giveaway/helper/endmessage', title)}\n${avoidEmpty}`);
+}
+
+export async function checkEndedGiveaways(client: DenkyClient) {
+  const giveawaysArray = await client.databases.fetchGiveaways();
+  giveawaysArray.forEach(giveaway => checkSingleEndedGiveaway(client, giveaway));
 }
 
 export async function deleteOldGiveaways(client: DenkyClient) {
