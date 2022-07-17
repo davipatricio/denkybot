@@ -105,5 +105,6 @@ export default {
   'giveaway/create/duration': 'duration',
   'giveaway/create/description': 'description',
   'giveaway/create/channel': 'channel',
-  'giveaway/end': 'end'
+  'giveaway/end': 'end',
+  'giveaway/end/id': 'id_giveaway'
 } as const;

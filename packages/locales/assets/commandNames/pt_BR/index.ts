@@ -106,5 +106,6 @@ export default {
   'giveaway/create/duration': 'duração',
   'giveaway/create/description': 'descrição',
   'giveaway/create/channel': 'canal',
-  'giveaway/end': 'encerrar'
+  'giveaway/end': 'encerrar',
+  'giveaway/end/id': 'id_sorteio'
 } as const;
