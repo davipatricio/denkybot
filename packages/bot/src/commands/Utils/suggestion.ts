@@ -1,5 +1,6 @@
 import { Command, CommandLocale, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
+import type { Suggestion } from '@prisma-client';
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -46,7 +47,6 @@ export default class PingCommand extends Command {
   }
 
   override run({ t, interaction }: CommandRunOptions) {
-    if (!interaction.guild) return;
     switch (interaction.options.getSubcommand(true)) {
       case 'send':
         this.sendSuggestion(t, interaction);
@@ -641,7 +641,7 @@ export default class PingCommand extends Command {
     return categoriesRow;
   }
 
-  #generateCategoriesArray(config: any, int: ChatInputCommandInteraction) {
+  #generateCategoriesArray(config: Suggestion, int: ChatInputCommandInteraction) {
     const categories: CategoriesStructure[] = [];
     for (const categoryId of config.categories) {
       const channel = int.guild?.channels.cache.get(categoryId) as TextChannel;

@@ -72,7 +72,6 @@ export default class SuggestionsSubCommand extends Command {
     });
 
     collector.on('collect', async int => {
-      if (!interaction.channel) return;
       let updatedConfig = (await this.client.databases.getSuggestion(interaction.guild.id)) as Suggestion;
       await int.deferUpdate();
       if (int.isSelectMenu()) {
@@ -118,7 +117,7 @@ export default class SuggestionsSubCommand extends Command {
           // Add category
           case 'add_category':
             await int.followUp({
-              content: `📥 **|** ${t('command:config/suggestions/actions/category/askToAdd', interaction.channel)}`,
+              content: `📥 **|** ${t('command:config/suggestions/actions/category/askToAdd', interaction.channel!)}`,
               ephemeral: true
             });
             message.channel
@@ -130,10 +129,10 @@ export default class SuggestionsSubCommand extends Command {
               .then(async m => {
                 const sentMsg = m.first();
                 const mentionedChannel = sentMsg?.mentions.channels.first()?.id as string;
-                updatedConfig.categories = updatedConfig.categories.filter(c => c !== mentionedChannel).slice(0, 5);
-                updatedConfig.categories.push(mentionedChannel);
+                const categories = updatedConfig.categories.filter(c => c !== mentionedChannel).slice(0, 5);
                 updatedConfig = await this.client.databases.updateSuggestion({
-                  ...updatedConfig
+                  ...updatedConfig,
+                  categories: [...categories, mentionedChannel]
                 });
                 int.followUp({
                   content: `✅ **|** ${t('command:config/suggestions/actions/category/added')}`,
@@ -151,7 +150,7 @@ export default class SuggestionsSubCommand extends Command {
           // Remove category
           case 'del_category':
             await int.followUp({
-              content: `📥 **|** ${t('command:config/suggestions/actions/category/askToRemove', interaction.channel)}`,
+              content: `📥 **|** ${t('command:config/suggestions/actions/category/askToRemove', interaction.channel!)}`,
               ephemeral: true
             });
             message.channel

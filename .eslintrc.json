@@ -70,12 +70,10 @@
                 "props": false
             }
         ],
-        "no-bitwise": "off",
         "no-restricted-syntax": "off",
         "no-restricted-globals": "off",
         "no-continue": "off",
         "no-console": "off",
-        "no-use-before-define": "off",
         "no-plusplus": "off",
         "no-unused-expressions": [
             "error",

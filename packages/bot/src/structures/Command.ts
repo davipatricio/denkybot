@@ -1,6 +1,10 @@
+import type { AutocompleteInteraction, Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
 import type { CommandCategoriesKeys, CommandNamesKeys, translateTuple } from '#lib/managers/LanguageManager';
 import type { DenkyClient } from '#types/Client';
-import type { Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
+
+export type CommandLocale = typeof translateTuple;
+export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
+export type AutocompleteRunOptions = { t: CommandLocale; interaction: AutocompleteInteraction };
 
 class Command {
   /** The client that instanced this command */
@@ -47,9 +51,10 @@ class Command {
   run({ t, interaction }: CommandRunOptions): Awaitable<any> {
     return { t, interaction };
   }
-}
 
-export type CommandLocale = typeof translateTuple;
-export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
+  runAutocomplete({ t, interaction }: AutocompleteRunOptions): Awaitable<any> {
+    return { t, interaction };
+  }
+}
 
 export { Command };

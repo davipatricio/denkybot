@@ -15,8 +15,7 @@ export default class ServerIconSubCommand extends Command {
   }
 
   override run({ t, interaction }: CommandRunOptions) {
-    if (!interaction.guild) return;
-    const guildIcon = interaction.guild.iconURL({
+    const guildIcon = interaction.guild!.iconURL({
       size: 2048,
       extension: 'png'
     });
@@ -28,10 +27,8 @@ export default class ServerIconSubCommand extends Command {
       return;
     }
 
-    const embed = new EmbedBuilder().setColor('Blurple').setTitle(t('command:server/icon/title', interaction.guild.name)).setImage(guildIcon);
-
+    const embed = new EmbedBuilder().setColor('Blurple').setTitle(t('command:server/icon/title', interaction.guild!.name)).setImage(guildIcon);
     const button = new ButtonBuilder().setURL(guildIcon).setStyle(ButtonStyle.Link).setLabel(t('command:server/icon/browser'));
-
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents([button]);
 
     interaction.editReply({ embeds: [embed], components: [row] });
