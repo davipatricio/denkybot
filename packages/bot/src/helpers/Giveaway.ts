@@ -127,7 +127,7 @@ export async function checkSingleEndedGiveaway(client: DenkyClient, giveaway: Gi
       .setColor('Red');
 
   const adaptedMsg = participants.length === 1 ? t('command:giveaway/helper/endmessage/singular', winnerString) : t('command:giveaway/helper/endmessage/plural', winnerString);
-  const avoidEmpty = participants.length === 0 ? t('command:giveaway/helper/endmessage/noWinners') : `${adaptedMsg} ${t('command:giveaway/helper/endmessage/congratiulations')}`;
+  const avoidEmpty = participants.length === 0 ? t('command:giveaway/helper/endmessage/noWinners') : `${adaptedMsg} ${t('command:giveaway/helper/endmessage/congratulations')}`;
 
   message.edit({ embeds: [embed], components: [row] });
   message.channel.send(`⏲️ **|** ${t('command:giveaway/helper/endmessage', title)}\n${avoidEmpty}`);
@@ -135,7 +135,7 @@ export async function checkSingleEndedGiveaway(client: DenkyClient, giveaway: Gi
 
 export async function checkEndedGiveaways(client: DenkyClient) {
   const giveawaysArray = await client.databases.fetchGiveaways();
-  giveawaysArray.forEach(giveaway => checkSingleEndedGiveaway(client, giveaway));
+  for (const giveaway of giveawaysArray) checkSingleEndedGiveaway(client, giveaway);
 }
 
 export async function deleteOldGiveaways(client: DenkyClient) {

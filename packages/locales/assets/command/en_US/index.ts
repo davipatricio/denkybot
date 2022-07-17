@@ -262,6 +262,6 @@ export default {
   'giveaway/helper/endmessage': (title: string) => `The giveaway \`${title}\` has ended!`,
   'giveaway/helper/endmessage/singular': (winner: string) => `The winner is **${winner}**!`,
   'giveaway/helper/endmessage/plural': (winners: string) => `The winners are **${winners}**!`,
-  'giveaway/helper/endmessage/congratiulations': 'Congratiulations! 🎉',
+  'giveaway/helper/endmessage/congratulations': 'Congratulations! 🎉',
   'giveaway/helper/endmessage/noWinners': 'There were no winners 😢.'
 } as const;

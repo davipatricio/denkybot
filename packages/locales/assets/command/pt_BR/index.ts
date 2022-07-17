@@ -266,6 +266,6 @@ export default {
   'giveaway/helper/endmessage': (title: string) => `O sorteio \`${title}\` acabou!`,
   'giveaway/helper/endmessage/singular': (winner: string) => `O ganhador é **${winner}**!`,
   'giveaway/helper/endmessage/plural': (winners: string) => `Os ganhadores são **${winners}**!`,
-  'giveaway/helper/endmessage/congratiulations': 'Parabéns! 🎉',
+  'giveaway/helper/endmessage/congratulations': 'Parabéns! 🎉',
   'giveaway/helper/endmessage/noWinners': 'Não houve ganhadores 😢.'
 } as const;
