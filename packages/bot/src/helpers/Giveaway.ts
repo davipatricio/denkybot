@@ -60,9 +60,7 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
       }
 
       const newWinner = giveawayData.participants.sort(() => Math.random() - 0.5)[0];
-      interaction.followUp({
-        content: `🎉 ${interaction.user} **|** O novo ganhador escolhido foi <@!${newWinner}>!`
-      });
+      interaction.followUp(`🎉 ${interaction.user} **|** ${t('command:giveaway/helper/reroll')} <@!${newWinner}>!`);
 
       // Reset the select menu choice
       interaction.message.edit({ embeds: [interaction.message.embeds[0]], components: [interaction.message.components[0]] });
