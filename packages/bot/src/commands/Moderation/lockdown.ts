@@ -17,10 +17,10 @@ export default class LockdownCommand extends Command {
   }
 
   override run({ t, interaction }: CommandRunOptions) {
-    if (interaction.guild!.memberCount < 30) {
-      interaction.editReply(`❌ ${interaction.user} **|** O servidor possui menos de 30 membros, não é possível bloquear todos os canais.`);
-      return;
-    }
+    // if (interaction.guild!.memberCount < 30) {
+    //   interaction.editReply(`❌ ${interaction.user} **|** O servidor possui menos de 30 membros, não é possível bloquear todos os canais.`);
+    //   return;
+    // }
 
     switch (interaction.options.getSubcommand(true)) {
       case 'enable':
