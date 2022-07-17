@@ -47,7 +47,6 @@ export default class PingCommand extends Command {
   }
 
   override run({ t, interaction }: CommandRunOptions) {
-    if (!interaction.guild) return;
     switch (interaction.options.getSubcommand(true)) {
       case 'send':
         this.sendSuggestion(t, interaction);

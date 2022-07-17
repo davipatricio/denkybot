@@ -16,7 +16,7 @@ export default class KickCommand extends Command {
   }
 
   override run({ t, interaction }: CommandRunOptions) {
-    if (!interaction.inCachedGuild() || !interaction.guild.members.me) return;
+    if (!interaction.inCachedGuild()) return;
 
     const member = interaction.options.getMember('user');
     const reason = interaction.options.getString('reason') ?? t('command:kick/no-reason');
@@ -26,7 +26,7 @@ export default class KickCommand extends Command {
       return;
     }
 
-    if (member.id === this.client.user?.id) {
+    if (member.id === this.client.user!.id) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:kick/error/kick-bot')}`);
       return;
     }
@@ -36,7 +36,7 @@ export default class KickCommand extends Command {
     }
 
     if (member.roles) {
-      if (!member.kickable || member.roles.highest.position >= interaction.guild.members.me.roles.highest.position) {
+      if (!member.kickable || member.roles.highest.position >= interaction.guild.members.me!.roles.highest.position) {
         interaction.editReply(`❌ ${interaction.user} **|** ${t('command:kick/error/not-kickable')}`);
         return;
       }

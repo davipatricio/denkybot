@@ -72,7 +72,6 @@ export default class SuggestionsSubCommand extends Command {
     });
 
     collector.on('collect', async int => {
-      if (!interaction.channel) return;
       let updatedConfig = (await this.client.databases.getSuggestion(interaction.guild.id)) as Suggestion;
       await int.deferUpdate();
       if (int.isSelectMenu()) {
@@ -118,7 +117,7 @@ export default class SuggestionsSubCommand extends Command {
           // Add category
           case 'add_category':
             await int.followUp({
-              content: `📥 **|** ${t('command:config/suggestions/actions/category/askToAdd', interaction.channel)}`,
+              content: `📥 **|** ${t('command:config/suggestions/actions/category/askToAdd', interaction.channel!)}`,
               ephemeral: true
             });
             message.channel
@@ -151,7 +150,7 @@ export default class SuggestionsSubCommand extends Command {
           // Remove category
           case 'del_category':
             await int.followUp({
-              content: `📥 **|** ${t('command:config/suggestions/actions/category/askToRemove', interaction.channel)}`,
+              content: `📥 **|** ${t('command:config/suggestions/actions/category/askToRemove', interaction.channel!)}`,
               ephemeral: true
             });
             message.channel
