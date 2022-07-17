@@ -240,9 +240,10 @@ export default {
   // Ban info
   'ban/info/error/userNotFound': 'User not found.',
   'ban/info/error/userNotBanned': 'User is not banned.',
-  'ban/noReason': 'No reason.',
-  'ban/embed/title': (user: User) => `Ban information from ${user.username}`,
-  'ban/embed/description': (reason: string) => `📖 Ban reason: **${reason}**`,
-  'ban/embed/field/name': '💁 User information',
-  'ban/embed/field/value': (user: User) => `🔢 User Id: **${user.id}**\n🏷 Discord Tag: **${user.tag}**\n🤖 Bot: **${user.bot ? 'Yes' : 'No'}**`
+  'ban/info/noReason': 'No reason.',
+  'ban/info/embed/title': (user: User) => `Ban information from ${user.username}`,
+  'ban/info/embed/description': (reason: string) => `📖 Ban reason: **${reason}**`,
+  'ban/info/embed/field/name': '💁 User information',
+  'ban/info/autocomplete/noBans': 'No bans found.',
+  'ban/info/embed/field/value': (user: User) => `🔢 User Id: **${user.id}**\n🏷 Discord Tag: **${user.tag}**\n🤖 Bot: **${user.bot ? 'Yes' : 'No'}**`
 } as const;

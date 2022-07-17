@@ -102,8 +102,9 @@ export default class BanData extends CommandDataStructure {
               descriptionLocalizations: {
                 'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/info/user')
               },
-              type: ApplicationCommandOptionType.User,
-              required: true
+              type: ApplicationCommandOptionType.String,
+              required: true,
+              autocomplete: true
             }
           ]
         },

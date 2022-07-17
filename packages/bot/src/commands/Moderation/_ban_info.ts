@@ -1,5 +1,5 @@
 import { EmbedBuilder, PermissionFlagsBits } from 'discord.js';
-import { Command, CommandRunOptions } from '#structures/Command';
+import { AutocompleteRunOptions, Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
 
 export default class BanInfoSubCommand extends Command {
@@ -17,13 +17,9 @@ export default class BanInfoSubCommand extends Command {
   override async run({ t, interaction }: CommandRunOptions) {
     if (!interaction.inCachedGuild()) return;
 
-    const user = interaction.options.getUser('user');
-    if (!user) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/info/error/userNotFound')}`);
-      return;
-    }
+    const userId = interaction.options.getString('user', true);
 
-    const ban = await interaction.guild.bans.fetch(user.id);
+    const ban = await interaction.guild.bans.fetch(userId);
     if (!ban) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/info/error/userNotBanned')}`);
       return;
@@ -31,17 +27,33 @@ export default class BanInfoSubCommand extends Command {
 
     const embed = new EmbedBuilder()
       .setColor('Purple')
-      .setThumbnail(user.displayAvatarURL({ extension: 'png', size: 1024 }))
-      .setTitle(t('command:ban/embed/title', user))
-      .setDescription(t('command:ban/embed/description', ban.reason ?? t('command:ban/noReason')))
+      .setThumbnail(ban.user.displayAvatarURL({ extension: 'png', size: 1024 }))
+      .setTitle(t('command:ban/info/embed/title', ban.user))
+      .setDescription(t('command:ban/info/embed/description', ban.reason ?? t('command:ban/info/noReason')))
       .addFields([
         {
-          name: t('command:ban/embed/field/name'),
-          value: t('command:ban/embed/field/value', user)
+          name: t('command:ban/info/embed/field/name'),
+          value: t('command:ban/info/embed/field/value', ban.user)
         }
       ])
       .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() });
 
     interaction.editReply({ embeds: [embed] });
+  }
+
+  override async runAutocomplete({ t, interaction }: AutocompleteRunOptions) {
+    if (!interaction.memberPermissions!.has(PermissionFlagsBits.BanMembers) && !interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.BanMembers)) {
+      await interaction.respond([]);
+      return;
+    }
+
+    const bans = await interaction.guild!.bans.fetch({ cache: true, limit: 25 });
+
+    if (!bans || bans.size === 0) {
+      interaction.respond([{ value: 'none', name: t('command:ban/info/autocomplete/noBans') }]);
+      return;
+    }
+
+    interaction.respond(bans.map(ban => ({ value: ban.user.id, name: `${ban.user.tag} | ${ban.user.id}` })));
   }
 }

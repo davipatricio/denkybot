@@ -15,7 +15,7 @@ export default class BanUserSubCommand extends Command {
   }
 
   override run({ t, interaction }: CommandRunOptions) {
-    if (!interaction.inCachedGuild() || !interaction.guild.members.me) return;
+    if (!interaction.inCachedGuild()) return;
 
     const deleteMessageDays = Number(interaction.options.getString('delete_messages') ?? 0);
     const reason = interaction.options.getString('reason') ?? t('command:ban/user/no-reason');
@@ -23,7 +23,7 @@ export default class BanUserSubCommand extends Command {
     const member = interaction.options.getMember('user');
     const user = member?.user ?? interaction.options.getUser('user', true);
 
-    if (user.id === this.client.user?.id) {
+    if (user.id === this.client.user!.id) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/user/error/ban-bot')}`);
       return;
     }
@@ -33,7 +33,7 @@ export default class BanUserSubCommand extends Command {
     }
 
     if (member?.roles) {
-      if (!member.bannable || member.roles.highest.position >= interaction.guild.members.me.roles.highest.position) {
+      if (!member.bannable || member.roles.highest.position >= interaction.guild.members.me!.roles.highest.position) {
         interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/user/error/not-bannable')}`);
         return;
       }

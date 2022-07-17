@@ -1,4 +1,4 @@
-import { Command, CommandRunOptions } from '#structures/Command';
+import { AutocompleteRunOptions, Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
 import { PermissionFlagsBits } from 'discord.js';
 
@@ -27,6 +27,14 @@ export default class BanCommand extends Command {
 
       case 'info':
         this.client.commands.get('_ban_info')?.run({ t, interaction });
+        break;
+    }
+  }
+
+  override runAutocomplete({ t, interaction }: AutocompleteRunOptions) {
+    switch (interaction.options.getSubcommand()) {
+      case 'info':
+        this.client.commands.get('_ban_info')?.runAutocomplete({ t, interaction });
         break;
     }
   }
