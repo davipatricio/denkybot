@@ -18,14 +18,14 @@ export default class MuteCommand extends Command {
   }
 
   override run({ t, interaction }: CommandRunOptions) {
-    if (!interaction.inCachedGuild() || !interaction.guild.members.me) return;
+    if (!interaction.inCachedGuild()) return;
 
     const member = interaction.options.getMember('user');
     const user = member?.user ?? interaction.options.getUser('user', true);
     const date = ms(interaction.options.getString('time', true));
     const reason = interaction.options.getString('reason') ?? t('command:mute/no-reason');
 
-    if (user.id === this.client.user?.id) {
+    if (user.id === this.client.user!.id) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:mute/error/mute-bot')}`);
       return;
     }
@@ -39,7 +39,7 @@ export default class MuteCommand extends Command {
     }
 
     if (member.roles) {
-      if (!member.moderatable || member.roles.highest.position >= interaction.guild.members.me.roles.highest.position) {
+      if (!member.moderatable || member.roles.highest.position >= interaction.guild.members.me!.roles.highest.position) {
         interaction.editReply(`❌ ${interaction.user} **|** ${t('command:mute/error/not-moderatable')}`);
         return;
       }

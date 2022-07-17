@@ -1,6 +1,5 @@
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import type { GuildMember } from 'discord.js';
 
 export default class PingCommand extends Command {
   constructor(client: DenkyClient) {
@@ -23,19 +22,17 @@ export default class PingCommand extends Command {
           break;
         }
 
-        const originalNick = interaction.inGuild() ? (interaction.member as GuildMember).nickname ?? interaction.user.username : undefined;
+        const originalNick = interaction.inCachedGuild() ? interaction.member.nickname ?? interaction.user.username : undefined;
 
         await this.client.databases.createAfk({
           userId: interaction.user.id,
-          guildId: interaction.guild?.id,
+          guildId: interaction.guild!.id,
           reason: interaction.options.getString('reason') ?? undefined,
           originalNick,
           startTime: Math.round(Date.now() / 1000)
         });
 
-        if (interaction.inGuild()) {
-          (interaction.member as GuildMember).setNickname(`[AFK] ${originalNick?.slice(0, 19)}`, 'AFK').catch(() => {});
-        }
+        if (interaction.inCachedGuild()) interaction.member.setNickname(`[AFK] ${originalNick?.slice(0, 19)}`, 'AFK').catch(() => {});
 
         interaction.editReply(t('command:afk/enabled', interaction.user));
         break;
@@ -50,9 +47,7 @@ export default class PingCommand extends Command {
 
         await this.client.databases.deleteAfk(interaction.user.id);
 
-        if (interaction.inGuild()) {
-          (interaction.member as GuildMember).setNickname(data.originalNick).catch(() => {});
-        }
+        if (interaction.inCachedGuild()) interaction.member.setNickname(data.originalNick).catch(() => {});
 
         interaction.editReply(t('command:afk/manuallyRemoved', interaction.user));
         break;

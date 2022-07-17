@@ -67,7 +67,7 @@ export class Poster {
       return false;
     }
 
-    const req = await request(`https://discord.bots.gg/api/v1/bots/${this.client.user?.id}/stats`, {
+    const req = await request(`https://discord.bots.gg/api/v1/bots/${this.client.user!.id}/stats`, {
       method: 'POST',
       headers: {
         Authorization,
@@ -97,7 +97,7 @@ export class Poster {
       return false;
     }
 
-    const req = await request(`https://discords.com/bots/api/bot/${this.client.user?.id}`, {
+    const req = await request(`https://discords.com/bots/api/bot/${this.client.user!.id}`, {
       method: 'POST',
       headers: {
         Authorization,
@@ -126,7 +126,7 @@ export class Poster {
       return false;
     }
 
-    const req = await request(`https://disforge.com/api/botstats/${this.client.user?.id}`, {
+    const req = await request(`https://disforge.com/api/botstats/${this.client.user!.id}`, {
       method: 'POST',
       headers: {
         Authorization,
@@ -152,7 +152,7 @@ export class Poster {
       return false;
     }
 
-    const req = await request(`https://discordbotlist.com/api/v1/bots/${this.client.user?.id}/stats`, {
+    const req = await request(`https://discordbotlist.com/api/v1/bots/${this.client.user!.id}/stats`, {
       method: 'POST',
       headers: {
         Authorization,
@@ -178,7 +178,7 @@ export class Poster {
       return false;
     }
 
-    const req = await request(`https://api.bladelist.gg/bots/${this.client.user?.id}`, {
+    const req = await request(`https://api.bladelist.gg/bots/${this.client.user!.id}`, {
       method: 'POST',
       headers: {
         Authorization: `Token ${Authorization}`,
@@ -208,7 +208,7 @@ export class Poster {
       return false;
     }
 
-    const req = await request(`https://api.fateslist.xyz/bots/${this.client.user?.id}/stats`, {
+    const req = await request(`https://api.fateslist.xyz/bots/${this.client.user!.id}/stats`, {
       method: 'POST',
       headers: {
         Authorization,
