@@ -88,6 +88,16 @@ export class DatabaseManager extends PrismaClient {
       take: 100
     });
   }
+
+  fetchGiveaway(messageId: string) {
+    return this.giveaway
+      .findFirst({
+        where: {
+          messageId
+        }
+      })
+      .catch(() => undefined);
+  }
   // #endregion
 
   // #region Suggestion
