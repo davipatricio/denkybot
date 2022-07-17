@@ -106,5 +106,10 @@ export default {
   'giveaway/create/description': 'description',
   'giveaway/create/channel': 'channel',
   'giveaway/end': 'end',
-  'giveaway/end/id': 'id_giveaway'
+  'giveaway/end/id': 'id_giveaway',
+
+  // Lockdown
+  lockdown: 'lockdown',
+  'lockdown/enable': 'enable',
+  'lockdown/disable': 'disable'
 } as const;
