@@ -12,16 +12,16 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
     return client.languages.manager.get(guildLocale, path, ...args);
   };
 
-  if (!interaction.isButton()) return;
+  if (!interaction.isSelectMenu() && !interaction.isButton()) return;
   switch (interaction.customId) {
     case 'giveaway_participate': {
-      await interaction.deferReply({ ephemeral: true });
+      await interaction.deferUpdate();
 
       const giveawayData = await client.databases.getGiveaway(interaction.message.id);
       if (!giveawayData || giveawayData.ended) return;
 
       if (giveawayData.participants.includes(interaction.user.id)) {
-        interaction.editReply({ content: `❌ **|** ${t('command:giveaway/helper/error/alreadyParticipating')}` });
+        interaction.followUp({ content: `❌ **|** ${t('command:giveaway/helper/error/alreadyParticipating')}`, ephemeral: true });
         return;
       }
 
@@ -29,17 +29,17 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
         ...giveawayData,
         participants: [...giveawayData.participants, interaction.user.id]
       });
-      interaction.editReply({ content: `🎉 **|** ${t('command:giveaway/helper/participate')}` });
+      interaction.followUp({ content: `🎉 **|** ${t('command:giveaway/helper/participate')}`, ephemeral: true });
       break;
     }
     case 'giveaway_desist': {
-      await interaction.deferReply({ ephemeral: true });
+      await interaction.deferUpdate();
 
       const giveawayData = await client.databases.getGiveaway(interaction.message.id);
       if (!giveawayData || giveawayData.ended) return;
 
       if (!giveawayData.participants.includes(interaction.user.id)) {
-        interaction.editReply({ content: `❌ **|** ${t('command:giveaway/helper/error/notParticipating')}` });
+        interaction.followUp({ content: `❌ **|** ${t('command:giveaway/helper/error/notParticipating')}`, ephemeral: true });
         return;
       }
 
@@ -47,8 +47,25 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
         ...giveawayData,
         participants: giveawayData.participants.filter(id => id !== interaction.user.id)
       });
-      interaction.editReply({ content: `👋 **|** ${t('command:giveaway/helper/exitGiveaway')}` });
+      interaction.followUp({ content: `👋 **|** ${t('command:giveaway/helper/exitGiveaway')}`, ephemeral: true });
       break;
+    }
+    case 'giveaway_dropdown': {
+      await interaction.deferUpdate();
+
+      const giveawayData = await client.databases.getGiveaway(interaction.message.id);
+      if (!giveawayData) {
+        interaction.followUp({ content: `❌ **|** ${t('command:giveaway/end/not-found')}`, ephemeral: true });
+        return;
+      }
+
+      const newWinner = giveawayData.participants.sort(() => Math.random() - 0.5)[0];
+      interaction.followUp({
+        content: `🎉 ${interaction.user} **|** O novo ganhador escolhido foi <@!${newWinner}>!`
+      });
+
+      // Reset the select menu choice
+      interaction.message.edit({ embeds: [interaction.message.embeds[0]], components: [interaction.message.components[0]] });
     }
   }
 }
@@ -84,12 +101,7 @@ export async function checkSingleEndedGiveaway(client: DenkyClient, giveaway: Gi
     .setFooter({ text: `⏰ ${t('command:giveaway/helper/embed/footer')}` })
     .setColor('Green');
 
-  const row = new ActionRowBuilder<SelectMenuBuilder>().setComponents([
-    new SelectMenuBuilder()
-      .setCustomId('dropdown')
-      .setPlaceholder(t('command:giveaway/helper/button/placeholder'))
-      .addOptions([new SelectMenuOptionBuilder().setEmoji('🔁').setLabel(t('command:giveaway/helper/button/label')).setValue('reroll').setDescription(t('command:giveaway/helper/button/description'))])
-  ]);
+  const row = new ActionRowBuilder<SelectMenuBuilder>();
 
   let winnerString = '';
 
@@ -116,7 +128,15 @@ export async function checkSingleEndedGiveaway(client: DenkyClient, giveaway: Gi
           }
         ])
         .setColor('Red');
-  } else
+    row.setComponents([
+      new SelectMenuBuilder()
+        .setCustomId('giveaway_dropdown')
+        .setPlaceholder(t('command:giveaway/helper/button/placeholder'))
+        .addOptions([
+          new SelectMenuOptionBuilder().setEmoji('🔁').setLabel(t('command:giveaway/helper/button/label')).setValue('reroll').setDescription(t('command:giveaway/helper/button/description'))
+        ])
+    ]);
+  } else {
     embed
       .addFields([
         {
@@ -125,6 +145,16 @@ export async function checkSingleEndedGiveaway(client: DenkyClient, giveaway: Gi
         }
       ])
       .setColor('Red');
+    row.setComponents([
+      new SelectMenuBuilder()
+        .setCustomId('giveaway_dropdown')
+        .setPlaceholder(t('command:giveaway/helper/button/placeholder'))
+        .setDisabled(true)
+        .addOptions([
+          new SelectMenuOptionBuilder().setEmoji('🔁').setLabel(t('command:giveaway/helper/button/label')).setValue('reroll').setDescription(t('command:giveaway/helper/button/description'))
+        ])
+    ]);
+  }
 
   const adaptedMsg = participants.length === 1 ? t('command:giveaway/helper/endmessage/singular', winnerString) : t('command:giveaway/helper/endmessage/plural', winnerString);
   const avoidEmpty = participants.length === 0 ? t('command:giveaway/helper/endmessage/noWinners') : `${adaptedMsg} ${t('command:giveaway/helper/endmessage/congratulations')}`;

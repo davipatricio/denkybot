@@ -111,7 +111,7 @@ export default class GiveawayData extends CommandDataStructure {
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: 'id',
+              name: 'idgiveaway',
               description: client.languages.manager.get('en_US', 'commandDescriptions:giveaway/end/id'),
               descriptionLocalizations: {
                 'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:giveaway/end/id')
