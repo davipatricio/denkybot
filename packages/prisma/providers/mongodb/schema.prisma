@@ -24,3 +24,15 @@ model Afk {
   originalNick String?
   startTime Int
 }
+
+model Giveaway {
+  messageId String @id @default("") @map("_id") @db.ObjectId
+  channelId String @default("")
+  authorId String @default("")
+  title String @default("")
+  description String @default("")
+  endTimestamp BigInt @default(0)
+  winnerAmount Int @default(0)
+  participants String[] @default([])
+  ended Boolean @default(false)
+}

@@ -1254,6 +1254,13 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hh-mm-ss@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/hh-mm-ss/-/hh-mm-ss-1.2.0.tgz#6d0f0b8280824a634cb1d1f20e0bc7bc8b689948"
+  integrity sha512-f4I9Hz1dLpX/3mrEs7yq30+FiuO3tt5NWAqAGeBTaoeoBfB8vhcQ3BphuDc5DjZb/K809agqrAaFlP0jhEU/8w==
+  dependencies:
+    zero-fill "^2.2.3"
+
 https-proxy-agent@^5.0.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-5.0.1.tgz#c59ef224a04fe8b754f3db0063a25ea30d0005d6"
@@ -2418,6 +2425,11 @@ yallist@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
+
+zero-fill@^2.2.3:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/zero-fill/-/zero-fill-2.2.4.tgz#b041320973dbcb03cd90193270ac8d4a3da05fc1"
+  integrity sha512-/N5GEDauLHz2uGnuJXWO1Wfib4EC+q4yp9C1jojM7RubwEKADqIqMcYpETMm1lRop403fi3v1qTOdgDE8DIOdw==
 
 zlib-sync@0.1.7:
   version "0.1.7"

@@ -98,5 +98,16 @@ export default {
   'animal/foxy': 'See a random image of a foxy',
   'animal/bunny': 'See a random image of a bunny',
   'animal/koala': 'See a random image of a koala',
-  'animal/duck': 'See a random image of a duck'
+  'animal/duck': 'See a random image of a duck',
+
+  // Giveaway
+  giveaway: 'Creae, delete, or edit a giveaway',
+  'giveaway/create': 'Create a giveaway in this channel',
+  'giveaway/create/title': 'The title of the giveaway',
+  'giveaway/create/winners': 'Number of people to be drawn',
+  'giveaway/create/duration': 'Duration of the giveaway (1d, 5d 2h, 14/07 20:00, 05:00 etc)',
+  'giveaway/create/description': 'Detailed description of the giveaway',
+  'giveaway/create/channel': 'Channel where the giveaway will be created',
+  'giveaway/end': 'Ends an ongoing giveaway and choose a winner',
+  'giveaway/end/id': 'ID of the giveaway to end'
 } as const;

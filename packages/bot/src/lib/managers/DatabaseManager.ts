@@ -1,11 +1,12 @@
-import type { DenkyClient } from '#types/Client';
-import { Afk, PrismaClient, Suggestion } from '@prisma-client';
+import { Afk, Giveaway, PrismaClient, Suggestion } from '@prisma-client';
 import Redis from 'ioredis';
 import type Prisma from 'prisma';
 import { createPrismaRedisCache } from 'prisma-redis-middleware';
+import type { DenkyClient } from '../../types/Client';
 
 export type SuggestionConfig = Partial<Suggestion> & Pick<Suggestion, 'guildId'>;
 export type AFKConfig = Partial<Afk> & Pick<Afk, 'userId' | 'startTime'>;
+export type GiveawayConfig = Giveaway;
 
 export class DatabaseManager extends PrismaClient {
   constructor(client: DenkyClient) {
@@ -26,13 +27,13 @@ export class DatabaseManager extends PrismaClient {
               type: 'redis' as const,
               options: {
                 client: new Redis(process.env.REDIS_CACHE_URL),
-                invalidation: { referencesTTL: 120 }
+                invalidation: { referencesTTL: client.config.cache.lifetime }
               }
             }
           : { type: 'memory' as const, options: { invalidation: true } };
 
       const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
-        models: [{ model: 'Suggestion' }, { model: 'Afk' }],
+        models: [{ model: 'Suggestion' }, { model: 'Afk', cacheTime: 2500 }, { model: 'Giveaway' }],
         storage,
         cacheTime: client.config.cache.lifetime,
         onError: error => {
@@ -44,6 +45,60 @@ export class DatabaseManager extends PrismaClient {
     }
     this.$connect();
   }
+
+  // #region Giveaway
+  createGiveaway(data: GiveawayConfig) {
+    return this.giveaway.create({ data });
+  }
+
+  getGiveaway(messageId: string) {
+    return this.giveaway
+      .findFirst({
+        where: {
+          messageId
+        }
+      })
+      .catch(() => undefined);
+  }
+
+  deleteGiveaway(messageId: string) {
+    return this.giveaway
+      .delete({
+        where: {
+          messageId
+        }
+      })
+      .catch(() => {});
+  }
+
+  updateGiveaway(data: GiveawayConfig) {
+    return this.giveaway.update({
+      where: {
+        messageId: data.messageId
+      },
+      data
+    });
+  }
+
+  fetchGiveaways() {
+    return this.giveaway.findMany({
+      where: {
+        ended: false
+      },
+      take: 100
+    });
+  }
+
+  fetchGiveaway(messageId: string) {
+    return this.giveaway
+      .findFirst({
+        where: {
+          messageId
+        }
+      })
+      .catch(() => undefined);
+  }
+  // #endregion
 
   // #region Suggestion
   createSuggestion(data: SuggestionConfig) {

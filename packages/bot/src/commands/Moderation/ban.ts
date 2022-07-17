@@ -2,7 +2,7 @@ import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
 import { PermissionFlagsBits } from 'discord.js';
 
-export default class PingCommand extends Command {
+export default class BanCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
     this.rawName = 'BAN';
