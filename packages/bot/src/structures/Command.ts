@@ -1,10 +1,27 @@
-import type { AutocompleteInteraction, Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
 import type { CommandCategoriesKeys, CommandNamesKeys, translateTuple } from '#lib/managers/LanguageManager';
 import type { DenkyClient } from '#types/Client';
+import type { AutocompleteInteraction, Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
 
 export type CommandLocale = typeof translateTuple;
 export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
 export type AutocompleteRunOptions = { t: CommandLocale; interaction: AutocompleteInteraction };
+
+type baseConfig = {
+  /** Whether this command should be hidden from the help command */
+  showInHelp: boolean;
+};
+type ephemeralConfig = baseConfig & {
+  /** Whether the bot should automatically call `interaction.deferReply()` */
+  autoDefer: true;
+  /** If `autoDefer` is true, whether this command will be an ephemeral message */
+  ephemeral: boolean;
+};
+type nonEphemeralConfig = baseConfig & {
+  /** Whether the bot should automatically call `interaction.deferReply()` */
+  autoDefer: false;
+  /** If `autoDefer` is true, whether this command will be an ephemeral message */
+  ephemeral: false;
+};
 
 class Command {
   /** The client that instanced this command */
@@ -21,14 +38,7 @@ class Command {
   };
 
   /** Internal command configuration */
-  config: {
-    /** If `autoDefer` is true, whether this command will be an ephemeral message */
-    ephemeral: boolean;
-    /** Whether the bot should automatically call `interaction.deferReply()` */
-    autoDefer: boolean;
-    /** Whether this command should be hidden from the help command */
-    showInHelp: boolean;
-  };
+  config: ephemeralConfig | nonEphemeralConfig;
 
   /** Command options to be posted to Discord */
   options: ChatInputApplicationCommandData;
