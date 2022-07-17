@@ -22,7 +22,7 @@ model Afk {
   guildId String?
   reason String?
   originalNick String?
-  startTime Int
+  startTime BigInt @default(0)
 }
 
 model Giveaway {
