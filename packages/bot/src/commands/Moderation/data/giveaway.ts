@@ -100,21 +100,21 @@ export default class GiveawayData extends CommandDataStructure {
           ]
         },
         {
-          name: 'end',
+          name: client.languages.manager.get('en_US', 'commandNames:giveaway/end'),
           nameLocalizations: {
-            'pt-BR': 'encerrar'
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:giveaway/end')
           },
-          description: 'Stop a giveaway and choose a winner',
+          description: client.languages.manager.get('en_US', 'commandDescriptions:giveaway/end'),
           descriptionLocalizations: {
-            'pt-BR': 'Encerra um sorteio e escolhe um ganhador'
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:giveaway/end')
           },
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
               name: 'id',
-              description: 'The giveaway ID',
+              description: client.languages.manager.get('en_US', 'commandDescriptions:giveaway/end/id'),
               descriptionLocalizations: {
-                'pt-BR': 'ID do sorteio'
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:giveaway/end/id')
               },
               required: true,
               type: ApplicationCommandOptionType.String,
