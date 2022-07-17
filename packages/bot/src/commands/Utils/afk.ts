@@ -29,7 +29,7 @@ export default class PingCommand extends Command {
           guildId: interaction.guild!.id,
           reason: interaction.options.getString('reason') ?? undefined,
           originalNick,
-          startTime: Math.round(Date.now() / 1000)
+          startTime: BigInt(Math.round(Date.now() / 1000))
         });
 
         if (interaction.inCachedGuild()) interaction.member.setNickname(`[AFK] ${originalNick?.slice(0, 19)}`, 'AFK').catch(() => {});
