@@ -1,4 +1,6 @@
+import { checkSingleEndedGiveaway } from '@bot/src/helpers/Giveaway';
 import { parseTime } from '@bot/src/helpers/Timestamp';
+import type { Giveaway } from '@prisma-client';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, TextBasedChannel } from 'discord.js';
 import ms from 'ms';
 import { Command, CommandRunOptions } from '../../structures/Command';
@@ -21,6 +23,9 @@ export default class GiveawayCommand extends Command {
     switch (interaction.options.getSubcommand(true)) {
       case 'create':
         this.#createGiveaway({ t, interaction });
+        break;
+      case 'end':
+        this.#endGiveaway({ t, interaction });
         break;
     }
   }
@@ -76,5 +81,26 @@ export default class GiveawayCommand extends Command {
       endTimestamp: BigInt(endTimestamp),
       ended: false
     });
+  }
+
+  async #endGiveaway({ t, interaction }: CommandRunOptions) {
+    const messageId = interaction.options.getString('id', true);
+    const giveaway = await this.client.databases.fetchGiveaway(messageId);
+    if (!giveaway) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/end/not-found')}`);
+      return;
+    }
+
+    if (giveaway.ended) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/end/already-ended')}`);
+      return;
+    }
+
+    interaction.editReply(`✅ ${interaction.user} **|** ${t('command:giveaway/end/ended')}`);
+    const fakeObject: Giveaway = {
+      ...giveaway,
+      endTimestamp: BigInt(Date.now())
+    };
+    checkSingleEndedGiveaway(this.client, fakeObject);
   }
 }

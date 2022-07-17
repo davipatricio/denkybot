@@ -98,6 +98,30 @@ export default class GiveawayData extends CommandDataStructure {
               channelTypes: [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildVoice, ChannelType.GuildNewsThread, ChannelType.GuildPrivateThread, ChannelType.GuildPublicThread]
             }
           ]
+        },
+        {
+          name: 'end',
+          nameLocalizations: {
+            'pt-BR': 'encerrar'
+          },
+          description: 'Stop a giveaway and choose a winner',
+          descriptionLocalizations: {
+            'pt-BR': 'Encerra um sorteio e escolhe um ganhador'
+          },
+          type: ApplicationCommandOptionType.Subcommand,
+          options: [
+            {
+              name: 'id',
+              description: 'The giveaway ID',
+              descriptionLocalizations: {
+                'pt-BR': 'ID do sorteio'
+              },
+              required: true,
+              type: ApplicationCommandOptionType.String,
+              minLength: 18,
+              maxLength: 21
+            }
+          ]
         }
       ]
     };
