@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@prisma/client": "4.0.0",
-    "discord.js": "14.0.0-dev.1657757514-fe34f48",
+    "discord.js": "14.0.1",
     "tsc-alias": "1.6.11",
     "tslib": "2.4.0"
   }

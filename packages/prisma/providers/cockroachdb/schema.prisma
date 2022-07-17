@@ -18,9 +18,21 @@ model Suggestion {
 }
 
 model Afk {
-  userId String @id @default("")
+  userId String @id @default("") @unique
   guildId String?
   reason String?
   originalNick String?
   startTime Int
+}
+
+model Giveaway {
+  messageId String @id @default("") @unique
+  channelId String @default("")
+  authorId String @default("")
+  title String @default("")
+  description String @default("")
+  endTimestamp BigInt
+  winnerAmount Int @default(0)
+  participants String[] @default([])
+  ended Boolean @default(false)
 }

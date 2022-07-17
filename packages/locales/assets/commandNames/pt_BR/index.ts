@@ -45,7 +45,7 @@ export default {
   'text/invert': 'inverter',
 
   // Config
-  config: 'config',
+  config: 'config sugestoes',
   'config/suggestions': 'sugestoes',
 
   // Suggestions
@@ -96,11 +96,22 @@ export default {
   'kick/reason': 'motivo',
 
   // Animal
-  animal: 'animal | cachorro | coala | coelho | gato | pato | raposa',
+  animal: 'animal cachorro | coala | coelho | gato | pato | raposa',
   'animal/dog': 'cachorro',
   'animal/koala': 'coala',
   'animal/bunny': 'coelho',
   'animal/cat': 'gato',
   'animal/duck': 'pato',
-  'animal/foxy': 'raposa'
+  'animal/foxy': 'raposa',
+
+  // Giveaway
+  giveaway: 'sorteio',
+  'giveaway/create': 'criar',
+  'giveaway/create/title': 'título',
+  'giveaway/create/winners': 'ganhadores',
+  'giveaway/create/duration': 'duração',
+  'giveaway/create/description': 'descrição',
+  'giveaway/create/channel': 'canal',
+  'giveaway/end': 'encerrar',
+  'giveaway/end/id': 'id_sorteio'
 } as const;
