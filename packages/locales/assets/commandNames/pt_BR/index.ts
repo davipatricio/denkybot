@@ -62,12 +62,17 @@ export default {
 
   // Ban
   ban: 'ban usuario | informação | lista',
-  'ban/user/user': 'usuario',
+  'ban/name': 'banir',
+  'ban/user': 'usuario',
   'ban/delete_messages': 'deletar_mensagens',
   'ban/delete_messages/day': 'dia',
   'ban/delete_messages/days': 'dias',
   'ban/reason': 'motivo',
+  'ban/info': 'informação',
   'ban/info/user': 'usuario',
+  'ban/remove': 'remover',
+  'ban/remove/user': 'usuario',
+  'ban/list': 'lista',
 
   // Wikipedia
   wikipedia: 'wikipedia',

@@ -77,6 +77,8 @@ export default {
   'ban/reason': 'The reason for the ban',
   'ban/info': 'Shows information about a ban',
   'ban/info/user': 'The user to get information about',
+  'ban/remove': 'Removes a user ban',
+  'ban/remove/user': 'The user to remove the ban',
   'ban/list': 'Shows a list of all bans',
 
   // Wikipedia

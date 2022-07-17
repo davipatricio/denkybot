@@ -77,6 +77,8 @@ export default {
   'ban/reason': 'O motivo do banimento',
   'ban/info': 'Veja informações sobre um usuário banido',
   'ban/info/user': 'O usuário que deseja ver as informações',
+  'ban/remove': 'Remove um banimento de um usuário',
+  'ban/remove/user': 'O usuário para remover o banimento',
   'ban/list': 'Veja a lista de todos os usuários banidos',
 
   // Wikipedia

@@ -7,7 +7,10 @@ export default class BanData extends CommandDataStructure {
     super(client);
 
     this.data = {
-      name: 'ban',
+      name: client.languages.manager.get('en_US', 'commandNames:ban/name'),
+      nameLocalizations: {
+        'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/name')
+      },
       type: ApplicationCommandType.ChatInput,
       dmPermission: false,
       defaultMemberPermissions: [PermissionFlagsBits.BanMembers],
@@ -17,7 +20,7 @@ export default class BanData extends CommandDataStructure {
       },
       options: [
         {
-          name: 'user',
+          name: client.languages.manager.get('en_US', 'commandNames:ban/user'),
           description: client.languages.manager.get('en_US', 'commandDescriptions:ban/user'),
           descriptionLocalizations: {
             'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/user')
@@ -25,9 +28,9 @@ export default class BanData extends CommandDataStructure {
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: client.languages.manager.get('en_US', 'commandNames:ban/user/user'),
+              name: client.languages.manager.get('en_US', 'commandNames:ban/user'),
               nameLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/user/user')
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/user')
               },
               type: ApplicationCommandOptionType.User,
               required: true,
@@ -86,7 +89,10 @@ export default class BanData extends CommandDataStructure {
           ]
         },
         {
-          name: 'info',
+          name: client.languages.manager.get('en_US', 'commandNames:ban/info'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/info')
+          },
           description: client.languages.manager.get('en_US', 'commandDescriptions:ban/info'),
           descriptionLocalizations: {
             'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/info')
@@ -109,7 +115,36 @@ export default class BanData extends CommandDataStructure {
           ]
         },
         {
-          name: 'list',
+          name: client.languages.manager.get('en_US', 'commandNames:ban/remove'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/remove')
+          },
+          description: client.languages.manager.get('en_US', 'commandDescriptions:ban/remove'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/remove')
+          },
+          type: ApplicationCommandOptionType.Subcommand,
+          options: [
+            {
+              name: client.languages.manager.get('en_US', 'commandNames:ban/remove/user'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/remove/user')
+              },
+              description: client.languages.manager.get('en_US', 'commandDescriptions:ban/remove/user'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/remove/user')
+              },
+              type: ApplicationCommandOptionType.String,
+              required: true,
+              autocomplete: true
+            }
+          ]
+        },
+        {
+          name: client.languages.manager.get('en_US', 'commandNames:ban/list'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/list')
+          },
           description: client.languages.manager.get('en_US', 'commandDescriptions:ban/list'),
           descriptionLocalizations: {
             'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/list')
