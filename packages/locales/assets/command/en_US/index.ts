@@ -246,7 +246,7 @@ export default {
   'ban/info/embed/description': (reason: string) => `📖 Ban reason: **${reason}**`,
   'ban/info/embed/field/name': '💁 User information',
   'ban/info/autocomplete/noBans': 'No bans found.',
-  'ban/info/embed/field/value': (user: User) => `🔢 User Id: **${user.id}**\n🏷 Discord Tag: **${user.tag}**\n🤖 Bot: **${user.bot ? 'Yes' : 'No'}**`
+  'ban/info/embed/field/value': (user: User) => `🔢 User Id: **${user.id}**\n🏷 Discord Tag: **${user.tag}**\n🤖 Bot: **${user.bot ? 'Yes' : 'No'}**`,
 
   // Giveaway
   'giveaway/create/no-description': 'Giveaway without description.',

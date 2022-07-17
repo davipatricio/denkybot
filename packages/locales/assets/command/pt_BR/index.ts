@@ -249,7 +249,7 @@ export default {
   'ban/info/embed/description': (reason: string) => `📖 Motivo do banimento: **${reason}**`,
   'ban/info/embed/field/name': '💁 Informações do usuário',
   'ban/info/autocomplete/noBans': 'Nenhum banimento encontrado.',
-  'ban/info/embed/field/value': (user: User) => `🔢 Id do usuário: **${user.id}**\n🏷 Tag no Discord: **${user.tag}**\n🤖 Bot: **${user.bot ? 'Sim' : 'Não'}**`
+  'ban/info/embed/field/value': (user: User) => `🔢 Id do usuário: **${user.id}**\n🏷 Tag no Discord: **${user.tag}**\n🤖 Bot: **${user.bot ? 'Sim' : 'Não'}**`,
 
   // Giveaway
   'giveaway/create/no-description': 'Sorteio sem descrição.',
