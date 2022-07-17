@@ -14,7 +14,7 @@ export default class LockdownData extends CommandDataStructure {
       type: ApplicationCommandType.ChatInput,
       dmPermission: false,
       defaultMemberPermissions: [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageGuild],
-      description: 'Bloqueia todos os canais que membros podem conversar ou desbloqueia esses que foram bloqueados por mim.',
+      description: 'Bloqueia todos os canais que membros podem conversar.',
       options: [
         {
           name: 'ativar',
