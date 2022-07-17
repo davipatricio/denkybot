@@ -31,8 +31,15 @@ model Giveaway {
   authorId String @default("")
   title String @default("")
   description String @default("")
-  endTimestamp BigInt @default(0)
+  endTimestamp BigInt
   winnerAmount Int @default(0)
   participants String[] @default([])
   ended Boolean @default(false)
 }
+
+model Lockdown {
+  guildId String @id @default("") @map("_id") @db.ObjectId
+  blockedChannels String[] @default([])
+  startTime BigInt @default(0)
+}
+
