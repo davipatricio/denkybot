@@ -7,7 +7,7 @@ export default class BotInviteSubCommand extends Command {
     this.rawName = '';
     this.config = {
       autoDefer: true,
-      ephemeral: false,
+      ephemeral: true,
       showInHelp: false
     };
     this.permissions = { bot: [] };
