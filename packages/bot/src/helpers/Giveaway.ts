@@ -129,8 +129,11 @@ export async function checkEndedGiveaways(client: DenkyClient) {
         ])
         .setColor('Red');
 
+    const adaptedMsg = participants.length === 1 ? t('command:giveaway/helper/endmessage/singular', winnerString) : t('command:giveaway/helper/endmessage/plural', winnerString);
+    const avoidEmpty = participants.length === 0 ? t('command:giveaway/helper/endmessage/noWinners') : `${adaptedMsg} ${t('command:giveaway/helper/endmessage/congratiulations')}`;
+
     message.edit({ embeds: [embed], components: [row] });
-    message.channel.send(`⏲️ **|** O sorteio \`${title}\` acabou! ${participants.length >= winnerAmount ? `Os ganhadores foram: ${winnerString}. Parabéns! 🎉` : 'Não houve ganhadores 😢'}`);
+    message.channel.send(`⏲️ **|** ${t('command:giveaway/helper/endmessage', title)}\n${avoidEmpty}`);
   });
 }
 

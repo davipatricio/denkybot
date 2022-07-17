@@ -258,5 +258,10 @@ export default {
   'giveaway/helper/embed/fieldThree/value': 'There were no participants in this giveaway.',
   'giveaway/helper/button/placeholder': 'Additional options',
   'giveaway/helper/button/label': 'New winner',
-  'giveaway/helper/button/description': 'Click to choose a new winner'
+  'giveaway/helper/button/description': 'Click to choose a new winner',
+  'giveaway/helper/endmessage': (title: string) => `The giveaway \`${title}\` has ended!`,
+  'giveaway/helper/endmessage/singular': (winner: string) => `The winner is **${winner}**!`,
+  'giveaway/helper/endmessage/plural': (winners: string) => `The winners are **${winners}**!`,
+  'giveaway/helper/endmessage/congratiulations': 'Congratiulations! 🎉',
+  'giveaway/helper/endmessage/noWinners': 'There were no winners 😢.'
 } as const;

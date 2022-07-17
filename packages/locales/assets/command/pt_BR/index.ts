@@ -262,5 +262,10 @@ export default {
   'giveaway/helper/embed/fieldThree/value': 'Não houve participantes neste sorteio.',
   'giveaway/helper/button/placeholder': 'Opções adicionais',
   'giveaway/helper/button/label': 'Novo ganhador',
-  'giveaway/helper/button/description': 'Clique para escolher um novo ganhador'
+  'giveaway/helper/button/description': 'Clique para escolher um novo ganhador',
+  'giveaway/helper/endmessage': (title: string) => `O sorteio \`${title}\` acabou!`,
+  'giveaway/helper/endmessage/singular': (winner: string) => `O ganhador é **${winner}**!`,
+  'giveaway/helper/endmessage/plural': (winners: string) => `Os ganhadores são **${winners}**!`,
+  'giveaway/helper/endmessage/congratiulations': 'Parabéns! 🎉',
+  'giveaway/helper/endmessage/noWinners': 'Não houve ganhadores 😢.'
 } as const;
