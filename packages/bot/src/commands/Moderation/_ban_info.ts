@@ -17,9 +17,14 @@ export default class BanInfoSubCommand extends Command {
   override async run({ t, interaction }: CommandRunOptions) {
     if (!interaction.inCachedGuild()) return;
 
-    const userId = interaction.options.getString('user', true);
+    const user = interaction.options.getString('user', true);
 
-    const ban = await interaction.guild.bans.fetch(userId);
+    if (user === 'none') {
+      interaction.editReply(t('command:ban/info/error/noGuildBans'));
+      return;
+    }
+
+    const ban = await interaction.guild.bans.fetch({ user, cache: true }).catch(() => undefined);
     if (!ban) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/info/error/userNotBanned')}`);
       return;
@@ -43,14 +48,14 @@ export default class BanInfoSubCommand extends Command {
 
   override async runAutocomplete({ t, interaction }: AutocompleteRunOptions) {
     if (!interaction.memberPermissions!.has(PermissionFlagsBits.BanMembers) && !interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.BanMembers)) {
-      await interaction.respond([]);
+      interaction.respond([]);
       return;
     }
 
-    const bans = await interaction.guild!.bans.fetch({ cache: true, limit: 25 });
+    const bans = await interaction.guild!.bans.fetch({ cache: true, limit: 25 }).catch(() => undefined);
 
     if (!bans || bans.size === 0) {
-      interaction.respond([{ value: 'none', name: t('command:ban/info/autocomplete/noBans') }]);
+      interaction.respond([{ value: 'none', name: `❌ | ${t('command:ban/info/autocomplete/noBans')}` }]);
       return;
     }
 

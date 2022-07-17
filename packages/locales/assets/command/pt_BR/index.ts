@@ -241,6 +241,7 @@ export default {
   'animal/foxy': 'Aqui está uma imagem de um raposa 🦊',
 
   // Ban Info
+  'ban/info/error/noGuildBans': 'Este servidor não possui banimentos.',
   'ban/info/error/userNotFound': 'Usuário não encontrado.',
   'ban/info/error/userNotBanned': 'Este usuário não está banido.',
   'ban/info/noReason': 'Nenhum motivo informado',

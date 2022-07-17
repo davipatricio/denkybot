@@ -238,6 +238,7 @@ export default {
   'animal/foxy': "Here's a picture of a foxy 🦊",
 
   // Ban info
+  'ban/info/error/noGuildBans': 'This server does not have bans.',
   'ban/info/error/userNotFound': 'User not found.',
   'ban/info/error/userNotBanned': 'User is not banned.',
   'ban/info/noReason': 'No reason.',
