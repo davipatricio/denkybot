@@ -1,18 +1,34 @@
+import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, Interaction, InteractionType, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
 import type { Command, CommandLocale, CommandRunOptions } from '#structures/Command';
 import { Event } from '#structures/Event';
 import type { DenkyClient } from '#types/Client';
-import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, Interaction, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
 import { recommendLocale } from '../helpers/Locale';
 
 export default class InteractionCreateEvent extends Event {
   /** Webhook used to log commands */
   webhookCommandLogs: WebhookClient;
+
   constructor() {
     super();
     this.eventName = 'interactionCreate';
   }
 
   override async run(client: DenkyClient, interaction: Interaction) {
+    if (interaction.type === InteractionType.ApplicationCommandAutocomplete) {
+      const command = client.commands.get(interaction.commandName);
+
+      if (!command) return;
+
+      const userLocale = recommendLocale(interaction.locale);
+
+      const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
+        return client.languages.manager.get(userLocale, path, ...args);
+      };
+
+      command.runAutocomplete({ t, interaction });
+      return;
+    }
+
     if (!interaction.isChatInputCommand()) return;
 
     const botCommand = client.commands.get(interaction.commandName);
