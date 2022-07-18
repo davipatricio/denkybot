@@ -4,6 +4,8 @@ import ms from 'ms';
 import { Command, CommandRunOptions } from '../../structures/Command';
 import type { DenkyClient } from '../../types/Client';
 
+const Cooldowns = new Map<string, number>();
+
 export default class LockdownCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
@@ -39,6 +41,11 @@ export default class LockdownCommand extends Command {
       interaction.editReply(`❌ ${interaction.user} **|** O servidor já está bloqueado.`);
       return;
     }
+    let cooldown = Cooldowns.get(interaction.guild!.id);
+    if (cooldown) {
+      interaction.editReply(`❌ ${interaction.user} **|** O servidor realizou um lockdown recentemente. Aguarde ${ms(cooldown - Date.now())} para desbloqueá-lo.`);
+      return;
+    }
 
     const confirmationRow = new ActionRowBuilder<ButtonBuilder>().setComponents([
       new ButtonBuilder().setCustomId('enable').setEmoji('🔒').setLabel('Sim').setStyle(ButtonStyle.Success),
@@ -60,10 +67,18 @@ export default class LockdownCommand extends Command {
 
     collector.on('collect', async int => {
       await int.deferUpdate();
-      if (int.customId === 'cancel') {
-        message.edit({ content: `❌ ${interaction.user} **|** Você decidiu não efetuar o lockdown.`, components: [] });
+      cooldown = Cooldowns.get(interaction.guild!.id);
+      if (cooldown) {
+        interaction.editReply(`❌ ${interaction.user} **|** O servidor realizou um lockdown recentemente. Aguarde ${ms(cooldown - Date.now())} para desbloqueá-lo.`);
         return;
       }
+
+      if (int.customId === 'cancel') {
+        message.edit({ content: `❌ ${interaction.user} **|** Você decidiu não efetuar o lockdown.`, components: [] });
+        Cooldowns.delete(interaction.guild!.id);
+        return;
+      }
+      Cooldowns.set(interaction.guild!.id, Date.now() + ms('30s'));
       message.edit({ content: `⏲️ ${interaction.user} **|** Bloqueando canais que membros podem enviar mensagens, aguarde...`, components: [] });
 
       await this.client.databases.createLockdown({
@@ -82,7 +97,8 @@ export default class LockdownCommand extends Command {
 
       if (!canais.size) {
         await this.client.databases.deleteLockdown(interaction.guild!.id);
-        message.edit({ content: `❌ ${interaction.user} **|** Não há canais para bloquear.` });
+        message.edit(`❌ ${interaction.user} **|** Não há canais para bloquear.`);
+        setTimeout(() => Cooldowns.delete(interaction.guild!.id), ms('20s')).unref();
         return;
       }
 
@@ -170,6 +186,8 @@ export default class LockdownCommand extends Command {
           }
         ]);
 
+      Cooldowns.set(interaction.guild!.id, Date.now() + ms('5m'));
+      setTimeout(() => Cooldowns.delete(interaction.guild!.id), ms('5m')).unref();
       message.edit({
         content: `✅ ${interaction.user} **|** ${blockedChannels.length} canais foram bloqueados com sucesso.
 ⏰ **|** Você pode agendar o desbloqueio automatico utilizando: \`/lockdown agendar desbloqueio\`.`,
@@ -188,11 +206,10 @@ export default class LockdownCommand extends Command {
       interaction.editReply(`❌ ${interaction.user} **|** O servidor não está bloqueado.`);
       return;
     }
-    // Check if lockdown is 5 minutes old through the startTime property
-    const diff = BigInt(Date.now()) - BigInt(lockdown?.startTime ?? 0);
-    if (lockdown && diff < ms('30s')) {
+    let cooldown = Cooldowns.get(interaction.guild!.id);
+    if (cooldown) {
       // TODO: use normal ints instead of BigInts
-      interaction.editReply(`❌ ${interaction.user} **|** O servidor realizou um lockdown recentemente. Aguarde ${ms(Number(BigInt(ms('30s')) - BigInt(diff)))} para desbloqueá-lo.`);
+      interaction.editReply(`❌ ${interaction.user} **|** O servidor realizou um lockdown recentemente. Aguarde ${ms(cooldown - Date.now())} para desbloqueá-lo.`);
       return;
     }
 
@@ -214,16 +231,24 @@ export default class LockdownCommand extends Command {
 
     collector.on('collect', async int => {
       await int.deferUpdate();
-      if (int.customId === 'nao') {
-        message.edit({ content: `❌ ${interaction.user} **|** Você decidiu não desfazer o lockdown.`, components: [] });
+      cooldown = Cooldowns.get(interaction.guild!.id);
+      if (cooldown) {
+        interaction.editReply(`❌ ${interaction.user} **|** O servidor realizou um lockdown recentemente. Aguarde ${ms(cooldown - Date.now())} para desbloqueá-lo.`);
         return;
       }
 
+      if (int.customId === 'nao') {
+        message.edit({ content: `❌ ${interaction.user} **|** Você decidiu não desfazer o lockdown.`, components: [] });
+        Cooldowns.delete(interaction.guild!.id);
+        return;
+      }
+      Cooldowns.set(interaction.guild!.id, Date.now() + ms('30s'));
       message.edit({ content: `⏲️ ${interaction.user} **|** Desbloqueando canais que foram bloqueados pelo lockdown, aguarde...`, components: [] });
-      const canais = (await interaction.guild!.channels.fetch()).filter(c => lockdown.blockedChannels.includes(c.id));
 
+      const canais = (await interaction.guild!.channels.fetch()).filter(c => lockdown.blockedChannels.includes(c.id));
       if (!canais.size) {
         message.edit({ content: `✅ ${interaction.user} **|** Não há canais bloqueados pelo lockdown atualmente.` });
+        setTimeout(() => Cooldowns.delete(interaction.guild!.id), ms('20s')).unref();
         await this.client.databases.deleteLockdown(interaction.guild!.id);
         return;
       }
@@ -304,6 +329,8 @@ export default class LockdownCommand extends Command {
           }
         ]);
 
+      Cooldowns.set(interaction.guild!.id, Date.now() + ms('5m'));
+      setTimeout(() => Cooldowns.delete(interaction.guild!.id), ms('5m')).unref();
       message.edit({ content: `✅ ${interaction.user} **|** ${unblockedChannels.length} canais foram desbloqueados com sucesso.`, embeds: [finalEmbed] });
     });
 
