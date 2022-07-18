@@ -1,8 +1,8 @@
 /* eslint-disable no-await-in-loop */
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ComponentType, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 import ms from 'ms';
-import { Command, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
+import { Command, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
 
 const Cooldowns = new Map<string, number>();
 
