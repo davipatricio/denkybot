@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Afk" ALTER COLUMN "startTime" SET DEFAULT 0,
-ALTER COLUMN "startTime" SET DATA TYPE BIGINT;
