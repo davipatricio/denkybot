@@ -14,16 +14,31 @@ export default class LockdownData extends CommandDataStructure {
       type: ApplicationCommandType.ChatInput,
       dmPermission: false,
       defaultMemberPermissions: [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageGuild],
-      description: 'Bloqueia todos os canais que membros podem conversar.',
+      description: client.languages.manager.get('en_US', 'commandDescriptions:lockdown'),
+      descriptionLocalizations: {
+        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown')
+      },
       options: [
         {
-          name: 'ativar',
-          description: 'Bloqueia todos os canais que membros podem conversar.',
+          name: client.languages.manager.get('en_US', 'commandNames:lockdown/enable'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:lockdown/enable')
+          },
+          description: client.languages.manager.get('en_US', 'commandDescriptions:lockdown/enable'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown/enable')
+          },
           type: ApplicationCommandOptionType.Subcommand
         },
         {
-          name: 'desativar',
-          description: 'Desbloqueia todos os canais que foram bloqueados por mim.',
+          name: client.languages.manager.get('en_US', 'commandNames:lockdown/disable'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:lockdown/disable')
+          },
+          description: client.languages.manager.get('en_US', 'commandDescriptions:lockdown/disable'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown/disable')
+          },
           type: ApplicationCommandOptionType.Subcommand
         }
       ]
