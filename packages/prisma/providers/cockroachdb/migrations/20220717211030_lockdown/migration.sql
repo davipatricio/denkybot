@@ -40,7 +40,6 @@ CREATE TABLE "Giveaway" (
 CREATE TABLE "Lockdown" (
     "guildId" STRING NOT NULL DEFAULT '',
     "blockedChannels" STRING[] DEFAULT ARRAY[]::STRING[],
-    "startTime" INT8 NOT NULL DEFAULT 0,
 
     CONSTRAINT "Lockdown_pkey" PRIMARY KEY ("guildId")
 );

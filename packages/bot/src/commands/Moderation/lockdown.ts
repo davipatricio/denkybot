@@ -83,7 +83,6 @@ export default class LockdownCommand extends Command {
 
       await this.client.databases.createLockdown({
         guildId: interaction.guild!.id,
-        startTime: BigInt(Date.now()),
         blockedChannels: []
       });
 
@@ -146,7 +145,6 @@ export default class LockdownCommand extends Command {
       if (blockedChannels.length) {
         await this.client.databases.createLockdown({
           guildId: interaction.guild!.id,
-          startTime: BigInt(Date.now()),
           blockedChannels
         });
         finalEmbed.setFooter({ text: '⚠️ Será possível desfazer esta ação em 5 minutos.' });

@@ -40,5 +40,4 @@ model Giveaway {
 model Lockdown {
   guildId String @id @default("") @unique
   blockedChannels String[] @default([])
-  startTime BigInt @db.BigInt @default(0)
 }
