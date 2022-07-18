@@ -72,6 +72,7 @@ export default {
   'ban/info/user': 'user',
   'ban/remove': 'remove',
   'ban/remove/user': 'user',
+  'ban/remove/reason': 'reason',
   'ban/list': 'list',
 
   // Wikipedia

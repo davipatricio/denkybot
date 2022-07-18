@@ -137,6 +137,20 @@ export default class BanData extends CommandDataStructure {
               type: ApplicationCommandOptionType.String,
               required: true,
               autocomplete: true
+            },
+            {
+              name: client.languages.manager.get('en_US', 'commandNames:ban/remove/reason'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/remove/reason')
+              },
+              description: client.languages.manager.get('en_US', 'commandDescriptions:ban/remove/reason'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/remove/reason')
+              },
+              type: ApplicationCommandOptionType.String,
+              required: true,
+              minLength: 2,
+              maxLength: 100
             }
           ]
         },
