@@ -22,7 +22,7 @@ model Afk {
   guildId String?
   reason String?
   originalNick String?
-  startTime Int
+  startTime BigInt @db.BigInt @default(0)
 }
 
 model Giveaway {
@@ -35,4 +35,9 @@ model Giveaway {
   winnerAmount Int @default(0)
   participants String[] @default([])
   ended Boolean @default(false)
+}
+
+model Lockdown {
+  guildId String @id @default("") @unique
+  blockedChannels String[] @default([])
 }

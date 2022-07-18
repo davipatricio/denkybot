@@ -114,6 +114,11 @@ export default {
   'giveaway/create/duration': 'Duração do sorteio (1d, 5d 2h, 14/07 20:00, 05:00 etc)',
   'giveaway/create/description': 'Descrição detalhada do sorteio',
   'giveaway/create/channel': 'Canal onde o sorteio será criado',
-  'giveaway/end': 'Stop a running giveaway and choose a winner',
-  'giveaway/end/id': 'ID do sorteio para encerrar'
+  'giveaway/end': 'Encerra um sorteio em andamento e escolhe um ganhador',
+  'giveaway/end/id': 'ID do sorteio para encerrar',
+
+  // Lockdown
+  lockdown: 'Bloqueia todos os canais que membros podem conversar',
+  'lockdown/enable': 'Bloqueia todos os canais que membros podem conversar',
+  'lockdown/disable': 'Desbloqueia todos os canais que foram bloqueados por mim'
 } as const;

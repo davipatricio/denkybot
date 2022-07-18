@@ -113,5 +113,10 @@ export default {
   'giveaway/create/description': 'descrição',
   'giveaway/create/channel': 'canal',
   'giveaway/end': 'encerrar',
-  'giveaway/end/id': 'id_sorteio'
+  'giveaway/end/id': 'id_sorteio',
+
+  // Lockdown
+  lockdown: 'lockdown',
+  'lockdown/enable': 'ativar',
+  'lockdown/disable': 'desativar'
 } as const;
