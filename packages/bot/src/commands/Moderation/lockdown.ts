@@ -23,10 +23,10 @@ export default class LockdownCommand extends Command {
     // }
 
     switch (interaction.options.getSubcommand(true)) {
-      case 'enable':
+      case 'ativar':
         this.#enableLockdown({ t, interaction });
         break;
-      case 'disable':
+      case 'desativar':
         this.#disableLockdown({ t, interaction });
         break;
     }
@@ -49,10 +49,16 @@ export default class LockdownCommand extends Command {
 
   async #disableLockdown({ interaction }: CommandRunOptions) {
     const lockdown = await this.client.databases.getLockdown(interaction.guild!.id);
+    if (!lockdown) {
+      interaction.editReply(`❌ ${interaction.user} **|** O servidor não está bloqueado.`);
+      return;
+    }
     // Check if lockdown is 5 minutes old through the startTime property
     const diff = BigInt(Date.now()) - BigInt(lockdown?.startTime ?? 0);
-    if (lockdown && diff < ms('5m')) {
-      interaction.editReply(`❌ ${interaction.user} **|** O servidor realizou um lockdown recentemente. Aguarde ${ms(diff)} ${ms(diff + ms('5m'))} e tente novamente.`);
+    if (lockdown && diff < ms('30s')) {
+      // TODO: use normal ints instead of BigInts
+      interaction.editReply(`❌ ${interaction.user} **|** O servidor realizou um lockdown recentemente. Aguarde ${ms(Number(BigInt(ms('30s')) - BigInt(diff)))} para desbloqueá-lo.`);
+      return;
     }
 
     interaction.editReply(`✅ ${interaction.user} **|** O servidor foi desbloqueado com sucesso.`);
