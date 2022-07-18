@@ -78,7 +78,7 @@ export default class GiveawayCommand extends Command {
       description,
       winnerAmount,
       participants: [],
-      endTimestamp: BigInt(endTimestamp),
+      endTimestamp,
       ended: false
     });
   }
@@ -99,7 +99,7 @@ export default class GiveawayCommand extends Command {
     interaction.editReply(`✅ ${interaction.user} **|** ${t('command:giveaway/end/ended')}`);
     const fakeObject: Giveaway = {
       ...giveaway,
-      endTimestamp: BigInt(Date.now())
+      endTimestamp: Date.now()
     };
     checkSingleEndedGiveaway(this.client, fakeObject);
   }
