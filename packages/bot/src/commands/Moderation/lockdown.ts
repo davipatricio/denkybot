@@ -26,10 +26,10 @@ export default class LockdownCommand extends Command {
     // }
 
     switch (interaction.options.getSubcommand(true)) {
-      case 'ativar':
+      case 'enable':
         this.#enableLockdown({ t, interaction });
         break;
-      case 'desativar':
+      case 'disable':
         this.#disableLockdown({ t, interaction });
         break;
     }
