@@ -1,4 +1,4 @@
-import { Afk, Giveaway, PrismaClient, Suggestion } from '@prisma-client';
+import { Afk, Giveaway, Lockdown, PrismaClient, Suggestion } from '@prisma-client';
 import Redis from 'ioredis';
 import type Prisma from 'prisma';
 import { createPrismaRedisCache } from 'prisma-redis-middleware';
@@ -7,6 +7,7 @@ import type { DenkyClient } from '../../types/Client';
 export type SuggestionConfig = Partial<Suggestion> & Pick<Suggestion, 'guildId'>;
 export type AFKConfig = Partial<Afk> & Pick<Afk, 'userId' | 'startTime'>;
 export type GiveawayConfig = Giveaway;
+export type LockdownConfig = Lockdown;
 
 export class DatabaseManager extends PrismaClient {
   constructor(client: DenkyClient) {
@@ -45,6 +46,20 @@ export class DatabaseManager extends PrismaClient {
     }
     this.$connect();
   }
+
+  // #region Lockdown
+  createLockdown(data: Lockdown) {
+    return this.lockdown.create({ data });
+  }
+
+  getLockdown(guildId: string) {
+    return this.lockdown.findFirst({ where: { guildId } }).catch(() => undefined);
+  }
+
+  deleteLockdown(guildId: string) {
+    return this.lockdown.delete({ where: { guildId } });
+  }
+  // #endregion
 
   // #region Giveaway
   createGiveaway(data: GiveawayConfig) {
