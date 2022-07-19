@@ -27,7 +27,7 @@ jobs:
         cache-dependency-path: yarn.lock
 
     - name: Install dependencies
-      run: yarn --immutable
+      run: yarn
 
     - name: Run ESLint
       run: npx eslint packages
@@ -49,7 +49,7 @@ jobs:
         cache-dependency-path: yarn.lock
 
     - name: Install dependencies
-      run: yarn --immutable
+      run: yarn
 
     - name: Generate Prisma schema
       run: yarn prisma
