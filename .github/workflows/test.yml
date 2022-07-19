@@ -52,7 +52,7 @@ jobs:
 
     - name: Install dependencies
       if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn --frozen-lockfile
+      run: yarn --immutable --ignore-optional
 
     - name: Run ESLint
       run: npx eslint packages --cache
@@ -90,7 +90,7 @@ jobs:
 
     - name: Install dependencies
       if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn --frozen-lockfile
+      run: yarn --immutable --ignore-optional
 
     - name: Generate Prisma schema
       run: yarn prisma
