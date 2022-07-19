@@ -20,7 +20,7 @@
     "build": "npx tsc --project tsconfig.json",
     "lint:fix": "npx eslint assets --fix --cache",
     "postbuild": "npx tsc-alias && node scripts/emptyYarnLock.js",
-    "types:check": "npx tsc --noEmit --incremental false"
+    "types:check": "npx tsc --noEmit"
   },
   "devDependencies": {
     "typescript": "4.7.4"

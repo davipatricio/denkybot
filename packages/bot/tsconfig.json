@@ -47,10 +47,6 @@
             ]
         },
     },
-    "include": [
-        "src/**/*.ts",
-        "package.json"
-    ],
     "exclude": [
         "tsconfig.json"
     ]

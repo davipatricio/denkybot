@@ -22,7 +22,7 @@
     "build": "npx tsc --project tsconfig.json",
     "lint:fix": "npx eslint src --fix --cache",
     "postbuild": "npx tsc-alias && node scripts/copyEnv.js && node scripts/emptyYarnLock.js",
-    "types:check": "npx tsc --noEmit --incremental false",
+    "types:check": "npx tsc --noEmit",
     "start": "cd src && node sharding/shard.js"
   },
   "devDependencies": {
