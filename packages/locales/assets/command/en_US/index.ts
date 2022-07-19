@@ -242,11 +242,11 @@ export default {
   'ban/info/error/userNotFound': 'User not found.',
   'ban/info/error/userNotBanned': 'User is not banned.',
   'ban/info/noReason': 'No reason.',
-  'ban/info/embed/title': (user: User) => `Ban information from ${user.username}`,
+  'ban/info/embed/title': (user: User) => `${user.bot ? '<:botTag:230105988211015680>' : ''} Ban information from ${user.username}`,
   'ban/info/embed/description': (reason: string) => `📖 Ban reason: **${reason}**`,
   'ban/info/embed/field/name': '💁 User information',
   'ban/info/autocomplete/noBans': 'No bans found.',
-  'ban/info/embed/field/value': (user: User) => `🔢 User Id: **${user.id}**\n🏷 Discord Tag: **${user.tag}**\n🤖 Bot: **${user.bot ? 'Yes' : 'No'}**`,
+  'ban/info/embed/field/value': (user: User) => `🔢 User Id: **${user.id}**\n🏷 Discord Tag: **${user.tag}**`,
 
   // Ban remove
   'ban/remove/noReason': 'No reason.',
