@@ -18,7 +18,7 @@
   "homepage": "https://github.com/denkylabs/denkybot/packages/locales",
   "scripts": {
     "build": "npx tsc --project tsconfig.json",
-    "lint:fix": "npx eslint assets --fix --cache",
+    "lint:fix": "npx eslint assets --fix",
     "postbuild": "npx tsc-alias && node scripts/emptyYarnLock.js",
     "types:check": "npx tsc --noEmit"
   },

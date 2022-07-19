@@ -19,7 +19,7 @@
   "homepage": "https://github.com/denkylabs/denkybot/packages/logger",
   "scripts": {
     "build": "npx tsc --project tsconfig.json",
-    "lint:fix": "npx eslint src --fix --cache",
+    "lint:fix": "npx eslint src --fix",
     "postbuild": "npx tsc-alias && node scripts/emptyYarnLock.js",
     "types:check": "npx tsc --noEmit"
   },
