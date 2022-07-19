@@ -1,8 +1,4 @@
 import { Afk, Giveaway, Lockdown, PrismaClient, Suggestion } from '@prisma-client';
-import Redis from 'ioredis';
-import type Prisma from 'prisma';
-import { createPrismaRedisCache } from 'prisma-redis-middleware';
-import type { DenkyClient } from '../../types/Client';
 
 export type SuggestionConfig = Partial<Suggestion> & Pick<Suggestion, 'guildId'>;
 export type AFKConfig = Partial<Afk> & Pick<Afk, 'userId' | 'startTime'>;
@@ -10,40 +6,8 @@ export type GiveawayConfig = Giveaway;
 export type LockdownConfig = Lockdown;
 
 export class DatabaseManager extends PrismaClient {
-  constructor(client: DenkyClient) {
+  constructor() {
     super();
-    if (client.config.cache.prismaQueries) {
-      if (!process.env.REDIS_CACHE_URL) {
-        process.env.REDIS_CACHE_URL = '';
-
-        if (client.config.cache.type === 'redis') {
-          client.logger.warn('No Redis cache URL provided, falling back to in-memory cache.', { tags: ['Cache'] });
-          client.config.cache.type = 'memory';
-        }
-      }
-
-      const storage =
-        client.config.cache.type === 'redis'
-          ? {
-              type: 'redis' as const,
-              options: {
-                client: new Redis(process.env.REDIS_CACHE_URL),
-                invalidation: { referencesTTL: client.config.cache.lifetime }
-              }
-            }
-          : { type: 'memory' as const, options: { invalidation: true } };
-
-      const cacheMiddleware: Prisma.Middleware = createPrismaRedisCache({
-        models: [{ model: 'Suggestion' }, { model: 'Afk', cacheTime: 2500 }, { model: 'Giveaway' }],
-        storage,
-        cacheTime: client.config.cache.lifetime,
-        onError: error => {
-          client.logger.error(error, { tags: 'Cache' });
-        }
-      });
-
-      this.$use(cacheMiddleware);
-    }
     this.$connect();
   }
 

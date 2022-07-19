@@ -3,6 +3,6 @@ import { DatabaseManager } from '../managers/DatabaseManager';
 
 export default class Database {
   constructor(client: DenkyClient) {
-    client.databases = new DatabaseManager(client);
+    client.databases = new DatabaseManager();
   }
 }

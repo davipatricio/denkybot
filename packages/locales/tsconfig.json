@@ -47,10 +47,6 @@
             ]
         },
     },
-	"include": [
-		"assets/**/*.ts",
-        "package.json"
-	],
 	"exclude": [
 		"tsconfig.json"
 	]

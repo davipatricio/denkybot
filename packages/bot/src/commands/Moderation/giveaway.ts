@@ -1,10 +1,10 @@
+import { Command, CommandRunOptions } from '#structures/Command';
+import type { DenkyClient } from '#types/Client';
 import { checkSingleEndedGiveaway } from '@bot/src/helpers/Giveaway';
 import { parseTime } from '@bot/src/helpers/Timestamp';
 import type { Giveaway } from '@prisma-client';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, TextBasedChannel } from 'discord.js';
 import ms from 'ms';
-import { Command, CommandRunOptions } from '../../structures/Command';
-import type { DenkyClient } from '../../types/Client';
 
 export default class GiveawayCommand extends Command {
   constructor(client: DenkyClient) {

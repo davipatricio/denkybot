@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/denkylabs/denkybot/packages/webserver",
   "scripts": {
-    "build": "npx tsc --project tsconfig.json",
-    "lint:fix": "npx eslint src --fix --cache",
-    "postbuild": "npx tsc-alias",
-    "types:check": "npx tsc --noEmit --incremental false"
+    "build": "tsc --project tsconfig.json",
+    "lint:fix": "eslint src --fix",
+    "postbuild": "tsc-alias && node scripts/emptyYarnLock.js",
+    "types:check": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/node": "18.0.6",

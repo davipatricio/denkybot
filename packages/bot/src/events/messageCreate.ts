@@ -2,7 +2,7 @@ import type { CommandLocale } from '#structures/Command';
 import { Event } from '#structures/Event';
 import type { DenkyClient } from '#types/Client';
 import type { Message } from 'discord.js';
-import { recommendLocale } from '../helpers/Locale';
+import { recommendLocale } from '#helpers/Locale';
 
 export default class MessageCreateEvent extends Event {
   constructor() {

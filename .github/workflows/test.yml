@@ -2,6 +2,7 @@ on:
   pull_request:
   push:
     paths:
+      - '.github/workflows/*.yml'
       - 'packages/**/*.ts'
       - 'packages/**/*.prisma'
       - 'packages/**/package.json'
@@ -19,43 +20,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
-
-    - uses: actions/cache@v3
-      id: yarn-cache
-      with:
-        path: |
-         **/node_modules
-         ${{ steps.yarn-cache-dir-path.outputs.dir }}
-
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
-
-    - name: ESLint cache
-      id: eslint-cache
-      uses: actions/cache@v3
-      with:
-        path: .eslintcache
-        key: eslint-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
-        restore-keys: |
-          eslint-${{ github.job }}-${{ github.ref_name }}-
-
     - name: Install Node v18
       uses: actions/setup-node@v3
       with:
         node-version: 18
         cache: 'yarn'
-        cache-dependency-path: yarn.lock
+        cache-dependency-path: 'yarn.lock'
 
     - name: Install dependencies
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn --immutable
+      run: yarn install --immutable
 
     - name: Run ESLint
-      run: npx eslint packages --cache
+      run: yarn run lint
 
   typescript:
     if:
@@ -66,34 +42,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
-
-    - uses: actions/cache@v3
-      id: yarn-cache
-      with:
-        path: |
-         **/node_modules
-         ${{ steps.yarn-cache-dir-path.outputs.dir }}
-
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
-
     - name: Install Node v18
       uses: actions/setup-node@v3
       with:
         node-version: 18
         cache: 'yarn'
-        cache-dependency-path: yarn.lock
+        cache-dependency-path: 'yarn.lock'
 
     - name: Install dependencies
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn --immutable
+      run: yarn install --immutable
 
     - name: Generate Prisma schema
-      run: yarn prisma
+      run: yarn run prisma
 
     - name: TypeScript Test
-      run: yarn typecheck
+      run: yarn run typecheck

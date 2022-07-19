@@ -13,6 +13,9 @@ dist
 .eslintcache
 *.log
 
+# TypeScript
+.tsbuildinfo
+
 # Yarn
 .pnp.*
 .yarn/*
