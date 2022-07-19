@@ -12,9 +12,8 @@ jobs:
     - uses: actions/labeler@v4
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
-  auto-assign:
-    runs-on: ubuntu-latest
-    steps:
-      - if: github.event.action == 'opened'
-        uses: kentaro-m/auto-assign-action@v1.2.1
+
+    - name: Automatically assign reviewers
+      if: github.event.action == 'opened'
+      uses: kentaro-m/auto-assign-action@v1.2.1
         
