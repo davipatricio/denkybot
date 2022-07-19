@@ -1,5 +1,5 @@
 {
-  "name": "@denky/denky",
+  "name": "@denkylabs/denky",
   "private": true,
   "version": "0.0.0",
   "description": "Denky is a multipurpose Discord bot used in +3000 servers. Built with Node.js, TypeScript and discord.js.",
@@ -23,15 +23,15 @@
     "node": ">=16.9.0"
   },
   "scripts": {
-    "build": "npx turbo run build --parallel",
-    "format": "npx turbo run lint:fix --parallel",
-    "typecheck": "npx turbo run types:check --parallel",
-    "prisma": "npx turbo run generate:postgres --scope=\"prisma\""
+    "build": "yarn workspaces foreach -pt run build",
+    "format": "yarn workspaces foreach -pt run lint:fix",
+    "typecheck": "yarn workspaces foreach -pt run types:check",
+    "prisma": "yarn workspace @denkylabs/prisma run generate:postgres"
   },
   "devDependencies": {
-    "@types/node": "18.0.3",
-    "@typescript-eslint/eslint-plugin": "5.30.6",
-    "@typescript-eslint/parser": "5.30.6",
+    "@types/node": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "5.30.7",
+    "@typescript-eslint/parser": "5.30.7",
     "eslint": "8.20.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",
@@ -39,7 +39,6 @@
     "eslint-plugin-prettier": "4.2.1",
     "prettier": "2.7.1",
     "prisma": "4.0.0",
-    "turbo": "1.3.1",
     "typescript": "4.7.4"
   },
   "dependencies": {
@@ -47,5 +46,6 @@
     "discord.js": "14.0.2",
     "tsc-alias": "1.7.0",
     "tslib": "2.4.0"
-  }
+  },
+  "packageManager": "yarn@4.0.0-rc.13"
 }

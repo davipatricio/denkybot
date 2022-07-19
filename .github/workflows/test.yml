@@ -8,7 +8,6 @@ on:
       - 'packages/**/tsconfig.json'
       - 'tsconfig.json'
       - 'package.json'
-      - 'turbo.json'
 
 jobs:
   eslint:
@@ -53,7 +52,7 @@ jobs:
 
     - name: Install dependencies
       if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn --frozen-lockfile
+      run: yarn --immutable --ignore-optional
 
     - name: Run ESLint
       run: npx eslint packages --cache
@@ -66,15 +65,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
-    - name: Turbo cache
-      id: turbo-cache
-      uses: actions/cache@v3
-      with:
-        path: .turbo
-        key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
-        restore-keys: |
-          turbo-${{ github.job }}-${{ github.ref_name }}-
 
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
@@ -100,10 +90,10 @@ jobs:
 
     - name: Install dependencies
       if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn --frozen-lockfile
+      run: yarn --immutable --ignore-optional
 
     - name: Generate Prisma schema
-      run: yarn prisma --cache-dir=".turbo"
+      run: yarn prisma
 
     - name: TypeScript Test
-      run: yarn typecheck --cache-dir=".turbo"
+      run: yarn typecheck
