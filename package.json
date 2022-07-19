@@ -23,9 +23,9 @@
     "node": ">=16.9.0"
   },
   "scripts": {
-    "build": "yarn workspaces foreach run build -t -p",
-    "format": "yarn workspaces foreach run lint:fix -t -p",
-    "typecheck": "yarn workspaces foreach run types:check -t -p",
+    "build": "yarn workspaces foreach -pt run build",
+    "format": "yarn workspaces foreach -pt run lint:fix",
+    "typecheck": "yarn workspaces foreach -pt run types:check",
     "prisma": "yarn workspaces foreach run generate:pg -t --include prisma generate:postgres"
   },
   "devDependencies": {
