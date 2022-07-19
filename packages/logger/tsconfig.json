@@ -50,7 +50,8 @@
 	"include": [
 		"src/**/*.ts",
         "package.json",
-        ".env"
+        ".env",
+        "yarn.lock"
 	],
 	"exclude": [
 		"tsconfig.json"
