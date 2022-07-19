@@ -24,14 +24,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18
-        cache: 'yarn'
-        cache-dependency-path: yarn.lock
 
     - name: Install dependencies
       run: yarn
 
     - name: Run ESLint
-      run: yarn exec "eslint packages"
+      run: yarn lint
 
   typescript:
     if:
@@ -46,8 +44,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18
-        cache: 'yarn'
-        cache-dependency-path: yarn.lock
 
     - name: Install dependencies
       run: yarn install

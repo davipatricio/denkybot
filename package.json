@@ -26,7 +26,8 @@
     "build": "yarn workspace @denkylabs/denkybot run build && yarn workspaces foreach -pt run postbuild",
     "typecheck": "yarn workspace @denkylabs/denkybot run types:check",
     "format": "yarn workspaces foreach -pt run lint:fix",
-    "prisma": "yarn workspace @denkylabs/prisma run generate:postgres"
+    "prisma": "yarn workspace @denkylabs/prisma run generate:postgres",
+    "lint": "eslint packages"
   },
   "devDependencies": {
     "@types/node": "18.0.6",
