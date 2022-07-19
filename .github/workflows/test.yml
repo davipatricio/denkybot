@@ -2,6 +2,7 @@ on:
   pull_request:
   push:
     paths:
+      - '.github/workflows/*.yml'
       - 'packages/**/*.ts'
       - 'packages/**/*.prisma'
       - 'packages/**/package.json'
