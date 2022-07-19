@@ -14,8 +14,8 @@ export default {
   'afk/alreadySet': (u: User) => `❌ ${u} **|** You are already AFK.`,
   'afk/notAfk': (u: User) => `❌ ${u} **|** You are not AFK.`,
   'afk/manuallyRemoved': (u: User) => `✅ ${u} **|** You are no longer AFK.`,
-  'afk/autoremoved': (u: User, time: number) => `👋 ${u} **|** Welcome back, your AFK has been removed.\n⏰ **|** You stayed AFK <t:${time}:R>`,
-  'afk/mentioned': (u: User, time: number, reason?: string) => `${u} got AFK <t:${time}:R>.\n_\`${reason ?? 'No reason given.'}\`_`,
+  'afk/autoremoved': (u: User, time: bigint) => `👋 ${u} **|** Welcome back, your AFK has been removed.\n⏰ **|** You stayed AFK <t:${time}:R>`,
+  'afk/mentioned': (u: User, time: bigint, reason?: string) => `${u} got AFK <t:${time}:R>.\n_\`${reason ?? 'No reason given.'}\`_`,
 
   // Poll
   'poll/create/title': 'Poll',
