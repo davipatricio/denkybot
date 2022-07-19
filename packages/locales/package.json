@@ -16,17 +16,16 @@
     "url": "https://github.com/denkylabs/denkybot/issues"
   },
   "homepage": "https://github.com/denkylabs/denkybot/packages/locales",
-
   "scripts": {
     "build": "npx tsc --project tsconfig.json",
     "lint:fix": "npx eslint assets --fix --cache",
     "types:check": "npx tsc --noEmit --incremental false"
   },
   "devDependencies": {
-    "typescript": "workspace:^"
+    "typescript": "4.7.4"
   },
   "dependencies": {
-    "discord.js": "workspace:^",
-    "tslib": "workspace:^"
+    "discord.js": "14.0.2",
+    "tslib": "2.4.0"
   }
 }
