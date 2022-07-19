@@ -26,7 +26,7 @@
     "build": "yarn workspaces foreach -pt run build",
     "format": "yarn workspaces foreach -pt run lint:fix",
     "typecheck": "yarn workspaces foreach -pt run types:check",
-    "prisma": "yarn workspaces foreach run generate:pg -t --include prisma generate:postgres"
+    "prisma": "yarn workspace @denkylabs/prisma run generate:postgres"
   },
   "devDependencies": {
     "@types/node": "18.0.6",
