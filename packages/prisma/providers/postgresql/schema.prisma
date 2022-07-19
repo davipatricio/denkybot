@@ -41,3 +41,8 @@ model Lockdown {
   guildId String @id @default("") @unique
   blockedChannels String[] @default([])
 }
+
+model UnlockdownTask {
+  guildId String @id @default("") @unique
+  endTimestamp Int @default(autoincrement())
+}

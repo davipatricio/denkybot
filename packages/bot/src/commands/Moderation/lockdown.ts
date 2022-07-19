@@ -1,4 +1,5 @@
 /* eslint-disable no-await-in-loop */
+import { parseTime } from '#helpers/Timestamp';
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ComponentType, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
@@ -32,7 +33,50 @@ export default class LockdownCommand extends Command {
       case 'disable':
         this.#disableLockdown({ t, interaction });
         break;
+      case 'unlockdown':
+        this.#scheduleUnlockdown({ t, interaction });
+        break;
     }
+  }
+
+  async #scheduleUnlockdown({ t, interaction }: CommandRunOptions) {
+    const lockdown = await this.client.databases.getLockdown(interaction.guild!.id);
+    if (!lockdown) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:lockdown/sched/no-lockdown')}`);
+      return;
+    }
+    const unlockdown = await this.client.databases.unlockdownTask.findFirst({ where: { guildId: interaction.guild!.id } }).catch(() => undefined);
+    if (unlockdown) {
+      interaction.editReply(`✅ ${interaction.user} **|** ${t('command:lockdown/sched/deleted')}`);
+      await this.client.databases.unlockdownTask.delete({ where: { guildId: interaction.guild!.id } }).catch(() => {});
+      return;
+    }
+
+    const { valid, type, value } = parseTime(interaction.options.getString('duration', true));
+    if (!valid || !value) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/create/invalid-time')}`);
+      return;
+    }
+    const now = Date.now();
+    const endTimestamp = type === 'full' ? value : now + value;
+
+    // allow schedules with durations between 30 seconds and 7 days
+    if (endTimestamp - now <= 0 || endTimestamp - now < ms('30s')) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/create/time-low')}`);
+      return;
+    }
+    if (endTimestamp - now > ms('7d')) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/create/time-big')}`);
+      return;
+    }
+
+    await this.client.databases.unlockdownTask.create({
+      data: {
+        guildId: interaction.guild!.id,
+        endTimestamp
+      }
+    });
+    interaction.editReply(`✅ ${interaction.user} **|** `);
   }
 
   async #enableLockdown({ t, interaction }: CommandRunOptions) {

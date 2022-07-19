@@ -114,5 +114,8 @@ export default {
   // Lockdown
   lockdown: 'Blocks all channels members can chat',
   'lockdown/enable': 'Blocks all channels members can chat',
-  'lockdown/disable': 'Unblocks all channels that have been blocked by me'
+  'lockdown/disable': 'Unblocks all channels that have been blocked by me',
+  'lockdown/schedule': 'Schedule a time to unlock channels',
+  'lockdown/schedule/unlockdown': 'Schedule a time to unlock channels',
+  'lockdown/schedule/unlockdown/duration': 'When should I unlock it? (1d, 5d 2h, 14/07 20:00, 05:00 etc)'
 } as const;

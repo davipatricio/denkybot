@@ -112,5 +112,8 @@ export default {
   // Lockdown
   lockdown: 'lockdown',
   'lockdown/enable': 'ativar',
-  'lockdown/disable': 'desativar'
+  'lockdown/disable': 'desativar',
+  'lockdown/schedule': 'agendar',
+  'lockdown/schedule/unlockdown': 'desbloqueio',
+  'lockdown/schedule/unlockdown/duration': 'duração'
 } as const;

@@ -309,5 +309,9 @@ export default {
   'lockdown/disable/embed/no-permission': "I don't have permission to edit channels:",
   'lockdown/disable/embed/footer/done': 'To block again, use /lockdown enable',
   'lockdown/disable/embed/footer/nochannels': 'No channels have been unlocked.',
-  'lockdown/disable/done': (unblockedAmout: number) => `${unblockedAmout} channels were successfully unblocked.`
+  'lockdown/disable/done': (unblockedAmout: number) => `${unblockedAmout} channels were successfully unblocked.`,
+
+  'lockdown/sched/no-lockdown': 'This server must have an active lockdown in order to schedule an unlock.',
+  'lockdown/sched/deleted': 'There was already an unlockdown scheduled for this server, so we canceled the unlockdown.',
+  'lockdown/sched/done': 'Successfully scheduled unlockdown. To cancel, use `/lockdown schedule unlock` again.'
 } as const;

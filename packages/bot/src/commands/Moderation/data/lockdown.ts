@@ -40,6 +40,46 @@ export default class LockdownData extends CommandDataStructure {
             'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown/disable')
           },
           type: ApplicationCommandOptionType.Subcommand
+        },
+        {
+          name: client.languages.manager.get('en_US', 'commandNames:lockdown/schedule'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:lockdown/schedule')
+          },
+          description: client.languages.manager.get('en_US', 'commandDescriptions:lockdown/schedule'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown/schedule')
+          },
+          type: ApplicationCommandOptionType.SubcommandGroup,
+          options: [
+            {
+              name: client.languages.manager.get('en_US', 'commandNames:lockdown/schedule/unlockdown'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:lockdown/schedule/unlockdown')
+              },
+              description: client.languages.manager.get('en_US', 'commandDescriptions:lockdown/schedule'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown/schedule')
+              },
+              type: ApplicationCommandOptionType.Subcommand,
+              options: [
+                {
+                  name: client.languages.manager.get('en_US', 'commandNames:lockdown/schedule/unlockdown/duration'),
+                  nameLocalizations: {
+                    'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:lockdown/schedule/unlockdown/duration')
+                  },
+                  description: client.languages.manager.get('en_US', 'commandDescriptions:lockdown/schedule/unlockdown/duration'),
+                  descriptionLocalizations: {
+                    'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown/schedule/unlockdown/duration')
+                  },
+                  type: ApplicationCommandOptionType.String,
+                  required: true,
+                  minLength: 2,
+                  maxLength: 15
+                }
+              ]
+            }
+          ]
         }
       ]
     };

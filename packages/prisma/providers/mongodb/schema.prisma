@@ -42,3 +42,7 @@ model Lockdown {
   blockedChannels String[] @default([])
 }
 
+model UnlockdownTask {
+  guildId String @id @default("") @map("_id") @db.ObjectId
+  endTimestamp Int
+}
