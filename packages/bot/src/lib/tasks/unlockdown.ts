@@ -2,11 +2,11 @@ import { checkEndedLockdowns } from '@bot/src/helpers/Unlockdown';
 import { Task } from '#structures/Task';
 import type { DenkyClient } from '#types/Client';
 
-export default class UnlockdowTask extends Task {
+export default class UnlockdownTask extends Task {
   constructor() {
     super();
     this.name = 'Check for ended lockdowns';
-    this.delay = 15000;
+    this.delay = 5000;
     this.interval = null;
   }
 
