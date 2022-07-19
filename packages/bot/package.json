@@ -19,10 +19,10 @@
   },
   "homepage": "https://github.com/denkylabs/denkybot/packages/bot",
   "scripts": {
-    "build": "npx tsc --project tsconfig.json",
-    "lint:fix": "npx eslint src --fix",
-    "postbuild": "npx tsc-alias && node scripts/copyEnv.js && node scripts/emptyYarnLock.js",
-    "types:check": "npx tsc --noEmit",
+    "build": "tsc --project tsconfig.json",
+    "lint:fix": "eslint src --fix",
+    "postbuild": "tsc-alias && node scripts/copyEnv.js && node scripts/emptyYarnLock.js",
+    "types:check": "tsc --noEmit",
     "start": "cd src && node sharding/shard.js"
   },
   "devDependencies": {
