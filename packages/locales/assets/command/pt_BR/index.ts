@@ -251,6 +251,15 @@ export default {
   'ban/info/autocomplete/noBans': 'Nenhum banimento encontrado.',
   'ban/info/embed/field/value': (user: User) => `🔢 Id do usuário: **${user.id}**\n🏷 Tag no Discord: **${user.tag}**\n🤖 Bot: **${user.bot ? 'Sim' : 'Não'}**`,
 
+  // Ban remove
+  'ban/remove/noReason': 'Sem motivo.',
+  'ban/remove/unbanned-by': 'Desbanido por:',
+  'ban/remove/error/noGuildBans': 'Este servidor não possui banimentos.',
+  'ban/remove/error/noUserBanned': 'Este usuário não está banido do servidor.',
+  'ban/remove/error/unknownError': 'Ocorreu um erro ao remover o banimento.',
+  'ban/remove/complete': (userId: string) => `O banimento do id \`${userId}\` foi removido.`,
+  'ban/remove/autocomplete/noBans': 'Nenhum banimento encontrado.',
+
   // Giveaway
   'giveaway/create/no-description': 'Sorteio sem descrição.',
   'giveaway/create/invalid-time': 'O tempo inserido é invalido, por favor, tente novamente.',

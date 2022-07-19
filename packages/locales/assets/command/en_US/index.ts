@@ -248,6 +248,15 @@ export default {
   'ban/info/autocomplete/noBans': 'No bans found.',
   'ban/info/embed/field/value': (user: User) => `🔢 User Id: **${user.id}**\n🏷 Discord Tag: **${user.tag}**\n🤖 Bot: **${user.bot ? 'Yes' : 'No'}**`,
 
+  // Ban remove
+  'ban/remove/noReason': 'No reason.',
+  'ban/remove/unbanned-by': 'Unbanned by:',
+  'ban/remove/error/noGuildBans': 'This server does not have bans.',
+  'ban/remove/error/noUserBanned': 'This user is not banned.',
+  'ban/remove/error/unknownError': 'There was an error removing the ban.',
+  'ban/remove/complete': (userId: string) => `The ban on \`${userId}\` id was removed.`,
+  'ban/remove/autocomplete/noBans': 'No bans found.',
+
   // Giveaway
   'giveaway/create/no-description': 'Giveaway without description.',
   'giveaway/create/invalid-time': 'The entered duration is invalid, please try again.',
