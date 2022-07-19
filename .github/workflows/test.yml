@@ -52,7 +52,7 @@ jobs:
 
     - name: Install dependencies
       if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn --immutable --ignore-optional
+      run: yarn --immutable
 
     - name: Run ESLint
       run: npx eslint packages --cache
@@ -90,7 +90,7 @@ jobs:
 
     - name: Install dependencies
       if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn --immutable --ignore-optional
+      run: yarn --immutable
 
     - name: Generate Prisma schema
       run: yarn prisma
