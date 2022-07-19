@@ -27,7 +27,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/denky@workspace:."
   dependencies:
-    "@prisma/client": "npm:4.0.0"
+    "@prisma/client": "npm:4.1.0"
     "@types/node": "npm:18.0.6"
     "@typescript-eslint/eslint-plugin": "npm:5.30.7"
     "@typescript-eslint/parser": "npm:5.30.7"
@@ -50,7 +50,6 @@ __metadata:
   resolution: "@denkylabs/denkybot@workspace:packages/bot"
   dependencies:
     "@prisma/client": "npm:4.0.0"
-    "@types/ioredis": "npm:4.28.10"
     "@types/node": "npm:18.0.6"
     bufferutil: "npm:4.0.6"
     dayjs: "npm:1.11.3"
@@ -58,10 +57,8 @@ __metadata:
     dotenv: "npm:16.0.1"
     erlpack: "npm:0.1.4"
     hh-mm-ss: "npm:1.2.0"
-    ioredis: "npm:5.1.0"
     ms: "npm:2.1.3"
     prisma: "npm:4.0.0"
-    prisma-redis-middleware: "npm:4.0.6"
     tsc-alias: "npm:1.7.0"
     tslib: "npm:2.4.0"
     undici: "npm:5.8.0"
@@ -101,7 +98,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/prisma@workspace:packages/prisma"
   dependencies:
-    "@prisma/client": "npm:4.0.0"
+    "@prisma/client": "npm:4.1.0"
     prisma: "npm:4.0.0"
     typescript: "npm:4.7.4"
   languageName: unknown
@@ -232,13 +229,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ioredis/commands@npm:^1.1.1":
-  version: 1.2.0
-  resolution: "@ioredis/commands@npm:1.2.0"
-  checksum: fe5f85d310fa707793974a03cd27625c3cca191e3028c0ecd1514bcd511c7ccd854f7d6b2140954bb5ad7611d3d025d53adb97fa2bc43f169636a3df3e929523
-  languageName: node
-  linkType: hard
-
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -300,10 +290,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prisma/client@npm:4.1.0":
+  version: 4.1.0
+  resolution: "@prisma/client@npm:4.1.0"
+  dependencies:
+    "@prisma/engines-version": "npm:4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8"
+  peerDependencies:
+    prisma: "*"
+  peerDependenciesMeta:
+    prisma:
+      optional: true
+  checksum: a358c04c59f0bdce3aa72c2b486027ec67dcd51d3a247c6f2638a1dc5a37a8ac09b3888688a55cf61feda44125efc134d9b6ab85acd2da9e78bf36588e727889
+  languageName: node
+  linkType: hard
+
 "@prisma/engines-version@npm:3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11":
   version: 3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11
   resolution: "@prisma/engines-version@npm:3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11"
   checksum: 9266bdfc39287b5d02f13fbb368772632bab231e7049b56f04a09c9903c0647771582f06694e62fc0c7596b7c2166935601121f4173514ff5f7f3431f179d121
+  languageName: node
+  linkType: hard
+
+"@prisma/engines-version@npm:4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8":
+  version: 4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8
+  resolution: "@prisma/engines-version@npm:4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8"
+  checksum: e2cd1782747d15ab4a85794c9990af6e581169b3cb076a31134e5de42242a52a1d72458acdd7bd000e17e6b892d81e42a5f9d564b45604ce0f1aa8cde37607a0
   languageName: node
   linkType: hard
 
@@ -405,15 +416,6 @@ __metadata:
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
   checksum: d9f7f2130a0a2e1ea50f3bc90b83a8b99c913bbb80d7a1706f7f4730292ef299d18443c3b57a42dfb17c6559c9085e13f751b1b6c969bcff7bee3eeaf9da4dec
-  languageName: node
-  linkType: hard
-
-"@types/ioredis@npm:4.28.10":
-  version: 4.28.10
-  resolution: "@types/ioredis@npm:4.28.10"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: a7f24a8a13508ce0fa7332e4e39abf9c96daa1f8246803670f26c4427d6ccd9501f1af4a18a4fedb4b40d3f99ff81e30181cac2408b889df27fd25fc609d3fc2
   languageName: node
   linkType: hard
 
@@ -762,17 +764,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async-cache-dedupe@npm:1.4.0":
-  version: 1.4.0
-  resolution: "async-cache-dedupe@npm:1.4.0"
-  dependencies:
-    abstract-logging: "npm:^2.0.1"
-    mnemonist: "npm:^0.39.0"
-    safe-stable-stringify: "npm:^2.2.0"
-  checksum: 5b7e3e380302544bb80196e9cee9afba24a2c526c136bd09210fbf135a2ae5d6cda6bcf83534961c57d678389eb8a92b8df3ef25d6b7b11ef09bdea8cf907db6
-  languageName: node
-  linkType: hard
-
 "async@npm:^3.2.3":
   version: 3.2.4
   resolution: "async@npm:3.2.4"
@@ -942,13 +933,6 @@ __metadata:
   version: 2.2.0
   resolution: "clean-stack@npm:2.2.0"
   checksum: 0a476c914f0a5e9e12b215729e1a633fcbdd47b8c3d508ebe6441f2ef8d5047fdd0800926349dd18253db4bfcab3e48aa0aca1f2e7f5d614f7194778d7851be4
-  languageName: node
-  linkType: hard
-
-"cluster-key-slot@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "cluster-key-slot@npm:1.1.0"
-  checksum: 6295183d865ab77ecb7a13187f49c04cd784589f420b6798f52aea4fd28ba96f85cbea3288a6ca9bc62b41be534a628c8784d9bf0ccb87d16f0278b84e570263
   languageName: node
   linkType: hard
 
@@ -1134,13 +1118,6 @@ __metadata:
   version: 1.0.0
   resolution: "delegates@npm:1.0.0"
   checksum: 2ef8c043c6caea7f00f23236e0606b00f10d2b497657d63d230e50efdef307936b070734187b03960b9c4afe64ce9e09a77c01da60e661d42dcefec11ce41c30
-  languageName: node
-  linkType: hard
-
-"denque@npm:^2.0.1":
-  version: 2.1.0
-  resolution: "denque@npm:2.1.0"
-  checksum: 7e1c278144b7c5047ff46783edf7d736193644abbdea1c788e1b686b402b7669fcf417e168c9a9ccd8a346ff0d1e1b15696177e2b231fd1af66ee03c072b4066
   languageName: node
   linkType: hard
 
@@ -2103,23 +2080,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ioredis@npm:5.1.0":
-  version: 5.1.0
-  resolution: "ioredis@npm:5.1.0"
-  dependencies:
-    "@ioredis/commands": "npm:^1.1.1"
-    cluster-key-slot: "npm:^1.1.0"
-    debug: "npm:^4.3.4"
-    denque: "npm:^2.0.1"
-    lodash.defaults: "npm:^4.2.0"
-    lodash.isarguments: "npm:^3.1.0"
-    redis-errors: "npm:^1.2.0"
-    redis-parser: "npm:^3.0.0"
-    standard-as-callback: "npm:^2.1.0"
-  checksum: 95cb12efd664e4e6fb97a13bef91f91884e49be307f633491dde6558b7647ffb12f9aad7e220e83ad4ed51905e0deb06e0a66f52607a370c1b9541dbc072761d
-  languageName: node
-  linkType: hard
-
 "ip@npm:^2.0.0":
   version: 2.0.0
   resolution: "ip@npm:2.0.0"
@@ -2388,20 +2348,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.defaults@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "lodash.defaults@npm:4.2.0"
-  checksum: 6ef1b158c3b00b1885abc4dbc4266863dcf4b978a433b7512191243a4ad029d44d9da2ef2c0cc08dc735b6091ff73434023877f8abc39882bd748ab4bda7e692
-  languageName: node
-  linkType: hard
-
-"lodash.isarguments@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "lodash.isarguments@npm:3.1.0"
-  checksum: 2508395914b6bb037d90d2f151bd71b40fe3433956cd04eab9dd1073c62203e816bbfa74d9174002a05decd888db9377aa64637c7513c8e9f218a091301b9111
-  languageName: node
-  linkType: hard
-
 "lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
@@ -2604,15 +2550,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mnemonist@npm:^0.39.0":
-  version: 0.39.2
-  resolution: "mnemonist@npm:0.39.2"
-  dependencies:
-    obliterator: "npm:^2.0.1"
-  checksum: c827c669ad92859ba9d82843edc73151edcd43976cea6bfb7a0ca41974c37a4260bc62a3206d2d57a89c312e58ceaf999b5764dfeefba53569fe01d9f1b9a313
-  languageName: node
-  linkType: hard
-
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
@@ -2770,13 +2707,6 @@ __metadata:
     define-properties: "npm:^1.1.3"
     es-abstract: "npm:^1.19.1"
   checksum: abb36ead4b7c2b76558b79e91cf1100f628dc5e11cff9d08faa69691107de9294bae607e44136f752acd4972e648642c2565780bd692d0be3d0aada6b1ce0efa
-  languageName: node
-  linkType: hard
-
-"obliterator@npm:^2.0.1":
-  version: 2.0.4
-  resolution: "obliterator@npm:2.0.4"
-  checksum: 66ac986e59518bc55eb128d02ac5e34239c6e32123dfd15a59ddd7e54de79c54bbc3fc9b10cee8f88bb259429ef7c7fa55e90c03da84cc902568b1a76221fe90
   languageName: node
   linkType: hard
 
@@ -2983,16 +2913,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma-redis-middleware@npm:4.0.6":
-  version: 4.0.6
-  resolution: "prisma-redis-middleware@npm:4.0.6"
-  dependencies:
-    async-cache-dedupe: "npm:1.4.0"
-    ioredis: "npm:5.1.0"
-  checksum: 94e4b23cdc0fb7849422e686db19d73c07ee9882243c8eb1d1f05541547b9f60e3217a9ce7457cf93c060b2a14a7d083273aec08629f120b1a45715b91bc90a0
-  languageName: node
-  linkType: hard
-
 "prisma@npm:4.0.0":
   version: 4.0.0
   resolution: "prisma@npm:4.0.0"
@@ -3109,22 +3029,6 @@ __metadata:
   version: 0.1.0
   resolution: "real-require@npm:0.1.0"
   checksum: 146086e516719fe08459005084d306e19e03b87caf882067ea9d99ec4e9465e6583c96ff4ca5a296a7fa50ae6bac6d88f7bbb2ce7d2888c458f7c29863e69ca4
-  languageName: node
-  linkType: hard
-
-"redis-errors@npm:^1.0.0, redis-errors@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "redis-errors@npm:1.2.0"
-  checksum: d83eea8875c9fd7e1b0012b694cb13d40acc2bc5a26ecd0cf2e343ddb5e83973781050d65b5f7239fdffac4955f9ec0abd090ce40818c37c409ceb3bc675f7a9
-  languageName: node
-  linkType: hard
-
-"redis-parser@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "redis-parser@npm:3.0.0"
-  dependencies:
-    redis-errors: "npm:^1.0.0"
-  checksum: 02c1783a0cbd37c14127a68c7c4bcd51b784d90fb956cc7399a829f7c6cb7dd62ff2274a23f488acf1c68b61cc662fb2f406ac3946685c78e2023825944ca498
   languageName: node
   linkType: hard
 
@@ -3250,7 +3154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safe-stable-stringify@npm:^2.2.0, safe-stable-stringify@npm:^2.3.1":
+"safe-stable-stringify@npm:^2.3.1":
   version: 2.3.1
   resolution: "safe-stable-stringify@npm:2.3.1"
   checksum: a796c980e9fcb32651f15d4546af63834bd2b3c0c2724a5978c280891815234b37e1381bad00221b395102c2068d97013c5856288aaeec91b92e748865e27a50
@@ -3412,13 +3316,6 @@ __metadata:
   version: 0.0.10
   resolution: "stack-trace@npm:0.0.10"
   checksum: f9a4244c4ba2523b79c8eee52c6dd6505289c7d13ae06664baa36b7482f5e6556564ac2d8442a604fc43a519c3217499572100a51956c0d5b521e05bbc9c4433
-  languageName: node
-  linkType: hard
-
-"standard-as-callback@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "standard-as-callback@npm:2.1.0"
-  checksum: 9f765f41bc0c6cd4357bc4aae48a190888802f5365667e5664aa8411a4ece1d3d4cce7e76e9e9be3cda3e24d132a2e5ba941c9b92f86349cf60f5a6a68a63794
   languageName: node
   linkType: hard
 
