@@ -31,7 +31,7 @@ jobs:
       run: yarn
 
     - name: Run ESLint
-      run: npx eslint packages
+      run: yarn exec "eslint packages"
 
   typescript:
     if:
@@ -50,7 +50,7 @@ jobs:
         cache-dependency-path: yarn.lock
 
     - name: Install dependencies
-      run: yarn
+      run: yarn install
 
     - name: Generate Prisma schema
       run: yarn prisma
