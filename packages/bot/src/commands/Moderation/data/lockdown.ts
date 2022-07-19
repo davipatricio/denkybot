@@ -42,18 +42,36 @@ export default class LockdownData extends CommandDataStructure {
           type: ApplicationCommandOptionType.Subcommand
         },
         {
-          name: 'schedule',
-          description: 'Agende um horário para o desbloqueio',
+          name: client.languages.manager.get('en_US', 'commandNames:lockdown/schedule'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:lockdown/schedule')
+          },
+          description: client.languages.manager.get('en_US', 'commandDescriptions:lockdown/schedule'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown/schedule')
+          },
           type: ApplicationCommandOptionType.SubcommandGroup,
           options: [
             {
-              name: 'unlockdown',
-              description: 'Desbloqueia o servidor',
+              name: client.languages.manager.get('en_US', 'commandNames:lockdown/schedule/unlockdown'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:lockdown/schedule/unlockdown')
+              },
+              description: client.languages.manager.get('en_US', 'commandDescriptions:lockdown/schedule'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown/schedule')
+              },
               type: ApplicationCommandOptionType.Subcommand,
               options: [
                 {
-                  name: 'duration',
-                  description: 'Tempo de duração do desbloqueio',
+                  name: client.languages.manager.get('en_US', 'commandNames:lockdown/schedule/unlockdown/duration'),
+                  nameLocalizations: {
+                    'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:lockdown/schedule/unlockdown/duration')
+                  },
+                  description: client.languages.manager.get('en_US', 'commandDescriptions:lockdown/schedule/unlockdown/duration'),
+                  descriptionLocalizations: {
+                    'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown/schedule/unlockdown/duration')
+                  },
                   type: ApplicationCommandOptionType.String,
                   required: true,
                   minLength: 2,

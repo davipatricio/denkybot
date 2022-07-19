@@ -114,5 +114,8 @@ export default {
   // Lockdown
   lockdown: 'Bloqueia todos os canais que membros podem conversar',
   'lockdown/enable': 'Bloqueia todos os canais que membros podem conversar',
-  'lockdown/disable': 'Desbloqueia todos os canais que foram bloqueados por mim'
+  'lockdown/disable': 'Desbloqueia todos os canais que foram bloqueados por mim',
+  'lockdown/schedule': 'Agende um horário para o desbloqueio dos canais',
+  'lockdown/schedule/unlockdown': 'Agende um horário para o desbloqueio dos canais',
+  'lockdown/schedule/unlockdown/duration': 'Quando deverei realizar o desbloqueio? (1d, 5d 2h, 14/07 20:00, 05:00 etc)'
 } as const;
