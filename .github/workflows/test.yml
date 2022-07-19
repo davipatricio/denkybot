@@ -26,7 +26,7 @@ jobs:
         node-version: 18
 
     - name: Install dependencies
-      run: yarn
+      run: yarn install
 
     - name: Run ESLint
       run: yarn lint
