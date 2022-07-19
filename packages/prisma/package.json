@@ -24,10 +24,10 @@
     "migrate:cr": "npx prisma migrate dev --schema=./providers/cockroachdb/schema.prisma"
   },
   "devDependencies": {
-    "prisma": "4.0.0",
+    "prisma": "4.1.0",
     "typescript": "4.7.4"
   },
   "dependencies": {
-    "@prisma/client": "4.0.0"
+    "@prisma/client": "4.1.0"
   }
 }
