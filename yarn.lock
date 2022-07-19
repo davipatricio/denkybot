@@ -98,7 +98,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/prisma@workspace:packages/prisma"
   dependencies:
-    "@prisma/client": "npm:4.1.0"
+    "@prisma/client": "npm:4.0.0"
     prisma: "npm:4.0.0"
     typescript: "npm:4.7.4"
   languageName: unknown
