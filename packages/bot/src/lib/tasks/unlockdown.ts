@@ -1,11 +1,11 @@
-import { checkEndedGiveaways, deleteOldGiveaways } from '@bot/src/helpers/Giveaway';
+import { checkEndedLockdowns } from '@bot/src/helpers/Unlockdown';
 import { Task } from '#structures/Task';
 import type { DenkyClient } from '#types/Client';
 
-export default class GiveawayTask extends Task {
+export default class UnlockdowTask extends Task {
   constructor() {
     super();
-    this.name = 'Check for ended giveaways';
+    this.name = 'Check for ended lockdowns';
     this.delay = 15000;
     this.interval = null;
   }
@@ -14,7 +14,6 @@ export default class GiveawayTask extends Task {
     if (!global.IS_MAIN_PROCESS) return;
 
     if (!client.isReady()) return;
-    checkEndedGiveaways(client);
-    deleteOldGiveaways(client);
+    checkEndedLockdowns(client);
   }
 }
