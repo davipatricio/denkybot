@@ -4,14 +4,12 @@ import { PermissionFlagsBits } from 'discord.js';
 
 export async function checkSingleEndedLockdown(client: DenkyClient, unlockdown: UnlockdownTask) {
   const { endTimestamp, guildId } = unlockdown;
-  console.log(Date.now(), endTimestamp, Date.now() < endTimestamp);
   if (Date.now() < endTimestamp) return;
 
   await client.databases.unlockdownTask.delete({ where: { guildId } });
   const lockdownData = await client.databases.getLockdown(guildId);
   if (!lockdownData) return;
   const { blockedChannels } = lockdownData;
-  console.log(blockedChannels);
   await client.databases.deleteLockdown(guildId);
   const guild = await client.guilds.fetch(guildId).catch(() => null);
   if (!guild) return;
@@ -36,6 +34,5 @@ export async function checkSingleEndedLockdown(client: DenkyClient, unlockdown: 
 
 export async function checkEndedLockdowns(client: DenkyClient) {
   const lockdownArray = await client.databases.unlockdownTask.findMany({ take: 100 });
-  console.log(lockdownArray);
   for (const lockdown of lockdownArray) checkSingleEndedLockdown(client, lockdown);
 }
