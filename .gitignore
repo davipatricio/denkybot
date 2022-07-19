@@ -10,7 +10,6 @@ dist
 
 # Dot files
 .env
-.turbo
 .eslintcache
 *.log
 
