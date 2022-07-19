@@ -38,7 +38,7 @@ __metadata:
     eslint-plugin-import: "npm:2.26.0"
     eslint-plugin-prettier: "npm:4.2.1"
     prettier: "npm:2.7.1"
-    prisma: "npm:4.0.0"
+    prisma: "npm:4.1.0"
     tsc-alias: "npm:1.7.0"
     tslib: "npm:2.4.0"
     typescript: "npm:4.7.4"
@@ -49,7 +49,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/denkybot@workspace:packages/bot"
   dependencies:
-    "@prisma/client": "npm:4.0.0"
     "@types/node": "npm:18.0.6"
     bufferutil: "npm:4.0.6"
     dayjs: "npm:1.11.3"
@@ -58,7 +57,6 @@ __metadata:
     erlpack: "npm:0.1.4"
     hh-mm-ss: "npm:1.2.0"
     ms: "npm:2.1.3"
-    prisma: "npm:4.0.0"
     tsc-alias: "npm:1.7.0"
     tslib: "npm:2.4.0"
     undici: "npm:5.8.0"
@@ -98,8 +96,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/prisma@workspace:packages/prisma"
   dependencies:
-    "@prisma/client": "npm:4.0.0"
-    prisma: "npm:4.0.0"
+    "@prisma/client": "npm:4.1.0"
+    prisma: "npm:4.1.0"
     typescript: "npm:4.7.4"
   languageName: unknown
   linkType: soft
@@ -276,20 +274,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@prisma/client@npm:4.0.0"
-  dependencies:
-    "@prisma/engines-version": "npm:3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11"
-  peerDependencies:
-    prisma: "*"
-  peerDependenciesMeta:
-    prisma:
-      optional: true
-  checksum: b43e0754614c4b9f66d18a74f302666118c42cf7b71bf8a9f0c5fcfb746e27b67fae4fb98d99261d0e450916feec0a44f96dea315203d585ac7b811175cd93a9
-  languageName: node
-  linkType: hard
-
 "@prisma/client@npm:4.1.0":
   version: 4.1.0
   resolution: "@prisma/client@npm:4.1.0"
@@ -304,13 +288,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11":
-  version: 3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11
-  resolution: "@prisma/engines-version@npm:3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11"
-  checksum: 9266bdfc39287b5d02f13fbb368772632bab231e7049b56f04a09c9903c0647771582f06694e62fc0c7596b7c2166935601121f4173514ff5f7f3431f179d121
-  languageName: node
-  linkType: hard
-
 "@prisma/engines-version@npm:4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8":
   version: 4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8
   resolution: "@prisma/engines-version@npm:4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8"
@@ -318,10 +295,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11":
-  version: 3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11
-  resolution: "@prisma/engines@npm:3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11"
-  checksum: 3d3e4afdc3a20b90899f551f245aeda36c1afc271f73a9478042808407440dbbd1035172f837133bb89579d3e0b0cb29fa512ad92849d1de78d061d87908df62
+"@prisma/engines@npm:4.1.0":
+  version: 4.1.0
+  resolution: "@prisma/engines@npm:4.1.0"
+  checksum: 3b728c900e789c24970f49eb90fa53a29b179b38f9ec3fee0449a50c7079c02a9b9bf320fcf7dc23850f8106cd3aa0deabca0bdc82d900fd61f3d763e33ce0a3
   languageName: node
   linkType: hard
 
@@ -2913,15 +2890,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:4.0.0":
-  version: 4.0.0
-  resolution: "prisma@npm:4.0.0"
+"prisma@npm:4.1.0":
+  version: 4.1.0
+  resolution: "prisma@npm:4.1.0"
   dependencies:
-    "@prisma/engines": "npm:3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11"
+    "@prisma/engines": "npm:4.1.0"
   bin:
     prisma: build/index.js
     prisma2: build/index.js
-  checksum: da67d82a7bf4e4596dfc91576e98e9c7de36900fe735dec165f9325c6925aab43d2f93c55d3fd80ca93e524b3099c2b3bda4b7b1a7cb534cdd01d26f6c2883c7
+  checksum: 461c2a3da14a4be04e5e7b7a08a58fd0a2b0499793e90fe79d366b8ef44485ce5a75d3501a092ed3f6fa5f11588b9c6e750be70d69dcf873ed3c84f99361ffdc
   languageName: node
   linkType: hard
 
