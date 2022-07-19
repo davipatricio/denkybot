@@ -24,9 +24,11 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18
+        cache: 'yarn'
+        cache-dependency-path: 'yarn.lock'
 
     - name: Install dependencies
-      run: yarn install
+      run: yarn install --immutable
 
     - name: Run ESLint
       run: yarn lint
@@ -44,9 +46,11 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18
+        cache: 'yarn'
+        cache-dependency-path: 'yarn.lock'
 
     - name: Install dependencies
-      run: yarn install
+      run: yarn install --immutable
 
     - name: Generate Prisma schema
       run: yarn prisma
