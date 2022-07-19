@@ -42,7 +42,13 @@ export default class LockdownCommand extends Command {
   async #scheduleUnlockdown({ t, interaction }: CommandRunOptions) {
     const lockdown = await this.client.databases.getLockdown(interaction.guild!.id);
     if (!lockdown) {
-      interaction.editReply(`❌ ${interaction.user} **|** Este servidor precisa ter um lockdown ativo para poder agendar um desbloqueio.`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:lockdown/sched/no-lockdown')}`);
+      return;
+    }
+    const unlockdown = await this.client.databases.unlockdownTask.findFirst({ where: { guildId: interaction.guild!.id } }).catch(() => undefined);
+    if (unlockdown) {
+      interaction.editReply(`✅ ${interaction.user} **|** ${t('command:lockdown/sched/deleted')}`);
+      await this.client.databases.unlockdownTask.delete({ where: { guildId: interaction.guild!.id } }).catch(() => {});
       return;
     }
 
@@ -70,7 +76,7 @@ export default class LockdownCommand extends Command {
         endTimestamp
       }
     });
-    interaction.editReply(`✅ ${interaction.user} **|** Lockdown programado com sucesso.`);
+    interaction.editReply(`✅ ${interaction.user} **|** `);
   }
 
   async #enableLockdown({ t, interaction }: CommandRunOptions) {

@@ -313,5 +313,9 @@ export default {
   'lockdown/disable/embed/no-permission': 'Eu não tenho permissão para editar os canais:',
   'lockdown/disable/embed/footer/done': 'Para bloquear novamente, utilize /lockdown ativar',
   'lockdown/disable/embed/footer/nochannels': 'Nenhum canal foi desbloqueado.',
-  'lockdown/disable/done': (unblockedAmout: number) => `${unblockedAmout} canais foram desbloqueados com sucesso.`
+  'lockdown/disable/done': (unblockedAmout: number) => `${unblockedAmout} canais foram desbloqueados com sucesso.`,
+
+  'lockdown/sched/no-lockdown': 'Este servidor precisa ter um lockdown ativo para poder agendar um desbloqueio.',
+  'lockdown/sched/deleted': 'Já havia um unlockdown programado para este servidor, então cancelamos o unlockdown.',
+  'lockdown/sched/done': 'Unlockdown programado com sucesso. Para cancelar, utilize `/lockdown agendar desbloqueio` novamente.',
 } as const;
