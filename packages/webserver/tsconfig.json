@@ -46,7 +46,8 @@
     },
 	"include": [
 		"src/*.ts",
-        "package.json"
+        "package.json",
+        "yarn.lock"
 	],
 	"exclude": [
 		"tsconfig.json"

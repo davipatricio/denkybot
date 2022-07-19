@@ -1,5 +1,5 @@
 {
 	"extends": "../../tsconfig.json",
-	"include": ["package.json", ".env"],
+	"include": ["package.json", ".env", "yarn.lock"],
 	"exclude": ["tsconfig.json"]
 }
