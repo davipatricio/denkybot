@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "bufferutil": "4.0.6",
-    "dayjs": "1.11.3",
+    "dayjs": "1.11.4",
     "discord.js": "14.0.2",
     "dotenv": "16.0.1",
     "hh-mm-ss": "1.2.0",
