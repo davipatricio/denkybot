@@ -1,5 +1,5 @@
 {
-  "name": "@denky/denky",
+  "name": "@denkylabs/denky",
   "private": true,
   "version": "0.0.0",
   "description": "Denky is a multipurpose Discord bot used in +3000 servers. Built with Node.js, TypeScript and discord.js.",
@@ -29,9 +29,9 @@
     "prisma": "yarn workspaces foreach run generate:pg -t --include prisma generate:postgres"
   },
   "devDependencies": {
-    "@types/node": "18.0.3",
-    "@typescript-eslint/eslint-plugin": "5.30.6",
-    "@typescript-eslint/parser": "5.30.6",
+    "@types/node": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "5.30.7",
+    "@typescript-eslint/parser": "5.30.7",
     "eslint": "8.20.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",
