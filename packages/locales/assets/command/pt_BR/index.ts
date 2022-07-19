@@ -14,8 +14,8 @@ export default {
   'afk/alreadySet': (u: User) => `❌ ${u} **|** Você já está ausente.`,
   'afk/notAfk': (u: User) => `❌ ${u} **|** Você não está ausente.`,
   'afk/manuallyRemoved': (u: User) => `✅ ${u} **|** Você não está mais ausente.`,
-  'afk/autoremoved': (u: User, time: bigint) => `👋 ${u} **|** Bem-vindo novamente, seu AFK foi removido.\n⏰ **|** Você ficou ausente <t:${time}:R>`,
-  'afk/mentioned': (u: User, time: bigint, reason?: string) => `${u} ficou ausente <t:${time}:R>.\n_\`${reason ?? 'Sem motivo informado.'}\`_`,
+  'afk/autoremoved': (u: User, time: number) => `👋 ${u} **|** Bem-vindo novamente, seu AFK foi removido.\n⏰ **|** Você ficou ausente <t:${time}:R>`,
+  'afk/mentioned': (u: User, time: number, reason?: string) => `${u} ficou ausente <t:${time}:R>.\n_\`${reason ?? 'Sem motivo informado.'}\`_`,
 
   // Poll
   'poll/create/title': 'Enquete',
@@ -324,5 +324,9 @@ export default {
   'lockdown/disable/embed/no-permission': 'Eu não tenho permissão para editar os canais:',
   'lockdown/disable/embed/footer/done': 'Para bloquear novamente, utilize /lockdown ativar',
   'lockdown/disable/embed/footer/nochannels': 'Nenhum canal foi desbloqueado.',
-  'lockdown/disable/done': (unblockedAmout: number) => `${unblockedAmout} canais foram desbloqueados com sucesso.`
+  'lockdown/disable/done': (unblockedAmout: number) => `${unblockedAmout} canais foram desbloqueados com sucesso.`,
+
+  'lockdown/sched/no-lockdown': 'Este servidor precisa ter um lockdown ativo para poder agendar um desbloqueio.',
+  'lockdown/sched/deleted': 'Já havia um unlockdown programado para este servidor, então cancelamos o unlockdown.',
+  'lockdown/sched/done': 'Unlockdown programado com sucesso. Para cancelar, utilize `/lockdown agendar desbloqueio` novamente.'
 } as const;

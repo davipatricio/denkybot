@@ -22,7 +22,7 @@ model Afk {
   guildId String?
   reason String?
   originalNick String?
-  startTime BigInt @db.BigInt @default(0)
+  startTime Int @default(0)
 }
 
 model Giveaway {
@@ -31,7 +31,7 @@ model Giveaway {
   authorId String @default("")
   title String @default("")
   description String @default("")
-  endTimestamp BigInt @db.BigInt @default(autoincrement())
+  endTimestamp Int @default(autoincrement())
   winnerAmount Int @default(0)
   participants String[] @default([])
   ended Boolean @default(false)
@@ -40,4 +40,9 @@ model Giveaway {
 model Lockdown {
   guildId String @id @default("") @unique
   blockedChannels String[] @default([])
+}
+
+model UnlockdownTask {
+  guildId String @id @default("") @unique
+  endTimestamp Int @default(autoincrement())
 }

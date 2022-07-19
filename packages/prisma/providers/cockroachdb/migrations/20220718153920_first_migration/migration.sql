@@ -16,7 +16,7 @@ CREATE TABLE "Afk" (
     "guildId" STRING,
     "reason" STRING,
     "originalNick" STRING,
-    "startTime" INT4 NOT NULL,
+    "startTime" INT4 NOT NULL DEFAULT 0,
 
     CONSTRAINT "Afk_pkey" PRIMARY KEY ("userId")
 );
@@ -28,7 +28,7 @@ CREATE TABLE "Giveaway" (
     "authorId" STRING NOT NULL DEFAULT '',
     "title" STRING NOT NULL DEFAULT '',
     "description" STRING NOT NULL DEFAULT '',
-    "endTimestamp" INT8 NOT NULL,
+    "endTimestamp" INT4 NOT NULL DEFAULT 0,
     "winnerAmount" INT4 NOT NULL DEFAULT 0,
     "participants" STRING[] DEFAULT ARRAY[]::STRING[],
     "ended" BOOL NOT NULL DEFAULT false,

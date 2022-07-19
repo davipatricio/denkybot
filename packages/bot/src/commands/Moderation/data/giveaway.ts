@@ -68,8 +68,8 @@ export default class GiveawayData extends CommandDataStructure {
               },
               type: ApplicationCommandOptionType.String,
               required: true,
-              minValue: 1,
-              maxValue: 20
+              minValue: 2,
+              maxValue: 15
             },
             {
               name: client.languages.manager.get('en_US', 'commandNames:giveaway/create/description'),

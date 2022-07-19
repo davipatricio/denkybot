@@ -118,5 +118,8 @@ export default {
   // Lockdown
   lockdown: 'lockdown',
   'lockdown/enable': 'enable',
-  'lockdown/disable': 'disable'
+  'lockdown/disable': 'disable',
+  'lockdown/schedule': 'schedule',
+  'lockdown/schedule/unlockdown': 'unlock',
+  'lockdown/schedule/unlockdown/duration': 'duration'
 } as const;
