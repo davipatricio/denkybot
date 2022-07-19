@@ -16,7 +16,6 @@
     "url": "https://github.com/denkylabs/denkybot/issues"
   },
   "homepage": "https://github.com/denkylabs/denkybot/packages/locales",
-
   "scripts": {
     "build": "npx tsc --project tsconfig.json",
     "lint:fix": "npx eslint assets --fix --cache",

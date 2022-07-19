@@ -23,10 +23,10 @@
     "node": ">=16.9.0"
   },
   "scripts": {
-    "build": "npx turbo run build --parallel",
-    "format": "npx turbo run lint:fix --parallel",
-    "typecheck": "npx turbo run types:check --parallel",
-    "prisma": "npx turbo run generate:postgres --scope=\"prisma\""
+    "build": "yarn workspaces foreach build -t -p",
+    "format": "yarn workspaces foreach -t -p",
+    "typecheck": "yarn workspaces foreach -t -p",
+    "prisma": "yarn workspaces foreach -t --include prssma generate:postgres"
   },
   "devDependencies": {
     "@types/node": "18.0.3",
@@ -39,7 +39,6 @@
     "eslint-plugin-prettier": "4.2.1",
     "prettier": "2.7.1",
     "prisma": "4.0.0",
-    "turbo": "1.3.1",
     "typescript": "4.7.4"
   },
   "dependencies": {
@@ -47,5 +46,6 @@
     "discord.js": "14.0.2",
     "tsc-alias": "1.7.0",
     "tslib": "2.4.0"
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }
