@@ -20,7 +20,7 @@ export default class BanInfoSubCommand extends Command {
     const user = interaction.options.getString('user', true);
 
     if (user === 'none') {
-      interaction.editReply(t('command:ban/info/error/noGuildBans'));
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:ban/info/error/noGuildBans')}`);
       return;
     }
 

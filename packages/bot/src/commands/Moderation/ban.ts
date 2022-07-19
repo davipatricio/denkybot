@@ -28,6 +28,10 @@ export default class BanCommand extends Command {
       case 'info':
         this.client.commands.get('_ban_info')?.run({ t, interaction });
         break;
+
+      case 'remove':
+        this.client.commands.get('_ban_remove')?.run({ t, interaction });
+        break;
     }
   }
 
@@ -35,6 +39,10 @@ export default class BanCommand extends Command {
     switch (interaction.options.getSubcommand()) {
       case 'info':
         this.client.commands.get('_ban_info')?.runAutocomplete({ t, interaction });
+        break;
+
+      case 'remove':
+        this.client.commands.get('_ban_remove')?.runAutocomplete({ t, interaction });
         break;
     }
   }
