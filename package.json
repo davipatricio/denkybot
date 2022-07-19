@@ -23,10 +23,10 @@
     "node": ">=16.9.0"
   },
   "scripts": {
-    "build": "yarn workspaces foreach build -t -p",
-    "format": "yarn workspaces foreach -t -p",
-    "typecheck": "yarn workspaces foreach -t -p",
-    "prisma": "yarn workspaces foreach -t --include prssma generate:postgres"
+    "build": "yarn workspaces foreach run build -t -p",
+    "format": "yarn workspaces foreach run lint:fix -t -p",
+    "typecheck": "yarn workspaces foreach run types:check -t -p",
+    "prisma": "yarn workspaces foreach run generate:pg -t --include prisma generate:postgres"
   },
   "devDependencies": {
     "@types/node": "18.0.3",
@@ -47,5 +47,5 @@
     "tsc-alias": "1.7.0",
     "tslib": "2.4.0"
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@4.0.0-rc.13"
 }
