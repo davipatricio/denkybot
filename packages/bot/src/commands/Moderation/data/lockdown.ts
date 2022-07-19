@@ -40,6 +40,28 @@ export default class LockdownData extends CommandDataStructure {
             'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:lockdown/disable')
           },
           type: ApplicationCommandOptionType.Subcommand
+        },
+        {
+          name: 'schedule',
+          description: 'Agende um horário para o desbloqueio',
+          type: ApplicationCommandOptionType.SubcommandGroup,
+          options: [
+            {
+              name: 'unlockdown',
+              description: 'Desbloqueia o servidor',
+              type: ApplicationCommandOptionType.Subcommand,
+              options: [
+                {
+                  name: 'duration',
+                  description: 'Tempo de duração do desbloqueio',
+                  type: ApplicationCommandOptionType.String,
+                  required: true,
+                  minLength: 2,
+                  maxLength: 15
+                }
+              ]
+            }
+          ]
         }
       ]
     };
