@@ -49,8 +49,7 @@ model UnlockdownTask {
 
 model Reminder {
   id String @id @default("") @unique
-  guildId String @default("")
-  channelId String @default("")
+  channelId String?
   authorId String @default("")
   text String @default("")
   endTimestamp BigInt
