@@ -6,7 +6,10 @@ export default class ReminderData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
     this.data = {
-      name: 'remind',
+      name: client.languages.manager.get('en_US', 'commandNames:remind'),
+      nameLocalizations: {
+        'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:remind')
+      },
       type: ApplicationCommandType.ChatInput,
       dmPermission: true,
       description: client.languages.manager.get('en_US', 'commandDescriptions:ping'),
@@ -15,21 +18,39 @@ export default class ReminderData extends CommandDataStructure {
       },
       options: [
         {
-          name: 'create',
-          description: 'Create a reminder',
+          name: client.languages.manager.get('en_US', 'commandNames:remind/create'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:remind/create')
+          },
+          description: client.languages.manager.get('en_US', 'commandDescriptions:remind/create'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:remind/create')
+          },
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: 'text',
+              name: client.languages.manager.get('en_US', 'commandNames:remind/create/description'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:remind/create/description')
+              },
               type: ApplicationCommandOptionType.String,
-              description: 'Texto do lembrete',
+              description: client.languages.manager.get('en_US', 'commandDescriptions:remind/create/description'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:remind/create/description')
+              },
               required: true,
-              maxLength: 100
+              maxLength: 120
             },
             {
-              name: 'duration',
+              name: client.languages.manager.get('en_US', 'commandNames:remind/create/duration'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:remind/create/duration')
+              },
               type: ApplicationCommandOptionType.String,
-              description: 'Duração',
+              description: client.languages.manager.get('en_US', 'commandDescriptions:remind/create/duration'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:remind/create/duration')
+              },
               required: true,
               minLength: 1,
               maxLength: 20
@@ -37,28 +58,52 @@ export default class ReminderData extends CommandDataStructure {
           ]
         },
         {
-          name: 'delete',
+          name: client.languages.manager.get('en_US', 'commandNames:remind/delete'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:remind/delete')
+          },
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'Delete a reminder',
+          description: client.languages.manager.get('en_US', 'commandDescriptions:remind/delete'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:remind/delete')
+          },
           options: [
             {
-              name: 'id',
+              name: client.languages.manager.get('en_US', 'commandNames:remind/delete/reminder'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:remind/delete/reminder')
+              },
               type: ApplicationCommandOptionType.String,
-              description: 'Reminder ID',
+              description: client.languages.manager.get('en_US', 'commandDescriptions:remind/delete/reminder'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:remind/delete/reminder')
+              },
               required: true,
               autocomplete: true
             }
           ]
         },
         {
-          name: 'info',
+          name: client.languages.manager.get('en_US', 'commandNames:remind/info'),
+          nameLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:remind/info')
+          },
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'Get info about a reminder',
+          description: client.languages.manager.get('en_US', 'commandDescriptions:remind/info'),
+          descriptionLocalizations: {
+            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:remind/info')
+          },
           options: [
             {
-              name: 'id',
+              name: client.languages.manager.get('en_US', 'commandNames:remind/info/reminder'),
+              nameLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:remind/info/reminder')
+              },
               type: ApplicationCommandOptionType.String,
-              description: 'Reminder ID',
+              description: client.languages.manager.get('en_US', 'commandDescriptions:remind/info/reminder'),
+              descriptionLocalizations: {
+                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:remind/info/reminder')
+              },
               required: true,
               autocomplete: true
             }

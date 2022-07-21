@@ -56,14 +56,14 @@ export default class ReminderCommand extends Command {
     await this.client.databases.createReminder({
       id: generateUuid(),
       authorId: interaction.user.id,
-      text: interaction.options.getString('text', true),
+      text: interaction.options.getString('description', true),
       channelId: interaction.channel!.id,
       endTimestamp: BigInt(endTimestamp)
     });
   }
 
   async #info({ t, interaction }: CommandRunOptions) {
-    const reminder = await this.client.databases.getReminder(interaction.options.getString('id', true));
+    const reminder = await this.client.databases.getReminder(interaction.options.getString('reminder', true));
     if (!reminder) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reminders/info/not-found')}`);
       return;
@@ -84,7 +84,7 @@ export default class ReminderCommand extends Command {
   }
 
   async #delete({ t, interaction }: CommandRunOptions) {
-    const reminder = await this.client.databases.getReminder(interaction.options.getString('id', true));
+    const reminder = await this.client.databases.getReminder(interaction.options.getString('reminder', true));
     if (!reminder) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reminders/info/not-found')}`);
       return;
