@@ -2,7 +2,7 @@ import { AutocompleteRunOptions, Command, CommandRunOptions } from '#structures/
 import type { DenkyClient } from '#types/Client';
 import { generateUuid } from '@bot/src/helpers/IdGenerator';
 import { parseTime } from '@bot/src/helpers/Timestamp';
-import { EmbedBuilder } from 'discord.js';
+import { Colors, EmbedBuilder } from 'discord.js';
 import ms from 'ms';
 
 export default class ReminderCommand extends Command {
@@ -71,7 +71,7 @@ export default class ReminderCommand extends Command {
 
     const embed = new EmbedBuilder()
       .setTitle(`⏰ | ${t('command:reminders/info/embed/title')}`)
-      .setColor('Yellow')
+      .setColor(Colors.Yellow)
       .setTimestamp()
       .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
       .setDescription(
