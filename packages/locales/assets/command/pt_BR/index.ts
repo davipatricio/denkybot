@@ -260,6 +260,11 @@ export default {
   'ban/remove/complete': (userId: string) => `O banimento do id \`${userId}\` foi removido.`,
   'ban/remove/autocomplete/noBans': 'Nenhum banimento encontrado.',
 
+  // Ban list
+  'ban/list/error/noGuildBans': 'Este servidor não possui banimentos.',
+  'ban/list/embed/title': (guildName: string) => `🔨 Lista de banimentos do servidor ${guildName}`,
+  'ban/list/noReason': 'Sem motivo.',
+
   // Giveaway
   'giveaway/create/no-description': 'Sorteio sem descrição.',
   'giveaway/create/invalid-time': 'O tempo inserido é invalido, por favor, tente novamente.',

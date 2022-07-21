@@ -257,6 +257,11 @@ export default {
   'ban/remove/complete': (userId: string) => `The ban on \`${userId}\` id was removed.`,
   'ban/remove/autocomplete/noBans': 'No bans found.',
 
+  // Ban list
+  'ban/list/error/noGuildBans': 'This server does not have bans.',
+  'ban/list/embed/title': (guildName: string) => `🔨 ${guildName}'s bans`,
+  'ban/list/noReason': 'No reason.',
+
   // Giveaway
   'giveaway/create/no-description': 'Giveaway without description.',
   'giveaway/create/invalid-time': 'The entered duration is invalid, please try again.',
