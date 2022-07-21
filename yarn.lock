@@ -50,7 +50,7 @@ __metadata:
   resolution: "@denkylabs/denkybot@workspace:packages/bot"
   dependencies:
     "@types/node": "npm:18.0.6"
-    "@types/uuid": "npm:^8"
+    "@types/uuid": "npm:8.3.4"
     bufferutil: "npm:4.0.6"
     dayjs: "npm:1.11.4"
     discord.js: "npm:14.0.3"
@@ -419,7 +419,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:^8":
+"@types/uuid@npm:8.3.4":
   version: 8.3.4
   resolution: "@types/uuid@npm:8.3.4"
   checksum: 42fa6d1868c459444c257fe418f624067aabfbe550ce97d9c124c5759a16f03bc475dc82086eefee807571608830b2f955e688c0e63e40aad5eb29b573471492
