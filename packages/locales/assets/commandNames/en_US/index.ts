@@ -67,12 +67,19 @@ export default {
   'suggestion/deny/reason': 'reason',
 
   // Ban
-  ban: 'ban',
+  ban: 'ban user | info | list',
+  'ban/name': 'ban',
   'ban/user': 'user',
   'ban/delete_messages': 'delete_messages',
   'ban/delete_messages/day': 'day',
   'ban/delete_messages/days': 'days',
   'ban/reason': 'reason',
+  'ban/info': 'info',
+  'ban/info/user': 'user',
+  'ban/remove': 'remove',
+  'ban/remove/user': 'user',
+  'ban/remove/reason': 'reason',
+  'ban/list': 'list',
 
   // Wikipedia
   'wikipedia/search': 'search',

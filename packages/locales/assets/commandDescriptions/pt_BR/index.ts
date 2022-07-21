@@ -70,10 +70,17 @@ export default {
   'suggestions/deny/reason': 'A razão para recusar a sugestão',
 
   // Ban
-  ban: 'Bane um usuário do servidor',
-  'ban/user': 'O usuário para banir',
+  ban: 'Comando para ver as informações de um banimento',
+  'ban/user': 'Bane um usuário do servidor',
+  'ban/user/user': 'O usuário para banir',
   'ban/delete_messages': 'Se devo ou não excluir as mensagens do usuário banido',
   'ban/reason': 'O motivo do banimento',
+  'ban/info': 'Veja informações sobre um usuário banido',
+  'ban/info/user': 'O usuário que deseja ver as informações',
+  'ban/remove': 'Remove um banimento de um usuário',
+  'ban/remove/user': 'O usuário para remover o banimento',
+  'ban/remove/reason': 'A razão para remover o banimento',
+  'ban/list': 'Veja a lista de todos os usuários banidos',
 
   // Wikipedia
   wikipedia: 'Veja informações sobre uma página da Wikipedia',

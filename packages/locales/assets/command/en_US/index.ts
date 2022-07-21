@@ -188,16 +188,16 @@ export default {
   'suggestions/management/deny/denied/moved': 'The suggestion was successfully denied and moved to this channel!',
 
   // Ban
-  'ban/no-reason': 'No reason.',
-  'ban/punished-by': 'Punished by:',
-  'ban/complete': (user: User | string) => `The user ${user} was banned from the server.`,
-  'ban/error/ban-bot': 'I can not ban myself.',
-  'ban/error/ban-self': 'You can not ban yourself.',
-  'ban/error/not-bannable': "I can not punish this user because my highest role is below or equal to the user's highest role.",
-  'ban/error/no-permissions': "You cannot punish this user as their highest rank is below or in the same rank as the member's highest role.",
-  'ban/error/unknown-member': 'Unknown member.',
-  'ban/error/unknown-error': 'There was an error banning the user.',
-  'ban/error/maximum-bans': 'This server has already banned many members who never joined the server.',
+  'ban/user/no-reason': 'No reason.',
+  'ban/user/punished-by': 'Punished by:',
+  'ban/user/complete': (user: User | string) => `The user ${user} was banned from the server.`,
+  'ban/user/error/ban-bot': 'I can not ban myself.',
+  'ban/user/error/ban-self': 'You can not ban yourself.',
+  'ban/user/error/not-bannable': "I can not punish this user because my highest role is below or equal to the user's highest role.",
+  'ban/user/error/no-permissions': "You cannot punish this user as their highest rank is below or in the same rank as the member's highest role.",
+  'ban/user/error/unknown-member': 'Unknown member.',
+  'ban/user/error/unknown-error': 'There was an error banning the user.',
+  'ban/user/error/maximum-bans': 'This server has already banned many members who never joined the server.',
 
   // Wikipedia
   'wikipedia/error/no-results': '❌ **|** No results found.',
@@ -236,6 +236,31 @@ export default {
   'animal/cat': "Here's a picture of a cat 🐱",
   'animal/duck': "Here's a picture of a duck 🦆",
   'animal/foxy': "Here's a picture of a foxy 🦊",
+
+  // Ban info
+  'ban/info/error/noGuildBans': 'This server does not have bans.',
+  'ban/info/error/userNotFound': 'User not found.',
+  'ban/info/error/userNotBanned': 'User is not banned.',
+  'ban/info/noReason': 'No reason.',
+  'ban/info/embed/title': (user: User) => `${user.bot ? '<:botTag:230105988211015680>' : ''} Ban information from ${user.username}`,
+  'ban/info/embed/description': (reason: string) => `📖 Ban reason: **${reason}**`,
+  'ban/info/embed/field/name': '💁 User information',
+  'ban/info/autocomplete/noBans': 'No bans found.',
+  'ban/info/embed/field/value': (user: User) => `🔢 User Id: **${user.id}**\n🏷 Discord Tag: **${user.tag}**`,
+
+  // Ban remove
+  'ban/remove/noReason': 'No reason.',
+  'ban/remove/unbanned-by': 'Unbanned by:',
+  'ban/remove/error/noGuildBans': 'This server does not have bans.',
+  'ban/remove/error/noUserBanned': 'This user is not banned.',
+  'ban/remove/error/unknownError': 'There was an error removing the ban.',
+  'ban/remove/complete': (userId: string) => `The ban on \`${userId}\` id was removed.`,
+  'ban/remove/autocomplete/noBans': 'No bans found.',
+
+  // Ban list
+  'ban/list/error/noGuildBans': 'This server does not have bans.',
+  'ban/list/embed/title': (guildName: string) => `🔨 ${guildName}'s bans`,
+  'ban/list/noReason': 'No reason.',
 
   // Giveaway
   'giveaway/create/no-description': 'Giveaway without description.',
