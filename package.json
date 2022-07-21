@@ -48,5 +48,5 @@
     "tsc-alias": "1.7.0",
     "tslib": "2.4.0"
   },
-  "packageManager": "yarn@4.0.0-rc.13"
+  "packageManager": "yarn@4.0.0-rc.12"
 }
