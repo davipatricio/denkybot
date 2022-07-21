@@ -1,6 +1,6 @@
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import { ChannelType, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import { ChannelType, Colors, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 
 export default class ServerInfoSubCommand extends Command {
   constructor(client: DenkyClient) {
