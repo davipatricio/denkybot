@@ -17,7 +17,7 @@ export async function checkSingleEndedReminder(client: DenkyClient, remind: Remi
     return client.languages.manager.get(client.config.defaultLanguage as SupportedLocales, path, ...args);
   };
 
-  channel?.send(`⏲️ <@!${authorId}> **|** ${t('command:reminders/notify', authorId, text)}`);
+  channel?.send(`⏲️ <@!${authorId}> **|** ${t('command:reminders/notify', text)}`);
 }
 
 export async function checkEndedReminders(client: DenkyClient) {

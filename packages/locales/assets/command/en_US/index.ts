@@ -316,7 +316,7 @@ export default {
   'lockdown/sched/done': 'Successfully scheduled unlockdown. To cancel, use `/lockdown schedule unlock` again.',
 
   // Reminders
-  'reminders/notify': (userId: string, text: string) => `<@!${userId}> Reminder! \`${text}\``,
+  'reminders/notify': (text: string) => `Reminder! \`${text}\``,
   'reminders/create/time-big': 'The entered duration is too long. Please choose a duration between 1 second and 1 year.',
   'reminders/create/time-low': 'The entered duration is too small. Please choose a duration between 1 second and 1 year.',
   'reminders/create/created': (timestamp: number) => `Reminder created succesfully. I'll remember you at <t:${timestamp}>`
