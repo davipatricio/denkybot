@@ -323,5 +323,6 @@ export default {
   'reminders/info/not-found': "This reminder doesn't exist.",
   'reminders/info/embed/title': 'Reminder information',
   'reminders/info/embed/description': 'Description:',
-  'reminders/info/embed/ends-at': 'Ends at:'
+  'reminders/info/embed/ends-at': 'Ends at:',
+  'reminders/delete/deleted': 'Reminder deleted successfully.'
 } as const;

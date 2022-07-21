@@ -26,6 +26,9 @@ export default class ReminderCommand extends Command {
       case 'info':
         this.#info({ t, interaction });
         break;
+      case 'delete':
+        this.#delete({ t, interaction });
+        break;
     }
   }
 
@@ -78,6 +81,18 @@ export default class ReminderCommand extends Command {
       );
 
     interaction.editReply({ embeds: [embed] });
+  }
+
+  async #delete({ t, interaction }: CommandRunOptions) {
+    const reminder = await this.client.databases.getReminder(interaction.options.getString('id', true));
+    if (!reminder) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reminders/info/not-found')}`);
+      return;
+    }
+
+    await this.client.databases.deleteReminder(reminder.id);
+
+    interaction.editReply(`✅ ${interaction.user} **|** ${t('command:reminders/delete/deleted')}`);
   }
 
   override async runAutocomplete({ interaction }: AutocompleteRunOptions) {

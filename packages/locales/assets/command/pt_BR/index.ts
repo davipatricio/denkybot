@@ -327,5 +327,6 @@ export default {
   'reminders/info/not-found': 'Este lembrete não existe.',
   'reminders/info/embed/title': 'Informações do lembrete',
   'reminders/info/embed/description': 'Descrição:',
-  'reminders/info/embed/ends-at': 'Encerra em:'
+  'reminders/info/embed/ends-at': 'Encerra em:',
+  'reminders/delete/deleted': 'Lembrete deletado com sucesso.'
 } as const;
