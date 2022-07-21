@@ -313,5 +313,16 @@ export default {
 
   'lockdown/sched/no-lockdown': 'This server must have an active lockdown in order to schedule an unlock.',
   'lockdown/sched/deleted': 'There was already an unlockdown scheduled for this server, so we canceled the unlockdown.',
-  'lockdown/sched/done': 'Successfully scheduled unlockdown. To cancel, use `/lockdown schedule unlock` again.'
+  'lockdown/sched/done': 'Successfully scheduled unlockdown. To cancel, use `/lockdown schedule unlock` again.',
+
+  // Reminders
+  'reminders/notify': (text: string) => `Reminder! \`${text}\``,
+  'reminders/create/time-big': 'The entered duration is too long. Please choose a duration between 1 second and 1 year.',
+  'reminders/create/time-low': 'The entered duration is too small. Please choose a duration between 1 second and 1 year.',
+  'reminders/create/created': (timestamp: number) => `Reminder created succesfully. I'll remember you at <t:${timestamp}>`,
+  'reminders/info/not-found': "This reminder doesn't exist.",
+  'reminders/info/embed/title': 'Reminder information',
+  'reminders/info/embed/description': 'Description:',
+  'reminders/info/embed/ends-at': 'Ends at:',
+  'reminders/delete/deleted': 'Reminder deleted successfully.'
 } as const;

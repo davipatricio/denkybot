@@ -120,5 +120,15 @@ export default {
   'lockdown/disable': 'disable',
   'lockdown/schedule': 'schedule',
   'lockdown/schedule/unlockdown': 'unlock',
-  'lockdown/schedule/unlockdown/duration': 'duration'
+  'lockdown/schedule/unlockdown/duration': 'duration',
+
+  // Reminder
+  remind: 'remind',
+  'remind/create': 'create',
+  'remind/create/description': 'description',
+  'remind/create/duration': 'duration',
+  'remind/delete': 'delete',
+  'remind/delete/reminder': 'reminder',
+  'remind/info': 'info',
+  'remind/info/reminder': 'reminder'
 } as const;

@@ -1,15 +1,38 @@
-import { Afk, Giveaway, Lockdown, PrismaClient, Suggestion } from '@prisma-client';
+import { Afk, Giveaway, Lockdown, PrismaClient, Reminder, Suggestion } from '@prisma-client';
 
 export type SuggestionConfig = Partial<Suggestion> & Pick<Suggestion, 'guildId'>;
 export type AFKConfig = Partial<Afk> & Pick<Afk, 'userId' | 'startTime'>;
 export type GiveawayConfig = Giveaway;
 export type LockdownConfig = Lockdown;
+export type ReminderConfig = Reminder;
 
 export class DatabaseManager extends PrismaClient {
   constructor() {
     super();
     this.$connect();
   }
+
+  // #region Reminder
+  createReminder(data: Reminder) {
+    return this.reminder.create({ data });
+  }
+
+  getReminder(id: string) {
+    return this.reminder.findFirst({ where: { id } });
+  }
+
+  getReminders(authorId: string) {
+    return this.reminder.findMany({
+      where: {
+        authorId
+      }
+    });
+  }
+
+  deleteReminder(id: string) {
+    return this.reminder.delete({ where: { id } });
+  }
+  // #endregion
 
   // #region Lockdown
   createLockdown(data: Lockdown) {
