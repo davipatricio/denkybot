@@ -1,4 +1,4 @@
-import { Command, CommandRunOptions } from '#structures/Command';
+import { AutocompleteRunOptions, Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
 import { generateUuid } from '@bot/src/helpers/IdGenerator';
 import { parseTime } from '@bot/src/helpers/Timestamp';
@@ -53,5 +53,20 @@ export default class ReminderCommand extends Command {
       channelId: interaction.channel!.id,
       endTimestamp: BigInt(endTimestamp)
     });
+  }
+
+  override async runAutocomplete({ interaction }: AutocompleteRunOptions) {
+    switch (interaction.options.getSubcommand()) {
+      case 'delete':
+      case 'info': {
+        const reminders = await this.client.databases.getReminders(interaction.user.id);
+        if (!reminders.length) {
+          interaction.respond([]);
+          return;
+        }
+        interaction.respond(reminders.map(reminder => ({ name: `⏰ | ${reminder.text.slice(0, 30)}`, value: reminder.id })));
+        break;
+      }
+    }
   }
 }

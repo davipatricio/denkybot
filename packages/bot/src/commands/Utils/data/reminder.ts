@@ -30,7 +30,37 @@ export default class ReminderData extends CommandDataStructure {
               name: 'duration',
               type: ApplicationCommandOptionType.String,
               description: 'Duração',
-              required: true
+              required: true,
+              minLength: 1,
+              maxLength: 20
+            }
+          ]
+        },
+        {
+          name: 'delete',
+          type: ApplicationCommandOptionType.Subcommand,
+          description: 'Delete a reminder',
+          options: [
+            {
+              name: 'id',
+              type: ApplicationCommandOptionType.String,
+              description: 'Reminder ID',
+              required: true,
+              autocomplete: true
+            }
+          ]
+        },
+        {
+          name: 'info',
+          type: ApplicationCommandOptionType.Subcommand,
+          description: 'Get info about a reminder',
+          options: [
+            {
+              name: 'id',
+              type: ApplicationCommandOptionType.String,
+              description: 'Reminder ID',
+              required: true,
+              autocomplete: true
             }
           ]
         }
