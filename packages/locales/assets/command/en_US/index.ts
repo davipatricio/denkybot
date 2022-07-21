@@ -313,5 +313,8 @@ export default {
 
   'lockdown/sched/no-lockdown': 'This server must have an active lockdown in order to schedule an unlock.',
   'lockdown/sched/deleted': 'There was already an unlockdown scheduled for this server, so we canceled the unlockdown.',
-  'lockdown/sched/done': 'Successfully scheduled unlockdown. To cancel, use `/lockdown schedule unlock` again.'
+  'lockdown/sched/done': 'Successfully scheduled unlockdown. To cancel, use `/lockdown schedule unlock` again.',
+
+  // Reminders
+  'reminders/notify': (userId: string, text: string) => `<@!${userId}> Reminder! \`${text}\``
 } as const;

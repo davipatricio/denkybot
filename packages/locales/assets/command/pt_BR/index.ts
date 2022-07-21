@@ -317,5 +317,8 @@ export default {
 
   'lockdown/sched/no-lockdown': 'Este servidor precisa ter um lockdown ativo para poder agendar um desbloqueio.',
   'lockdown/sched/deleted': 'Já havia um unlockdown programado para este servidor, então cancelamos o unlockdown.',
-  'lockdown/sched/done': 'Unlockdown programado com sucesso. Para cancelar, utilize `/lockdown agendar desbloqueio` novamente.'
+  'lockdown/sched/done': 'Unlockdown programado com sucesso. Para cancelar, utilize `/lockdown agendar desbloqueio` novamente.',
+
+  // Reminders
+  'reminders/notify': (userId: string, text: string) => `<@!${userId}> Lembrete! \`${text}\``
 } as const;
