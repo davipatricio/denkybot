@@ -22,7 +22,7 @@ export default class ServerInfoSubCommand extends Command {
     const voiceChannels = interaction.guild!.channels.cache.filter(c => c.type === ChannelType.GuildText).size.toString();
 
     const embed = new EmbedBuilder()
-      .setColor('Blurple')
+      .setColor(Colors.Blurple)
       .setAuthor({
         name: interaction.guild!.name,
         iconURL: interaction.guild!.iconURL() as string

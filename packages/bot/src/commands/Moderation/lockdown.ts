@@ -2,7 +2,7 @@
 import { parseTime } from '#helpers/Timestamp';
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ComponentType, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, Colors, ComponentType, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 import ms from 'ms';
 
 const Cooldowns = new Map<string, number>();
@@ -180,7 +180,7 @@ export default class LockdownCommand extends Command {
             .map(i => `<#${i}>`)
             .join(' ') || t('command:lockdown/enable/embed/empty')
         )
-        .setColor('Blurple');
+        .setColor(Colors.Blurple);
       await this.client.databases.deleteLockdown(interaction.guild!.id);
 
       if (blockedChannels.length) {
@@ -325,7 +325,7 @@ export default class LockdownCommand extends Command {
             .map(i => `<#${i}>`)
             .join(' ') || t('command:lockdown/disable/embed/empty')
         )
-        .setColor('Blurple')
+        .setColor(Colors.Blurple)
         .setTimestamp();
 
       await this.client.databases.deleteLockdown(interaction.guild!.id);

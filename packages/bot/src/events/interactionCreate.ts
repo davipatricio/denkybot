@@ -3,7 +3,7 @@ import { recommendLocale } from '#helpers/Locale';
 import type { Command, CommandLocale, CommandRunOptions } from '#structures/Command';
 import { Event } from '#structures/Event';
 import type { DenkyClient } from '#types/Client';
-import { ChannelType, ChatInputCommandInteraction, EmbedBuilder, Interaction, InteractionType, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
+import { ChannelType, ChatInputCommandInteraction, Colors, EmbedBuilder, Interaction, InteractionType, PermissionsBitField, TextChannel, WebhookClient } from 'discord.js';
 
 export default class InteractionCreateEvent extends Event {
   /** Webhook used to log commands */
@@ -63,7 +63,7 @@ export default class InteractionCreateEvent extends Event {
     const embed = new EmbedBuilder()
       .setTitle('⚙️ A command was run')
       .setDescription(`\`\`\`${interaction.toString()}\`\`\``)
-      .setColor('Green')
+      .setColor(Colors.Green)
       .addFields([
         {
           name: 'User information',

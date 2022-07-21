@@ -1,6 +1,6 @@
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, GuildMember, PermissionFlagsBits } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, GuildMember, PermissionFlagsBits } from 'discord.js';
 
 export default class UserAvatarSubCommand extends Command {
   constructor(client: DenkyClient) {
@@ -42,7 +42,7 @@ export default class UserAvatarSubCommand extends Command {
     const embed = new EmbedBuilder()
       .setTitle(t('command:user/avatar/title', user.username))
       .setImage(guildAvatar ?? userAvatar)
-      .setColor('Green');
+      .setColor(Colors.Green);
     const message = await interaction.editReply({
       content: interaction.user.toString(),
       embeds: [embed],

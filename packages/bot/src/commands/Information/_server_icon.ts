@@ -1,6 +1,6 @@
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 
 export default class ServerIconSubCommand extends Command {
   constructor(client: DenkyClient) {
@@ -27,7 +27,7 @@ export default class ServerIconSubCommand extends Command {
       return;
     }
 
-    const embed = new EmbedBuilder().setColor('Blurple').setTitle(t('command:server/icon/title', interaction.guild!.name)).setImage(guildIcon);
+    const embed = new EmbedBuilder().setColor(Colors.Blurple).setTitle(t('command:server/icon/title', interaction.guild!.name)).setImage(guildIcon);
     const button = new ButtonBuilder().setURL(guildIcon).setStyle(ButtonStyle.Link).setLabel(t('command:server/icon/browser'));
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents([button]);
 

@@ -1,6 +1,6 @@
 import { Event } from '#structures/Event';
 import type { DenkyClient } from '#types/Client';
-import { EmbedBuilder, Guild, WebhookClient } from 'discord.js';
+import { Colors, EmbedBuilder, Guild, WebhookClient } from 'discord.js';
 
 export default class GuildDeleteEvent extends Event {
   /** Webhook used to log server deletions */
@@ -19,7 +19,7 @@ export default class GuildDeleteEvent extends Event {
       });
 
     const embed = new EmbedBuilder()
-      .setColor('Red')
+      .setColor(Colors.Red)
       .setTitle('➖ Removed from a server')
       .addFields([
         {

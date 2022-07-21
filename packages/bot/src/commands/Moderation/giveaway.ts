@@ -3,7 +3,7 @@ import type { DenkyClient } from '#types/Client';
 import { checkSingleEndedGiveaway } from '@bot/src/helpers/Giveaway';
 import { parseTime } from '@bot/src/helpers/Timestamp';
 import type { Giveaway } from '@prisma-client';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, TextBasedChannel } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, PermissionFlagsBits, TextBasedChannel } from 'discord.js';
 import ms from 'ms';
 
 export default class GiveawayCommand extends Command {
@@ -64,7 +64,7 @@ export default class GiveawayCommand extends Command {
       .setDescription(
         `${description}\n\n🔢 **${t('command:giveaway/create/embed/winners')}**: ${winnerAmount}\n⏲️ **${t('command:giveaway/create/embed/ends-in')}**: <t:${Math.round(endTimestamp / 1000)}:R>`
       )
-      .setColor('Yellow');
+      .setColor(Colors.Yellow);
 
     const message = await channel.send({ embeds: [embed], components: [row] });
     if (channel.id !== interaction.channelId) interaction.editReply(`✅ ${interaction.user} **|** ${t('command:giveaway/create/created', message.url)}`);
