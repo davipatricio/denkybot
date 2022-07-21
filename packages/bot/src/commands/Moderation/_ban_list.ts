@@ -1,4 +1,4 @@
-import { EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import { Colors, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
 
@@ -26,7 +26,7 @@ export default class BanListSubCommand extends Command {
 
     const embed = new EmbedBuilder()
       .setTitle(t('command:ban/list/embed/title', interaction.guild.name))
-      .setColor('Purple')
+      .setColor(Colors.Purple)
       .setFooter({
         text: interaction.user.tag,
         iconURL: interaction.user.displayAvatarURL()

@@ -1,4 +1,4 @@
-import { EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import { Colors, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 import { AutocompleteRunOptions, Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
 
@@ -31,7 +31,7 @@ export default class BanInfoSubCommand extends Command {
     }
 
     const embed = new EmbedBuilder()
-      .setColor('Purple')
+      .setColor(Colors.Purple)
       .setThumbnail(ban.user.displayAvatarURL({ extension: 'png', size: 1024 }))
       .setTitle(t('command:ban/info/embed/title', ban.user))
       .setDescription(t('command:ban/info/embed/description', ban.reason ?? t('command:ban/info/noReason')))
