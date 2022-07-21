@@ -8,7 +8,7 @@ import ms from 'ms';
 export default class ReminderCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
-    this.rawName = 'PING';
+    this.rawName = 'REMIND';
     this.rawCategory = 'UTILS';
     this.config = {
       autoDefer: true,
