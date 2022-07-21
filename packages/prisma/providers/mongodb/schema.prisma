@@ -46,3 +46,11 @@ model UnlockdownTask {
   guildId String @id @default("") @map("_id") @db.ObjectId
   endTimestamp BigInt
 }
+
+model Reminder {
+  id String @id @default("") @map("_id") @db.ObjectId
+  channelId String?
+  authorId String @default("")
+  text String @default("")
+  endTimestamp BigInt
+}

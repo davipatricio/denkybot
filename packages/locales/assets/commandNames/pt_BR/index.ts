@@ -122,5 +122,15 @@ export default {
   'lockdown/disable': 'desativar',
   'lockdown/schedule': 'agendar',
   'lockdown/schedule/unlockdown': 'desbloqueio',
-  'lockdown/schedule/unlockdown/duration': 'duração'
+  'lockdown/schedule/unlockdown/duration': 'duração',
+
+  // Reminder
+  remind: 'lembrete',
+  'remind/create': 'criar',
+  'remind/create/description': 'descrição',
+  'remind/create/duration': 'duração',
+  'remind/delete': 'excluir',
+  'remind/delete/reminder': 'lembrete',
+  'remind/info': 'info',
+  'remind/info/reminder': 'lembrete'
 } as const;

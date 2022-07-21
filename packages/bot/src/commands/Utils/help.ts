@@ -1,7 +1,7 @@
 import type { CommandCategoriesKeys, CommandDescriptionsKeys, CommandNamesKeys } from '#lib/managers/LanguageManager';
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, SelectMenuBuilder, SelectMenuInteraction, SelectMenuOptionBuilder } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, PermissionFlagsBits, SelectMenuBuilder, SelectMenuInteraction, SelectMenuOptionBuilder } from 'discord.js';
 
 export default class HelpCommand extends Command {
   constructor(client: DenkyClient) {
@@ -33,7 +33,7 @@ export default class HelpCommand extends Command {
         text: interaction.user.tag,
         iconURL: interaction.user.displayAvatarURL()
       })
-      .setColor('Blurple');
+      .setColor(Colors.Blurple);
 
     const Row = new ActionRowBuilder<SelectMenuBuilder>();
     const finalSelect = new SelectMenuBuilder().setCustomId('help').setPlaceholder(t('command:help/menu/placeholder'));
@@ -82,7 +82,7 @@ export default class HelpCommand extends Command {
       await int.deferUpdate();
 
       const rawCategory = categoriesEmoji[int.values[0]];
-      const embed = new EmbedBuilder().setTitle(rawCategory).setColor('Yellow');
+      const embed = new EmbedBuilder().setTitle(rawCategory).setColor(Colors.Yellow);
 
       embed.setDescription(categories[rawCategory].join('\n'));
       interaction.inGuild()

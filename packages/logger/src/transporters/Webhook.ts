@@ -1,11 +1,10 @@
-import { EmbedBuilder, WebhookClient } from 'discord.js';
+import { Colors, EmbedBuilder, WebhookClient } from 'discord.js';
 import { inspect } from 'util';
 import type { LogCallback, LogEntry } from 'winston';
 import Transport from 'winston-transport';
 
 export class WebhookTransporter extends Transport {
   private readonly webhook: WebhookClient;
-
   constructor(url: string) {
     super({ level: 'error' });
     this.webhook = new WebhookClient({ url });
@@ -13,7 +12,7 @@ export class WebhookTransporter extends Transport {
 
   override log(info: LogEntry, callback: LogCallback) {
     const embed = new EmbedBuilder()
-      .setColor('Purple')
+      .setColor(Colors.Purple)
       .setAuthor({
         name: info.level.includes('warn') ? '⚠ WARN' : '❌ ERROR'
       })

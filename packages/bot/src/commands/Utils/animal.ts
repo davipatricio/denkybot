@@ -1,6 +1,6 @@
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import { EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import { Colors, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 
 export default class AnimalCommand extends Command {
   constructor(client: DenkyClient) {
@@ -16,7 +16,7 @@ export default class AnimalCommand extends Command {
   }
 
   override async run({ t, interaction }: CommandRunOptions) {
-    const baseEmbed = new EmbedBuilder().setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() }).setTimestamp().setColor('Purple');
+    const baseEmbed = new EmbedBuilder().setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() }).setTimestamp().setColor(Colors.Purple);
 
     switch (interaction.options.getSubcommand(true)) {
       case 'bunny':

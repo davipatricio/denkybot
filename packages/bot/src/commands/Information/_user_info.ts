@@ -1,6 +1,6 @@
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import { EmbedBuilder, escapeMarkdown, GuildMember, PermissionFlagsBits } from 'discord.js';
+import { Colors, EmbedBuilder, escapeMarkdown, GuildMember, PermissionFlagsBits } from 'discord.js';
 
 export default class UserInfoSubCommand extends Command {
   constructor(client: DenkyClient) {
@@ -23,7 +23,7 @@ export default class UserInfoSubCommand extends Command {
     const cleanUsername = escapeMarkdown(user.username);
 
     const embed = new EmbedBuilder()
-      .setColor('Blurple')
+      .setColor(Colors.Blurple)
       .setTitle(cleanUsername)
       .addFields([
         {

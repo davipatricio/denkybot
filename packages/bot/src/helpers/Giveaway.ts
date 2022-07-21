@@ -3,7 +3,7 @@ import { recommendLocale } from '@bot/src/helpers/Locale';
 import type { CommandLocale } from '@bot/src/structures/Command';
 import type { Giveaway } from '@prisma-client';
 import dayjs from 'dayjs';
-import { ActionRowBuilder, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
+import { ActionRowBuilder, Colors, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 
 export async function handleInteraction(client: DenkyClient, interaction: Interaction) {
   const guildLocale = recommendLocale(interaction.guild!.preferredLocale);
@@ -97,7 +97,7 @@ export async function checkSingleEndedGiveaway(client: DenkyClient, giveaway: Gi
   const embed = new EmbedBuilder(message.embeds[0].toJSON())
     .setDescription(t('command:giveaway/helper/embed/description', description, winnerAmount, Math.round(Date.now() / 1000)))
     .setFooter({ text: `⏰ ${t('command:giveaway/helper/embed/footer')}` })
-    .setColor('Green');
+    .setColor(Colors.Green);
 
   const row = new ActionRowBuilder<SelectMenuBuilder>();
 
@@ -125,7 +125,7 @@ export async function checkSingleEndedGiveaway(client: DenkyClient, giveaway: Gi
             value: t('command:giveaway/helper/embed/fieldTwo/value')
           }
         ])
-        .setColor('Red');
+        .setColor(Colors.Red);
     row.setComponents([
       new SelectMenuBuilder()
         .setCustomId('giveaway_dropdown')
@@ -142,7 +142,7 @@ export async function checkSingleEndedGiveaway(client: DenkyClient, giveaway: Gi
           value: t('command:giveaway/helper/embed/fieldThree/value')
         }
       ])
-      .setColor('Red');
+      .setColor(Colors.Red);
     row.setComponents([
       new SelectMenuBuilder()
         .setCustomId('giveaway_dropdown')

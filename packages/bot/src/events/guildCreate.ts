@@ -1,6 +1,6 @@
 import { Event } from '#structures/Event';
 import type { DenkyClient } from '#types/Client';
-import { EmbedBuilder, Guild, WebhookClient } from 'discord.js';
+import { Colors, EmbedBuilder, Guild, WebhookClient } from 'discord.js';
 
 export default class GuildCreateEvent extends Event {
   /** Webhook used to log server joins */
@@ -19,7 +19,7 @@ export default class GuildCreateEvent extends Event {
       });
 
     const embed = new EmbedBuilder()
-      .setColor('Green')
+      .setColor(Colors.Green)
       .setTitle('➕ Added in a new server')
       .addFields([
         {

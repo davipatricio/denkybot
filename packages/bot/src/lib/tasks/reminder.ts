@@ -1,11 +1,11 @@
 import { Task } from '#structures/Task';
 import type { DenkyClient } from '#types/Client';
-import { checkEndedGiveaways, deleteOldGiveaways } from '@bot/src/helpers/Giveaway';
+import { checkEndedReminders } from '@bot/src/helpers/Reminder';
 
-export default class GiveawayTask extends Task {
+export default class ReminderTask extends Task {
   constructor() {
     super();
-    this.name = 'Check for ended giveaways';
+    this.name = 'Check for ended reminders';
     this.delay = 15000;
     this.interval = null;
   }
@@ -18,7 +18,6 @@ export default class GiveawayTask extends Task {
     }
 
     if (!client.isReady()) return;
-    checkEndedGiveaways(client);
-    deleteOldGiveaways(client);
+    checkEndedReminders(client);
   }
 }

@@ -1,6 +1,6 @@
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import { EmbedBuilder, Locale } from 'discord.js';
+import { Colors, EmbedBuilder, Locale } from 'discord.js';
 import { request } from 'undici';
 
 export default class WikipediaCommand extends Command {
@@ -34,7 +34,7 @@ export default class WikipediaCommand extends Command {
 
     const embed = new EmbedBuilder()
       .setTimestamp()
-      .setColor('Purple')
+      .setColor(Colors.Purple)
       .setFooter({
         text: interaction.user.tag,
         iconURL: interaction.user.displayAvatarURL()

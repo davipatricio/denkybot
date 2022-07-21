@@ -124,5 +124,15 @@ export default {
   'lockdown/disable': 'Desbloqueia todos os canais que foram bloqueados por mim',
   'lockdown/schedule': 'Agende um horário para o desbloqueio dos canais',
   'lockdown/schedule/unlockdown': 'Agende um horário para o desbloqueio dos canais',
-  'lockdown/schedule/unlockdown/duration': 'Quando deverei realizar o desbloqueio? (1d, 5d 2h, 14/07 20:00, 05:00 etc)'
+  'lockdown/schedule/unlockdown/duration': 'Quando deverei realizar o desbloqueio? (1d, 5d 2h, 14/07 20:00, 05:00 etc)',
+
+  // Reminder
+  remind: 'Crie um lembrete',
+  'remind/create': 'Crie um lembrete para se lembrar de algo',
+  'remind/create/description': 'Descrição do lembrete',
+  'remind/create/duration': 'Quando deverei te lembrar? (1d, 5d 2h, 14/07 20:00, 05:00 etc)',
+  'remind/delete': 'Apague um lembrete que você criou anteriormente',
+  'remind/delete/reminder': 'Escolha um lembrete para excluir',
+  'remind/info': 'Obtenha informações sobre um lembrete',
+  'remind/info/reminder': 'Escolha um lembrete para ver informações'
 } as const;

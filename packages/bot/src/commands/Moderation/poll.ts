@@ -1,6 +1,6 @@
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import { EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import { Colors, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
 
 const MappedNumericEmojis = {
   1: '1️⃣',
@@ -47,7 +47,7 @@ export default class PollCommand extends Command {
 
         const embed = new EmbedBuilder()
           .setTitle(`📊 ${t('command:poll/create/title')}`)
-          .setColor('Blurple')
+          .setColor(Colors.Blurple)
           .setFooter({
             text: t('command:poll/create/footer', interaction.user.tag),
             iconURL: interaction.user.displayAvatarURL()

@@ -154,7 +154,7 @@ export default class PingCommand extends Command {
 
       const embed = new EmbedBuilder(suggestionMessage.embeds[0].toJSON())
         .setTitle(`❌ • ${t('command:suggestions/management/deny/embed/title')}`)
-        .setColor('Green')
+        .setColor(Colors.Green)
         .addFields([
           {
             name: t('command:suggestions/management/embed/answer'),
@@ -173,7 +173,7 @@ export default class PingCommand extends Command {
 
       if (config.sendNotices && suggesterId) {
         const noticeEmbed = new EmbedBuilder()
-          .setColor('Red')
+          .setColor(Colors.Red)
           .setTimestamp()
           .setDescription(`❌ **|** ${t('command:suggestions/management/deny/memberdm', embed.data.description?.replace('> ', '').slice(0, 15) ?? '', interaction.user, suggestionMessage.url)}`);
         interaction.guild.members
@@ -281,7 +281,7 @@ export default class PingCommand extends Command {
 
       const embed = new EmbedBuilder(suggestionMessage.embeds[0].toJSON())
         .setTitle(`✅ • ${t('command:suggestions/management/accept/embed/title')}`)
-        .setColor('Green')
+        .setColor(Colors.Green)
         .addFields([
           {
             name: t('command:suggestions/management/embed/answer'),
@@ -300,7 +300,7 @@ export default class PingCommand extends Command {
 
       if (config.sendNotices && suggesterId) {
         const noticeEmbed = new EmbedBuilder()
-          .setColor('Green')
+          .setColor(Colors.Green)
           .setTimestamp()
           .setDescription(`✅ **|** ${t('command:suggestions/management/accept/memberdm', embed.data.description?.replace('> ', '').slice(0, 15) ?? '', interaction.user, suggestionMessage.url)}`);
         interaction.guild.members
@@ -421,7 +421,7 @@ export default class PingCommand extends Command {
         const embed = new EmbedBuilder()
           .setTitle(`💡 • ${t('command:suggestions/embed/title')}`)
           .setDescription(`> ${text}`)
-          .setColor('Yellow')
+          .setColor(Colors.Yellow)
           .setTimestamp()
           .setFooter({
             text: `[${t('command:suggestions/edit/embed/edited')}] ${interaction.user.tag} (${interaction.user.id})`,
@@ -522,7 +522,7 @@ export default class PingCommand extends Command {
         const embed = new EmbedBuilder()
           .setTitle(`💡 • ${t('command:suggestions/embed/title')}`)
           .setDescription(`> ${text}`)
-          .setColor('Yellow')
+          .setColor(Colors.Yellow)
           .setTimestamp()
           .setFooter({
             text: `${interaction.user.tag} (${interaction.user.id})`,

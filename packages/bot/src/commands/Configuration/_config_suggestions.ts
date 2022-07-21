@@ -1,7 +1,7 @@
 import { Command, CommandLocale, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
 import type { Suggestion } from '@prisma-client';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ChatInputCommandInteraction, EmbedBuilder, Message, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ChatInputCommandInteraction, Colors, EmbedBuilder, Message, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 import ms from 'ms';
 
 type PageTypes = 'sugestoes' | 'categorias' | 'reacoes' | 'cooldown' | 'threads' | 'notices';
@@ -274,7 +274,7 @@ export default class SuggestionsSubCommand extends Command {
       timestamp: Date.now(),
       footer: { text: user.tag, iconURL: user.displayAvatarURL() }
     })
-      .setColor('Blurple')
+      .setColor(Colors.Blurple)
       .setTitle(`🔧 ${t('command:config/suggestions/title')}`);
     switch (page) {
       case 'sugestoes':

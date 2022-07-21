@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "18.0.6",
+    "@types/uuid": "8.3.4",
     "tsc-alias": "1.7.0"
   },
   "dependencies": {
@@ -39,7 +40,8 @@
     "tslib": "2.4.0",
     "undici": "5.8.0",
     "utf-8-validate": "5.0.9",
-    "utility-types": "3.10.0"
+    "utility-types": "3.10.0",
+    "uuid": "8.3.2"
   },
   "optionalDependencies": {
     "erlpack": "0.1.4",
