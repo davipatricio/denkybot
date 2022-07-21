@@ -191,16 +191,16 @@ export default {
   'suggestions/management/deny/denied/moved': 'A sugestão foi recusada com sucesso e movida para este canal!',
 
   // Ban
-  'ban/no-reason': 'Sem motivo.',
-  'ban/punished-by': 'Punido por:',
-  'ban/complete': (user: User | string) => `O usuário ${user} foi banido do servidor.`,
-  'ban/error/ban-bot': 'Eu não posso me banir.',
-  'ban/error/ban-self': 'Você não pode se banir.',
-  'ban/error/not-bannable': 'Não posso punir este usuário, pois meu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
-  'ban/error/no-permissions': 'Você não pode punir este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
-  'ban/error/unknown-member': 'Membro desconhecido.',
-  'ban/error/unknown-error': 'Ocorreu um erro ao banir o usuário.',
-  'ban/error/maximum-bans': 'Este servidor já baniu muitos membros que nunca entraram no servidor.',
+  'ban/user/no-reason': 'Sem motivo.',
+  'ban/user/punished-by': 'Punido por:',
+  'ban/user/complete': (user: User | string) => `O usuário ${user} foi banido do servidor.`,
+  'ban/user/error/ban-bot': 'Eu não posso me banir.',
+  'ban/user/error/ban-self': 'Você não pode se banir.',
+  'ban/user/error/not-bannable': 'Não posso punir este usuário, pois meu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'ban/user/error/no-permissions': 'Você não pode punir este usuário, pois seu maior cargo está abaixo ou na mesma posição do maior cargo do membro.',
+  'ban/user/error/unknown-member': 'Membro desconhecido.',
+  'ban/user/error/unknown-error': 'Ocorreu um erro ao banir o usuário.',
+  'ban/user/error/maximum-bans': 'Este servidor já baniu muitos membros que nunca entraram no servidor.',
 
   // Wikipedia
   'wikipedia/error/no-results': '❌ **|** Nenhum resultado encontrado.',
@@ -239,6 +239,31 @@ export default {
   'animal/cat': 'Aqui está uma imagem de um gato 🐱',
   'animal/duck': 'Aqui está uma imagem de um pato 🦆',
   'animal/foxy': 'Aqui está uma imagem de um raposa 🦊',
+
+  // Ban Info
+  'ban/info/error/noGuildBans': 'Este servidor não possui banimentos.',
+  'ban/info/error/userNotFound': 'Usuário não encontrado.',
+  'ban/info/error/userNotBanned': 'Este usuário não está banido.',
+  'ban/info/noReason': 'Nenhum motivo informado',
+  'ban/info/embed/title': (user: User) => `${user.bot ? '<:botTag:230105988211015680>' : ''} Informações do banimento de ${user.username}`,
+  'ban/info/embed/description': (reason: string) => `📖 Motivo do banimento: **${reason}**`,
+  'ban/info/embed/field/name': '💁 Informações do usuário',
+  'ban/info/autocomplete/noBans': 'Nenhum banimento encontrado.',
+  'ban/info/embed/field/value': (user: User) => `🔢 Id do usuário: **${user.id}**\n🏷 Tag no Discord: **${user.tag}**`,
+
+  // Ban remove
+  'ban/remove/noReason': 'Sem motivo.',
+  'ban/remove/unbanned-by': 'Desbanido por:',
+  'ban/remove/error/noGuildBans': 'Este servidor não possui banimentos.',
+  'ban/remove/error/noUserBanned': 'Este usuário não está banido do servidor.',
+  'ban/remove/error/unknownError': 'Ocorreu um erro ao remover o banimento.',
+  'ban/remove/complete': (userId: string) => `O banimento do id \`${userId}\` foi removido.`,
+  'ban/remove/autocomplete/noBans': 'Nenhum banimento encontrado.',
+
+  // Ban list
+  'ban/list/error/noGuildBans': 'Este servidor não possui banimentos.',
+  'ban/list/embed/title': (guildName: string) => `🔨 Lista de banimentos do servidor ${guildName}`,
+  'ban/list/noReason': 'Sem motivo.',
 
   // Giveaway
   'giveaway/create/no-description': 'Sorteio sem descrição.',

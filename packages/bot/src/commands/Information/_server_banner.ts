@@ -15,7 +15,9 @@ export default class ServerBannerSubCommand extends Command {
   }
 
   override run({ t, interaction }: CommandRunOptions) {
-    const guildBanner = interaction.guild!.bannerURL({
+    if (!interaction.inCachedGuild()) return;
+
+    const guildBanner = interaction.guild.bannerURL({
       size: 2048,
       extension: 'png'
     });
@@ -28,7 +30,7 @@ export default class ServerBannerSubCommand extends Command {
       return;
     }
 
-    const embed = new EmbedBuilder().setColor(Colors.Blurple).setTitle(t('command:server/banner/title', interaction.guild!.name)).setImage(guildBanner);
+    const embed = new EmbedBuilder().setColor(Colors.Blurple).setTitle(t('command:server/banner/title', interaction.guild.name)).setImage(guildBanner);
     const button = new ButtonBuilder().setURL(guildBanner).setStyle(ButtonStyle.Link).setLabel(t('command:server/banner/browser'));
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents([button]);
 
