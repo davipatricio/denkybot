@@ -117,5 +117,15 @@ export default {
   'lockdown/disable': 'Unblocks all channels that have been blocked by me',
   'lockdown/schedule': 'Schedule a time to unlock channels',
   'lockdown/schedule/unlockdown': 'Schedule a time to unlock channels',
-  'lockdown/schedule/unlockdown/duration': 'When should I unlock it? (1d, 5d 2h, 14/07 20:00, 05:00 etc)'
+  'lockdown/schedule/unlockdown/duration': 'When should I unlock it? (1d, 5d 2h, 14/07 20:00, 05:00 etc)',
+
+  // Reminder
+  remind: 'Create a reminder',
+  'remind/create': 'Create a reminder to remember something',
+  'remind/create/description': 'Reminder description',
+  'remind/create/duration': 'When should I remind you? (1d, 5d 2h, 14/07 20:00, 05:00 etc)',
+  'remind/delete': 'Delete a reminder you created earlier',
+  'remind/delete/reminder': 'Choose a reminder to delete',
+  'remind/info': 'Get information about a reminder',
+  'remind/info/reminder': 'Choose a reminder to see information'
 } as const;
