@@ -37,15 +37,15 @@ export default class ReminderCommand extends Command {
 
     // allow giveaways with durations between 30 seconds and 1 year
     if (endTimestamp - now <= 0 || endTimestamp - now < ms('1s')) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/create/time-low')}`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reminders/create/time-low')}`);
       return;
     }
     if (endTimestamp - now > ms('1y')) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/create/time-big')}`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reminders/create/time-big')}`);
       return;
     }
 
-    interaction.editReply(`✅ ${interaction.user} **|** Lembrete criado com sucesso.`);
+    interaction.editReply(`✅ ${interaction.user} **|** ${t('command:reminders/create/created', Math.round(endTimestamp / 1000))}`);
     await this.client.databases.createReminder({
       id: generateUuid(),
       authorId: interaction.user.id,

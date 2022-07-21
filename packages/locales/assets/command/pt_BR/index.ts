@@ -320,5 +320,8 @@ export default {
   'lockdown/sched/done': 'Unlockdown programado com sucesso. Para cancelar, utilize `/lockdown agendar desbloqueio` novamente.',
 
   // Reminders
-  'reminders/notify': (userId: string, text: string) => `<@!${userId}> Lembrete! \`${text}\``
+  'reminders/notify': (userId: string, text: string) => `<@!${userId}> Lembrete! \`${text}\``,
+  'reminders/create/time-big': 'O tempo inserido é muito grande. Por favor, escolha uma duração entre 1 segundo e 1 ano.',
+  'reminders/create/time-low': 'O tempo inserido é muito pequeno. Por favor, escolha uma duração entre 1 segundo e 1 ano.',
+  'reminders/create/created': (timestamp: number) => `Lembrete criado com sucesso. Eu irei te lembrar em <t:${timestamp}>`
 } as const;
