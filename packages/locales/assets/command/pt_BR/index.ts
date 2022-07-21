@@ -323,5 +323,9 @@ export default {
   'reminders/notify': (text: string) => `Lembrete! \`${text}\``,
   'reminders/create/time-big': 'O tempo inserido é muito grande. Por favor, escolha uma duração entre 1 segundo e 1 ano.',
   'reminders/create/time-low': 'O tempo inserido é muito pequeno. Por favor, escolha uma duração entre 1 segundo e 1 ano.',
-  'reminders/create/created': (timestamp: number) => `Lembrete criado com sucesso. Eu irei te lembrar em <t:${timestamp}>`
+  'reminders/create/created': (timestamp: number) => `Lembrete criado com sucesso. Eu irei te lembrar em <t:${timestamp}>`,
+  'reminders/info/not-found': 'Este lembrete não existe.',
+  'reminders/info/embed/title': 'Informações do lembrete',
+  'reminders/info/embed/description': 'Descrição:',
+  'reminders/info/embed/ends-at': 'Encerra em:'
 } as const;

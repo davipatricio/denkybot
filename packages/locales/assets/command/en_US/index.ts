@@ -319,5 +319,9 @@ export default {
   'reminders/notify': (text: string) => `Reminder! \`${text}\``,
   'reminders/create/time-big': 'The entered duration is too long. Please choose a duration between 1 second and 1 year.',
   'reminders/create/time-low': 'The entered duration is too small. Please choose a duration between 1 second and 1 year.',
-  'reminders/create/created': (timestamp: number) => `Reminder created succesfully. I'll remember you at <t:${timestamp}>`
+  'reminders/create/created': (timestamp: number) => `Reminder created succesfully. I'll remember you at <t:${timestamp}>`,
+  'reminders/info/not-found': "This reminder doesn't exist.",
+  'reminders/info/embed/title': 'Reminder information',
+  'reminders/info/embed/description': 'Description:',
+  'reminders/info/embed/ends-at': 'Ends at:'
 } as const;

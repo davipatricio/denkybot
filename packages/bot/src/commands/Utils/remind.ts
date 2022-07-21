@@ -2,6 +2,7 @@ import { AutocompleteRunOptions, Command, CommandRunOptions } from '#structures/
 import type { DenkyClient } from '#types/Client';
 import { generateUuid } from '@bot/src/helpers/IdGenerator';
 import { parseTime } from '@bot/src/helpers/Timestamp';
+import { EmbedBuilder } from 'discord.js';
 import ms from 'ms';
 
 export default class ReminderCommand extends Command {
@@ -21,6 +22,9 @@ export default class ReminderCommand extends Command {
     switch (interaction.options.getSubcommand(false)) {
       case 'create':
         this.#create({ t, interaction });
+        break;
+      case 'info':
+        this.#info({ t, interaction });
         break;
     }
   }
@@ -53,6 +57,27 @@ export default class ReminderCommand extends Command {
       channelId: interaction.channel!.id,
       endTimestamp: BigInt(endTimestamp)
     });
+  }
+
+  async #info({ t, interaction }: CommandRunOptions) {
+    const reminder = await this.client.databases.getReminder(interaction.options.getString('id', true));
+    if (!reminder) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reminders/info/not-found')}`);
+      return;
+    }
+
+    const embed = new EmbedBuilder()
+      .setTitle(`⏰ | ${t('command:reminders/info/embed/title')}`)
+      .setColor('Yellow')
+      .setTimestamp()
+      .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
+      .setDescription(
+        `💭 **${t('command:reminders/info/embed/description')}**: ${reminder.text}\n🕒 **${t('command:reminders/info/embed/ends-at')}**: <t:${Math.round(
+          Number(reminder.endTimestamp) / 1000
+        )}> (<t:${Math.round(Number(reminder.endTimestamp) / 1000)}:R>)`
+      );
+
+    interaction.editReply({ embeds: [embed] });
   }
 
   override async runAutocomplete({ interaction }: AutocompleteRunOptions) {
