@@ -46,6 +46,8 @@ type DenkyChatInputApplicationCommandData = ChatInputApplicationCommandData & {
   options?: DenkyApplicationCommandOptionData[];
 };
 
+const removeCmdArgs = (cmd: string): string => cmd.split(' ')[0];
+
 export class CommandDataStructure {
   data: ChatInputApplicationCommandData;
   constructor(client: DenkyClient);
@@ -55,9 +57,9 @@ export class CommandDataStructure {
   parseData(client: DenkyClient, rawData: DenkyChatInputApplicationCommandData) {
     this.data = {
       ...rawData,
-      name: client.languages.manager.get('en_US', `commandNames:${rawData.name}`),
+      name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${rawData.name}`)),
       nameLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', `commandNames:${rawData.name}`)
+        'pt-BR': removeCmdArgs(client.languages.manager.get('pt_BR', `commandNames:${rawData.name}`))
       },
       description: client.languages.manager.get('en_US', `commandDescriptions:${rawData.description}`),
       descriptionLocalizations: {
@@ -74,9 +76,9 @@ export class CommandDataStructure {
   static parseOptions(client: DenkyClient, rawData: DenkyApplicationCommandOptionData) {
     const finalObject = {
       ...rawData,
-      name: client.languages.manager.get('en_US', `commandNames:${rawData.name}`),
+      name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${rawData.name}`)),
       nameLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', `commandNames:${rawData.name}`)
+        'pt-BR': removeCmdArgs(client.languages.manager.get('pt_BR', `commandNames:${rawData.name}`))
       },
       description: client.languages.manager.get('en_US', `commandDescriptions:${rawData.description}`),
       descriptionLocalizations: {
@@ -95,9 +97,9 @@ export class CommandDataStructure {
         finalObject.options = ((rawData.options as DenkyApplicationCommandSubCommandData[] | undefined)?.map(subOption => {
           const subCommandFinalObject: ApplicationCommandSubCommandData = {
             ...subOption,
-            name: client.languages.manager.get('en_US', `commandNames:${subOption.name}`),
+            name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${subOption.name}`)),
             nameLocalizations: {
-              'pt-BR': client.languages.manager.get('pt_BR', `commandNames:${subOption.name}`)
+              'pt-BR': removeCmdArgs(client.languages.manager.get('pt_BR', `commandNames:${subOption.name}`))
             },
             description: client.languages.manager.get('en_US', `commandDescriptions:${subOption.description}`),
             descriptionLocalizations: {
@@ -122,9 +124,9 @@ export class CommandDataStructure {
       rawData.options.map((subOption: DenkyApplicationCommandSubCommandData) => {
         const subCommandGroupFinalObject = {
           ...subOption,
-          name: client.languages.manager.get('en_US', `commandNames:${rawData.name}`),
+          name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${rawData.name}`)),
           nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', `commandNames:${rawData.name}`)
+            'pt-BR': removeCmdArgs(client.languages.manager.get('pt_BR', `commandNames:${rawData.name}`))
           },
           description: client.languages.manager.get('en_US', `commandDescriptions:${rawData.description}`),
           descriptionLocalizations: {
