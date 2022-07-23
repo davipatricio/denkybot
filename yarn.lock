@@ -48,7 +48,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/denkybot@workspace:packages/bot"
   dependencies:
-    "@types/module-alias": "npm:^2"
+    "@types/module-alias": "npm:2.0.1"
     "@types/node": "npm:18.0.6"
     "@types/uuid": "npm:8.3.4"
     bufferutil: "npm:4.0.6"
@@ -88,7 +88,7 @@ __metadata:
   resolution: "@denkylabs/logger@workspace:packages/logger"
   dependencies:
     "@sentry/node": "npm:7.7.0"
-    "@types/module-alias": "npm:^2"
+    "@types/module-alias": "npm:2.0.1"
     discord.js: "npm:14.0.3"
     module-alias: "npm:2.2.2"
     winston: "npm:3.8.1"
@@ -110,7 +110,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/webserver@workspace:packages/webserver"
   dependencies:
-    "@types/module-alias": "npm:^2"
+    "@types/module-alias": "npm:2.0.1"
     "@types/node": "npm:18.0.6"
     discord.js: "npm:14.0.3"
     fastify: "npm:4.3.0"
@@ -415,7 +415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/module-alias@npm:^2":
+"@types/module-alias@npm:2.0.1":
   version: 2.0.1
   resolution: "@types/module-alias@npm:2.0.1"
   checksum: f3b20ebe1c080cdc0a551ed46a41af5bb05ad00d61daacf108a6b318589d50661ab525120e20933f017db7b8e049fce3a0389bf8e7cbbd4d51315541dbdbad88
