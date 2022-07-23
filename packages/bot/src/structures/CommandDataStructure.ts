@@ -94,27 +94,30 @@ export class CommandDataStructure {
       }
       case ApplicationCommandOptionType.Subcommand: {
         if (finalObject.type !== ApplicationCommandOptionType.Subcommand) break;
-        finalObject.options = ((rawData.options as DenkyApplicationCommandSubCommandData[] | undefined)?.map(subOption => {
-          const subCommandFinalObject: ApplicationCommandSubCommandData = {
-            ...subOption,
-            name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${subOption.name}`)),
-            nameLocalizations: {
-              'pt-BR': removeCmdArgs(client.languages.manager.get('pt_BR', `commandNames:${subOption.name}`))
-            },
-            description: client.languages.manager.get('en_US', `commandDescriptions:${subOption.description}`),
-            descriptionLocalizations: {
-              'pt-BR': client.languages.manager.get('pt_BR', `commandDescriptions:${subOption.description}`)
-            }
-          } as unknown as ApplicationCommandSubCommandData;
-
-          return subCommandFinalObject;
-        }) ?? undefined) as ApplicationCommandSubCommandData['options'];
-
+        finalObject.options = CommandDataStructure.#parseSubcommand(client, rawData.options as unknown as DenkyApplicationCommandSubCommandData[]);
         break;
       }
     }
 
     return finalObject;
+  }
+
+  static #parseSubcommand(client: DenkyClient, options: DenkyApplicationCommandSubCommandData[]) {
+    return (options?.map(option => {
+      const subCommandFinalObject = {
+        ...option,
+        name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${option.name}`)),
+        nameLocalizations: {
+          'pt-BR': removeCmdArgs(client.languages.manager.get('pt_BR', `commandNames:${option.name}`))
+        },
+        description: client.languages.manager.get('en_US', `commandDescriptions:${option.description}`),
+        descriptionLocalizations: {
+          'pt-BR': client.languages.manager.get('pt_BR', `commandDescriptions:${option.description}`)
+        }
+      };
+
+      return subCommandFinalObject;
+    }) ?? []) as unknown as ApplicationCommandSubCommandData['options'];
   }
 
   static #parseSubcommandGroup(client: DenkyClient, rawData: DenkyApplicationCommandSubGroupData) {
