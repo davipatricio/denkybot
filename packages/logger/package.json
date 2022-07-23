@@ -42,6 +42,6 @@
     "winston-transport": "4.5.0"
   },
   "devDependencies": {
-    "@types/module-alias": "^2"
+    "@types/module-alias": "2.0.1"
   }
 }
