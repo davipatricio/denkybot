@@ -1,3 +1,6 @@
+/* eslint-disable import/first */
+require('module-alias/register');
+
 import type { DenkyClient } from '#types/Client';
 import { inspect } from 'node:util';
 import { createLogger as createWinstonLogger, format, Logger, LoggerOptions } from 'winston';

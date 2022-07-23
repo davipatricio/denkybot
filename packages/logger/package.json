@@ -20,13 +20,28 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "lint:fix": "eslint src --fix",
-    "postbuild": "tsc-alias && node scripts/emptyYarnLock.js",
+    "postbuild": "node scripts/emptyYarnLock.js",
     "types:check": "tsc --noEmit"
+  },
+  "_moduleAliases": {
+    "@bot": "../bot",
+    "@locales": "../locales",
+    "@webserver": "../webserver",
+    "@logger": "../logger",
+    "@prisma-client": "../../node_modules/.prisma/client",
+    "#lib": "../bot/src/lib/",
+    "#helpers": "../bot/src/helpers/",
+    "#structures": "../bot/src/structures/",
+    "#types": "../bot/src/types/"
   },
   "dependencies": {
     "@sentry/node": "7.7.0",
     "discord.js": "14.0.3",
+    "module-alias": "2.2.2",
     "winston": "3.8.1",
     "winston-transport": "4.5.0"
+  },
+  "devDependencies": {
+    "@types/module-alias": "^2"
   }
 }
