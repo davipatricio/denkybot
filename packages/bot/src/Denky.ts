@@ -1,3 +1,6 @@
+/* eslint-disable import/first */
+require('module-alias/register');
+
 import { Initializer } from '#lib/utils/Initializer';
 import type { DenkyClient } from '#types/Client';
 import { Client, GatewayIntentBits, Partials } from 'discord.js';

@@ -19,7 +19,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "lint:fix": "eslint assets --fix",
-    "postbuild": "tsc-alias && node scripts/emptyYarnLock.js",
+    "postbuild": "node scripts/emptyYarnLock.js",
     "types:check": "tsc --noEmit"
   },
   "devDependencies": {

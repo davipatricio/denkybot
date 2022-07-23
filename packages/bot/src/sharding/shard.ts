@@ -1,3 +1,6 @@
+/* eslint-disable import/first */
+require('module-alias/register');
+
 import { createLogger } from '@logger';
 import { ShardingManager } from 'discord.js';
 import { config } from 'dotenv';

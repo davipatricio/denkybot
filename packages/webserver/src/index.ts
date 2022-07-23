@@ -1,3 +1,6 @@
+/* eslint-disable import/first */
+require('module-alias/register');
+
 import type { DenkyClient } from '#types/Client';
 import { APIInteraction, InteractionResponseType, InteractionType } from 'discord.js';
 import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';

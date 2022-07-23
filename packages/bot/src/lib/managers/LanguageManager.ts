@@ -40,8 +40,7 @@ export class LanguageManager {
     for (const category of localeCategories) {
       const categoryLocales = (await readdir(`${BASE_LOCALE_DIR}/${category}`)) as SupportedLocales[];
       for (const locale of categoryLocales) {
-        // HACK: tsc-alias doesn't support dynamic imports
-        const { default: localeData } = await import(`../../../../locales/assets/${category}/${locale}`);
+        const { default: localeData } = await import(`@locales/assets/${category}/${locale}`);
         // @ts-expect-error We are initializing the cache with a dynamic key
         if (!this.cache[category]) this.cache[category] = {};
         // @ts-expect-error We are initializing the cache with a dynamic key
