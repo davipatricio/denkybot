@@ -68,9 +68,7 @@ export class CommandDataStructure {
       type: ApplicationCommandType.ChatInput
     };
 
-    if (rawData.options) {
-      this.data.options = rawData.options.map((option: DenkyApplicationCommandOptionData) => CommandDataStructure.parseOptions(client, option));
-    }
+    if (rawData.options) this.data.options = rawData.options.map((option: DenkyApplicationCommandOptionData) => CommandDataStructure.parseOptions(client, option));
   }
 
   static parseOptions(client: DenkyClient, rawData: DenkyApplicationCommandOptionData) {
@@ -137,11 +135,10 @@ export class CommandDataStructure {
           }
         };
 
-        if (subOption.options) {
+        if (subOption.options)
           subCommandGroupFinalObject.options = subOption.options.map(subSubOption =>
             CommandDataStructure.parseOptions(client, subSubOption as unknown as DenkyApplicationCommandOptionData)
           ) as ApplicationCommandSubCommandData['options'];
-        }
 
         return subCommandGroupFinalObject;
       }) as unknown as ApplicationCommandSubCommandData
