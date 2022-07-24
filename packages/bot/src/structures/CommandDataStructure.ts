@@ -42,7 +42,6 @@ type DenkyChatInputApplicationCommandData = ChatInputApplicationCommandData & {
   name: CommandNamesKeys;
   description: CommandDescriptionsKeys;
   dmPermission: boolean;
-  type: ApplicationCommandType.ChatInput;
   options?: DenkyApplicationCommandOptionData[];
 };
 
@@ -54,7 +53,7 @@ export class CommandDataStructure {
   // eslint-disable-next-line no-useless-constructor, @typescript-eslint/no-empty-function
   constructor() {}
 
-  parseData(client: DenkyClient, rawData: DenkyChatInputApplicationCommandData) {
+  protected parseData(client: DenkyClient, rawData: DenkyChatInputApplicationCommandData) {
     this.data = {
       ...rawData,
       name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${rawData.name}`)),
