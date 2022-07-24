@@ -1,42 +1,26 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
-import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, ApplicationCommandType } from 'discord.js';
+import type { DenkyClient } from '@bot/src/types/Client';
+import { ApplicationCommandOptionType } from 'discord.js';
 
 export default class BotData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.data = {
+    this.parseData(client, {
       name: 'bot',
-      type: ApplicationCommandType.ChatInput,
       dmPermission: true,
-      description: client.languages.manager.get('en_US', 'commandDescriptions:bot'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:bot')
-      },
+      description: 'bot',
       options: [
         {
-          name: client.languages.manager.get('en_US', 'commandNames:bot/invite'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:bot/invite')
-          },
+          name: 'bot/invite',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:bot/invite'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:bot/invite')
-          }
+          description: 'bot/invite'
         },
         {
-          name: client.languages.manager.get('en_US', 'commandNames:bot/vote'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:bot/vote')
-          },
+          name: 'bot/vote',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:bot/vote'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:bot/vote')
-          }
+          description: 'bot/vote'
         }
       ]
-    };
+    });
   }
 }
