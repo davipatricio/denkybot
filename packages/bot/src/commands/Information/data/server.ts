@@ -1,44 +1,31 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, ApplicationCommandType } from 'discord.js';
+import { ApplicationCommandOptionType } from 'discord.js';
 
 export default class ServerData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.data = {
+    this.parseData(client, {
       name: 'server',
-      type: ApplicationCommandType.ChatInput,
       dmPermission: false,
-      description: client.languages.manager.get('en_US', 'commandDescriptions:server'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server')
-      },
+      description: 'server',
       options: [
         {
-          name: 'info',
+          name: 'server/info',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:server/info'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/info')
-          }
+          description: 'server/info'
         },
         {
-          name: 'icon',
+          name: 'server/icon',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:server/icon'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/icon')
-          }
+          description: 'server/icon'
         },
         {
-          name: 'banner',
+          name: 'server/banner',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:server/banner'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:server/banner')
-          }
+          description: 'server/banner'
         }
       ]
-    };
+    });
   }
 }

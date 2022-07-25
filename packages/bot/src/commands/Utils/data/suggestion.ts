@@ -1,50 +1,28 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, ApplicationCommandType } from 'discord.js';
+import { ApplicationCommandOptionType } from 'discord.js';
 
 export default class PingData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.data = {
-      name: client.languages.manager.get('en_US', 'commandNames:suggestion'),
-      nameLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion')
-      },
-      type: ApplicationCommandType.ChatInput,
+    this.parseData(client, {
+      name: 'suggestion',
       dmPermission: false,
-      description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions')
-      },
+      description: 'suggestions',
       options: [
         {
-          name: client.languages.manager.get('en_US', 'commandNames:suggestion/send'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/send')
-          },
+          name: 'suggestion/send',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/send'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/send')
-          }
+          description: 'suggestions/send'
         },
         {
-          name: client.languages.manager.get('en_US', 'commandNames:suggestion/edit'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/edit')
-          },
+          name: 'suggestion/edit',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/edit'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/edit')
-          },
+          description: 'suggestions/edit',
           options: [
             {
               name: 'id',
-              description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/edit/id'),
-              descriptionLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/edit/id')
-              },
+              description: 'suggestions/edit/id',
               type: ApplicationCommandOptionType.String,
               required: true,
               minLength: 18,
@@ -53,39 +31,21 @@ export default class PingData extends CommandDataStructure {
           ]
         },
         {
-          name: client.languages.manager.get('en_US', 'commandNames:suggestion/accept'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/accept')
-          },
+          name: 'suggestion/accept',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/accept'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/accept')
-          },
+          description: 'suggestions/accept',
           options: [
             {
-              name: client.languages.manager.get('en_US', 'commandNames:suggestion/accept/id'),
-              nameLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/accept/id')
-              },
-              description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/accept/id'),
-              descriptionLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/accept/id')
-              },
+              name: 'suggestion/accept/id',
+              description: 'suggestions/accept/id',
               type: ApplicationCommandOptionType.String,
               required: true,
               minLength: 18,
               maxLength: 21
             },
             {
-              name: client.languages.manager.get('en_US', 'commandNames:suggestion/accept/reason'),
-              nameLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/accept/reason')
-              },
-              description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/accept/reason'),
-              descriptionLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/accept/reason')
-              },
+              name: 'suggestion/accept/reason',
+              description: 'suggestions/accept/reason',
               type: ApplicationCommandOptionType.String,
               required: false,
               maxLength: 1024
@@ -93,39 +53,21 @@ export default class PingData extends CommandDataStructure {
           ]
         },
         {
-          name: client.languages.manager.get('en_US', 'commandNames:suggestion/deny'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/deny')
-          },
+          name: 'suggestion/deny',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/deny'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/deny')
-          },
+          description: 'suggestions/deny',
           options: [
             {
-              name: client.languages.manager.get('en_US', 'commandNames:suggestion/deny/id'),
-              nameLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/deny/id')
-              },
-              description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/deny/id'),
-              descriptionLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/deny/id')
-              },
+              name: 'suggestion/deny/id',
+              description: 'suggestions/deny/id',
               type: ApplicationCommandOptionType.String,
               required: true,
               minLength: 18,
               maxLength: 21
             },
             {
-              name: client.languages.manager.get('en_US', 'commandNames:suggestion/deny/reason'),
-              nameLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:suggestion/deny/reason')
-              },
-              description: client.languages.manager.get('en_US', 'commandDescriptions:suggestions/deny/reason'),
-              descriptionLocalizations: {
-                'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:suggestions/deny/reason')
-              },
+              name: 'suggestion/deny/reason',
+              description: 'suggestions/deny/reason',
               type: ApplicationCommandOptionType.String,
               required: false,
               maxLength: 1024
@@ -133,6 +75,6 @@ export default class PingData extends CommandDataStructure {
           ]
         }
       ]
-    };
+    });
   }
 }

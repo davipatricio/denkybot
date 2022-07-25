@@ -27,12 +27,18 @@ export default {
 
   // User
   user: 'user avatar | info | banner',
+  'user/info': 'user info',
+  'user/avatar': 'user avatar',
+  'user/banner': 'user banner',
   'user/info/user': 'usuario',
   'user/avatar/user': 'usuario',
   'user/banner/user': 'usuario',
 
   // Server
-  server: 'server avatar | info | banner',
+  server: 'server avatar | icon | banner',
+  'server/info': 'server info',
+  'server/icon': 'server icon',
+  'server/banner': 'server banner',
 
   // Bot
   bot: 'bot info | invite | vote',

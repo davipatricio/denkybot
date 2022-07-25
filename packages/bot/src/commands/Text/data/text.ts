@@ -1,6 +1,6 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, ApplicationCommandSubCommandData, ApplicationCommandType } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandSubCommandData } from 'discord.js';
 
 export default class TextData extends CommandDataStructure {
   constructor(client: DenkyClient) {
@@ -8,74 +8,43 @@ export default class TextData extends CommandDataStructure {
 
     const baseTextOption: ApplicationCommandSubCommandData['options'] = [
       {
-        name: client.languages.manager.get('en_US', 'commandNames:text'),
-        nameLocalizations: {
-          'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:text')
-        },
+        name: 'text',
         type: ApplicationCommandOptionType.String,
         required: true,
-        description: client.languages.manager.get('en_US', 'commandDescriptions:text/text'),
-        descriptionLocalizations: {
-          'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:text/text')
-        }
+        description: 'text/text'
       }
     ];
 
-    this.data = {
-      name: client.languages.manager.get('en_US', 'commandNames:text'),
-      nameLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:text')
-      },
-      type: ApplicationCommandType.ChatInput,
+    this.parseData(client, {
+      name: 'text',
       dmPermission: true,
-      description: client.languages.manager.get('en_US', 'commandDescriptions:text'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:text')
-      },
+      description: 'text',
       options: [
         {
-          name: client.languages.manager.get('en_US', 'commandNames:text/claps'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:text/claps')
-          },
+          name: 'text/claps',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:text/claps'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:text/claps')
-          },
+          description: 'text/claps',
           options: baseTextOption
         },
         {
-          name: 'emojify',
+          name: 'ignore:emojify',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:text/emojify'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:text/emojify')
-          },
+          description: 'text/emojify',
           options: baseTextOption
         },
         {
-          name: client.languages.manager.get('en_US', 'commandNames:text/invert'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:text/invert')
-          },
+          name: 'text/invert',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:text/invert'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:text/invert')
-          },
+          description: 'text/invert',
           options: baseTextOption
         },
         {
-          name: 'vaporwave',
+          name: 'ignore:vaporwave',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:text/vaporwave'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:text/vaporwave')
-          },
+          description: 'text/vaporwave',
           options: baseTextOption
         }
       ]
-    };
+    });
   }
 }
