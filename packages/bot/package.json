@@ -21,7 +21,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "lint:fix": "eslint src --fix",
-    "postbuild": "node scripts/copyEnv.js && node scripts/emptyYarnLock.js",
+    "postbuild": "node scripts/copyEnv.js",
     "types:check": "tsc --noEmit",
     "start": "cd src && node sharding/shard.js"
   },
