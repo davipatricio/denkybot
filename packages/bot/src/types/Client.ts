@@ -10,7 +10,7 @@ export interface DenkyClient extends Client<boolean> {
   /** Cached bot commands */
   commands: Collection<string, Command>;
   /** Bot configuration */
-  config: typeof import('../../config.example.json');
+  config: typeof import('@bot/config.example.json');
   /** Bot databases */
   databases: DatabaseManager;
   /** Cached bot tasks */
