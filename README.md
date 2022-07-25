@@ -10,17 +10,17 @@ Denky is totally modular, you can enable or disable features that you don't want
 
 ## ⚙️ Self hosting
 
-> ⚠️ Support will not be provided for self-hosted instances. Issues with self-hosted instances opened in this repository will be closed immediately. 
+> ⚠️ Support will not be provided for CUSTOM self-hosted instances. Issues with custom self-hosted instances opened in this repository will be closed immediately. 
 
 1. Create a Discord application. [Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot).
 2. Install Node.js v16.9.0 or newer.
 3. Fork or clone this repository.
 4. Install dependecies using `yarn`.
 5. Generate the Prisma Client using `yarn prisma`.
-6. Build the entire project using `yarn build`
-7. Go to `packages/bot`, `packages/logger` & `packages/prisma` and rename `.env.example` to `.env` and fill out the values.
-8. Go to `packages/bot` and rename `config.example.json` to `config.json` and fill out the values.
-9. Go to `dist/bot` and start the bot using `yarn start`.
+6. Go to `packages/bot`, `packages/logger` & `packages/prisma` and rename `.env.example` to `.env` and fill out the values.
+7. Go to `packages/bot` and rename `config.example.json` to `config.json` and fill out the values.
+8. Build the entire project using `yarn build`.
+9. Go to `dist/bot` and start the bot using `npm start`.
 
 ## License
 This project is licensed under the [GPL-3.0](LICENSE) license.
