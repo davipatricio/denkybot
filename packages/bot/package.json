@@ -31,10 +31,10 @@
     "@webserver": "../webserver",
     "@logger": "../logger",
     "@prisma-client": "../../node_modules/.prisma/client",
-    "#lib": "./bot/src/lib/",
-    "#helpers": "./bot/src/helpers/",
-    "#structures": "./bot/src/structures/",
-    "#types": "./bot/src/types/"
+    "#lib": "../bot/src/lib/",
+    "#helpers": "../bot/src/helpers/",
+    "#structures": "../bot/src/structures/",
+    "#types": "../bot/src/types/"
   },
   "devDependencies": {
     "@types/module-alias": "2.0.1",
