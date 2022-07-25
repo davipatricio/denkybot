@@ -1,44 +1,25 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
+import { ApplicationCommandOptionType, PermissionFlagsBits } from 'discord.js';
 
 export default class MuteData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.data = {
-      name: client.languages.manager.get('en_US', 'commandNames:mute'),
-      nameLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:mute')
-      },
-      type: ApplicationCommandType.ChatInput,
+    this.parseData(client, {
+      name: 'mute',
       dmPermission: false,
       defaultMemberPermissions: [PermissionFlagsBits.ModerateMembers],
-      description: client.languages.manager.get('en_US', 'commandDescriptions:mute'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:mute')
-      },
+      description: 'mute',
       options: [
         {
-          name: client.languages.manager.get('en_US', 'commandNames:mute/user'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:mute/user')
-          },
-          description: client.languages.manager.get('en_US', 'commandDescriptions:mute/user'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:mute/user')
-          },
+          name: 'mute/user',
+          description: 'mute/user',
           required: true,
           type: ApplicationCommandOptionType.User
         },
         {
-          name: client.languages.manager.get('en_US', 'commandNames:mute/time'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:mute/time')
-          },
-          description: client.languages.manager.get('en_US', 'commandDescriptions:mute/time'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:mute/time')
-          },
+          name: 'mute/time',
+          description: 'mute/time',
           required: true,
           type: ApplicationCommandOptionType.String,
           choices: [
@@ -94,18 +75,12 @@ export default class MuteData extends CommandDataStructure {
           ]
         },
         {
-          name: client.languages.manager.get('en_US', 'commandNames:mute/reason'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:mute/reason')
-          },
-          description: client.languages.manager.get('en_US', 'commandDescriptions:mute/reason'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:mute/reason')
-          },
+          name: 'mute/reason',
+          description: 'mute/reason',
           required: false,
           type: ApplicationCommandOptionType.String
         }
       ]
-    };
+    });
   }
 }

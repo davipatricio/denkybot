@@ -1,42 +1,26 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
+import { ApplicationCommandOptionType, PermissionFlagsBits } from 'discord.js';
 
 export default class BanData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.data = {
-      name: client.languages.manager.get('en_US', 'commandNames:ban'),
-      type: ApplicationCommandType.ChatInput,
+    this.parseData(client, {
+      name: 'ban',
       dmPermission: false,
       defaultMemberPermissions: [PermissionFlagsBits.BanMembers],
-      description: client.languages.manager.get('en_US', 'commandDescriptions:ban'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban')
-      },
+      description: 'ban',
       options: [
         {
-          name: client.languages.manager.get('en_US', 'commandNames:ban/user'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/user')
-          },
+          name: 'ban/user',
           type: ApplicationCommandOptionType.User,
           required: true,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:ban/user'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/user')
-          }
+          description: 'ban/user'
         },
         {
-          name: client.languages.manager.get('en_US', 'commandNames:ban/delete_messages'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/delete_messages')
-          },
-          description: client.languages.manager.get('en_US', 'commandDescriptions:ban/delete_messages'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/delete_messages')
-          },
+          name: 'ban/delete_messages',
+          description: 'ban/delete_messages',
           type: ApplicationCommandOptionType.String,
           choices: [
             {
@@ -63,19 +47,13 @@ export default class BanData extends CommandDataStructure {
           ]
         },
         {
-          name: client.languages.manager.get('en_US', 'commandNames:ban/reason'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:ban/reason')
-          },
+          name: 'ban/reason',
           type: ApplicationCommandOptionType.String,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:ban/reason'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ban/reason')
-          },
+          description: 'ban/reason',
           minLength: 1,
           maxLength: 100
         }
       ]
-    };
+    });
   }
 }

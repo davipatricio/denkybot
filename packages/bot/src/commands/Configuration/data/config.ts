@@ -1,32 +1,22 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
+import { ApplicationCommandOptionType, PermissionFlagsBits } from 'discord.js';
 
 export default class PingData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.data = {
+    this.parseData(client, {
       name: 'config',
-      type: ApplicationCommandType.ChatInput,
       dmPermission: false,
       defaultMemberPermissions: [PermissionFlagsBits.ManageGuild, PermissionFlagsBits.ManageChannels],
-      description: client.languages.manager.get('en_US', 'commandDescriptions:config'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:config')
-      },
+      description: 'config',
       options: [
         {
-          name: client.languages.manager.get('en_US', 'commandNames:config/suggestions'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:config/suggestions')
-          },
+          name: 'config/suggestions',
           type: ApplicationCommandOptionType.Subcommand,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:config/suggestions'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:config/suggestions')
-          }
+          description: 'config/suggestions'
         }
       ]
-    };
+    });
   }
 }

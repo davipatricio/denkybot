@@ -1,47 +1,31 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } from 'discord.js';
+import { ApplicationCommandOptionType, PermissionFlagsBits } from 'discord.js';
 
 export default class KickData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.data = {
-      name: client.languages.manager.get('en_US', 'commandNames:kick'),
-      type: ApplicationCommandType.ChatInput,
+    this.parseData(client, {
+      name: 'kick',
       dmPermission: false,
       defaultMemberPermissions: [PermissionFlagsBits.KickMembers],
-      description: client.languages.manager.get('en_US', 'commandDescriptions:kick'),
-      descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:kick')
-      },
+      description: 'kick',
       options: [
         {
-          name: client.languages.manager.get('en_US', 'commandNames:kick/user'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:kick/user')
-          },
+          name: 'kick/user',
           type: ApplicationCommandOptionType.User,
           required: true,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:kick/user'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:kick/user')
-          }
+          description: 'kick/user'
         },
         {
-          name: client.languages.manager.get('en_US', 'commandNames:kick/reason'),
-          nameLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:kick/reason')
-          },
+          name: 'kick/reason',
           type: ApplicationCommandOptionType.String,
-          description: client.languages.manager.get('en_US', 'commandDescriptions:kick/reason'),
-          descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:kick/reason')
-          },
+          description: 'kick/reason',
           minLength: 1,
           maxLength: 100
         }
       ]
-    };
+    });
   }
 }
