@@ -13,11 +13,11 @@ import {
   ApplicationCommandType,
   ChatInputApplicationCommandData
 } from 'discord.js';
-import type { CommandDescriptionsKeys, CommandNamesKeys } from '../lib/managers/LanguageManager';
+import type { CommandDescriptionsKeys, CommandNamesKeys, SupportedLocales } from '../lib/managers/LanguageManager';
 
 type DenkyLocalizationFields = {
-  name: CommandNamesKeys;
-  description: CommandDescriptionsKeys;
+  name: `ignore:${string}` | CommandNamesKeys;
+  description: `ignore:${string}` | CommandDescriptionsKeys;
 };
 
 type DenkyApplicationCommandSubCommandData = ApplicationCommandSubCommandData & DenkyLocalizationFields;
@@ -39,13 +39,23 @@ type DenkyApplicationCommandOptionData = (
   DenkyLocalizationFields;
 
 type DenkyChatInputApplicationCommandData = ChatInputApplicationCommandData & {
-  name: CommandNamesKeys;
-  description: CommandDescriptionsKeys;
+  name: `ignore:${string}` | CommandNamesKeys;
+  description: `ignore:${string}` | CommandDescriptionsKeys;
   dmPermission: boolean;
   options?: DenkyApplicationCommandOptionData[];
 };
 
-const removeCmdArgs = (cmd: string): string => cmd.split(' ')[0];
+const removeCmdArgs = (cmd: string) => cmd.split(' ')[0];
+
+function translateCommandKey(client: DenkyClient, key: string, lang: SupportedLocales) {
+  if (key.startsWith('ignore:')) return key.slice('ignore:'.length);
+  return removeCmdArgs(client.languages.manager.get(lang, `commandNames:${key as CommandNamesKeys}`));
+}
+
+function translateDescriptionKey(client: DenkyClient, key: string, lang: SupportedLocales) {
+  if (key.startsWith('ignore:')) return key.slice('ignore:'.length);
+  return removeCmdArgs(client.languages.manager.get(lang, `commandDescriptions:${key as CommandDescriptionsKeys}`));
+}
 
 export class CommandDataStructure {
   data: ChatInputApplicationCommandData;
@@ -56,13 +66,13 @@ export class CommandDataStructure {
   protected parseData(client: DenkyClient, rawData: DenkyChatInputApplicationCommandData) {
     this.data = {
       ...rawData,
-      name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${rawData.name}`)),
+      name: translateCommandKey(client, rawData.name, 'en_US'),
       nameLocalizations: {
-        'pt-BR': removeCmdArgs(client.languages.manager.get('pt_BR', `commandNames:${rawData.name}`))
+        'pt-BR': translateCommandKey(client, rawData.name, 'pt_BR')
       },
-      description: client.languages.manager.get('en_US', `commandDescriptions:${rawData.description}`),
+      description: translateCommandKey(client, rawData.name, 'en_US'),
       descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', `commandDescriptions:${rawData.description}`)
+        'pt-BR': translateDescriptionKey(client, rawData.name, 'pt_BR')
       },
       type: ApplicationCommandType.ChatInput
     };
@@ -73,13 +83,13 @@ export class CommandDataStructure {
   static parseOptions(client: DenkyClient, rawData: DenkyApplicationCommandOptionData) {
     const finalObject = {
       ...rawData,
-      name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${rawData.name}`)),
+      name: translateCommandKey(client, rawData.name, 'en_US'),
       nameLocalizations: {
-        'pt-BR': removeCmdArgs(client.languages.manager.get('pt_BR', `commandNames:${rawData.name}`))
+        'pt-BR': translateCommandKey(client, rawData.name, 'pt_BR')
       },
-      description: client.languages.manager.get('en_US', `commandDescriptions:${rawData.description}`),
+      description: translateCommandKey(client, rawData.name, 'en_US'),
       descriptionLocalizations: {
-        'pt-BR': client.languages.manager.get('pt_BR', `commandDescriptions:${rawData.description}`)
+        'pt-BR': translateDescriptionKey(client, rawData.name, 'pt_BR')
       }
     } as ApplicationCommandOptionData;
 
@@ -103,13 +113,13 @@ export class CommandDataStructure {
     return (options?.map(option => {
       const subCommandFinalObject = {
         ...option,
-        name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${option.name}`)),
+        name: translateCommandKey(client, option.name, 'en_US'),
         nameLocalizations: {
-          'pt-BR': removeCmdArgs(client.languages.manager.get('pt_BR', `commandNames:${option.name}`))
+          'pt-BR': translateCommandKey(client, option.name, 'pt_BR')
         },
-        description: client.languages.manager.get('en_US', `commandDescriptions:${option.description}`),
+        description: translateCommandKey(client, option.name, 'en_US'),
         descriptionLocalizations: {
-          'pt-BR': client.languages.manager.get('pt_BR', `commandDescriptions:${option.description}`)
+          'pt-BR': translateDescriptionKey(client, option.name, 'pt_BR')
         }
       };
 
@@ -124,13 +134,13 @@ export class CommandDataStructure {
       rawData.options.map((subOption: DenkyApplicationCommandSubCommandData) => {
         const subCommandGroupFinalObject = {
           ...subOption,
-          name: removeCmdArgs(client.languages.manager.get('en_US', `commandNames:${rawData.name}`)),
+          name: translateCommandKey(client, rawData.name, 'en_US'),
           nameLocalizations: {
-            'pt-BR': removeCmdArgs(client.languages.manager.get('pt_BR', `commandNames:${rawData.name}`))
+            'pt-BR': translateCommandKey(client, rawData.name, 'pt_BR')
           },
-          description: client.languages.manager.get('en_US', `commandDescriptions:${rawData.description}`),
+          description: translateCommandKey(client, rawData.name, 'en_US'),
           descriptionLocalizations: {
-            'pt-BR': client.languages.manager.get('pt_BR', `commandDescriptions:${rawData.description}`)
+            'pt-BR': translateDescriptionKey(client, rawData.name, 'pt_BR')
           }
         };
 
