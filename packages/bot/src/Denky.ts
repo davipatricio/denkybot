@@ -1,5 +1,7 @@
 /* eslint-disable import/first */
-require('module-alias/register');
+import mAlias from 'module-alias';
+
+mAlias(`${__dirname}/../package.json`);
 
 import { Initializer } from '#lib/utils/Initializer';
 import type { DenkyClient } from '#types/Client';

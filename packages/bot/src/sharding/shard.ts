@@ -1,5 +1,7 @@
 /* eslint-disable import/first */
-require('module-alias/register');
+import mAlias from 'module-alias';
+
+mAlias(`${__dirname}/../../package.json`);
 
 import { createLogger } from '@logger';
 import { ShardingManager } from 'discord.js';
