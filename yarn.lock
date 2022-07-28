@@ -27,7 +27,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/denky@workspace:."
   dependencies:
-    "@prisma/client": "npm:4.1.0"
+    "@prisma/client": "npm:4.1.1"
     "@types/node": "npm:18.0.6"
     "@typescript-eslint/eslint-plugin": "npm:5.31.0"
     "@typescript-eslint/parser": "npm:5.31.0"
@@ -100,7 +100,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/prisma@workspace:packages/prisma"
   dependencies:
-    "@prisma/client": "npm:4.1.0"
+    "@prisma/client": "npm:4.1.1"
     prisma: "npm:4.1.0"
     typescript: "npm:4.7.4"
   languageName: unknown
@@ -279,9 +279,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:4.1.0":
-  version: 4.1.0
-  resolution: "@prisma/client@npm:4.1.0"
+"@prisma/client@npm:4.1.1":
+  version: 4.1.1
+  resolution: "@prisma/client@npm:4.1.1"
   dependencies:
     "@prisma/engines-version": "npm:4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8"
   peerDependencies:
@@ -289,7 +289,7 @@ __metadata:
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: a358c04c59f0bdce3aa72c2b486027ec67dcd51d3a247c6f2638a1dc5a37a8ac09b3888688a55cf61feda44125efc134d9b6ab85acd2da9e78bf36588e727889
+  checksum: 0ca0ae3229b91afeb4a896ab621c6de60fcc23f71376ee12ec662481323675f1f45ab4f928f69c6dad5010d5cb017dec01528d3521ad2fc5dff76f0d98aa3d6c
   languageName: node
   linkType: hard
 
