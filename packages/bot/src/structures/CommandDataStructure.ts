@@ -70,9 +70,9 @@ export class CommandDataStructure {
       nameLocalizations: {
         'pt-BR': translateCommandKey(client, rawData.name, 'pt_BR')
       },
-      description: translateCommandKey(client, rawData.name, 'en_US'),
+      description: translateDescriptionKey(client, rawData.description, 'en_US'),
       descriptionLocalizations: {
-        'pt-BR': translateDescriptionKey(client, rawData.name, 'pt_BR')
+        'pt-BR': translateDescriptionKey(client, rawData.description, 'pt_BR')
       },
       type: ApplicationCommandType.ChatInput
     };
@@ -87,9 +87,9 @@ export class CommandDataStructure {
       nameLocalizations: {
         'pt-BR': translateCommandKey(client, rawData.name, 'pt_BR')
       },
-      description: translateCommandKey(client, rawData.name, 'en_US'),
+      description: translateDescriptionKey(client, rawData.description, 'en_US'),
       descriptionLocalizations: {
-        'pt-BR': translateDescriptionKey(client, rawData.name, 'pt_BR')
+        'pt-BR': translateDescriptionKey(client, rawData.description, 'pt_BR')
       }
     } as ApplicationCommandOptionData;
 
@@ -117,7 +117,7 @@ export class CommandDataStructure {
         nameLocalizations: {
           'pt-BR': translateCommandKey(client, option.name, 'pt_BR')
         },
-        description: translateCommandKey(client, option.name, 'en_US'),
+        description: translateDescriptionKey(client, option.name, 'en_US'),
         descriptionLocalizations: {
           'pt-BR': translateDescriptionKey(client, option.name, 'pt_BR')
         }
@@ -138,7 +138,7 @@ export class CommandDataStructure {
           nameLocalizations: {
             'pt-BR': translateCommandKey(client, rawData.name, 'pt_BR')
           },
-          description: translateCommandKey(client, rawData.name, 'en_US'),
+          description: translateDescriptionKey(client, rawData.name, 'en_US'),
           descriptionLocalizations: {
             'pt-BR': translateDescriptionKey(client, rawData.name, 'pt_BR')
           }
