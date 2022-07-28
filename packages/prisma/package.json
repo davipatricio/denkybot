@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/denkylabs/denkybot/packages/prisma",
   "scripts": {
+    "postbuild": "node scripts/copyEnv.js",
     "generate:cockroachdb": "prisma generate --schema=./providers/cockroachdb/schema.prisma",
     "generate:postgres": "prisma generate --schema=./providers/postgresql/schema.prisma",
     "generate:mongodb": "prisma generate ---schema=./providers/mongodb/schema.prisma",

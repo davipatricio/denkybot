@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/denkylabs/denkybot/packages/logger",
   "scripts": {
+    "postbuild": "node scripts/copyEnv.js",
     "build": "tsc --project tsconfig.json",
     "lint:fix": "eslint src --fix",
     "types:check": "tsc --noEmit"
