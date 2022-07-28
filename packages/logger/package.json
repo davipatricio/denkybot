@@ -29,6 +29,7 @@
     "@logger": "../logger",
     "@prisma-client": "../../node_modules/.prisma/client",
     "#lib": "../bot/src/lib/",
+    "#apis": "../bot/src/lib/apis/",
     "#helpers": "../bot/src/helpers/",
     "#structures": "../bot/src/structures/",
     "#types": "../bot/src/types/"
