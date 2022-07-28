@@ -54,7 +54,7 @@ function translateCommandKey(client: DenkyClient, key: string, lang: SupportedLo
 
 function translateDescriptionKey(client: DenkyClient, key: string, lang: SupportedLocales) {
   if (key.startsWith('ignore:')) return key.slice('ignore:'.length);
-  return removeCmdArgs(client.languages.manager.get(lang, `commandDescriptions:${key as CommandDescriptionsKeys}`));
+  return client.languages.manager.get(lang, `commandDescriptions:${key as CommandDescriptionsKeys}`);
 }
 
 export class CommandDataStructure {
