@@ -54,3 +54,8 @@ model Reminder {
   text String @default("")
   endTimestamp BigInt
 }
+
+model ButtonRole {
+  messageId String @id @default("") @map("_id") @db.ObjectId
+  rolesIds String[] @default([])
+}
