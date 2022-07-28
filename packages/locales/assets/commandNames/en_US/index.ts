@@ -82,6 +82,7 @@ export default {
   'ban/list': 'list',
 
   // Wikipedia
+  wikipedia: 'wikipedia',
   'wikipedia/search': 'search',
 
   // Mute
