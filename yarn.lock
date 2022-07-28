@@ -38,7 +38,7 @@ __metadata:
     eslint-plugin-import: "npm:2.26.0"
     eslint-plugin-prettier: "npm:4.2.1"
     prettier: "npm:2.7.1"
-    prisma: "npm:4.1.0"
+    prisma: "npm:4.1.1"
     tslib: "npm:2.4.0"
     typescript: "npm:4.7.4"
   languageName: unknown
@@ -101,7 +101,7 @@ __metadata:
   resolution: "@denkylabs/prisma@workspace:packages/prisma"
   dependencies:
     "@prisma/client": "npm:4.1.1"
-    prisma: "npm:4.1.0"
+    prisma: "npm:4.1.1"
     typescript: "npm:4.7.4"
   languageName: unknown
   linkType: soft
@@ -300,10 +300,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:4.1.0":
-  version: 4.1.0
-  resolution: "@prisma/engines@npm:4.1.0"
-  checksum: 3b728c900e789c24970f49eb90fa53a29b179b38f9ec3fee0449a50c7079c02a9b9bf320fcf7dc23850f8106cd3aa0deabca0bdc82d900fd61f3d763e33ce0a3
+"@prisma/engines@npm:4.1.1":
+  version: 4.1.1
+  resolution: "@prisma/engines@npm:4.1.1"
+  checksum: 4a46762662d83103c97000ca8e8b66d5dabe0e06e7c2f97c4c2114d380816bb94835b1219d878984c9174d21e3a01e334db0ee7619e83362449ff645450f5d39
   languageName: node
   linkType: hard
 
@@ -2822,15 +2822,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:4.1.0":
-  version: 4.1.0
-  resolution: "prisma@npm:4.1.0"
+"prisma@npm:4.1.1":
+  version: 4.1.1
+  resolution: "prisma@npm:4.1.1"
   dependencies:
-    "@prisma/engines": "npm:4.1.0"
+    "@prisma/engines": "npm:4.1.1"
   bin:
     prisma: build/index.js
     prisma2: build/index.js
-  checksum: 461c2a3da14a4be04e5e7b7a08a58fd0a2b0499793e90fe79d366b8ef44485ce5a75d3501a092ed3f6fa5f11588b9c6e750be70d69dcf873ed3c84f99361ffdc
+  checksum: 46b221d539c624440936260b74de18692675cba24ccc12222290076a313302e0f1760c7f3469e422ef9cdb0fa7986832967fefe8c16818d920b56f013921dc37
   languageName: node
   linkType: hard
 
