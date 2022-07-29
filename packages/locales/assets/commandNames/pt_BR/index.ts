@@ -60,10 +60,8 @@ export default {
   'suggestion/send': 'enviar',
   'suggestion/edit': 'editar',
   'suggestion/accept': 'aceitar',
-  'suggestion/accept/id': 'id_sugestao',
   'suggestion/accept/reason': 'motivo',
   'suggestion/deny': 'recusar',
-  'suggestion/deny/id': 'id_sugestao',
   'suggestion/deny/reason': 'motivo',
 
   // Ban
