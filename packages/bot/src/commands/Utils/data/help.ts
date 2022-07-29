@@ -5,9 +5,9 @@ export default class HelpData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
     this.parseData(client, {
-      name: 'help',
-      dmPermission: true,
-      description: 'help'
+      this.setName('help',
+      .setDMPermission(true)
+      .setDescription('help'
     });
   }
 }

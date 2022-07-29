@@ -6,15 +6,15 @@ export default class PingData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
     this.parseData(client, {
-      name: 'config',
-      dmPermission: false,
+      this.setName('config',
+      .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.ManageGuild, PermissionFlagsBits.ManageChannels],
-      description: 'config',
+      .setDescription('config',
       options: [
         {
-          name: 'config/suggestions',
+          this.setName('config/suggestions',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'config/suggestions'
+          .setDescription('config/suggestions'
         }
       ]
     });

@@ -6,19 +6,19 @@ export default class BotData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
     this.parseData(client, {
-      name: 'bot',
-      dmPermission: true,
-      description: 'bot',
+      this.setName('bot',
+      .setDMPermission(true)
+      .setDescription('bot',
       options: [
         {
-          name: 'bot/invite',
+          this.setName('bot/invite',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'bot/invite'
+          .setDescription('bot/invite'
         },
         {
-          name: 'bot/vote',
+          this.setName('bot/vote',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'bot/vote'
+          .setDescription('bot/vote'
         }
       ]
     });

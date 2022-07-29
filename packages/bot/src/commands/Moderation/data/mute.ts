@@ -6,20 +6,20 @@ export default class MuteData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
     this.parseData(client, {
-      name: 'mute',
-      dmPermission: false,
+      this.setName('mute',
+      .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.ModerateMembers],
-      description: 'mute',
+      .setDescription('mute',
       options: [
         {
-          name: 'mute/user',
-          description: 'mute/user',
+          this.setName('mute/user',
+          .setDescription('mute/user',
           required: true,
           type: ApplicationCommandOptionType.User
         },
         {
-          name: 'mute/time',
-          description: 'mute/time',
+          this.setName('mute/time',
+          .setDescription('mute/time',
           required: true,
           type: ApplicationCommandOptionType.String,
           choices: [
@@ -75,8 +75,8 @@ export default class MuteData extends CommandDataStructure {
           ]
         },
         {
-          name: 'mute/reason',
-          description: 'mute/reason',
+          this.setName('mute/reason',
+          .setDescription('mute/reason',
           required: false,
           type: ApplicationCommandOptionType.String
         }

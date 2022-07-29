@@ -6,46 +6,46 @@ export default class UserData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
     this.parseData(client, {
-      name: 'user',
-      dmPermission: false,
-      description: 'user',
+      this.setName('user',
+      .setDMPermission(false),
+      .setDescription('user',
       options: [
         {
-          name: 'user/info',
+          this.setName('user/info',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'user/info',
+          .setDescription('user/info',
           options: [
             {
-              name: 'user/info/user',
+              this.setName('user/info/user',
               type: ApplicationCommandOptionType.User,
               required: false,
-              description: 'user/info/user'
+              .setDescription('user/info/user'
             }
           ]
         },
         {
-          name: 'user/avatar',
+          this.setName('user/avatar',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'user/avatar',
+          .setDescription('user/avatar',
           options: [
             {
-              name: 'user/avatar/user',
+              this.setName('user/avatar/user',
               type: ApplicationCommandOptionType.User,
               required: false,
-              description: 'user/avatar/user'
+              .setDescription('user/avatar/user'
             }
           ]
         },
         {
-          name: 'user/banner',
+          this.setName('user/banner',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'user/banner',
+          .setDescription('user/banner',
           options: [
             {
-              name: 'user/banner/user',
+              this.setName('user/banner/user',
               type: ApplicationCommandOptionType.User,
               required: false,
-              description: 'user/banner/user'
+              .setDescription('user/banner/user'
             }
           ]
         }

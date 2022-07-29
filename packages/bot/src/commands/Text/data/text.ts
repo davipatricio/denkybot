@@ -8,40 +8,40 @@ export default class TextData extends CommandDataStructure {
 
     const baseTextOption: ApplicationCommandSubCommandData['options'] = [
       {
-        name: 'text',
+        this.setName('text',
         type: ApplicationCommandOptionType.String,
         required: true,
-        description: 'text/text'
+        .setDescription('text/text'
       }
     ];
 
     this.parseData(client, {
-      name: 'text',
-      dmPermission: true,
-      description: 'text',
+      this.setName('text',
+      .setDMPermission(true)
+      .setDescription('text',
       options: [
         {
-          name: 'text/claps',
+          this.setName('text/claps',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'text/claps',
+          .setDescription('text/claps',
           options: baseTextOption
         },
         {
-          name: 'ignore:emojify',
+          this.setName('ignore:emojify',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'text/emojify',
+          .setDescription('text/emojify',
           options: baseTextOption
         },
         {
-          name: 'text/invert',
+          this.setName('text/invert',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'text/invert',
+          .setDescription('text/invert',
           options: baseTextOption
         },
         {
-          name: 'ignore:vaporwave',
+          this.setName('ignore:vaporwave',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'text/vaporwave',
+          .setDescription('text/vaporwave',
           options: baseTextOption
         }
       ]

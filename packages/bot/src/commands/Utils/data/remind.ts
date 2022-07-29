@@ -11,7 +11,7 @@ export default class ReminderData extends CommandDataStructure {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandNames:remind')
       },
       type: ApplicationCommandType.ChatInput,
-      dmPermission: true,
+      .setDMPermission(true)
       description: client.languages.manager.get('en_US', 'commandDescriptions:ping'),
       descriptionLocalizations: {
         'pt-BR': client.languages.manager.get('pt_BR', 'commandDescriptions:ping')

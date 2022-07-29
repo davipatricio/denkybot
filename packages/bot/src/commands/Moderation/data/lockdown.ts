@@ -7,34 +7,34 @@ export default class LockdownData extends CommandDataStructure {
     super(client);
 
     this.parseData(client, {
-      name: 'lockdown',
-      dmPermission: false,
+      this.setName('lockdown',
+      .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageGuild],
-      description: 'lockdown',
+      .setDescription('lockdown',
       options: [
         {
-          name: 'lockdown/enable',
-          description: 'lockdown/enable',
+          this.setName('lockdown/enable',
+          .setDescription('lockdown/enable',
           type: ApplicationCommandOptionType.Subcommand
         },
         {
-          name: 'lockdown/disable',
-          description: 'lockdown/disable',
+          this.setName('lockdown/disable',
+          .setDescription('lockdown/disable',
           type: ApplicationCommandOptionType.Subcommand
         },
         {
-          name: 'lockdown/schedule',
-          description: 'lockdown/schedule',
+          this.setName('lockdown/schedule',
+          .setDescription('lockdown/schedule',
           type: ApplicationCommandOptionType.SubcommandGroup,
           options: [
             {
-              name: 'lockdown/schedule/unlockdown',
-              description: 'lockdown/schedule',
+              this.setName('lockdown/schedule/unlockdown',
+              .setDescription('lockdown/schedule',
               type: ApplicationCommandOptionType.Subcommand,
               options: [
                 {
-                  name: 'lockdown/schedule/unlockdown/duration',
-                  description: 'lockdown/schedule/unlockdown/duration',
+                  this.setName('lockdown/schedule/unlockdown/duration',
+                  .setDescription('lockdown/schedule/unlockdown/duration',
                   type: ApplicationCommandOptionType.String,
                   required: true,
                   minLength: 2,

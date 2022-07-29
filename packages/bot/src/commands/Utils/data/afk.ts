@@ -6,25 +6,25 @@ export default class AfkData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
     this.parseData(client, {
-      name: 'afk',
-      description: 'afk/on',
-      dmPermission: true,
+      this.setName('afk',
+      .setDescription('afk/on',
+      .setDMPermission(true)
       options: [
         {
-          name: 'afk/on',
-          description: 'afk/on',
+          this.setName('afk/on',
+          .setDescription('afk/on',
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: 'afk/reason',
+              this.setName('afk/reason',
               type: ApplicationCommandOptionType.String,
-              description: 'afk/on/reason'
+              .setDescription('afk/on/reason'
             }
           ]
         },
         {
-          name: 'afk/off',
-          description: 'afk/off',
+          this.setName('afk/off',
+          .setDescription('afk/off',
           type: ApplicationCommandOptionType.Subcommand
         }
       ]

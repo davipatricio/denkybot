@@ -7,49 +7,49 @@ export default class GiveawayData extends CommandDataStructure {
     super(client);
 
     this.parseData(client, {
-      name: 'giveaway',
-      dmPermission: false,
+      this.setName('giveaway',
+      .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.ManageGuild],
-      description: 'giveaway',
+      .setDescription('giveaway',
       options: [
         {
-          name: 'giveaway/create',
-          description: 'giveaway/create',
+          this.setName('giveaway/create',
+          .setDescription('giveaway/create',
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: 'giveaway/create/title',
-              description: 'giveaway/create/title',
+              this.setName('giveaway/create/title',
+              .setDescription('giveaway/create/title',
               type: ApplicationCommandOptionType.String,
               required: true,
               maxLength: 40
             },
             {
-              name: 'giveaway/create/winners',
-              description: 'giveaway/create/winners',
+              this.setName('giveaway/create/winners',
+              .setDescription('giveaway/create/winners',
               type: ApplicationCommandOptionType.Number,
               required: true,
               minValue: 1,
               maxValue: 100
             },
             {
-              name: 'giveaway/create/duration',
-              description: 'giveaway/create/duration',
+              this.setName('giveaway/create/duration',
+              .setDescription('giveaway/create/duration',
               type: ApplicationCommandOptionType.String,
               required: true,
               minValue: 2,
               maxValue: 15
             },
             {
-              name: 'giveaway/create/description',
-              description: 'giveaway/create/description',
+              this.setName('giveaway/create/description',
+              .setDescription('giveaway/create/description',
               type: ApplicationCommandOptionType.String,
               required: false,
               maxLength: 300
             },
             {
-              name: 'giveaway/create/channel',
-              description: 'giveaway/create/channel',
+              this.setName('giveaway/create/channel',
+              .setDescription('giveaway/create/channel',
               type: ApplicationCommandOptionType.Channel,
               required: false,
               channelTypes: [ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildVoice, ChannelType.GuildNewsThread, ChannelType.GuildPrivateThread, ChannelType.GuildPublicThread]
@@ -57,13 +57,13 @@ export default class GiveawayData extends CommandDataStructure {
           ]
         },
         {
-          name: 'giveaway/end',
-          description: 'giveaway/end',
+          this.setName('giveaway/end',
+          .setDescription('giveaway/end',
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: 'giveaway/end/id',
-              description: 'giveaway/end/id',
+              this.setName('giveaway/end/id',
+              .setDescription('giveaway/end/id',
               required: true,
               type: ApplicationCommandOptionType.String,
               minLength: 19,

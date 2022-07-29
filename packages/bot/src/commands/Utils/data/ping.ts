@@ -5,9 +5,9 @@ export default class PingData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
     this.parseData(client, {
-      name: 'ping',
-      dmPermission: true,
-      description: 'ping'
+      this.setName('ping',
+      .setDMPermission(true)
+      .setDescription('ping'
     });
   }
 }

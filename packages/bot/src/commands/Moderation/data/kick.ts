@@ -7,21 +7,21 @@ export default class KickData extends CommandDataStructure {
     super(client);
 
     this.parseData(client, {
-      name: 'kick',
-      dmPermission: false,
+      this.setName('kick',
+      .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.KickMembers],
-      description: 'kick',
+      .setDescription('kick',
       options: [
         {
-          name: 'kick/user',
+          this.setName('kick/user',
           type: ApplicationCommandOptionType.User,
           required: true,
-          description: 'kick/user'
+          .setDescription('kick/user'
         },
         {
-          name: 'kick/reason',
+          this.setName('kick/reason',
           type: ApplicationCommandOptionType.String,
-          description: 'kick/reason',
+          .setDescription('kick/reason',
           minLength: 1,
           maxLength: 100
         }

@@ -6,24 +6,24 @@ export default class ServerData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
     this.parseData(client, {
-      name: 'server',
-      dmPermission: false,
-      description: 'server',
+      this.setName('server',
+      .setDMPermission(false),
+      .setDescription('server',
       options: [
         {
-          name: 'server/info',
+          this.setName('server/info',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'server/info'
+          .setDescription('server/info'
         },
         {
-          name: 'server/icon',
+          this.setName('server/icon',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'server/icon'
+          .setDescription('server/icon'
         },
         {
-          name: 'server/banner',
+          this.setName('server/banner',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'server/banner'
+          .setDescription('server/banner'
         }
       ]
     });

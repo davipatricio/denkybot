@@ -6,43 +6,43 @@ export default class AnimalData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
     this.parseData(client, {
-      name: 'animal',
-      dmPermission: true,
-      description: 'animal',
+      this.setName('animal',
+      .setDMPermission(true)
+      .setDescription('animal',
       options: [
         {
-          name: 'ignore:panda',
-          description: 'animal/panda',
+          this.setName('ignore:panda',
+          .setDescription('animal/panda',
           type: ApplicationCommandOptionType.Subcommand
         },
         {
-          name: 'animal/dog',
-          description: 'animal/dog',
+          this.setName('animal/dog',
+          .setDescription('animal/dog',
           type: ApplicationCommandOptionType.Subcommand
         },
         {
-          name: 'animal/koala',
-          description: 'animal/koala',
+          this.setName('animal/koala',
+          .setDescription('animal/koala',
           type: ApplicationCommandOptionType.Subcommand
         },
         {
-          name: 'animal/bunny',
-          description: 'animal/bunny',
+          this.setName('animal/bunny',
+          .setDescription('animal/bunny',
           type: ApplicationCommandOptionType.Subcommand
         },
         {
-          name: 'animal/cat',
-          description: 'animal/cat',
+          this.setName('animal/cat',
+          .setDescription('animal/cat',
           type: ApplicationCommandOptionType.Subcommand
         },
         {
-          name: 'animal/duck',
-          description: 'animal/duck',
+          this.setName('animal/duck',
+          .setDescription('animal/duck',
           type: ApplicationCommandOptionType.Subcommand
         },
         {
-          name: 'animal/foxy',
-          description: 'animal/foxy',
+          this.setName('animal/foxy',
+          .setDescription('animal/foxy',
           type: ApplicationCommandOptionType.Subcommand
         }
       ]

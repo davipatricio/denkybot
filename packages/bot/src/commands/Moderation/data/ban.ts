@@ -7,25 +7,25 @@ export default class BanData extends CommandDataStructure {
     super(client);
 
     this.parseData(client, {
-      name: 'ban/name',
-      dmPermission: false,
+      this.setName('ban/name',
+      .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.BanMembers],
-      description: 'ban',
+      .setDescription('ban',
       options: [
         {
-          name: 'ban/user',
-          description: 'ban/user',
+          this.setName('ban/user',
+          .setDescription('ban/user',
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: 'ban/user',
+              this.setName('ban/user',
               type: ApplicationCommandOptionType.User,
               required: true,
-              description: 'ban/user/user'
+              .setDescription('ban/user/user'
             },
             {
-              name: 'ban/delete_messages',
-              description: 'ban/delete_messages',
+              this.setName('ban/delete_messages',
+              .setDescription('ban/delete_messages',
               type: ApplicationCommandOptionType.String,
               choices: [
                 {
@@ -52,22 +52,22 @@ export default class BanData extends CommandDataStructure {
               ]
             },
             {
-              name: 'ban/reason',
+              this.setName('ban/reason',
               type: ApplicationCommandOptionType.String,
-              description: 'ban/reason',
+              .setDescription('ban/reason',
               minLength: 1,
               maxLength: 100
             }
           ]
         },
         {
-          name: 'ban/info',
-          description: 'ban/info',
+          this.setName('ban/info',
+          .setDescription('ban/info',
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: 'ban/info/user',
-              description: 'ban/info/user',
+              this.setName('ban/info/user',
+              .setDescription('ban/info/user',
               type: ApplicationCommandOptionType.String,
               required: true,
               autocomplete: true
@@ -75,20 +75,20 @@ export default class BanData extends CommandDataStructure {
           ]
         },
         {
-          name: 'ban/remove',
-          description: 'ban/remove',
+          this.setName('ban/remove',
+          .setDescription('ban/remove',
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
-              name: 'ban/remove/user',
-              description: 'ban/remove/user',
+              this.setName('ban/remove/user',
+              .setDescription('ban/remove/user',
               type: ApplicationCommandOptionType.String,
               required: true,
               autocomplete: true
             },
             {
-              name: 'ban/remove/reason',
-              description: 'ban/remove/reason',
+              this.setName('ban/remove/reason',
+              .setDescription('ban/remove/reason',
               type: ApplicationCommandOptionType.String,
               required: false,
               minLength: 2,
@@ -97,8 +97,8 @@ export default class BanData extends CommandDataStructure {
           ]
         },
         {
-          name: 'ban/list',
-          description: 'ban/list',
+          this.setName('ban/list',
+          .setDescription('ban/list',
           type: ApplicationCommandOptionType.Subcommand
         }
       ]

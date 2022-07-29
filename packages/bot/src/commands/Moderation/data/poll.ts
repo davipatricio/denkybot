@@ -19,15 +19,15 @@ export default class PollData extends CommandDataStructure {
     }
 
     this.parseData(client, {
-      name: 'poll',
-      dmPermission: false,
+      this.setName('poll',
+      .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.ManageMessages],
-      description: 'poll',
+      .setDescription('poll',
       options: [
         {
-          name: 'poll/create',
+          this.setName('poll/create',
           type: ApplicationCommandOptionType.Subcommand,
-          description: 'poll/create',
+          .setDescription('poll/create',
           options
         }
       ]

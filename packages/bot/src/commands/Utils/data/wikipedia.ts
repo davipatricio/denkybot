@@ -5,18 +5,19 @@ import { ApplicationCommandOptionType } from 'discord.js';
 export default class WikipediaData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.parseData(client, {
-      name: 'wikipedia',
-      dmPermission: true,
-      description: 'wikipedia',
-      options: [
-        {
-          name: 'wikipedia/search',
-          description: 'wikipedia/search',
-          required: true,
-          type: ApplicationCommandOptionType.String
-        }
-      ]
-    });
+    this.t('a');
+    // this.parseData(client, {
+    //   this.setName('wikipedia',
+    //   .setDMPermission(true)
+    //   .setDescription('wikipedia',
+    //   options: [
+    //     {
+    //       this.setName('wikipedia/search',
+    //       .setDescription('wikipedia/search',
+    //       required: true,
+    //       type: ApplicationCommandOptionType.String
+    //     }
+    //   ]
+    // });
   }
 }
