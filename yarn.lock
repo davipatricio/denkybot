@@ -31,7 +31,7 @@ __metadata:
     "@types/node": "npm:18.0.6"
     "@typescript-eslint/eslint-plugin": "npm:5.31.0"
     "@typescript-eslint/parser": "npm:5.31.0"
-    discord.js: "npm:14.1.1"
+    discord.js: "npm:14.1.2"
     eslint: "npm:8.20.0"
     eslint-config-airbnb-base: "npm:15.0.0"
     eslint-config-prettier: "npm:8.5.0"
@@ -53,7 +53,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     bufferutil: "npm:4.0.6"
     dayjs: "npm:1.11.4"
-    discord.js: "npm:14.1.1"
+    discord.js: "npm:14.1.2"
     dotenv: "npm:16.0.1"
     erlpack: "npm:0.1.4"
     hh-mm-ss: "npm:1.2.0"
@@ -77,7 +77,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/locales@workspace:packages/locales"
   dependencies:
-    discord.js: "npm:14.1.1"
+    discord.js: "npm:14.1.2"
     tslib: "npm:2.4.0"
     typescript: "npm:4.7.4"
   languageName: unknown
@@ -89,7 +89,7 @@ __metadata:
   dependencies:
     "@sentry/node": "npm:7.8.0"
     "@types/module-alias": "npm:2.0.1"
-    discord.js: "npm:14.1.1"
+    discord.js: "npm:14.1.2"
     module-alias: "npm:2.2.2"
     winston: "npm:3.8.1"
     winston-transport: "npm:4.5.0"
@@ -112,7 +112,7 @@ __metadata:
   dependencies:
     "@types/module-alias": "npm:2.0.1"
     "@types/node": "npm:18.0.6"
-    discord.js: "npm:14.1.1"
+    discord.js: "npm:14.1.2"
     fastify: "npm:4.3.0"
     module-alias: "npm:2.2.2"
     tslib: "npm:2.4.0"
@@ -1097,9 +1097,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:14.1.1":
-  version: 14.1.1
-  resolution: "discord.js@npm:14.1.1"
+"discord.js@npm:14.1.2":
+  version: 14.1.2
+  resolution: "discord.js@npm:14.1.2"
   dependencies:
     "@discordjs/builders": "npm:^1.1.0"
     "@discordjs/collection": "npm:^1.0.1"
@@ -1112,7 +1112,7 @@ __metadata:
     tslib: "npm:^2.4.0"
     undici: "npm:^5.8.0"
     ws: "npm:^8.8.1"
-  checksum: d18b18fbb36708f5f50aa77207a5255fc6b6326bcc77a31f9261c830ff277df4024b7748a8b4d875c4d5e0a094f53fa6e6ed652eb5226309ee51584d1351854b
+  checksum: c5834f607b7d1280be87811339cb9573589fb781b2b9aaa1da006fc1ef9675dd964243f73bd9efa6d8c87a9db476da21010032c2b937c511954afc375cd04b98
   languageName: node
   linkType: hard
 
