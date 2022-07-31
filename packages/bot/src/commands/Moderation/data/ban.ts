@@ -1,106 +1,117 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, PermissionFlagsBits } from 'discord.js';
+import { PermissionFlagsBits, SlashCommandStringOption, SlashCommandSubcommandBuilder, SlashCommandUserOption } from 'discord.js';
 
 export default class BanData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    
-      this.setName('ban/name',
-      .setDMPermission(false),
-      defaultMemberPermissions: [PermissionFlagsBits.BanMembers],
-      .setDescription('ban',
-      options: [
-        {
-          this.setName('ban/user',
-          .setDescription('ban/user',
-          type: ApplicationCommandOptionType.Subcommand,
-          options: [
-            {
-              this.setName('ban/user',
-              type: ApplicationCommandOptionType.User,
-              required: true,
-              .setDescription('ban/user/user'
-            },
-            {
-              this.setName('ban/delete_messages',
-              .setDescription('ban/delete_messages',
-              type: ApplicationCommandOptionType.String,
-              choices: [
+    this.setName('ban')
+      .setDMPermission(false)
+      .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
+      .setDescription(this.t('commandDescriptions:ban'))
+      .setDescriptionLocalizations(this.localizations('commandDescriptions:ban'))
+      .addSubcommand(
+        new SlashCommandSubcommandBuilder()
+          .setName(this.t('commandNames:ban/user'))
+          .setNameLocalizations(this.localizations('commandNames:ban/user'))
+          .setDescription(this.t('commandDescriptions:ban/user'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:ban/user'))
+          .addUserOption(
+            new SlashCommandUserOption()
+              .setName(this.t('commandNames:ban/user'))
+              .setNameLocalizations(this.localizations('commandNames:ban/user'))
+              .setDescription(this.t('commandDescriptions:ban/user/user'))
+              .setDescriptionLocalizations(this.localizations('commandDescriptions:ban/user/user'))
+              .setRequired(true)
+          )
+          .addStringOption(
+            new SlashCommandStringOption()
+              .setName(this.t('commandNames:ban/delete_messages'))
+              .setNameLocalizations(this.localizations('commandNames:ban/delete_messages'))
+              .setDescription(this.t('commandDescriptions:ban/delete_messages'))
+              .setDescriptionLocalizations(this.localizations('commandDescriptions:ban/delete_messages'))
+              .setChoices(
                 {
-                  name: `🗑️ 1 ${client.languages.manager.get('en_US', 'commandNames:ban/delete_messages/day')}`,
-                  nameLocalizations: {
+                  name: `🗑️ 1 ${this.t('commandNames:ban/delete_messages/day')}`,
+                  name_localizations: {
                     'pt-BR': `🗑️ 1 ${client.languages.manager.get('pt_BR', 'commandNames:ban/delete_messages/day')}`
                   },
                   value: '1'
                 },
                 {
-                  name: `🗑️ 5 ${client.languages.manager.get('en_US', 'commandNames:ban/delete_messages/days')}`,
-                  nameLocalizations: {
+                  name: `🗑️ 5 ${this.t('commandNames:ban/delete_messages/days')}`,
+                  name_localizations: {
                     'pt-BR': `🗑️ 5 ${client.languages.manager.get('pt_BR', 'commandNames:ban/delete_messages/days')}`
                   },
                   value: '5'
                 },
                 {
-                  name: `🗑️ 7 ${client.languages.manager.get('en_US', 'commandNames:ban/delete_messages/days')}`,
-                  nameLocalizations: {
+                  name: `🗑️ 7 ${this.t('commandNames:ban/delete_messages/days')}`,
+                  name_localizations: {
                     'pt-BR': `🗑️ 7 ${client.languages.manager.get('pt_BR', 'commandNames:ban/delete_messages/days')}`
                   },
                   value: '7'
                 }
-              ]
-            },
-            {
-              this.setName('ban/reason',
-              type: ApplicationCommandOptionType.String,
-              .setDescription('ban/reason',
-              minLength: 1,
-              maxLength: 100
-            }
-          ]
-        },
-        {
-          this.setName('ban/info',
-          .setDescription('ban/info',
-          type: ApplicationCommandOptionType.Subcommand,
-          options: [
-            {
-              this.setName('ban/info/user',
-              .setDescription('ban/info/user',
-              type: ApplicationCommandOptionType.String,
-              required: true,
-              autocomplete: true
-            }
-          ]
-        },
-        {
-          this.setName('ban/remove',
-          .setDescription('ban/remove',
-          type: ApplicationCommandOptionType.Subcommand,
-          options: [
-            {
-              this.setName('ban/remove/user',
-              .setDescription('ban/remove/user',
-              type: ApplicationCommandOptionType.String,
-              required: true,
-              autocomplete: true
-            },
-            {
-              this.setName('ban/remove/reason',
-              .setDescription('ban/remove/reason',
-              type: ApplicationCommandOptionType.String,
-              required: false,
-              minLength: 2,
-              maxLength: 100
-            }
-          ]
-        },
-        {
-          this.setName('ban/list',
-          .setDescription('ban/list',
-          type: ApplicationCommandOptionType.Subcommand
-        }
-      ]
+              )
+          )
+          .addStringOption(
+            new SlashCommandStringOption()
+              .setName(this.t('commandNames:ban/reason'))
+              .setNameLocalizations(this.localizations('commandNames:ban/reason'))
+              .setDescription(this.t('commandDescriptions:ban/reason'))
+              .setDescriptionLocalizations(this.localizations('commandDescriptions:ban/reason'))
+              .setMinLength(1)
+              .setMaxLength(255)
+          )
+      )
+      .addSubcommand(
+        new SlashCommandSubcommandBuilder()
+          .setName(this.t('commandNames:ban/info'))
+          .setNameLocalizations(this.localizations('commandNames:ban/info'))
+          .setDescription(this.t('commandDescriptions:ban/info'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:ban/info'))
+          .addStringOption(
+            new SlashCommandStringOption()
+              .setName(this.t('commandNames:ban/info/user'))
+              .setNameLocalizations(this.localizations('commandNames:ban/info/user'))
+              .setDescription(this.t('commandDescriptions:ban/info/user'))
+              .setDescriptionLocalizations(this.localizations('commandDescriptions:ban/info/user'))
+              .setRequired(true)
+              .setAutocomplete(true)
+          )
+      )
+      .addSubcommand(
+        new SlashCommandSubcommandBuilder()
+          .setName(this.t('commandNames:ban/remove'))
+          .setNameLocalizations(this.localizations('commandNames:ban/remove'))
+          .setDescription(this.t('commandDescriptions:ban/remove'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:ban/remove'))
+          .addStringOption(
+            new SlashCommandStringOption()
+              .setName(this.t('commandNames:ban/remove/user'))
+              .setNameLocalizations(this.localizations('commandNames:ban/remove/user'))
+              .setDescription(this.t('commandDescriptions:ban/remove/user'))
+              .setDescriptionLocalizations(this.localizations('commandDescriptions:ban/remove/user'))
+              .setRequired(true)
+              .setAutocomplete(true)
+          )
+          .addStringOption(
+            new SlashCommandStringOption()
+              .setName(this.t('commandNames:ban/remove/reason'))
+              .setNameLocalizations(this.localizations('commandNames:ban/remove/reason'))
+              .setDescription(this.t('commandDescriptions:ban/remove/reason'))
+              .setDescriptionLocalizations(this.localizations('commandDescriptions:ban/remove/reason'))
+              .setMinLength(2)
+              .setMaxLength(100)
+          )
+      )
+      .addSubcommand(
+        new SlashCommandSubcommandBuilder()
+          .setName(this.t('commandNames:ban/list'))
+          .setNameLocalizations(this.localizations('commandNames:ban/list'))
+          .setDescription(this.t('commandDescriptions:ban/list'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:ban/list'))
+      );
   }
 }
