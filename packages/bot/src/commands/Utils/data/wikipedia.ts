@@ -5,16 +5,17 @@ import { SlashCommandStringOption } from 'discord.js';
 export default class WikipediaData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
+
     this.setName('wikipedia')
       .setDMPermission(true)
-      .setDescription(this.t('en_US', 'commandDescriptions:wikipedia'))
-      .setDescriptionLocalization('pt-BR', this.t('pt_BR', 'commandDescriptions:wikipedia'))
+      .setDescription(this.t('commandDescriptions:wikipedia'))
+      .setDescriptionLocalizations(this.localizations('commandDescriptions:wikipedia'))
       .addStringOption(
         new SlashCommandStringOption()
-          .setName(this.t('en_US', 'commandNames:wikipedia/search'))
-          .setNameLocalization('pt-BR', this.t('pt_BR', 'commandNames:wikipedia/search'))
-          .setDescription(this.t('en_US', 'commandDescriptions:wikipedia/search'))
-          .setDescriptionLocalization('pt-BR', this.t('pt_BR', 'commandDescriptions:wikipedia/search'))
+          .setName(this.t('commandNames:wikipedia/search'))
+          .setNameLocalizations(this.localizations('commandNames:wikipedia/search'))
+          .setDescription(this.t('commandDescriptions:wikipedia/search'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:wikipedia/search'))
           .setMaxLength(100)
           .setRequired(true)
       );

@@ -235,7 +235,7 @@ export default {
   'animal/bunny': "Here's a picture of a bunny 🐰",
   'animal/cat': "Here's a picture of a cat 🐱",
   'animal/duck': "Here's a picture of a duck 🦆",
-  'animal/foxy': "Here's a picture of a foxy 🦊",
+  'animal/fox': "Here's a picture of a fox 🦊",
 
   // Ban info
   'ban/info/error/noGuildBans': 'This server does not have bans.',

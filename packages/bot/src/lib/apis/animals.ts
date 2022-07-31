@@ -34,8 +34,8 @@ export default class AnimalsAPI {
     return data.url as string;
   }
 
-  /** Get a random image of a foxy */
-  async getRandomFoxy() {
+  /** Get a random image of a fox */
+  async getRandomFox() {
     const data = await this.request('https://randomfox.ca/floof/').then(res => res.body.json());
 
     return data.image as string;

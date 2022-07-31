@@ -107,7 +107,7 @@ export default {
   'animal/bunny': 'coelho',
   'animal/cat': 'gato',
   'animal/duck': 'pato',
-  'animal/foxy': 'raposa',
+  'animal/fox': 'raposa',
 
   // Giveaway
   giveaway: 'sorteio',

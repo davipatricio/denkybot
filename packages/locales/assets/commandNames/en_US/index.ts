@@ -101,13 +101,13 @@ export default {
   'kick/reason': 'reason',
 
   // Animal
-  animal: 'animal dog | koala | bunny | cat | duck | foxy',
+  animal: 'animal dog | koala | bunny | cat | duck | fox',
   'animal/dog': 'dog',
   'animal/koala': 'koala',
   'animal/bunny': 'bunny',
   'animal/cat': 'cat',
   'animal/duck': 'duck',
-  'animal/foxy': 'foxy',
+  'animal/fox': 'fox',
 
   // Giveaway
   giveaway: 'giveaway',

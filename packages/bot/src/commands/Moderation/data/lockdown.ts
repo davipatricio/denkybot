@@ -6,7 +6,7 @@ export default class LockdownData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.parseData(client, {
+    
       this.setName('lockdown',
       .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageGuild],
@@ -45,6 +45,5 @@ export default class LockdownData extends CommandDataStructure {
           ]
         }
       ]
-    });
   }
 }

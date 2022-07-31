@@ -18,7 +18,7 @@ export default class PollData extends CommandDataStructure {
       });
     }
 
-    this.parseData(client, {
+    
       this.setName('poll',
       .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.ManageMessages],
@@ -31,6 +31,5 @@ export default class PollData extends CommandDataStructure {
           options
         }
       ]
-    });
   }
 }

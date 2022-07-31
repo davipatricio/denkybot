@@ -31,8 +31,8 @@ export default class AnimalCommand extends Command {
       case 'duck':
         baseEmbed.setTitle(t('command:animal/duck')).setImage(await this.client.apis.animals.getRandomDuck());
         break;
-      case 'foxy':
-        baseEmbed.setTitle(t('command:animal/foxy')).setImage(await this.client.apis.animals.getRandomFoxy());
+      case 'fox':
+        baseEmbed.setTitle(t('command:animal/fox')).setImage(await this.client.apis.animals.getRandomFox());
         break;
       case 'koala':
         baseEmbed.setTitle(t('command:animal/koala')).setImage(await this.client.apis.animals.getRandomKoala());

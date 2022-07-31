@@ -6,7 +6,7 @@ export default class GiveawayData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.parseData(client, {
+    
       this.setName('giveaway',
       .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.ManageGuild],
@@ -72,6 +72,5 @@ export default class GiveawayData extends CommandDataStructure {
           ]
         }
       ]
-    });
   }
 }

@@ -102,7 +102,7 @@ export default {
   'animal/panda': 'Veja uma imagem aleatória de um panda',
   'animal/cat': 'Veja uma imagem aleatória de um gato',
   'animal/dog': 'Veja uma imagem aleatória de um cachorro',
-  'animal/foxy': 'Veja uma imagem aleatória de um raposa',
+  'animal/fox': 'Veja uma imagem aleatória de um raposa',
   'animal/bunny': 'Veja uma imagem aleatória de um coelho',
   'animal/koala': 'Veja uma imagem aleatória de um coala',
   'animal/duck': 'Veja uma imagem aleatória de um pato',

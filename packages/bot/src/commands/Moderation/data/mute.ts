@@ -5,7 +5,7 @@ import { ApplicationCommandOptionType, PermissionFlagsBits } from 'discord.js';
 export default class MuteData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.parseData(client, {
+    
       this.setName('mute',
       .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.ModerateMembers],
@@ -81,6 +81,5 @@ export default class MuteData extends CommandDataStructure {
           type: ApplicationCommandOptionType.String
         }
       ]
-    });
   }
 }

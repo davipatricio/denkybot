@@ -6,7 +6,7 @@ export default class BanData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.parseData(client, {
+    
       this.setName('ban/name',
       .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.BanMembers],
@@ -102,6 +102,5 @@ export default class BanData extends CommandDataStructure {
           type: ApplicationCommandOptionType.Subcommand
         }
       ]
-    });
   }
 }

@@ -6,7 +6,7 @@ export default class KickData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.parseData(client, {
+    
       this.setName('kick',
       .setDMPermission(false),
       defaultMemberPermissions: [PermissionFlagsBits.KickMembers],
@@ -26,6 +26,5 @@ export default class KickData extends CommandDataStructure {
           maxLength: 100
         }
       ]
-    });
   }
 }
