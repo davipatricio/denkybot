@@ -60,7 +60,7 @@ export class Initializer {
 
         const { default: CommandDataClass }: DefaultClass<CommandDataStructure> = await import(`../../commands/${category}/data/${command}`);
         const cachedCommand = this.client.commands.get(commandDataWithoutExtension);
-        if (cachedCommand) cachedCommand.options = new CommandDataClass(this.client).data;
+        if (cachedCommand) cachedCommand.options = new CommandDataClass(this.client);
       }
     }
   }

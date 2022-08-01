@@ -1,5 +1,5 @@
 import type { DenkyClient } from '#types/Client';
-import { ChatInputApplicationCommandData, SlashCommandBuilder } from 'discord.js';
+import { SlashCommandBuilder } from 'discord.js';
 import type { CommandDescriptionsKeys, CommandNamesKeys } from '../lib/managers/LanguageManager';
 
 function localizationObject(client: DenkyClient, path: `commandNames:${CommandNamesKeys}` | `commandDescriptions:${CommandDescriptionsKeys}`) {
@@ -11,7 +11,6 @@ function localizationObject(client: DenkyClient, path: `commandNames:${CommandNa
 
 export class CommandDataStructure extends SlashCommandBuilder {
   client: DenkyClient;
-  data: ChatInputApplicationCommandData;
   constructor(client: DenkyClient);
   // eslint-disable-next-line no-useless-constructor, @typescript-eslint/no-empty-function
   constructor(client: DenkyClient) {

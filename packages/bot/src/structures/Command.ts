@@ -1,6 +1,7 @@
 import type { CommandCategoriesKeys, CommandNamesKeys, translateTuple } from '#lib/managers/LanguageManager';
 import type { DenkyClient } from '#types/Client';
-import type { AutocompleteInteraction, Awaitable, ChatInputApplicationCommandData, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
+import type { AutocompleteInteraction, Awaitable, ChatInputCommandInteraction, PermissionResolvable } from 'discord.js';
+import type { CommandDataStructure } from './CommandDataStructure';
 
 export type CommandLocale = typeof translateTuple;
 export type CommandRunOptions = { t: CommandLocale; interaction: ChatInputCommandInteraction };
@@ -41,7 +42,7 @@ class Command {
   config: ephemeralConfig | nonEphemeralConfig;
 
   /** Command options to be posted to Discord */
-  options: ChatInputApplicationCommandData;
+  options: CommandDataStructure;
 
   constructor(client: DenkyClient) {
     this.client = client;
