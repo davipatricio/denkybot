@@ -65,14 +65,14 @@ export default {
   'suggestion/deny/reason': 'motivo',
 
   // Ban
-  ban: 'ban usuario | informação | lista',
+  ban: 'ban usuario | info | lista',
   'ban/name': 'banir',
   'ban/user': 'usuario',
   'ban/delete_messages': 'deletar_mensagens',
   'ban/delete_messages/day': 'dia',
   'ban/delete_messages/days': 'dias',
   'ban/reason': 'motivo',
-  'ban/info': 'informação',
+  'ban/info': 'info',
   'ban/info/user': 'usuario',
   'ban/remove': 'remover',
   'ban/remove/user': 'usuario',
