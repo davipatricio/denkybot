@@ -87,7 +87,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/logger@workspace:packages/logger"
   dependencies:
-    "@sentry/node": "npm:7.8.0"
+    "@sentry/node": "npm:7.8.1"
     "@types/module-alias": "npm:2.0.1"
     discord.js: "npm:14.1.2"
     module-alias: "npm:2.2.2"
@@ -338,59 +338,59 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/core@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@sentry/core@npm:7.8.0"
+"@sentry/core@npm:7.8.1":
+  version: 7.8.1
+  resolution: "@sentry/core@npm:7.8.1"
   dependencies:
-    "@sentry/hub": "npm:7.8.0"
-    "@sentry/types": "npm:7.8.0"
-    "@sentry/utils": "npm:7.8.0"
+    "@sentry/hub": "npm:7.8.1"
+    "@sentry/types": "npm:7.8.1"
+    "@sentry/utils": "npm:7.8.1"
     tslib: "npm:^1.9.3"
-  checksum: 4939e561036a91d1c2694c9315e43392810909d4ada70cc02326db56787fae804aee8d6ce0fa1f1b2ab458d38a5fb7e69b88cc3e44f9d2f3ba3011c39b88485e
+  checksum: 877851010629c5ed352da671fb007ed00acaa73b908ba566621573a617150f2197a16090c2d918962f2a2d98ff0e2a0ed813794aec9970e8ba1bdb6ed576d126
   languageName: node
   linkType: hard
 
-"@sentry/hub@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@sentry/hub@npm:7.8.0"
+"@sentry/hub@npm:7.8.1":
+  version: 7.8.1
+  resolution: "@sentry/hub@npm:7.8.1"
   dependencies:
-    "@sentry/types": "npm:7.8.0"
-    "@sentry/utils": "npm:7.8.0"
+    "@sentry/types": "npm:7.8.1"
+    "@sentry/utils": "npm:7.8.1"
     tslib: "npm:^1.9.3"
-  checksum: c7d14ea47bb2cd9d582a54dcb4092d1afaf2005d0d9cd1bde6e8a63f21e96212341b1c90735ee5c3650c2a4ac502f379b8bf5a239a64b6d2177f9950fbe17525
+  checksum: 26e721f1163140fe51bbf40285ed64ef5bb011a7c98bc9a85118b1f8b303b64de28db7ed8e538d44538a1d822a3dc302249319c4ad797f66085d1e935c54d5d5
   languageName: node
   linkType: hard
 
-"@sentry/node@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@sentry/node@npm:7.8.0"
+"@sentry/node@npm:7.8.1":
+  version: 7.8.1
+  resolution: "@sentry/node@npm:7.8.1"
   dependencies:
-    "@sentry/core": "npm:7.8.0"
-    "@sentry/hub": "npm:7.8.0"
-    "@sentry/types": "npm:7.8.0"
-    "@sentry/utils": "npm:7.8.0"
+    "@sentry/core": "npm:7.8.1"
+    "@sentry/hub": "npm:7.8.1"
+    "@sentry/types": "npm:7.8.1"
+    "@sentry/utils": "npm:7.8.1"
     cookie: "npm:^0.4.1"
     https-proxy-agent: "npm:^5.0.0"
     lru_map: "npm:^0.3.3"
     tslib: "npm:^1.9.3"
-  checksum: 2efd5347342f9456768f6bed543b22fe3c3f7e42a5a52559340287690cb2ce462c755c749b3d5c760271024b2b191299dd889f6d91ad2031f24bb72551640e1a
+  checksum: 6bbaf744e7a057032069c3bacdce2d14d58fe42df7dfcc89d6007c60e30f55e0a72dcf3c7a2b6406a491d2f536baf665fe082043c495fa34b4002247945b4183
   languageName: node
   linkType: hard
 
-"@sentry/types@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@sentry/types@npm:7.8.0"
-  checksum: c1b61527d6a762c3e0152bd4e53d3e7ec56752971630b6ed0dc55aadff7d4148531056560268e096f96f0065ef5f44556def08e2e8a6fcf64f83428ed80cb72c
+"@sentry/types@npm:7.8.1":
+  version: 7.8.1
+  resolution: "@sentry/types@npm:7.8.1"
+  checksum: 71436e1d70e996a4dbf9e2a07acfdb59964b5a20a9323aa66e02023984336416964b542ad0d39e39938be3c86a2a03bf49523dbd75b166a85033569697a186fd
   languageName: node
   linkType: hard
 
-"@sentry/utils@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@sentry/utils@npm:7.8.0"
+"@sentry/utils@npm:7.8.1":
+  version: 7.8.1
+  resolution: "@sentry/utils@npm:7.8.1"
   dependencies:
-    "@sentry/types": "npm:7.8.0"
+    "@sentry/types": "npm:7.8.1"
     tslib: "npm:^1.9.3"
-  checksum: 37b76a28ced7940350cc6c772be926ab0ba5d21c55a5bc8ac6b66dc25b0898d8a640da0399d5288ad8d1127f694967ed7a59ee90199d2967d83a19aa211be4e3
+  checksum: cee37e0ac5f9fffe9c6e452e2f464861e076103e3930748b2de4cb66f35cea8aa370dd07dd8490793c062ab05dcf8a7cacb5bac74646daa4534337621c9d4ea3
   languageName: node
   linkType: hard
 
