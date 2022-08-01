@@ -58,16 +58,16 @@ export default {
   'config/suggestions': 'Configure o sistema de sugestões do Denky',
 
   // Suggestions
-  suggestions: 'Envie sugestões para o servidor',
-  'suggestions/send': 'Envie sugestões para o servidor',
-  'suggestions/edit': 'Edite uma sugestão que você enviou anteriormente',
-  'suggestions/edit/id': 'ID da sua sugestão',
-  'suggestions/accept': 'Aceite uma sugestão que foi enviada',
-  'suggestions/accept/id': 'ID da sugestão para aceitar',
-  'suggestions/accept/reason': 'A razão para aceitar a sugestão',
-  'suggestions/deny': 'Recuse uma sugestão que foi enviada',
-  'suggestions/deny/id': 'ID da sugestão para recusar',
-  'suggestions/deny/reason': 'A razão para recusar a sugestão',
+  suggestion: 'Envie sugestões para o servidor',
+  'suggestion/send': 'Envie sugestões para o servidor',
+  'suggestion/edit': 'Edite uma sugestão que você enviou anteriormente',
+  'suggestion/edit/id': 'ID da sua sugestão',
+  'suggestion/accept': 'Aceite uma sugestão que foi enviada',
+  'suggestion/accept/id': 'ID da sugestão para aceitar',
+  'suggestion/accept/reason': 'A razão para aceitar a sugestão',
+  'suggestion/deny': 'Recuse uma sugestão que foi enviada',
+  'suggestion/deny/id': 'ID da sugestão para recusar',
+  'suggestion/deny/reason': 'A razão para recusar a sugestão',
 
   // Ban
   ban: 'Comando para ver as informações de um banimento',
