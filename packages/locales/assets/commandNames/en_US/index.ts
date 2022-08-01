@@ -46,7 +46,8 @@ export default {
   'bot/vote': 'vote',
 
   // Text
-  text: 'text',
+  text: 'text emojify | vaporwave | claps | invert',
+  'text/name': 'text',
   'text/claps': 'claps',
   'text/invert': 'invert',
 
@@ -56,7 +57,8 @@ export default {
 
   // Suggestions
   suggestions: 'suggestions',
-  suggestion: 'suggestion',
+  suggestion: 'suggestion | send | edit | accept | deny',
+  'suggestion/name': 'suggestion',
   'suggestion/send': 'send',
   'suggestion/edit': 'edit',
   'suggestion/accept': 'accept',

@@ -46,7 +46,8 @@ export default {
   'bot/vote': 'votar',
 
   // Text
-  text: 'texto',
+  text: 'texto emojify | vaporwave | palmas | inverter',
+  'text/name': 'texto',
   'text/claps': 'palmas',
   'text/invert': 'inverter',
 
@@ -56,7 +57,8 @@ export default {
 
   // Suggestions
   suggestions: 'sugestoes',
-  suggestion: 'sugestao',
+  suggestion: 'sugestao | enviar | editar | aceitar | recusar',
+  'suggestion/name': 'sugestao',
   'suggestion/send': 'enviar',
   'suggestion/edit': 'editar',
   'suggestion/accept': 'aceitar',

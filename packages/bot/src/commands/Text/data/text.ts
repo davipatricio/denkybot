@@ -7,14 +7,15 @@ export default class TextData extends CommandDataStructure {
     super(client);
 
     const baseTextOption = new SlashCommandStringOption()
-      .setName(this.t('commandNames:text'))
-      .setNameLocalizations(this.localizations('commandNames:text'))
-      .setDescription(this.t('commandDescriptions:text'))
-      .setDescriptionLocalizations(this.localizations('commandDescriptions:text'))
+      .setName(this.t('commandNames:text/name'))
+      .setNameLocalizations(this.localizations('commandNames:text/name'))
+      .setDescription(this.t('commandDescriptions:text/text'))
+      .setDescriptionLocalizations(this.localizations('commandDescriptions:text/text'))
       .setMaxLength(100)
       .setRequired(true);
 
-    this.setName('text')
+    this.setName(this.t('commandNames:text/name'))
+      .setNameLocalizations(this.localizations('commandNames:text/name'))
       .setDMPermission(true)
       .setDescription(this.t('commandDescriptions:text'))
       .setDescriptionLocalizations(this.localizations('commandDescriptions:text'))

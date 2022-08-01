@@ -6,8 +6,8 @@ export default class SuggestionData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.setName(this.t('commandNames:suggestion'))
-      .setNameLocalizations(this.localizations('commandNames:suggestion'))
+    this.setName(this.t('commandNames:suggestion/name'))
+      .setNameLocalizations(this.localizations('commandNames:suggestion/name'))
       .setDMPermission(false)
       .setDescription('suggestions')
       .addSubcommand(
