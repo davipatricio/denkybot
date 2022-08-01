@@ -1,28 +1,33 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, PermissionFlagsBits } from 'discord.js';
+import { PermissionFlagsBits, SlashCommandStringOption, SlashCommandUserOption } from 'discord.js';
 
 export default class MuteData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    
-      this.setName('mute',
-      .setDMPermission(false),
-      defaultMemberPermissions: [PermissionFlagsBits.ModerateMembers],
-      .setDescription('mute',
-      options: [
-        {
-          this.setName('mute/user',
-          .setDescription('mute/user',
-          required: true,
-          type: ApplicationCommandOptionType.User
-        },
-        {
-          this.setName('mute/time',
-          .setDescription('mute/time',
-          required: true,
-          type: ApplicationCommandOptionType.String,
-          choices: [
+
+    this.setName(this.t('commandNames:mute'))
+      .setNameLocalizations(this.localizations('commandNames:mute'))
+      .setDMPermission(false)
+      .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
+      .setDescription(this.t('commandDescriptions:mute'))
+      .setDescriptionLocalizations(this.localizations('commandDescriptions:mute'))
+      .addUserOption(
+        new SlashCommandUserOption()
+          .setName(this.t('commandNames:mute/user'))
+          .setNameLocalizations(this.localizations('commandNames:mute/user'))
+          .setDescription(this.t('commandDescriptions:mute/user'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:mute/user'))
+          .setRequired(true)
+      )
+      .addStringOption(
+        new SlashCommandStringOption()
+          .setName(this.t('commandNames:mute/time'))
+          .setNameLocalizations(this.localizations('commandNames:mute/time'))
+          .setDescription(this.t('commandDescriptions:mute/time'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:mute/time'))
+          .setRequired(true)
+          .setChoices(
             {
               name: `🤐 1 ${client.languages.manager.get('en_US', 'commandNames:mute/time/minute')}`,
               nameLocalizations: {
@@ -72,14 +77,14 @@ export default class MuteData extends CommandDataStructure {
               },
               value: '28d'
             }
-          ]
-        },
-        {
-          this.setName('mute/reason',
-          .setDescription('mute/reason',
-          required: false,
-          type: ApplicationCommandOptionType.String
-        }
-      ]
+          )
+      )
+      .addStringOption(
+        new SlashCommandStringOption()
+          .setName(this.t('commandNames:mute/reason'))
+          .setNameLocalizations(this.localizations('commandNames:mute/reason'))
+          .setDescription(this.t('commandDescriptions:mute/reason'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:mute/reason'))
+      );
   }
 }
