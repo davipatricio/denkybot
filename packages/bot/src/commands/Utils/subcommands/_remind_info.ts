@@ -5,12 +5,12 @@ import { Colors, EmbedBuilder } from 'discord.js';
 export default class ReminderInfoSubCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
-    this.rawName = 'REMIND';
-    this.rawCategory = 'UTILS';
+    this.rawName = '';
+    this.rawCategory = '';
     this.config = {
       autoDefer: true,
       ephemeral: false,
-      showInHelp: true
+      showInHelp: false
     };
     this.permissions = { bot: [] };
   }

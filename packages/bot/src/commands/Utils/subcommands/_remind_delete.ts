@@ -4,8 +4,8 @@ import type { DenkyClient } from '#types/Client';
 export default class ReminderDeleteSubCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
-    this.rawName = 'REMIND';
-    this.rawCategory = 'UTILS';
+    this.rawName = '';
+    this.rawCategory = '';
     this.config = {
       autoDefer: true,
       ephemeral: false,
