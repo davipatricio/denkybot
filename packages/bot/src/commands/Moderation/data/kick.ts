@@ -1,31 +1,32 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType, PermissionFlagsBits } from 'discord.js';
+import { PermissionFlagsBits, SlashCommandStringOption, SlashCommandUserOption } from 'discord.js';
 
 export default class KickData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.parseData(client, {
-      name: 'kick',
-      dmPermission: false,
-      defaultMemberPermissions: [PermissionFlagsBits.KickMembers],
-      description: 'kick',
-      options: [
-        {
-          name: 'kick/user',
-          type: ApplicationCommandOptionType.User,
-          required: true,
-          description: 'kick/user'
-        },
-        {
-          name: 'kick/reason',
-          type: ApplicationCommandOptionType.String,
-          description: 'kick/reason',
-          minLength: 1,
-          maxLength: 100
-        }
-      ]
-    });
+    this.setName('kick')
+      .setDMPermission(false)
+      .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+      .setDescription(this.t('commandDescriptions:kick'))
+      .setDescriptionLocalizations(this.localizations('commandDescriptions:kick'))
+      .addUserOption(
+        new SlashCommandUserOption()
+          .setName(this.t('commandNames:kick/user'))
+          .setNameLocalizations(this.localizations('commandNames:kick/user'))
+          .setDescription(this.t('commandDescriptions:kick/user'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:kick/user'))
+          .setRequired(true)
+      )
+      .addStringOption(
+        new SlashCommandStringOption()
+          .setName(this.t('commandNames:kick/reason'))
+          .setNameLocalizations(this.localizations('commandNames:kick/reason'))
+          .setDescription(this.t('commandDescriptions:kick/reason'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:kick/reason'))
+          .setMinLength(4)
+          .setMaxLength(255)
+      );
   }
 }

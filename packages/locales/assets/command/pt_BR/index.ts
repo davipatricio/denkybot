@@ -238,7 +238,7 @@ export default {
   'animal/bunny': 'Aqui está uma imagem de um coelho 🐰',
   'animal/cat': 'Aqui está uma imagem de um gato 🐱',
   'animal/duck': 'Aqui está uma imagem de um pato 🦆',
-  'animal/foxy': 'Aqui está uma imagem de um raposa 🦊',
+  'animal/fox': 'Aqui está uma imagem de um raposa 🦊',
 
   // Ban Info
   'ban/info/error/noGuildBans': 'Este servidor não possui banimentos.',

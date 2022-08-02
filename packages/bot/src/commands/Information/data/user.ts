@@ -1,55 +1,56 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType } from 'discord.js';
+import { SlashCommandSubcommandBuilder, SlashCommandUserOption } from 'discord.js';
 
 export default class UserData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.parseData(client, {
-      name: 'user',
-      dmPermission: false,
-      description: 'user',
-      options: [
-        {
-          name: 'user/info',
-          type: ApplicationCommandOptionType.Subcommand,
-          description: 'user/info',
-          options: [
-            {
-              name: 'user/info/user',
-              type: ApplicationCommandOptionType.User,
-              required: false,
-              description: 'user/info/user'
-            }
-          ]
-        },
-        {
-          name: 'user/avatar',
-          type: ApplicationCommandOptionType.Subcommand,
-          description: 'user/avatar',
-          options: [
-            {
-              name: 'user/avatar/user',
-              type: ApplicationCommandOptionType.User,
-              required: false,
-              description: 'user/avatar/user'
-            }
-          ]
-        },
-        {
-          name: 'user/banner',
-          type: ApplicationCommandOptionType.Subcommand,
-          description: 'user/banner',
-          options: [
-            {
-              name: 'user/banner/user',
-              type: ApplicationCommandOptionType.User,
-              required: false,
-              description: 'user/banner/user'
-            }
-          ]
-        }
-      ]
-    });
+
+    this.setName('user')
+      .setDMPermission(false)
+      .setDescription(this.t('commandDescriptions:user'))
+      .setDescriptionLocalizations(this.localizations('commandDescriptions:user'))
+      .addSubcommand(
+        new SlashCommandSubcommandBuilder()
+          .setName('info')
+          .setDescription(this.t('commandDescriptions:user/info'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:user/info'))
+          .addUserOption(
+            new SlashCommandUserOption()
+              .setName(this.t('commandNames:user/info/user'))
+              .setNameLocalizations(this.localizations('commandNames:user/info/user'))
+              .setDescription(this.t('commandDescriptions:user/info/user'))
+              .setDescriptionLocalizations(this.localizations('commandDescriptions:user/info/user'))
+              .setRequired(false)
+          )
+      )
+      .addSubcommand(
+        new SlashCommandSubcommandBuilder()
+          .setName('avatar')
+          .setDescription(this.t('commandDescriptions:user/avatar'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:user/avatar'))
+          .addUserOption(
+            new SlashCommandUserOption()
+              .setName(this.t('commandNames:user/avatar/user'))
+              .setNameLocalizations(this.localizations('commandNames:user/avatar/user'))
+              .setDescription(this.t('commandDescriptions:user/avatar/user'))
+              .setDescriptionLocalizations(this.localizations('commandDescriptions:user/avatar/user'))
+              .setRequired(false)
+          )
+      )
+      .addSubcommand(
+        new SlashCommandSubcommandBuilder()
+          .setName('banner')
+          .setDescription(this.t('commandDescriptions:user/banner'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:user/banner'))
+          .addUserOption(
+            new SlashCommandUserOption()
+              .setName(this.t('commandNames:user/banner/user'))
+              .setNameLocalizations(this.localizations('commandNames:user/banner/user'))
+              .setDescription(this.t('commandDescriptions:user/banner/user'))
+              .setDescriptionLocalizations(this.localizations('commandDescriptions:user/banner/user'))
+              .setRequired(false)
+          )
+      );
   }
 }

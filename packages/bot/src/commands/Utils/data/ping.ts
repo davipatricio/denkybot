@@ -4,10 +4,7 @@ import type { DenkyClient } from '#types/Client';
 export default class PingData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.parseData(client, {
-      name: 'ping',
-      dmPermission: true,
-      description: 'ping'
-    });
+
+    this.setName('ping').setDMPermission(true).setDescription(this.t('commandDescriptions:ping')).setDescriptionLocalizations(this.localizations('commandDescriptions:ping'));
   }
 }

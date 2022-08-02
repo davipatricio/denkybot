@@ -1,22 +1,23 @@
 import { CommandDataStructure } from '#structures/CommandDataStructure';
 import type { DenkyClient } from '#types/Client';
-import { ApplicationCommandOptionType } from 'discord.js';
+import { SlashCommandStringOption } from 'discord.js';
 
 export default class WikipediaData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.parseData(client, {
-      name: 'wikipedia',
-      dmPermission: true,
-      description: 'wikipedia',
-      options: [
-        {
-          name: 'wikipedia/search',
-          description: 'wikipedia/search',
-          required: true,
-          type: ApplicationCommandOptionType.String
-        }
-      ]
-    });
+
+    this.setName('wikipedia')
+      .setDMPermission(true)
+      .setDescription(this.t('commandDescriptions:wikipedia'))
+      .setDescriptionLocalizations(this.localizations('commandDescriptions:wikipedia'))
+      .addStringOption(
+        new SlashCommandStringOption()
+          .setName(this.t('commandNames:wikipedia/search'))
+          .setNameLocalizations(this.localizations('commandNames:wikipedia/search'))
+          .setDescription(this.t('commandDescriptions:wikipedia/search'))
+          .setDescriptionLocalizations(this.localizations('commandDescriptions:wikipedia/search'))
+          .setMaxLength(100)
+          .setRequired(true)
+      );
   }
 }

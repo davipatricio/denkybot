@@ -27,18 +27,18 @@ export default {
 
   // User
   user: 'user avatar | info | banner',
-  'user/info': 'user info',
-  'user/avatar': 'user avatar',
-  'user/banner': 'user banner',
+  'user/info': 'info',
+  'user/avatar': 'avatar',
+  'user/banner': 'banner',
   'user/info/user': 'usuario',
   'user/avatar/user': 'usuario',
   'user/banner/user': 'usuario',
 
   // Server
   server: 'server avatar | icon | banner',
-  'server/info': 'server info',
-  'server/icon': 'server icon',
-  'server/banner': 'server banner',
+  'server/info': 'info',
+  'server/icon': 'icon',
+  'server/banner': 'banner',
 
   // Bot
   bot: 'bot info | invite | vote',
@@ -46,7 +46,8 @@ export default {
   'bot/vote': 'votar',
 
   // Text
-  text: 'texto',
+  text: 'texto emojify | vaporwave | palmas | inverter',
+  'text/name': 'texto',
   'text/claps': 'palmas',
   'text/invert': 'inverter',
 
@@ -56,25 +57,24 @@ export default {
 
   // Suggestions
   suggestions: 'sugestoes',
-  suggestion: 'sugestao',
+  suggestion: 'sugestao | enviar | editar | aceitar | recusar',
+  'suggestion/name': 'sugestao',
   'suggestion/send': 'enviar',
   'suggestion/edit': 'editar',
   'suggestion/accept': 'aceitar',
-  'suggestion/accept/id': 'id_sugestao',
   'suggestion/accept/reason': 'motivo',
   'suggestion/deny': 'recusar',
-  'suggestion/deny/id': 'id_sugestao',
   'suggestion/deny/reason': 'motivo',
 
   // Ban
-  ban: 'ban usuario | informação | lista',
+  ban: 'ban usuario | info | lista',
   'ban/name': 'banir',
   'ban/user': 'usuario',
   'ban/delete_messages': 'deletar_mensagens',
   'ban/delete_messages/day': 'dia',
   'ban/delete_messages/days': 'dias',
   'ban/reason': 'motivo',
-  'ban/info': 'informação',
+  'ban/info': 'info',
   'ban/info/user': 'usuario',
   'ban/remove': 'remover',
   'ban/remove/user': 'usuario',
@@ -109,7 +109,7 @@ export default {
   'animal/bunny': 'coelho',
   'animal/cat': 'gato',
   'animal/duck': 'pato',
-  'animal/foxy': 'raposa',
+  'animal/fox': 'raposa',
 
   // Giveaway
   giveaway: 'sorteio',

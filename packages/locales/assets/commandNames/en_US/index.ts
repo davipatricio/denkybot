@@ -27,18 +27,18 @@ export default {
 
   // User
   user: 'user avatar | info | banner',
-  'user/info': 'user info',
-  'user/avatar': 'user avatar',
-  'user/banner': 'user banner',
+  'user/info': 'info',
+  'user/avatar': 'avatar',
+  'user/banner': 'banner',
   'user/info/user': 'user',
   'user/avatar/user': 'user',
   'user/banner/user': 'user',
 
   // Server
   server: 'server avatar | icon | banner',
-  'server/info': 'server info',
-  'server/icon': 'server icon',
-  'server/banner': 'server banner',
+  'server/info': 'info',
+  'server/icon': 'icon',
+  'server/banner': 'banner',
 
   // Bot
   bot: 'bot info | convidar | votar',
@@ -46,7 +46,8 @@ export default {
   'bot/vote': 'vote',
 
   // Text
-  text: 'text',
+  text: 'text emojify | vaporwave | claps | invert',
+  'text/name': 'text',
   'text/claps': 'claps',
   'text/invert': 'invert',
 
@@ -56,14 +57,13 @@ export default {
 
   // Suggestions
   suggestions: 'suggestions',
-  suggestion: 'suggestion',
+  suggestion: 'suggestion | send | edit | accept | deny',
+  'suggestion/name': 'suggestion',
   'suggestion/send': 'send',
   'suggestion/edit': 'edit',
   'suggestion/accept': 'accept',
-  'suggestion/accept/id': 'id_suggestion',
   'suggestion/accept/reason': 'reason',
   'suggestion/deny': 'deny',
-  'suggestion/deny/id': 'id_suggestion',
   'suggestion/deny/reason': 'reason',
 
   // Ban
@@ -82,6 +82,7 @@ export default {
   'ban/list': 'list',
 
   // Wikipedia
+  wikipedia: 'wikipedia',
   'wikipedia/search': 'search',
 
   // Mute
@@ -102,13 +103,13 @@ export default {
   'kick/reason': 'reason',
 
   // Animal
-  animal: 'animal dog | koala | bunny | cat | duck | foxy',
+  animal: 'animal dog | koala | bunny | cat | duck | fox',
   'animal/dog': 'dog',
   'animal/koala': 'koala',
   'animal/bunny': 'bunny',
   'animal/cat': 'cat',
   'animal/duck': 'duck',
-  'animal/foxy': 'foxy',
+  'animal/fox': 'fox',
 
   // Giveaway
   giveaway: 'giveaway',

@@ -4,10 +4,11 @@ import type { DenkyClient } from '#types/Client';
 export default class HelpData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
-    this.parseData(client, {
-      name: 'help',
-      dmPermission: true,
-      description: 'help'
-    });
+
+    this.setName(this.t('commandNames:help'))
+      .setNameLocalizations(this.localizations('commandNames:help'))
+      .setDMPermission(true)
+      .setDescription(this.t('commandDescriptions:help'))
+      .setDescriptionLocalizations(this.localizations('commandDescriptions:help'));
   }
 }
