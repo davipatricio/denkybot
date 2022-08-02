@@ -20,7 +20,9 @@ export default class WikipediaCommand extends Command {
     const option = interaction.options.getString('search', true);
     const locale = this.#getWikipediaLocale(interaction.locale);
 
-    const res = await request(`https://${locale}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(option)}`, { maxRedirections: 5 }).then(x => x.body.json());
+    const res = await request(`https://${locale}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(option)}`, { maxRedirections: 5 })
+      .catch(() => request(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(option)}`, { maxRedirections: 5 }))
+      .then(x => x.body.json());
 
     if (!res || !res.title || res.title === 'Not found.') {
       interaction.editReply(t('command:wikipedia/error/no-results'));
