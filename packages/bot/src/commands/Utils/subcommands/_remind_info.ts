@@ -1,21 +1,9 @@
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
 import { Colors, EmbedBuilder } from 'discord.js';
 
-export default class ReminderInfoSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.rawCategory = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [] };
-  }
-
-  override async run({ t, interaction }: CommandRunOptions) {
+export default class ReminderInfoSubCommand extends SubCommand {
+  async run({ t, interaction }: CommandRunOptions) {
     const reminder = await this.client.databases.getReminder(interaction.options.getString('reminder', true));
     if (!reminder) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reminders/info/not-found')}`);

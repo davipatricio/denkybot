@@ -1,23 +1,11 @@
 import { generateUuid } from '#helpers/IdGenerator';
 import { parseTime } from '#helpers/Timestamp';
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
 import ms from 'ms';
 
-export default class ReminderCreateSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.rawCategory = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [] };
-  }
-
-  override async run({ t, interaction }: CommandRunOptions) {
+export default class ReminderCreateSubCommand extends SubCommand {
+  async run({ t, interaction }: CommandRunOptions) {
     const { valid, type, value } = parseTime(interaction.options.getString('duration', true));
     if (!valid || !value) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/create/invalid-time')}`);

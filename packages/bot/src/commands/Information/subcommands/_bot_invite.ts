@@ -1,21 +1,8 @@
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
 
-export default class BotInviteSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: true,
-      showInHelp: false
-    };
-    this.permissions = { bot: [] };
-  }
-
-  override run({ t, interaction }: CommandRunOptions) {
-    interaction.editReply({
-      content: t('command:bot/invite/invite', interaction.user, this.client.config.links.invite)
-    });
+export default class BotInviteSubCommand extends SubCommand {
+  run({ t, interaction }: CommandRunOptions) {
+    interaction.editReply(t('command:bot/invite/invite', interaction.user, this.client.config.links.invite));
   }
 }

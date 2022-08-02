@@ -1,21 +1,8 @@
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
 
-export default class BotVoteSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [] };
-  }
-
-  override run({ t, interaction }: CommandRunOptions) {
-    interaction.editReply({
-      content: t('command:bot/vote/vote', interaction.user, this.client.config.links.vote)
-    });
+export default class BotVoteSubCommand extends SubCommand {
+  run({ t, interaction }: CommandRunOptions) {
+    interaction.editReply(t('command:bot/vote/vote', interaction.user, this.client.config.links.vote));
   }
 }

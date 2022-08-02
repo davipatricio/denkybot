@@ -1,20 +1,9 @@
-import { Colors, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
+import { Colors, EmbedBuilder } from 'discord.js';
 
-export default class BanListSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [PermissionFlagsBits.BanMembers] };
-  }
-
-  override async run({ t, interaction }: CommandRunOptions) {
+export default class BanListSubCommand extends SubCommand {
+  async run({ t, interaction }: CommandRunOptions) {
     if (!interaction.inCachedGuild()) return;
 
     const bans = await interaction.guild.bans.fetch().catch(() => undefined);

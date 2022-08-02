@@ -1,20 +1,7 @@
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
+import { SubCommand } from '#structures/SubCommand';
 
-export default class AfkOffSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.rawCategory = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [] };
-  }
-
-  override async run({ t, interaction }: CommandRunOptions) {
+export default class AfkOffSubCommand extends SubCommand {
+  async run({ t, interaction }) {
     const data = await this.client.databases.getAfk(interaction.user.id);
     if (!data) {
       interaction.editReply(t('command:afk/notAfk', interaction.user));
