@@ -1,20 +1,8 @@
-import { PermissionFlagsBits } from 'discord.js';
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
 
-export default class BanUserSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [PermissionFlagsBits.BanMembers] };
-  }
-
-  override run({ t, interaction }: CommandRunOptions) {
+export default class BanUserSubCommand extends SubCommand {
+  run({ t, interaction }: CommandRunOptions) {
     if (!interaction.inCachedGuild()) return;
 
     const deleteMessageDays = Number(interaction.options.getString('delete_messages') ?? 0);

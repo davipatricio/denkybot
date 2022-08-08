@@ -1,20 +1,9 @@
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
-import { ChannelType, Colors, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
+import { ChannelType, Colors, EmbedBuilder } from 'discord.js';
 
-export default class ServerInfoSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
-  }
-
-  override async run({ t, interaction }: CommandRunOptions) {
+export default class ServerInfoSubCommand extends SubCommand {
+  async run({ t, interaction }: CommandRunOptions) {
     if (!interaction.inCachedGuild()) return;
     const guildOwner = await interaction.guild.fetchOwner();
 

@@ -1,25 +1,13 @@
-import { Command, CommandLocale, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
+import type { CommandLocale, CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '@bot/src/structures/SubCommand';
 import type { Suggestion } from '@prisma-client';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ChatInputCommandInteraction, Colors, EmbedBuilder, Message, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 import ms from 'ms';
 
 type PageTypes = 'sugestoes' | 'categorias' | 'reacoes' | 'cooldown' | 'threads' | 'notices';
 
-export default class SuggestionsSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.rawCategory = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [] };
-  }
-
-  override async run({ t, interaction }: CommandRunOptions) {
+export default class SuggestionsSubCommand extends SubCommand {
+  async run({ t, interaction }: CommandRunOptions) {
     if (!interaction.inCachedGuild()) return;
     const configStatus = (await this.client.databases.getSuggestion(interaction.guild.id)) ?? undefined;
 

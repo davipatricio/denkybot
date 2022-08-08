@@ -1,20 +1,9 @@
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder } from 'discord.js';
 
-export default class ServerBannerSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
-  }
-
-  override run({ t, interaction }: CommandRunOptions) {
+export default class ServerBannerSubCommand extends SubCommand {
+  run({ t, interaction }: CommandRunOptions) {
     if (!interaction.inCachedGuild()) return;
 
     const guildBanner = interaction.guild.bannerURL({

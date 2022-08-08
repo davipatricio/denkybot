@@ -33,7 +33,7 @@ type CategoriesStructure = {
   topic?: string | null;
 };
 
-export default class PingCommand extends Command {
+export default class SuggestionCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
     this.rawName = 'SUGGESTION';

@@ -1,20 +1,9 @@
+import type { AutocompleteRunOptions, CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
 import { PermissionFlagsBits } from 'discord.js';
-import { AutocompleteRunOptions, Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
 
-export default class BanRemoveSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [PermissionFlagsBits.BanMembers] };
-  }
-
-  override async run({ t, interaction }: CommandRunOptions) {
+export default class BanRemoveSubCommand extends SubCommand {
+  async run({ t, interaction }: CommandRunOptions) {
     if (!interaction.inCachedGuild()) return;
 
     const userId = interaction.options.getString('user', true);
@@ -42,7 +31,7 @@ export default class BanRemoveSubCommand extends Command {
       });
   }
 
-  override async runAutocomplete({ t, interaction }: AutocompleteRunOptions) {
+  async runAutocomplete({ t, interaction }: AutocompleteRunOptions) {
     if (!interaction.memberPermissions!.has(PermissionFlagsBits.BanMembers) && !interaction.guild!.members.me!.permissions.has(PermissionFlagsBits.BanMembers)) {
       interaction.respond([]);
       return;

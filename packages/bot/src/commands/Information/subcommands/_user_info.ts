@@ -1,20 +1,9 @@
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
-import { Colors, EmbedBuilder, escapeMarkdown, GuildMember, PermissionFlagsBits } from 'discord.js';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
+import { Colors, EmbedBuilder, escapeMarkdown, GuildMember } from 'discord.js';
 
-export default class UserInfoSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
-  }
-
-  override async run({ t, interaction }: CommandRunOptions) {
+export default class UserInfoSubCommand extends SubCommand {
+  async run({ t, interaction }: CommandRunOptions) {
     const user = interaction.options.getUser('user') ?? interaction.user;
 
     const tempMember = interaction.options.getMember('user') as GuildMember;

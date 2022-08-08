@@ -1,20 +1,9 @@
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, GuildMember, PermissionFlagsBits } from 'discord.js';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, GuildMember } from 'discord.js';
 
-export default class UserAvatarSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
-  }
-
-  override async run({ t, interaction }: CommandRunOptions) {
+export default class UserAvatarSubCommand extends SubCommand {
+  async run({ t, interaction }: CommandRunOptions) {
     const user = interaction.options.getUser('user') ?? interaction.user;
 
     const userAvatar = user.displayAvatarURL({ size: 2048, extension: 'png' });

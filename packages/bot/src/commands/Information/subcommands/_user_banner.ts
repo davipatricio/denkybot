@@ -1,20 +1,9 @@
-import { Command, CommandRunOptions } from '#structures/Command';
-import type { DenkyClient } from '#types/Client';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import type { CommandRunOptions } from '#structures/Command';
+import { SubCommand } from '#structures/SubCommand';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder } from 'discord.js';
 
-export default class UserBannerSubCommand extends Command {
-  constructor(client: DenkyClient) {
-    super(client);
-    this.rawName = '';
-    this.config = {
-      autoDefer: true,
-      ephemeral: false,
-      showInHelp: false
-    };
-    this.permissions = { bot: [PermissionFlagsBits.EmbedLinks] };
-  }
-
-  override async run({ t, interaction }: CommandRunOptions) {
+export default class UserBannerSubCommand extends SubCommand {
+  async run({ t, interaction }: CommandRunOptions) {
     const user = await (interaction.options.getUser('user') ?? interaction.user).fetch();
     const userBanner = user.bannerURL({ size: 2048, extension: 'png' });
 
@@ -24,9 +13,7 @@ export default class UserBannerSubCommand extends Command {
     }
 
     const embed = new EmbedBuilder().setTitle(t('command:user/banner/title', user.username)).setImage(userBanner).setColor(Colors.Blurple);
-
     const button = new ButtonBuilder().setURL(userBanner).setStyle(ButtonStyle.Link).setLabel(t('command:user/banner/browser'));
-
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents([button]);
 
     interaction.editReply({ embeds: [embed], components: [row] });

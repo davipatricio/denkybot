@@ -21,8 +21,9 @@ export class Initializer {
     await this.loadModules();
     await this.loadCommands();
     await this.loadCommandData();
-    await this.loadEvents();
+    await this.loadSubcommands();
     await this.loadTasks();
+    await this.loadEvents();
     // Log bot in after loading everything
     this.client.login(process.env.BOT_TOKEN).then(() => this.client.logger.info('Bot successfully started.', { tags: ['Bot'] }));
   }
@@ -32,9 +33,11 @@ export class Initializer {
     const categories = await readdir('./commands/');
     let totalCommands = 0;
 
+    // Load commands
     for (const category of categories) {
       const commands = (await readdir(`./commands/${category}`)).filter(file => file.endsWith('.js'));
       totalCommands += commands.length;
+
       for (const command of commands) {
         const commandWithoutExtension = command.replace('.js', '');
 
@@ -52,15 +55,28 @@ export class Initializer {
 
   async loadCommandData() {
     const categories = await readdir('./commands/');
-    for await (const category of categories) {
-      const commands = (await readdir(`./commands/${category}/data`)).filter(file => file.endsWith('.js'));
-
-      for await (const command of commands) {
+    for (const category of categories) {
+      const commandData = (await readdir(`./commands/${category}/data`)).filter(file => file.endsWith('.js'));
+      for (const command of commandData) {
         const commandDataWithoutExtension = command.replace('.js', '');
 
         const { default: CommandDataClass }: DefaultClass<CommandDataStructure> = await import(`../../commands/${category}/data/${command}`);
         const cachedCommand = this.client.commands.get(commandDataWithoutExtension);
         if (cachedCommand) cachedCommand.options = new CommandDataClass(this.client);
+      }
+    }
+  }
+
+  async loadSubcommands() {
+    const categories = await readdir('./commands/');
+    for (const category of categories) {
+      const subCommands = (await readdir(`./commands/${category}/subcommands`)).filter(file => file.endsWith('.js'));
+      for (const command of subCommands) {
+        const commandWithoutExtension = command.replace('.js', '');
+
+        const { default: CommandClass }: DefaultClass<Command> = await import(`../../commands/${category}/subcommands/${command}`);
+        const cmd = new CommandClass(this.client);
+        this.client.commands.set(commandWithoutExtension, cmd);
       }
     }
   }
@@ -81,7 +97,7 @@ export class Initializer {
 
   async loadModules() {
     const modules = (await readdir('./lib/modules/')).filter(file => file.endsWith('.js'));
-    for await (const module of modules) {
+    for (const module of modules) {
       const { default: Module }: DefaultClass<unknown> = await import(`../modules/${module}`);
       // eslint-disable-next-line no-new
       new Module(this.client);
@@ -96,7 +112,7 @@ export class Initializer {
   async loadTasks() {
     this.client.tasks = new Collection();
     const tasks = (await readdir('./lib/tasks/')).filter(file => file.endsWith('.js'));
-    for await (const task of tasks) {
+    for (const task of tasks) {
       const { default: TaskClass }: DefaultClass<Task> = await import(`../tasks/${task}`);
       const createdTask = new TaskClass();
       createdTask.interval = setInterval(() => createdTask.run(this.client), createdTask.delay);
