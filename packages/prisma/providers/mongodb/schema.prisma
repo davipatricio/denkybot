@@ -55,7 +55,14 @@ model Reminder {
   endTimestamp BigInt
 }
 
+model ButtonRoleAction {
+  customId            String      @id @map("_id") @db.ObjectId @default("")
+  roleId              String      @default("")
+  ButtonRole          ButtonRole? @relation(fields: [buttonRoleMessageId], references: [messageId])
+  buttonRoleMessageId String?
+}
+
 model ButtonRole {
-  messageId String @id @default("") @map("_id") @db.ObjectId
-  rolesIds String[] @default([])
+  messageId String    @id @map("_id") @db.ObjectId @default("")
+  actions   ButtonRoleAction[]
 }

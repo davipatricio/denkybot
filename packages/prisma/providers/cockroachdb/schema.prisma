@@ -55,7 +55,14 @@ model Reminder {
   endTimestamp BigInt
 }
 
+model ButtonRoleAction {
+  customId            String      @id @unique @default("")
+  roleId              String      @default("")
+  ButtonRole          ButtonRole? @relation(fields: [buttonRoleMessageId], references: [messageId])
+  buttonRoleMessageId String?
+}
+
 model ButtonRole {
-  messageId String @id @default("") @unique
-  rolesIds String[] @default([])
+  messageId String    @id @unique @default("")
+  actions   ButtonRoleAction[]
 }

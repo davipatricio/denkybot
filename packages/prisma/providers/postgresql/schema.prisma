@@ -9,53 +9,60 @@ generator client {
 }
 
 model Suggestion {
-  guildId String @id @default("")
-  addReactions Boolean @default(true)
-  categories String[] @default([])
-  cooldown Int @default(0)
-  useThreads Boolean @default(false)
-  sendNotices Boolean @default(false)
+  guildId      String   @id @default("")
+  addReactions Boolean  @default(true)
+  categories   String[] @default([])
+  cooldown     Int      @default(0)
+  useThreads   Boolean  @default(false)
+  sendNotices  Boolean  @default(false)
 }
 
 model Afk {
-  userId String @id @default("") @unique
-  guildId String?
-  reason String?
+  userId       String  @id @unique @default("")
+  guildId      String?
+  reason       String?
   originalNick String?
-  startTime BigInt @db.BigInt
+  startTime    BigInt  @db.BigInt
 }
 
 model Giveaway {
-  messageId String @id @default("") @unique
-  channelId String @default("")
-  authorId String @default("")
-  title String @default("")
-  description String @default("")
-  endTimestamp BigInt @db.BigInt
-  winnerAmount Int @default(0)
+  messageId    String   @id @unique @default("")
+  channelId    String   @default("")
+  authorId     String   @default("")
+  title        String   @default("")
+  description  String   @default("")
+  endTimestamp BigInt   @db.BigInt
+  winnerAmount Int      @default(0)
   participants String[] @default([])
-  ended Boolean @default(false)
+  ended        Boolean  @default(false)
 }
 
 model Lockdown {
-  guildId String @id @default("") @unique
+  guildId         String   @id @unique @default("")
   blockedChannels String[] @default([])
 }
 
 model UnlockdownTask {
-  guildId String @id @default("") @unique
+  guildId      String @id @unique @default("")
   endTimestamp BigInt @db.BigInt
 }
 
 model Reminder {
-  id String @id @default("") @unique
-  channelId String?
-  authorId String @default("")
-  text String @default("")
-  endTimestamp BigInt @db.BigInt
+  id           String  @id @unique @default("")
+  channelId    String?
+  authorId     String  @default("")
+  text         String  @default("")
+  endTimestamp BigInt  @db.BigInt
+}
+
+model ButtonRoleAction {
+  customId            String      @id @unique @default("")
+  roleId              String      @default("")
+  ButtonRole          ButtonRole? @relation(fields: [buttonRoleMessageId], references: [messageId])
+  buttonRoleMessageId String?
 }
 
 model ButtonRole {
-  messageId String @id @default("") @unique
-  rolesIds String[] @default([])
+  messageId String    @id @unique @default("")
+  actions   ButtonRoleAction[]
 }
