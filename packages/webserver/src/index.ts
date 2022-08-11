@@ -18,15 +18,44 @@ export class InteractionsWebserver {
 
   start({ port }: { port: number; publicKey: string }) {
     this.router.get('/', (_, res) => res.redirect('https://github.com/denkylabs/denkybot'));
-    this.router.post('/interactions', (request, response) => this.#handleRequest(request, response));
+    this.router.post('/interactions', (request, response) => this.#handleInteractionRequest(request, response));
+
+    this.router.get('/stats', async (_, response) => {
+      const guilds = await this.client.shard?.fetchClientValues('guilds.cache.size').then((g: number[]) => g.reduce((a, b) => a + b, 0));
+      const users = await this.client.shard?.broadcastEval(c => c.guilds.cache.reduce((a, b) => a + b.memberCount, 0)).then(g => g.reduce((a, b) => a + b, 0));
+      const commands = this.client.commands.size;
+
+      response.status(200).send({
+        uptime: Math.round(process.uptime()),
+        guilds,
+        users,
+        commands
+      });
+    });
+
+    this.router.get('/popular-guilds', async (_, response) => {
+      const guilds =
+        (await this.client.shard
+          ?.broadcastEval(c => {
+            return c.guilds.cache
+              .sort((a, b) => b.memberCount - a.memberCount)
+              .map(g => g)
+              .slice(0, 10)
+              .map(g => ({ id: g.id, name: g.name, memberCount: g.memberCount, iconURL: g.iconURL({ size: 2048 }) }));
+          })
+          .then(g => g.reduce((a, b) => a.concat(b), []))
+          .catch(() => [])) ?? [];
+
+      response.status(200).send(guilds.slice(0, 10));
+    });
 
     this.router.listen({ port, host: '0.0.0.0' }, err => {
       if (err) throw err;
-      this.client.logger.info(`Started webserver to listen to interactions on port ${port}`, { tags: ['Interactions'] });
+      this.client.logger.info(`Started webserver on port ${port}`, { tags: ['Interactions'] });
     });
   }
 
-  #handleRequest(request: FastifyRequest, response: FastifyReply) {
+  #handleInteractionRequest(request: FastifyRequest, response: FastifyReply) {
     const signature = request.headers['x-signature-ed25519'] as string;
     const timestamp = request.headers['x-signature-timestamp'] as string;
     const body = JSON.stringify(request.body);
