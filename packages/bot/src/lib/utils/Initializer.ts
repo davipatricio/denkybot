@@ -133,14 +133,20 @@ export class Initializer {
 
   loadWebserver() {
     if (!global.IS_MAIN_PROCESS) return;
-    const { port, publicKey, useHttpServer } = this.client.config.interactions;
-    if (useHttpServer && publicKey && port) {
-      this.client.logger.info('Starting webserver to listen to interactions...', {
-        tags: ['Interactions']
-      });
-      const webserver = new InteractionsWebserver(this.client);
-      webserver.start({ port, publicKey });
+    const { publicKey } = this.client.config.interactions;
+    const { useHttpInteractions } = this.client.config.features;
+    const { enable, port } = this.client.config.webserver;
+
+    if (!enable) {
+      if (useHttpInteractions) this.client.logger.error('HTTP interactions are enabled but the webserver is disabled.', { tags: ['Webserver'] });
+      return;
     }
+
+    this.client.logger.info('Starting webserver to listen to interactions...', {
+      tags: ['Interactions']
+    });
+    const webserver = new InteractionsWebserver(this.client);
+    webserver.start({ port, publicKey });
   }
 
   async peformPreInitialization() {
