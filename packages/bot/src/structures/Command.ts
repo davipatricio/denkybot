@@ -44,6 +44,9 @@ class Command {
   /** Command options to be posted to Discord */
   options: CommandDataStructure;
 
+  /** Whether this command is a sub command */
+  isSubcommand: boolean;
+
   constructor(client: DenkyClient) {
     this.client = client;
 

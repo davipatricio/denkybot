@@ -43,6 +43,7 @@ export class Initializer {
 
         const { default: CommandClass }: DefaultClass<Command> = await import(`../../commands/${category}/${command}`);
         const cmd = new CommandClass(this.client);
+        cmd.isSubcommand = false;
         this.client.commands.set(commandWithoutExtension, cmd);
       }
     }
@@ -76,6 +77,7 @@ export class Initializer {
 
         const { default: CommandClass }: DefaultClass<Command> = await import(`../../commands/${category}/subcommands/${command}`);
         const cmd = new CommandClass(this.client);
+        cmd.isSubcommand = true;
         this.client.commands.set(commandWithoutExtension, cmd);
       }
     }
