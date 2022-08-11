@@ -19,7 +19,7 @@ export default class ReadyEvent extends Event {
     // Publish cached commands to Discord
     if (!global.IS_MAIN_PROCESS) return;
 
-    const mappedCommands = client.commands.filter(c => c.isSubcommand && c.config.showInHelp === true).map(c => c.options.toJSON());
+    const mappedCommands = client.commands.filter(c => !c.isSubcommand && c.config.showInHelp === true).map(c => c.options.toJSON());
     await client.application!.commands.set(mappedCommands);
     client.logger.info(`Posted ${mappedCommands.length} commands to Discord!`, {
       tags: ['Commands']
