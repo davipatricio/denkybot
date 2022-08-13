@@ -4,6 +4,7 @@ import mAlias from 'module-alias';
 mAlias(`${__dirname}/../package.json`);
 
 import type { DenkyClient } from '#types/Client';
+import cors from '@fastify/cors';
 import { APIInteraction, InteractionResponseType, InteractionType } from 'discord.js';
 import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import nacl from 'tweetnacl';
@@ -11,12 +12,17 @@ import nacl from 'tweetnacl';
 export class InteractionsWebserver {
   client: DenkyClient;
   router: FastifyInstance;
+
   constructor(client: DenkyClient) {
     this.client = client;
     this.router = fastify({ logger: false, trustProxy: 1 });
   }
 
   start({ port }: { port: number; publicKey: string }) {
+    this.router.register(cors, {
+      origin: '*',
+      methods: ['GET', 'POST']
+    });
     this.router.get('/', (_, res) => res.redirect('https://github.com/denkylabs/denkybot'));
     this.router.post('/interactions', (request, response) => this.#handleInteractionRequest(request, response));
 
@@ -26,7 +32,6 @@ export class InteractionsWebserver {
       const commands = this.client.commands.size;
 
       response.status(200).send({
-        uptime: Math.round(process.uptime()),
         guilds,
         users,
         commands

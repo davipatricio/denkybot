@@ -111,6 +111,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/webserver@workspace:packages/webserver"
   dependencies:
+    "@fastify/cors": "npm:8.1.0"
     "@types/module-alias": "npm:2.0.1"
     "@types/node": "npm:18.0.6"
     discord.js: "npm:14.2.0"
@@ -182,6 +183,16 @@ __metadata:
     ajv-formats: "npm:^2.1.1"
     fast-uri: "npm:^2.0.0"
   checksum: 53b47fec17c43687af7d814639b4010c108f5140529aa07dc79e8ea62a6d3383028836f4599f4e1b6aefce6aedaea1037a93372d363511d3ff4c039b3106a6c2
+  languageName: node
+  linkType: hard
+
+"@fastify/cors@npm:8.1.0":
+  version: 8.1.0
+  resolution: "@fastify/cors@npm:8.1.0"
+  dependencies:
+    fastify-plugin: "npm:^4.0.0"
+    mnemonist: "npm:0.39.2"
+  checksum: e505bf5d8c4b75c631055064df4e75571723157ff9d25b5ac8b77be638331d545bb73c7c6a3d6e529053c006eb74edfaa274bb5e2ebbd9d65294a92644b54b85
   languageName: node
   linkType: hard
 
@@ -1565,6 +1576,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fastify-plugin@npm:^4.0.0":
+  version: 4.1.0
+  resolution: "fastify-plugin@npm:4.1.0"
+  checksum: 976c3e38abf8ca3ec4c857460d888610c5827ba5c4d10d5b7b8708f571dd2f04fd1ea23a7430b586423fe7bfdf730e3d89ac8d497ee1218cd40f424cc88d0c27
+  languageName: node
+  linkType: hard
+
 "fastify@npm:4.4.0":
   version: 4.4.0
   resolution: "fastify@npm:4.4.0"
@@ -2520,6 +2538,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mnemonist@npm:0.39.2":
+  version: 0.39.2
+  resolution: "mnemonist@npm:0.39.2"
+  dependencies:
+    obliterator: "npm:^2.0.1"
+  checksum: c827c669ad92859ba9d82843edc73151edcd43976cea6bfb7a0ca41974c37a4260bc62a3206d2d57a89c312e58ceaf999b5764dfeefba53569fe01d9f1b9a313
+  languageName: node
+  linkType: hard
+
 "module-alias@npm:2.2.2":
   version: 2.2.2
   resolution: "module-alias@npm:2.2.2"
@@ -2670,6 +2697,13 @@ __metadata:
     define-properties: "npm:^1.1.3"
     es-abstract: "npm:^1.19.1"
   checksum: abb36ead4b7c2b76558b79e91cf1100f628dc5e11cff9d08faa69691107de9294bae607e44136f752acd4972e648642c2565780bd692d0be3d0aada6b1ce0efa
+  languageName: node
+  linkType: hard
+
+"obliterator@npm:^2.0.1":
+  version: 2.0.4
+  resolution: "obliterator@npm:2.0.4"
+  checksum: 66ac986e59518bc55eb128d02ac5e34239c6e32123dfd15a59ddd7e54de79c54bbc3fc9b10cee8f88bb259429ef7c7fa55e90c03da84cc902568b1a76221fe90
   languageName: node
   linkType: hard
 
