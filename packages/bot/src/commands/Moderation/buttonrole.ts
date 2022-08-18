@@ -41,15 +41,10 @@ export default class ButtonRoleCommand extends Command {
     const role5 = interaction.options.getRole('cargo5');
 
     const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
+    const buttonLabel = interaction.options.getString('título') ?? roles.length === 1 ? `"${role.name}"` : 'Obter cargos';
 
     const embed = new EmbedBuilder().setColor(Colors.Yellow).setDescription(embedDescription);
-    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-      new ButtonBuilder()
-        .setLabel(roles.length ? `"${role.name}"` : 'Obter cargos')
-        .setCustomId('button_role_single')
-        .setEmoji('➰')
-        .setStyle(ButtonStyle[buttonColor])
-    );
+    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setLabel(buttonLabel).setCustomId('button_role_single').setEmoji('➰').setStyle(ButtonStyle[buttonColor]));
 
     await interaction.editReply('Criado.');
 
