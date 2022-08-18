@@ -359,5 +359,7 @@ export default {
   'buttonroles/managed-role': 'Não é possível adicionar o cargo @everyone ou cargos gerenciados por integrações',
   'buttonroles/higher-role': 'Há cargos com posição superior que meu maior cargo',
   'buttonroles/default-label': 'Obter/remover cargos',
-  'buttonroles/created': 'Botão de cargos criado com sucesso!'
+  'buttonroles/created': 'Botão de cargos criado com sucesso!',
+  'buttonroles/warn/had-roles': 'Você já possui alguns cargos que foram incluidos neste botão',
+  'buttonroles/warn/missing-roles': 'Você não possui alguns cargos que foram incluidos neste botão'
 } as const;

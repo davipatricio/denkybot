@@ -1,12 +1,20 @@
 import type { DenkyClient } from '#types/Client';
 import type { ButtonInteraction, Interaction } from 'discord.js';
 import { ButtonRoleType } from '../commands/Moderation/buttonrole';
+import type { CommandLocale } from '../structures/Command';
+import { recommendLocale } from './Locale';
 
 async function handleSingleButtonRole(client: DenkyClient, interaction: ButtonInteraction) {
   if (!interaction.inCachedGuild()) return;
 
   const buttonRoleData = await client.databases.buttonRole.findFirst({ where: { messageId: interaction.message.id } });
   if (!buttonRoleData) return;
+
+  const guildLocale = recommendLocale(interaction.guild!.preferredLocale);
+
+  const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
+    return client.languages.manager.get(guildLocale, path, ...args);
+  };
 
   switch (buttonRoleData.type) {
     case ButtonRoleType.Add: {
@@ -18,7 +26,7 @@ async function handleSingleButtonRole(client: DenkyClient, interaction: ButtonIn
 
       await interaction.member.roles.add(buttonRoleData.roles, 'Button Role');
       interaction.followUp({
-        content: content.includes('❌') ? `${content}\n\n⚠️ **|** _Você já possuia alguns cargos que foram incluidos neste botão_` : content,
+        content: content.includes('❌') ? `${content}\n\n⚠️ **|** _${t('command:buttonroles/warn/had-roles')}_` : content,
         ephemeral: true
       });
       break;
@@ -33,7 +41,7 @@ async function handleSingleButtonRole(client: DenkyClient, interaction: ButtonIn
 
       await interaction.member.roles.remove(buttonRoleData.roles, 'Button Role');
       interaction.followUp({
-        content: content.includes('❌') ? `${content}\n\n⚠️ **|** _Você não possuia alguns cargos que foram incluidos neste botão_` : content,
+        content: content.includes('❌') ? `${content}\n\n⚠️ **|** _${t('command:buttonroles/warn/missing-roles')}_` : content,
         ephemeral: true
       });
       break;

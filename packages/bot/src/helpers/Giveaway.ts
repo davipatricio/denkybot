@@ -6,13 +6,13 @@ import dayjs from 'dayjs';
 import { ActionRowBuilder, Colors, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 
 export async function handleInteraction(client: DenkyClient, interaction: Interaction) {
+  if (!interaction.isSelectMenu() && !interaction.isButton()) return;
+
   const guildLocale = recommendLocale(interaction.guild!.preferredLocale);
 
   const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
     return client.languages.manager.get(guildLocale, path, ...args);
   };
-
-  if (!interaction.isSelectMenu() && !interaction.isButton()) return;
   switch (interaction.customId) {
     case 'giveaway_participate': {
       await interaction.deferUpdate();

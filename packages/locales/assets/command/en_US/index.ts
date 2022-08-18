@@ -355,5 +355,7 @@ export default {
   'buttonroles/managed-role': 'Cannot add @everyone role or roles managed by integrations',
   'buttonroles/higher-role': 'There are roles with a higher position than my highest role',
   'buttonroles/default-label': 'Get/remove roles',
-  'buttonroles/created': 'Button role created successfully!'
+  'buttonroles/created': 'Button role created successfully!',
+  'buttonroles/warn/had-roles': 'You already have some roles that have been added to this button',
+  'buttonroles/warn/missing-roles': 'You do not have some roles that have been included in this button'
 } as const;
