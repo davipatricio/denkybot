@@ -70,6 +70,7 @@ export default class ButtonRoleCommand extends Command {
     await this.client.databases.buttonRole.create({
       data: {
         messageId: message.id,
+        guildId: interaction.guild!.id,
         roles: roles.map(r => r.id),
         type: ButtonRoleType[actionType]
       }

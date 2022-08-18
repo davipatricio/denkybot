@@ -9,60 +9,55 @@ generator client {
 }
 
 model Suggestion {
-  guildId String @id @default("") @map("_id") @db.ObjectId
-  addReactions Boolean @default(true)
-  categories String[] @default([])
-  cooldown Int @default(0)
-  useThreads Boolean @default(false)
-  sendNotices Boolean @default(false)
+  guildId      String   @id @default("") @map("_id") @db.ObjectId
+  addReactions Boolean  @default(true)
+  categories   String[] @default([])
+  cooldown     Int      @default(0)
+  useThreads   Boolean  @default(false)
+  sendNotices  Boolean  @default(false)
 }
 
 model Afk {
-  userId String @id @default("") @map("_id") @db.ObjectId
-  guildId String?
-  reason String?
+  userId       String  @id @default("") @map("_id") @db.ObjectId
+  guildId      String?
+  reason       String?
   originalNick String?
-  startTime BigInt
+  startTime    BigInt  @default(0)
 }
 
 model Giveaway {
-  messageId String @id @default("") @map("_id") @db.ObjectId
-  channelId String @default("")
-  authorId String @default("")
-  title String @default("")
-  description String @default("")
-  endTimestamp BigInt
-  winnerAmount Int @default(0)
+  messageId    String   @id @default("") @map("_id") @db.ObjectId
+  channelId    String   @default("")
+  authorId     String   @default("")
+  title        String   @default("")
+  description  String   @default("")
+  endTimestamp BigInt   @default(0)
+  winnerAmount Int      @default(0)
   participants String[] @default([])
-  ended Boolean @default(false)
+  ended        Boolean  @default(false)
 }
 
 model Lockdown {
-  guildId String @id @default("") @map("_id") @db.ObjectId
+  guildId         String   @id @default("") @map("_id") @db.ObjectId
   blockedChannels String[] @default([])
 }
 
 model UnlockdownTask {
-  guildId String @id @default("") @map("_id") @db.ObjectId
-  endTimestamp BigInt
+  guildId      String @id @default("") @map("_id") @db.ObjectId
+  endTimestamp BigInt @default(0)
 }
 
 model Reminder {
-  id String @id @default("") @map("_id") @db.ObjectId
-  channelId String?
-  authorId String @default("")
-  text String @default("")
-  endTimestamp BigInt
-}
-
-model ButtonRoleAction {
-  customId            String      @id @map("_id") @db.ObjectId @default("")
-  roleId              String      @default("")
-  ButtonRole          ButtonRole? @relation(fields: [buttonRoleMessageId], references: [messageId])
-  buttonRoleMessageId String?
+  id           String  @id @default("") @map("_id") @db.ObjectId
+  channelId    String?
+  authorId     String  @default("")
+  text         String  @default("")
+  endTimestamp BigInt  @default(0)
 }
 
 model ButtonRole {
-  messageId String    @id @map("_id") @db.ObjectId @default("")
-  actions   ButtonRoleAction[]
+  messageId String   @id @default("") @map("_id") @db.ObjectId
+  guildId   String   @default("")
+  roles     String[] @default([])
+  type      Int      @default(0)
 }
