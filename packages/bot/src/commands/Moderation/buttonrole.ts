@@ -49,7 +49,7 @@ export default class ButtonRoleCommand extends Command {
     }
 
     if (roles.some(r => r.position > interaction.guild!.members.me!.roles.highest.position)) {
-      interaction.editReply(`❌ **|** ${interaction.user} Há cargos com posição suporior que meu maior cargo.`);
+      interaction.editReply(`❌ **|** ${interaction.user} Há cargos com posição superior que meu maior cargo.`);
       return;
     }
 

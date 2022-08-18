@@ -33,12 +33,12 @@ export default class ButtonRoleData extends CommandDataStructure {
               .addChoices({ name: 'Vermelho', value: 'Danger' }, { name: 'Azul', value: 'Primary' }, { name: 'Cinza', value: 'Secondary' }, { name: 'Verde', value: 'Success' })
           )
           .addStringOption(new SlashCommandStringOption().setName('descrição').setDescription('Descrição da mensagem').setRequired(true).setMinLength(10).setMaxLength(1024))
-          .addStringOption(new SlashCommandStringOption().setName('título').setDescription('Título do botão').setMinLength(1).setMaxLength(80))
           .addRoleOption(new SlashCommandRoleOption().setName('cargo').setDescription('Cargo para adicionar ou remover quando o botão for clicado').setRequired(true))
           .addRoleOption(new SlashCommandRoleOption().setName('cargo2').setDescription('Cargo para adicionar ou remover quando o botão for clicado'))
           .addRoleOption(new SlashCommandRoleOption().setName('cargo3').setDescription('Cargo para adicionar ou remover quando o botão for clicado'))
           .addRoleOption(new SlashCommandRoleOption().setName('cargo4').setDescription('Cargo para adicionar ou remover quando o botão for clicado'))
           .addRoleOption(new SlashCommandRoleOption().setName('cargo5').setDescription('Cargo para adicionar ou remover quando o botão for clicado'))
+          .addStringOption(new SlashCommandStringOption().setName('título').setDescription('Título do botão').setMinLength(1).setMaxLength(80))
       );
   }
 }
