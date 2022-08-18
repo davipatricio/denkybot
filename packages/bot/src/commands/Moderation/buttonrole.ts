@@ -54,10 +54,19 @@ export default class ButtonRoleCommand extends Command {
     }
 
     const embed = new EmbedBuilder().setColor(Colors.Yellow).setDescription(embedDescription);
-    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setLabel(buttonLabel).setCustomId('button_role_single').setEmoji('➰').setStyle(ButtonStyle[buttonColor]));
+    let emoji = '➰';
+    switch (ButtonRoleType[actionType]) {
+      case ButtonRoleType.Add:
+        emoji = '➕';
+        break;
+      case ButtonRoleType.Remove:
+        emoji = '➖';
+        break;
+    }
+
+    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setLabel(buttonLabel).setCustomId('button_role_single').setEmoji(emoji).setStyle(ButtonStyle[buttonColor]));
 
     await interaction.editReply('Criado.');
-
     const message = await interaction.channel!.send({ embeds: [embed], components: [row] });
 
     await this.client.databases.buttonRole.create({
