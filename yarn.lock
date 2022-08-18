@@ -115,7 +115,7 @@ __metadata:
     "@types/module-alias": "npm:2.0.1"
     "@types/node": "npm:18.0.6"
     discord.js: "npm:14.2.0"
-    fastify: "npm:4.5.1"
+    fastify: "npm:4.5.2"
     module-alias: "npm:2.2.2"
     tslib: "npm:2.4.0"
     tweetnacl: "npm:1.0.3"
@@ -1583,9 +1583,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify@npm:4.5.1":
-  version: 4.5.1
-  resolution: "fastify@npm:4.5.1"
+"fastify@npm:4.5.2":
+  version: 4.5.2
+  resolution: "fastify@npm:4.5.2"
   dependencies:
     "@fastify/ajv-compiler": "npm:^3.1.1"
     "@fastify/error": "npm:^3.0.0"
@@ -1601,7 +1601,7 @@ __metadata:
     secure-json-parse: "npm:^2.4.0"
     semver: "npm:^7.3.7"
     tiny-lru: "npm:^8.0.2"
-  checksum: 7de17d62856979d18cfd8d9bd5b431e3c5358d69cef86ac3e754d6a760d2a8e5636ca2517d1165b04c6f7c99b9c809466a4ec279722153316fa29ad93015e3d8
+  checksum: fcc0c14f591df69537fb21cd504e8078cdb9edc30c71de8e237b8cd9d87c65845a039ae313869a4b44bf8da219542f1d74def9abc8d89ab69605835960ca91c7
   languageName: node
   linkType: hard
 
