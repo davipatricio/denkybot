@@ -30,7 +30,7 @@ export default class ButtonRoleCommand extends Command {
     }
   }
 
-  async #createButtonRole({ interaction }: CommandRunOptions) {
+  async #createButtonRole({ t, interaction }: CommandRunOptions) {
     const actionType = interaction.options.getString('tipo', true) as keyof typeof ButtonRoleType;
     const buttonColor = interaction.options.getString('cor', true) as keyof typeof ButtonStyle;
     const embedDescription = interaction.options.getString('descrição', true);
@@ -42,12 +42,12 @@ export default class ButtonRoleCommand extends Command {
     const role5 = interaction.options.getRole('cargo5');
     const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
     if (roles.some(r => r.managed) || roles.some(r => r.id === interaction.guild!.id)) {
-      interaction.editReply(`❌ **|** ${interaction.user} Não é possível adicionar o cargo @everyone ou cargos gerenciados por integrações.`);
+      interaction.editReply(`❌ **|** ${interaction.user} ${t('command:buttonroles/managed-role')}.`);
       return;
     }
 
     if (roles.some(r => r.position > interaction.guild!.members.me!.roles.highest.position)) {
-      interaction.editReply(`❌ **|** ${interaction.user} Há cargos com posição superior que meu maior cargo.`);
+      interaction.editReply(`❌ **|** ${interaction.user} ${t('command:buttonroles/higher-role')}.`);
       return;
     }
 
@@ -60,11 +60,11 @@ export default class ButtonRoleCommand extends Command {
         emoji = '➖';
         break;
     }
-    const buttonLabel = interaction.options.getString('título') ?? roles.length === 1 ? `"${role.name}"` : 'Obter cargos';
+    const buttonLabel = interaction.options.getString('título') ?? roles.length === 1 ? `"${role.name}"` : t('command:buttonroles/default-label');
     const embed = new EmbedBuilder().setColor(Colors.Yellow).setDescription(embedDescription);
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setLabel(buttonLabel).setCustomId('button_role_single').setEmoji(emoji).setStyle(ButtonStyle[buttonColor]));
 
-    await interaction.editReply(`✅ **|** ${interaction.user} Botão de cargos criado com sucesso!`);
+    await interaction.editReply(`✅ **|** ${interaction.user} ${t('command:buttonroles/created')}`);
     const message = await interaction.channel!.send({ embeds: [embed], components: [row] });
 
     await this.client.databases.buttonRole.create({
