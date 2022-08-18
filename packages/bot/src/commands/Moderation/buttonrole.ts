@@ -31,7 +31,7 @@ export default class ButtonRoleCommand extends Command {
   }
 
   async #createButtonRole({ interaction }: CommandRunOptions) {
-    // const actionType = interaction.options.getString('tipo', true) as keyof typeof ButtonRoleType;
+    const actionType = interaction.options.getString('tipo', true) as keyof typeof ButtonRoleType;
     const buttonColor = interaction.options.getString('cor', true) as keyof typeof ButtonStyle;
     const embedDescription = interaction.options.getString('descrição', true);
     const role = interaction.options.getRole('cargo', true);
@@ -63,13 +63,11 @@ export default class ButtonRoleCommand extends Command {
       components: [row]
     });
 
-    this.client.databases.buttonRole.create({
+    await this.client.databases.buttonRole.create({
       data: {
-        actions: {
-          create: roles.map(r => ({ roleId: r.id }))
-        },
         messageId: message.id,
-        type: ButtonRoleType.Toggle
+        roles: roles.map(r => r.id),
+        type: ButtonRoleType[actionType]
       }
     });
   }
