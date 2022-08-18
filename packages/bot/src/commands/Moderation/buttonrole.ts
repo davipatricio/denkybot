@@ -51,8 +51,6 @@ export default class ButtonRoleCommand extends Command {
       return;
     }
 
-    const buttonLabel = interaction.options.getString('título') ?? roles.length === 1 ? `"${role.name}"` : 'Obter cargos';
-    const embed = new EmbedBuilder().setColor(Colors.Yellow).setDescription(embedDescription);
     let emoji = '➰';
     switch (ButtonRoleType[actionType]) {
       case ButtonRoleType.Add:
@@ -62,7 +60,8 @@ export default class ButtonRoleCommand extends Command {
         emoji = '➖';
         break;
     }
-
+    const buttonLabel = interaction.options.getString('título') ?? roles.length === 1 ? `"${role.name}"` : 'Obter cargos';
+    const embed = new EmbedBuilder().setColor(Colors.Yellow).setDescription(embedDescription);
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setLabel(buttonLabel).setCustomId('button_role_single').setEmoji(emoji).setStyle(ButtonStyle[buttonColor]));
 
     await interaction.editReply(`✅ **|** ${interaction.user} Botão de cargos criado com sucesso!`);
