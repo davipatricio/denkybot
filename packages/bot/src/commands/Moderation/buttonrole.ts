@@ -34,12 +34,12 @@ export default class ButtonRoleCommand extends Command {
     const actionType = interaction.options.getString('tipo', true) as keyof typeof ButtonRoleType;
     const buttonColor = interaction.options.getString('cor', true) as keyof typeof ButtonStyle;
     const embedDescription = interaction.options.getString('descrição', true);
+
     const role = interaction.options.getRole('cargo', true);
     const role2 = interaction.options.getRole('cargo2');
     const role3 = interaction.options.getRole('cargo3');
     const role4 = interaction.options.getRole('cargo4');
     const role5 = interaction.options.getRole('cargo5');
-
     const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
     const buttonLabel = interaction.options.getString('título') ?? roles.length === 1 ? `"${role.name}"` : 'Obter cargos';
 
@@ -58,10 +58,7 @@ export default class ButtonRoleCommand extends Command {
 
     await interaction.editReply('Criado.');
 
-    const message = await interaction.channel!.send({
-      embeds: [embed],
-      components: [row]
-    });
+    const message = await interaction.channel!.send({ embeds: [embed], components: [row] });
 
     await this.client.databases.buttonRole.create({
       data: {
