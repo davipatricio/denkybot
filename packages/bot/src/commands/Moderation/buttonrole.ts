@@ -1,7 +1,13 @@
 /* eslint-disable no-await-in-loop */
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
-import { PermissionFlagsBits } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, PermissionFlagsBits, Role } from 'discord.js';
+
+export enum ButtonRoleType {
+  Add,
+  Remove,
+  Toggle
+}
 
 export default class ButtonRoleCommand extends Command {
   constructor(client: DenkyClient) {
@@ -16,25 +22,49 @@ export default class ButtonRoleCommand extends Command {
     this.permissions = { bot: [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageGuild] };
   }
 
-  override run({ interaction }: CommandRunOptions) {
+  override run({ t, interaction }: CommandRunOptions) {
     switch (interaction.options.getSubcommand(true)) {
       case 'create':
-        this.#createButtonRole();
+        this.#createButtonRole({ t, interaction });
         break;
     }
   }
 
-  #createButtonRole() {
+  async #createButtonRole({ interaction }: CommandRunOptions) {
+    // const actionType = interaction.options.getString('tipo', true) as keyof typeof ButtonRoleType;
+    const buttonColor = interaction.options.getString('cor', true) as keyof typeof ButtonStyle;
+    const embedDescription = interaction.options.getString('descrição', true);
+    const role = interaction.options.getRole('cargo', true);
+    const role2 = interaction.options.getRole('cargo2');
+    const role3 = interaction.options.getRole('cargo3');
+    const role4 = interaction.options.getRole('cargo4');
+    const role5 = interaction.options.getRole('cargo5');
+
+    const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
+
+    const embed = new EmbedBuilder().setColor(Colors.Yellow).setDescription(embedDescription);
+    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+      new ButtonBuilder()
+        .setLabel(roles.length ? `"${role.name}"` : 'Obter cargos')
+        .setCustomId('button_role_single')
+        .setEmoji('➰')
+        .setStyle(ButtonStyle[buttonColor])
+    );
+
+    await interaction.editReply('Criado.');
+
+    const message = await interaction.channel!.send({
+      embeds: [embed],
+      components: [row]
+    });
+
     this.client.databases.buttonRole.create({
       data: {
         actions: {
-          create: [
-            {
-              customId: '',
-              roleId: ''
-            }
-          ]
-        }
+          create: roles.map(r => ({ roleId: r.id }))
+        },
+        messageId: message.id,
+        type: ButtonRoleType.Toggle
       }
     });
   }

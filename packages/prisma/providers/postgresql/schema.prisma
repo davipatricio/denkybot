@@ -56,13 +56,14 @@ model Reminder {
 }
 
 model ButtonRoleAction {
-  customId            String      @id @unique @default("")
-  roleId              String      @default("")
+  id                  String      @id @unique @default("")
+  roleId              String
   ButtonRole          ButtonRole? @relation(fields: [buttonRoleMessageId], references: [messageId])
   buttonRoleMessageId String?
 }
 
 model ButtonRole {
-  messageId String    @id @unique @default("")
+  messageId String             @id @unique @default("")
   actions   ButtonRoleAction[]
+  type      Int
 }
