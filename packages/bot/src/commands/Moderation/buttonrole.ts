@@ -66,7 +66,7 @@ export default class ButtonRoleCommand extends Command {
 
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setLabel(buttonLabel).setCustomId('button_role_single').setEmoji(emoji).setStyle(ButtonStyle[buttonColor]));
 
-    await interaction.editReply('Criado.');
+    await interaction.editReply(`✅ **|** ${interaction.user} Botão de cargos criado com sucesso!`);
     const message = await interaction.channel!.send({ embeds: [embed], components: [row] });
 
     await this.client.databases.buttonRole.create({
