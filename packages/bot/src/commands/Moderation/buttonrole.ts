@@ -48,6 +48,11 @@ export default class ButtonRoleCommand extends Command {
       return;
     }
 
+    if (roles.some(r => r.position > interaction.guild!.members.me!.roles.highest.position)) {
+      interaction.editReply(`❌ **|** ${interaction.user} Há cargos com posição suporior que meu maior cargo.`);
+      return;
+    }
+
     const embed = new EmbedBuilder().setColor(Colors.Yellow).setDescription(embedDescription);
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setLabel(buttonLabel).setCustomId('button_role_single').setEmoji('➰').setStyle(ButtonStyle[buttonColor]));
 
