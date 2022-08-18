@@ -41,8 +41,6 @@ export default class ButtonRoleCommand extends Command {
     const role4 = interaction.options.getRole('cargo4');
     const role5 = interaction.options.getRole('cargo5');
     const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
-    const buttonLabel = interaction.options.getString('título') ?? roles.length === 1 ? `"${role.name}"` : 'Obter cargos';
-
     if (roles.some(r => r.managed) || roles.some(r => r.id === interaction.guild!.id)) {
       interaction.editReply(`❌ **|** ${interaction.user} Não é possível adicionar o cargo @everyone ou cargos gerenciados por integrações.`);
       return;
@@ -53,6 +51,7 @@ export default class ButtonRoleCommand extends Command {
       return;
     }
 
+    const buttonLabel = interaction.options.getString('título') ?? roles.length === 1 ? `"${role.name}"` : 'Obter cargos';
     const embed = new EmbedBuilder().setColor(Colors.Yellow).setDescription(embedDescription);
     let emoji = '➰';
     switch (ButtonRoleType[actionType]) {
