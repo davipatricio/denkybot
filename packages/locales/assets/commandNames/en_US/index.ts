@@ -138,5 +138,24 @@ export default {
   'remind/delete': 'delete',
   'remind/delete/reminder': 'reminder',
   'remind/info': 'info',
-  'remind/info/reminder': 'reminder'
+  'remind/info/reminder': 'reminder',
+
+  // Button Roles
+  buttonroles: 'buttonroles',
+  'buttonroles/create': 'create',
+  'buttonroles/create/type': 'type',
+  'buttonroles/create/choice/add': 'Add - Just add the role to the user',
+  'buttonroles/create/choice/remove': 'Remove - Just remove the user role',
+  'buttonroles/create/choice/toggle': 'Toggle - Add or Remove User roles',
+  'buttonroles/create/choice/danger': 'Red',
+  'buttonroles/create/choice/primary': 'Blue',
+  'buttonroles/create/choice/secondary': 'Gray',
+  'buttonroles/create/choice/success': 'Green',
+  'buttonroles/create/embed/description': 'description',
+  'buttonroles/create/button/label': 'label',
+  'buttonroles/create/role': 'role',
+  'buttonroles/create/role2': 'role2',
+  'buttonroles/create/role3': 'role3',
+  'buttonroles/create/role4': 'role4',
+  'buttonroles/create/role5': 'role5'
 } as const;

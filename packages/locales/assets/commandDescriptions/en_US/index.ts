@@ -134,5 +134,13 @@ export default {
   'remind/delete': 'Delete a reminder you created earlier',
   'remind/delete/reminder': 'Choose a reminder to delete',
   'remind/info': 'Get information about a reminder',
-  'remind/info/reminder': 'Choose a reminder to see information'
+  'remind/info/reminder': 'Choose a reminder to see information',
+
+  // Button Roles
+  buttonroles: 'Create buttons that give or remove roles',
+  'buttonroles/create': 'Create buttons that give or remove roles',
+  'buttonroles/create/type': 'What action should this button perform?',
+  'buttonroles/create/embed/description': 'Message description',
+  'buttonroles/create/button/label': 'The label of the button',
+  'buttonroles/create/role': 'Role to add or remove when button is clicked'
 } as const;
