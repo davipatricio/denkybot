@@ -10,17 +10,49 @@ async function handleSingleButtonRole(client: DenkyClient, interaction: ButtonIn
 
   switch (buttonRoleData.type) {
     case ButtonRoleType.Add: {
-      let finalStr = '';
+      let content = '';
       buttonRoleData.roles.forEach(roleId => {
-        if (interaction.member.roles.cache.has(roleId)) finalStr += `❌ <@&${roleId}>\n`;
-        else finalStr += `➕ <@&${roleId}>\n`;
+        if (interaction.member.roles.cache.has(roleId)) content += `❌ <@&${roleId}>\n`;
+        else content += `➕ <@&${roleId}>\n`;
       });
 
       await interaction.member.roles.add(buttonRoleData.roles, 'Button Role');
       interaction.followUp({
-        content: finalStr.includes('❌') ? `${finalStr}\n\n⚠️ **|** _Você já possuia alguns cargos que foram incluidos neste botão_` : finalStr,
+        content: content.includes('❌') ? `${content}\n\n⚠️ **|** _Você já possuia alguns cargos que foram incluidos neste botão_` : content,
         ephemeral: true
       });
+      break;
+    }
+
+    case ButtonRoleType.Remove: {
+      let content = '';
+      buttonRoleData.roles.forEach(roleId => {
+        if (interaction.member.roles.cache.has(roleId)) content += `➖ <@&${roleId}>\n`;
+        else content += `❌ <@&${roleId}>\n`;
+      });
+
+      await interaction.member.roles.remove(buttonRoleData.roles, 'Button Role');
+      interaction.followUp({
+        content: content.includes('❌') ? `${content}\n\n⚠️ **|** _Você não possuia alguns cargos que foram incluidos neste botão_` : content,
+        ephemeral: true
+      });
+      break;
+    }
+
+    case ButtonRoleType.Toggle: {
+      let content = '';
+      buttonRoleData.roles.forEach(roleId => {
+        if (interaction.member.roles.cache.has(roleId)) {
+          content += `➖ <@&${roleId}>\n`;
+          interaction.member.roles.remove(roleId, 'Button Role');
+        } else {
+          content += `➕ <@&${roleId}>\n`;
+          interaction.member.roles.add(roleId, 'Button Role');
+        }
+      });
+
+      interaction.followUp({ content, ephemeral: true });
+      break;
     }
   }
 }
