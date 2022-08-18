@@ -75,6 +75,8 @@
         "no-continue": "off",
         "no-console": "off",
         "no-plusplus": "off",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": "warn",
         "no-unused-expressions": [
             "error",
             {

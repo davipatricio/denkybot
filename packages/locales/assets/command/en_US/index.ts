@@ -349,5 +349,13 @@ export default {
   'reminders/info/embed/title': 'Reminder information',
   'reminders/info/embed/description': 'Description:',
   'reminders/info/embed/ends-at': 'Ends at:',
-  'reminders/delete/deleted': 'Reminder deleted successfully.'
+  'reminders/delete/deleted': 'Reminder deleted successfully.',
+
+  // Button Roles
+  'buttonroles/managed-role': 'Cannot add @everyone role or roles managed by integrations',
+  'buttonroles/higher-role': 'There are roles with a higher position than my highest role',
+  'buttonroles/default-label': 'Get/remove roles',
+  'buttonroles/created': 'Button role created successfully!',
+  'buttonroles/warn/had-roles': 'You already have some roles that have been added to this button',
+  'buttonroles/warn/missing-roles': 'You do not have some roles that have been included in this button'
 } as const;

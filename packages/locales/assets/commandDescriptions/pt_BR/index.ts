@@ -134,5 +134,13 @@ export default {
   'remind/delete': 'Apague um lembrete que você criou anteriormente',
   'remind/delete/reminder': 'Escolha um lembrete para excluir',
   'remind/info': 'Obtenha informações sobre um lembrete',
-  'remind/info/reminder': 'Escolha um lembrete para ver informações'
+  'remind/info/reminder': 'Escolha um lembrete para ver informações',
+
+  // Button Roles
+  buttonroles: 'Crie botões que dão ou removem cargos',
+  'buttonroles/create': 'Crie botões que dão ou removem cargos',
+  'buttonroles/create/type': 'Qual ação este botão deverá realizar?',
+  'buttonroles/create/embed/description': 'Descrição da mensagem',
+  'buttonroles/create/button/label': 'O rótulo do botão',
+  'buttonroles/create/role': 'Cargo para adicionar ou remover quando o botão for clicado'
 } as const;

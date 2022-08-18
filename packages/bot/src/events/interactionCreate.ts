@@ -1,3 +1,4 @@
+import { handleInteraction as handleButtonRoleInteraction } from '#helpers/ButtonRole';
 import { handleInteraction as handleGiveawayInteraction } from '#helpers/Giveaway';
 import { recommendLocale } from '#helpers/Locale';
 import type { Command, CommandLocale, CommandRunOptions } from '#structures/Command';
@@ -16,10 +17,11 @@ export default class InteractionCreateEvent extends Event {
 
   override async run(client: DenkyClient, interaction: Interaction) {
     handleGiveawayInteraction(client, interaction);
-    if (interaction.type === InteractionType.ApplicationCommandAutocomplete) {
-      const command = client.commands.get(interaction.commandName);
+    handleButtonRoleInteraction(client, interaction);
 
-      if (!command) return;
+    if (interaction.isChatInputCommand() || interaction.type === InteractionType.ApplicationCommandAutocomplete) {
+      const botCommand = client.commands.get(interaction.commandName);
+      if (!botCommand) return;
 
       const userLocale = recommendLocale(interaction.locale);
 
@@ -27,29 +29,21 @@ export default class InteractionCreateEvent extends Event {
         return client.languages.manager.get(userLocale, path, ...args);
       };
 
-      command.runAutocomplete({ t, interaction });
-      return;
+      // Auto complete commands
+      if (interaction.type === InteractionType.ApplicationCommandAutocomplete) {
+        botCommand.runAutocomplete({ t, interaction });
+        return;
+      }
+
+      // Slash commands
+      if (botCommand.config.autoDefer && interaction.isChatInputCommand()) await interaction.deferReply({ ephemeral: botCommand.config.ephemeral });
+      if (interaction.inGuild()) {
+        if (!InteractionCreateEvent.checkBotPermissions(interaction, botCommand, t)) return;
+      }
+
+      this.logCommand(client, interaction, userLocale);
+      botCommand.run({ interaction, t } as CommandRunOptions);
     }
-
-    if (!interaction.isChatInputCommand()) return;
-
-    const botCommand = client.commands.get(interaction.commandName);
-    if (!botCommand) return;
-
-    const userLocale = recommendLocale(interaction.locale);
-
-    const t: CommandLocale = (path: Parameters<CommandLocale>[0], ...args: any) => {
-      return client.languages.manager.get(userLocale, path, ...args);
-    };
-
-    if (interaction.inGuild()) {
-      if (!InteractionCreateEvent.checkBotPermissions(interaction, botCommand, t)) return;
-    }
-
-    if (botCommand.config.autoDefer) await interaction.deferReply({ ephemeral: botCommand.config.ephemeral });
-
-    this.logCommand(client, interaction, userLocale);
-    botCommand.run({ interaction, t } as CommandRunOptions);
   }
 
   logCommand(client: DenkyClient, interaction: ChatInputCommandInteraction, usedLocale: string) {

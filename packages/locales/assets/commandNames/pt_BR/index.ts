@@ -138,5 +138,24 @@ export default {
   'remind/delete': 'excluir',
   'remind/delete/reminder': 'lembrete',
   'remind/info': 'info',
-  'remind/info/reminder': 'lembrete'
+  'remind/info/reminder': 'lembrete',
+
+  // Button Roles
+  buttonroles: 'buttonroles',
+  'buttonroles/create': 'criar',
+  'buttonroles/create/type': 'tipo',
+  'buttonroles/create/choice/add': 'Adicionar - Apenas adicionar o cargo ao usuário',
+  'buttonroles/create/choice/remove': 'Remover - Apenas remover o cargo do usuário',
+  'buttonroles/create/choice/toggle': 'Alternar - Adicionar ou remover o cargo do usuário',
+  'buttonroles/create/choice/danger': 'Vermelho',
+  'buttonroles/create/choice/primary': 'Azul',
+  'buttonroles/create/choice/secondary': 'Cinza',
+  'buttonroles/create/choice/success': 'Verde',
+  'buttonroles/create/embed/description': 'descrição',
+  'buttonroles/create/button/label': 'rótulo',
+  'buttonroles/create/role': 'cargo',
+  'buttonroles/create/role2': 'cargo2',
+  'buttonroles/create/role3': 'cargo3',
+  'buttonroles/create/role4': 'cargo4',
+  'buttonroles/create/role5': 'cargo5'
 } as const;
