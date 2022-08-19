@@ -44,8 +44,10 @@ export default class ButtonRoleData extends CommandDataStructure {
           )
           .addStringOption(
             new SlashCommandStringOption()
-              .setName('cor')
-              .setDescription('Cor do botão')
+              .setName(this.t('commandNames:buttonroles/create/button/color'))
+              .setNameLocalizations(this.localizations('commandNames:buttonroles/create/button/color'))
+              .setDescription(this.t('commandDescriptions:buttonroles/create/button/color'))
+              .setDescriptionLocalizations(this.localizations('commandDescriptions:buttonroles/create/button/color'))
               .setRequired(true)
               .addChoices(
                 {

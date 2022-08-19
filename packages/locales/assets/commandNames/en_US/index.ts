@@ -153,6 +153,7 @@ export default {
   'buttonroles/create/choice/success': 'Green',
   'buttonroles/create/embed/description': 'description',
   'buttonroles/create/button/label': 'label',
+  'buttonroles/create/button/color': 'color',
   'buttonroles/create/role': 'role',
   'buttonroles/create/role2': 'role2',
   'buttonroles/create/role3': 'role3',

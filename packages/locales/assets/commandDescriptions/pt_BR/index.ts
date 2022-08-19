@@ -142,5 +142,6 @@ export default {
   'buttonroles/create/type': 'Qual ação este botão deverá realizar?',
   'buttonroles/create/embed/description': 'Descrição da mensagem',
   'buttonroles/create/button/label': 'O rótulo do botão',
+  'buttonroles/create/button/color': 'A cor do botão',
   'buttonroles/create/role': 'Cargo para adicionar ou remover quando o botão for clicado'
 } as const;
