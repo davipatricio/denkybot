@@ -42,12 +42,12 @@ export default class ButtonRoleCommand extends Command {
     const role5 = interaction.options.getRole('role5');
     const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
     if (roles.some(r => r.managed) || roles.some(r => r.id === interaction.guild!.id)) {
-      interaction.editReply(`❌ **|** ${interaction.user} ${t('command:buttonroles/managed-role')}.`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/managed-role')}.`);
       return;
     }
 
     if (roles.some(r => r.position > interaction.guild!.members.me!.roles.highest.position)) {
-      interaction.editReply(`❌ **|** ${interaction.user} ${t('command:buttonroles/higher-role')}.`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/higher-role')}.`);
       return;
     }
 
@@ -64,7 +64,7 @@ export default class ButtonRoleCommand extends Command {
     const embed = new EmbedBuilder().setColor(Colors.Yellow).setDescription(embedDescription);
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setLabel(buttonLabel).setCustomId('button_role_single').setEmoji(emoji).setStyle(ButtonStyle[buttonColor]));
 
-    await interaction.editReply(`✅ **|** ${interaction.user} ${t('command:buttonroles/created')}`);
+    await interaction.editReply(`✅ ${interaction.user} **|** ${t('command:buttonroles/created')}`);
     const message = await interaction.channel!.send({ embeds: [embed], components: [row] });
 
     await this.client.databases.buttonRole.create({
