@@ -13,7 +13,7 @@ export default class UserAvatarSubCommand extends SubCommand {
             size: 2048,
             extension: 'png'
           })
-        : (interaction.member as GuildMember).avatarURL({
+        : (interaction.member as GuildMember | null)?.avatarURL({
             size: 2048,
             extension: 'png'
           })) ?? undefined;

@@ -7,7 +7,6 @@ export default class UserData extends CommandDataStructure {
     super(client);
 
     this.setName('user')
-      .setDMPermission(false)
       .setDescription(this.t('commandDescriptions:user'))
       .setDescriptionLocalizations(this.localizations('commandDescriptions:user'))
       .addSubcommand(
