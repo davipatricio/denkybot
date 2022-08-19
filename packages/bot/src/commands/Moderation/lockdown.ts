@@ -76,7 +76,7 @@ export default class LockdownCommand extends Command {
         endTimestamp
       }
     });
-    interaction.editReply(`✅ ${interaction.user} **|** `);
+    interaction.editReply(`✅ ${interaction.user} **|** ${t('command:lockdown/sched/done')}`);
   }
 
   async #enableLockdown({ t, interaction }: CommandRunOptions) {
@@ -244,7 +244,6 @@ export default class LockdownCommand extends Command {
     }
     let cooldown = Cooldowns.get(interaction.guild!.id);
     if (cooldown) {
-      // TODO: use normal ints instead of BigInts
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:lockdown/disable/cooldown', ms(cooldown - Date.now()))}`);
       return;
     }
