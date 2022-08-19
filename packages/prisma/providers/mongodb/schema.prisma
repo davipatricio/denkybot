@@ -26,16 +26,17 @@ model Afk {
 }
 
 model Giveaway {
-  messageId    String   @id @default("") @map("_id") @db.ObjectId
-  channelId    String   @default("")
-  authorId     String   @default("")
-  guildId      String   @default("")
-  title        String   @default("")
-  description  String   @default("")
-  endTimestamp BigInt   @default(0)
-  winnerAmount Int      @default(0)
-  participants String[] @default([])
-  ended        Boolean  @default(false)
+  messageId      String   @id @default("") @map("_id") @db.ObjectId
+  channelId      String   @default("")
+  authorId       String   @default("")
+  guildId        String   @default("")
+  requiredRoleId String   @default("")
+  title          String   @default("")
+  description    String   @default("")
+  endTimestamp   BigInt   @default(0)
+  winnerAmount   Int      @default(0)
+  participants   String[] @default([])
+  ended          Boolean  @default(false)
 }
 
 model Lockdown {
