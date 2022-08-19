@@ -20,7 +20,6 @@ export default class UserData extends CommandDataStructure {
               .setNameLocalizations(this.localizations('commandNames:user/info/user'))
               .setDescription(this.t('commandDescriptions:user/info/user'))
               .setDescriptionLocalizations(this.localizations('commandDescriptions:user/info/user'))
-              .setRequired(false)
           )
       )
       .addSubcommand(
@@ -34,7 +33,6 @@ export default class UserData extends CommandDataStructure {
               .setNameLocalizations(this.localizations('commandNames:user/avatar/user'))
               .setDescription(this.t('commandDescriptions:user/avatar/user'))
               .setDescriptionLocalizations(this.localizations('commandDescriptions:user/avatar/user'))
-              .setRequired(false)
           )
       )
       .addSubcommand(
@@ -48,7 +46,6 @@ export default class UserData extends CommandDataStructure {
               .setNameLocalizations(this.localizations('commandNames:user/banner/user'))
               .setDescription(this.t('commandDescriptions:user/banner/user'))
               .setDescriptionLocalizations(this.localizations('commandDescriptions:user/banner/user'))
-              .setRequired(false)
           )
       );
   }
