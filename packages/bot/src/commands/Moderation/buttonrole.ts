@@ -31,15 +31,15 @@ export default class ButtonRoleCommand extends Command {
   }
 
   async #createButtonRole({ t, interaction }: CommandRunOptions) {
-    const actionType = interaction.options.getString('tipo', true) as keyof typeof ButtonRoleType;
-    const buttonColor = interaction.options.getString('cor', true) as keyof typeof ButtonStyle;
-    const embedDescription = interaction.options.getString('descrição', true);
+    const actionType = interaction.options.getString('type', true) as keyof typeof ButtonRoleType;
+    const buttonColor = interaction.options.getString('color', true) as keyof typeof ButtonStyle;
+    const embedDescription = interaction.options.getString('description', true);
 
-    const role = interaction.options.getRole('cargo', true);
-    const role2 = interaction.options.getRole('cargo2');
-    const role3 = interaction.options.getRole('cargo3');
-    const role4 = interaction.options.getRole('cargo4');
-    const role5 = interaction.options.getRole('cargo5');
+    const role = interaction.options.getRole('role', true);
+    const role2 = interaction.options.getRole('role2');
+    const role3 = interaction.options.getRole('role3');
+    const role4 = interaction.options.getRole('role4');
+    const role5 = interaction.options.getRole('role5');
     const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
     if (roles.some(r => r.managed) || roles.some(r => r.id === interaction.guild!.id)) {
       interaction.editReply(`❌ **|** ${interaction.user} ${t('command:buttonroles/managed-role')}.`);
