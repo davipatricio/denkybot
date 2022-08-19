@@ -8,7 +8,7 @@ export default class UserBannerSubCommand extends SubCommand {
     const userBanner = user.bannerURL({ size: 2048, extension: 'png' });
 
     if (!userBanner) {
-      interaction.editReply(t('command:user/banner/noBanner'));
+      interaction.editReply(`❌ **|** ${interaction.user} ${t('command:user/banner/noBanner')}`);
       return;
     }
 

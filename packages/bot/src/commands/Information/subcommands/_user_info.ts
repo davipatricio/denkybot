@@ -42,12 +42,8 @@ export default class UserInfoSubCommand extends SubCommand {
     }
 
     const tempUser = await user.fetch();
-    embed.setImage(tempUser.bannerURL({ size: 2048 }) ?? null);
-    embed.setThumbnail(user.displayAvatarURL({ size: 1024 }));
+    embed.setImage(tempUser.bannerURL({ size: 2048 }) ?? null).setThumbnail(user.displayAvatarURL({ size: 1024 }));
 
-    interaction.editReply({
-      content: interaction.user.toString(),
-      embeds: [embed]
-    });
+    interaction.editReply({ embeds: [embed] });
   }
 }

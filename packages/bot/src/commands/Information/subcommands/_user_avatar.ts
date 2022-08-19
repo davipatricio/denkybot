@@ -32,11 +32,7 @@ export default class UserAvatarSubCommand extends SubCommand {
       .setTitle(t('command:user/avatar/title', user.username))
       .setImage(guildAvatar ?? userAvatar)
       .setColor(Colors.Green);
-    const message = await interaction.editReply({
-      content: interaction.user.toString(),
-      embeds: [embed],
-      components: [row, row2]
-    });
+    const message = await interaction.editReply({ embeds: [embed], components: [row, row2] });
 
     if (guildAvatar) {
       const collector = message.createMessageComponentCollector({
