@@ -11,8 +11,9 @@ export default class GuildDeleteEvent extends Event {
   }
 
   override run(client: DenkyClient, guild: Guild) {
-    if (!client.config.webhooks.serverLogs || !process.env.DISCORD_SERVERLOGS_WEBHOOK_URL || !guild || !guild.name) return;
+    this.deleteData(client, guild);
 
+    if (!client.config.webhooks.serverLogs || !process.env.DISCORD_SERVERLOGS_WEBHOOK_URL || !guild || !guild.name) return;
     if (!this.webhookServerLogs)
       this.webhookServerLogs = new WebhookClient({
         url: process.env.DISCORD_SERVERLOGS_WEBHOOK_URL
@@ -31,5 +32,36 @@ export default class GuildDeleteEvent extends Event {
       ]);
 
     this.webhookServerLogs.send({ embeds: [embed] });
+  }
+
+  async deleteData(client: DenkyClient, guild: Guild) {
+    await client.databases.giveaway
+      .deleteMany({
+        where: {
+          guildId: guild.id
+        }
+      })
+      .catch(() => {});
+    await client.databases.buttonRole
+      .deleteMany({
+        where: {
+          guildId: guild.id
+        }
+      })
+      .catch(() => {});
+    await client.databases.suggestion
+      .deleteMany({
+        where: {
+          guildId: guild.id
+        }
+      })
+      .catch(() => {});
+    await client.databases.unlockdownTask
+      .deleteMany({
+        where: {
+          guildId: guild.id
+        }
+      })
+      .catch(() => {});
   }
 }

@@ -9,11 +9,10 @@ export default class MessageDeleteEvent extends Event {
   }
 
   override run(client: DenkyClient, message: Message) {
-    this.deleteExistingButtonRole(client, message);
-    this.deleteExistingGiveaway(client, message);
+    this.deleteData(client, message);
   }
 
-  async deleteExistingButtonRole(client: DenkyClient, message: Message) {
+  async deleteData(client: DenkyClient, message: Message) {
     await client.databases.buttonRole
       .delete({
         where: {
@@ -21,9 +20,6 @@ export default class MessageDeleteEvent extends Event {
         }
       })
       .catch(() => {});
-  }
-
-  async deleteExistingGiveaway(client: DenkyClient, message: Message) {
     await client.databases.giveaway
       .delete({
         where: {
