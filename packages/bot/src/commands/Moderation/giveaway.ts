@@ -73,6 +73,7 @@ export default class GiveawayCommand extends Command {
     await this.client.databases.createGiveaway({
       messageId: message.id,
       authorId: interaction.user.id,
+      guildId: interaction.guild!.id,
       channelId: channel.id,
       title,
       description,

@@ -29,6 +29,7 @@ model Giveaway {
   messageId    String   @id @unique @default("")
   channelId    String   @default("")
   authorId     String   @default("")
+  guildId      String   @default("")
   title        String   @default("")
   description  String   @default("")
   endTimestamp BigInt   @default(0) @db.BigInt
