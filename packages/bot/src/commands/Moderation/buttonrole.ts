@@ -60,7 +60,7 @@ export default class ButtonRoleCommand extends Command {
         emoji = '➖';
         break;
     }
-    const buttonLabel = interaction.options.getString('título') ?? roles.length === 1 ? `"${role.name}"` : t('command:buttonroles/default-label');
+    const buttonLabel = interaction.options.getString('title') ?? roles.length === 1 ? `"${role.name}"` : t('command:buttonroles/default-label');
     const embed = new EmbedBuilder().setColor(Colors.Yellow).setDescription(embedDescription);
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setLabel(buttonLabel).setCustomId('button_role_single').setEmoji(emoji).setStyle(ButtonStyle[buttonColor]));
 
