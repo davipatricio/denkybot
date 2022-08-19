@@ -302,6 +302,7 @@ export default {
   'lockdown/no-answer': 'Você não respondeu em tempo suficiente.',
   'lockdown/buttons/yes': 'Sim',
   'lockdown/buttons/no': 'Não',
+  'lockdown/trust-factor': 'O servidor possui menos de 60 membros, não é possível bloquear todos os canais.',
 
   'lockdown/enable/blocked': 'O servidor já está bloqueado.',
   'lockdown/enable/cooldown': (time: string) => `O servidor realizou um lockdown/unlockdown recentemente. Aguarde ${time} para bloqueá-lo.`,
