@@ -272,6 +272,8 @@ export default {
   'giveaway/create/embed/winners': 'Winners',
   'giveaway/create/embed/ends-in': 'Ends',
   'giveaway/create/created': (url: string) => `Giveaway created successfully! Check it out [here](${url})`,
+  'giveaway/create/created-same': 'Giveaway created successfully!',
+  'giveaway/create/required-role-managed': 'The required role cannot be @everyone or managed by an integration.',
   'giveaway/end/not-found': 'Unknown giveaway.',
   'giveaway/end/already-ended': 'This giveaway already ended.',
   'giveaway/end/ended': 'Giveaway ended successfully.',

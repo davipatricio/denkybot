@@ -276,6 +276,7 @@ export default {
   'giveaway/create/embed/ends-in': 'Acaba',
   'giveaway/create/created': (url: string) => `Sorteio criado com sucesso! Confira-o [aqui](${url})`,
   'giveaway/create/created-same': 'Sorteio criado com sucesso!',
+  'giveaway/create/required-role-managed': 'O cargo necessário não pode ser @everyone ou gerenciado por uma integração.',
   'giveaway/end/not-found': 'Sorteio desconhecido.',
   'giveaway/end/already-ended': 'Este sorteio já foi encerrado.',
   'giveaway/end/ended': 'Sorteio encerrado com sucesso.',

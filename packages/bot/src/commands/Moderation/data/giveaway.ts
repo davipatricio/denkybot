@@ -1,6 +1,6 @@
 import { CommandDataStructure } from '@bot/src/structures/CommandDataStructure';
 import type { DenkyClient } from '@bot/src/types/Client';
-import { ChannelType, PermissionFlagsBits, SlashCommandChannelOption, SlashCommandNumberOption, SlashCommandStringOption, SlashCommandSubcommandBuilder } from 'discord.js';
+import { ChannelType, PermissionFlagsBits, SlashCommandChannelOption, SlashCommandNumberOption, SlashCommandRoleOption, SlashCommandStringOption, SlashCommandSubcommandBuilder } from 'discord.js';
 
 export default class GiveawayData extends CommandDataStructure {
   constructor(client: DenkyClient) {
@@ -63,6 +63,7 @@ export default class GiveawayData extends CommandDataStructure {
               .setDescriptionLocalizations(this.localizations('commandDescriptions:giveaway/create/channel'))
               .addChannelTypes(ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildVoice, ChannelType.GuildNewsThread, ChannelType.GuildPrivateThread, ChannelType.GuildPublicThread)
           )
+          .addRoleOption(new SlashCommandRoleOption().setName('required_role').setDescription('Qual cargo membros devem ter para conseguir participar do sorteio?'))
       )
       .addSubcommand(
         new SlashCommandSubcommandBuilder()
