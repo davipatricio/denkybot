@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@fastify/cors": "8.1.0",
-    "discord.js": "14.2.0",
+    "discord.js": "14.3.0",
     "fastify": "4.5.2",
     "module-alias": "2.2.2",
     "tslib": "2.4.0",
