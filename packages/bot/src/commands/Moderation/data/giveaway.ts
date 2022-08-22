@@ -1,6 +1,6 @@
 import { CommandDataStructure } from '@bot/src/structures/CommandDataStructure';
 import type { DenkyClient } from '@bot/src/types/Client';
-import { ChannelType, PermissionFlagsBits, SlashCommandChannelOption, SlashCommandNumberOption, SlashCommandStringOption, SlashCommandSubcommandBuilder } from 'discord.js';
+import { ChannelType, PermissionFlagsBits, SlashCommandChannelOption, SlashCommandNumberOption, SlashCommandRoleOption, SlashCommandStringOption, SlashCommandSubcommandBuilder } from 'discord.js';
 
 export default class GiveawayData extends CommandDataStructure {
   constructor(client: DenkyClient) {
@@ -62,6 +62,13 @@ export default class GiveawayData extends CommandDataStructure {
               .setDescription(this.t('commandDescriptions:giveaway/create/channel'))
               .setDescriptionLocalizations(this.localizations('commandDescriptions:giveaway/create/channel'))
               .addChannelTypes(ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildVoice, ChannelType.GuildNewsThread, ChannelType.GuildPrivateThread, ChannelType.GuildPublicThread)
+          )
+          .addRoleOption(
+            new SlashCommandRoleOption()
+              .setName(this.t('commandNames:giveaway/create/requiredRole'))
+              .setNameLocalizations(this.localizations('commandNames:giveaway/create/requiredRole'))
+              .setDescription(this.t('commandNames:giveaway/create/requiredRole'))
+              .setDescriptionLocalizations(this.localizations('commandNames:giveaway/create/requiredRole'))
           )
       )
       .addSubcommand(

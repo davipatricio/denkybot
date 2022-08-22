@@ -3,7 +3,7 @@ import { recommendLocale } from '@bot/src/helpers/Locale';
 import type { CommandLocale } from '@bot/src/structures/Command';
 import type { Giveaway } from '@prisma-client';
 import dayjs from 'dayjs';
-import { ActionRowBuilder, Colors, EmbedBuilder, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
+import { ActionRowBuilder, Colors, EmbedBuilder, GuildMember, Interaction, SelectMenuBuilder, SelectMenuOptionBuilder } from 'discord.js';
 
 export async function handleInteraction(client: DenkyClient, interaction: Interaction) {
   if (!interaction.isSelectMenu() && !interaction.isButton()) return;
@@ -22,6 +22,11 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
 
       if (giveawayData.participants.includes(interaction.user.id)) {
         interaction.followUp({ content: `❌ **|** ${t('command:giveaway/helper/error/alreadyParticipating')}`, ephemeral: true });
+        return;
+      }
+
+      if (giveawayData.requiredRoleId && !(interaction.member as GuildMember).roles.cache.has(giveawayData.requiredRoleId)) {
+        interaction.followUp({ content: `❌ **|** ${t('command:giveaway/helper/error/missingRequiredRole', giveawayData.requiredRoleId)}`, ephemeral: true });
         return;
       }
 

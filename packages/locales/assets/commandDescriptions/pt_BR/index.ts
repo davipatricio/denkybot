@@ -115,6 +115,7 @@ export default {
   'giveaway/create/duration': 'Duração do sorteio (1d, 5d 2h, 14/07 20:00, 05:00 etc)',
   'giveaway/create/description': 'Descrição detalhada do sorteio',
   'giveaway/create/channel': 'Canal onde o sorteio será criado',
+  'giveaway/create/requiredRole': 'Qual cargo membros devem ter para conseguir participar do sorteio?',
   'giveaway/end': 'Encerra um sorteio em andamento e escolhe um ganhador',
   'giveaway/end/id': 'ID do sorteio para encerrar',
 

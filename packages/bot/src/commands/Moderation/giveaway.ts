@@ -2,7 +2,6 @@ import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
 import { checkSingleEndedGiveaway } from '@bot/src/helpers/Giveaway';
 import { parseTime } from '@bot/src/helpers/Timestamp';
-import type { Giveaway } from '@prisma-client';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, PermissionFlagsBits, TextBasedChannel } from 'discord.js';
 import ms from 'ms';
 
@@ -35,6 +34,12 @@ export default class GiveawayCommand extends Command {
     const description = interaction.options.getString('description') ?? t('command:giveaway/create/no-description');
     const winnerAmount = interaction.options.getNumber('winners', true);
     const channel = (interaction.options.getChannel('channel') ?? interaction.channel!) as TextBasedChannel;
+    const requiredRole = interaction.options.getRole('require_role');
+
+    if (requiredRole?.managed || requiredRole?.id === interaction.guild!.id) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:giveaway/create/required-role-managed')}`);
+      return;
+    }
 
     const { valid, type, value } = parseTime(interaction.options.getString('duration', true));
     if (!valid || !value) {
@@ -75,6 +80,7 @@ export default class GiveawayCommand extends Command {
       authorId: interaction.user.id,
       guildId: interaction.guild!.id,
       channelId: channel.id,
+      requiredRoleId: requiredRole?.id ?? null,
       title,
       description,
       winnerAmount,
@@ -98,7 +104,7 @@ export default class GiveawayCommand extends Command {
     }
 
     interaction.editReply(`✅ ${interaction.user} **|** ${t('command:giveaway/end/ended')}`);
-    const fakeObject: Giveaway = {
+    const fakeObject = {
       ...giveaway,
       endTimestamp: BigInt(Date.now())
     };
