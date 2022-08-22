@@ -279,6 +279,7 @@ export default {
   'giveaway/end/ended': 'Giveaway ended successfully.',
   'giveaway/helper/error/alreadyParticipating': 'You are already participating in the giveaway.',
   'giveaway/helper/error/notParticipating': 'You are not participating of this giveaway.',
+  'giveaway/helper/error/missingRequiredRole': (roleId: string) => `You must have the role <@&${roleId}> to participate of this giveaway.`,
   'giveaway/helper/participate': 'You are participating in the giveaway. Good luck!',
   'giveaway/helper/exitGiveaway': 'You are no longer participating of this giveaway.',
   'giveaway/helper/embed/description': (description: string, winnerAmount: number, date: number) => `${description}\n\n🔢 **Winners**: ${winnerAmount}\n⏲️ **Finalizado**: <t:${date}:R>`,

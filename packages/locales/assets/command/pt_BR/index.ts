@@ -282,6 +282,7 @@ export default {
   'giveaway/end/ended': 'Sorteio encerrado com sucesso.',
   'giveaway/helper/error/alreadyParticipating': 'Você já está participando deste sorteio.',
   'giveaway/helper/error/notParticipating': 'Você não está participando deste sorteio.',
+  'giveaway/helper/error/missingRequiredRole': (roleId: string) => `Você precisa ter o cargo <@&${roleId}> para participar deste sorteio.`,
   'giveaway/helper/participate': 'Você está participando do sorteio. Boa sorte!',
   'giveaway/helper/exitGiveaway': 'Você não está mais participando deste sorteio.',
   'giveaway/helper/embed/description': (description: string, winnerAmount: number, date: number) => `${description}\n\n🔢 **Ganhadores**: ${winnerAmount}\n⏲️ **Finalizado**: ${date}`,
