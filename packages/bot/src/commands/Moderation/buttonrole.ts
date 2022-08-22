@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, PermissionFlagsBits, Role } from 'discord.js';
