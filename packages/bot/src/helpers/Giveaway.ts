@@ -26,7 +26,7 @@ export async function handleInteraction(client: DenkyClient, interaction: Intera
       }
 
       if (giveawayData.requiredRoleId && !(interaction.member as GuildMember).roles.cache.has(giveawayData.requiredRoleId)) {
-        interaction.followUp({ content: `❌ **|** ${t('command:giveaway/helper/error/missingRequiredRole')}`, ephemeral: true });
+        interaction.followUp({ content: `❌ **|** ${t('command:giveaway/helper/error/missingRequiredRole', giveawayData.requiredRoleId)}`, ephemeral: true });
         return;
       }
 
