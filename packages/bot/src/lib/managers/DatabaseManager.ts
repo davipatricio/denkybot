@@ -18,7 +18,7 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getReminder(id: string) {
-    return this.reminder.findFirst({ where: { id } });
+    return this.reminder.findFirst({ where: { id } }).catch(() => undefined);
   }
 
   getReminders(authorId: string) {
