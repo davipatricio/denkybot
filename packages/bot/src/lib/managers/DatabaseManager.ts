@@ -1,10 +1,4 @@
-import { Afk, Giveaway, Lockdown, PrismaClient, Reminder, Suggestion } from '@prisma-client';
-
-export type SuggestionConfig = Partial<Suggestion> & Pick<Suggestion, 'guildId'>;
-export type AFKConfig = Partial<Afk> & Pick<Afk, 'userId' | 'startTime'>;
-export type GiveawayConfig = Giveaway;
-export type LockdownConfig = Lockdown;
-export type ReminderConfig = Reminder;
+import { Afk as AFKConfig, Giveaway as GiveawayConfig, Lockdown, PrismaClient, Reminder, Suggestion as SuggestionConfig } from '@prisma-client';
 
 export class DatabaseManager extends PrismaClient {
   constructor() {
@@ -22,11 +16,7 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getReminders(authorId: string) {
-    return this.reminder.findMany({
-      where: {
-        authorId
-      }
-    });
+    return this.reminder.findMany({ where: { authorId } });
   }
 
   deleteReminder(id: string) {
@@ -54,51 +44,23 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getGiveaway(messageId: string) {
-    return this.giveaway
-      .findFirst({
-        where: {
-          messageId
-        }
-      })
-      .catch(() => undefined);
+    return this.giveaway.findFirst({ where: { messageId } }).catch(() => undefined);
   }
 
   deleteGiveaway(messageId: string) {
-    return this.giveaway
-      .delete({
-        where: {
-          messageId
-        }
-      })
-      .catch(() => {});
+    return this.giveaway.delete({ where: { messageId } }).catch(() => {});
   }
 
   updateGiveaway(data: GiveawayConfig) {
-    return this.giveaway.update({
-      where: {
-        messageId: data.messageId
-      },
-      data
-    });
+    return this.giveaway.update({ where: { messageId: data.messageId }, data });
   }
 
   fetchGiveaways() {
-    return this.giveaway.findMany({
-      where: {
-        ended: false
-      },
-      take: 100
-    });
+    return this.giveaway.findMany({ where: { ended: false }, take: 5000 });
   }
 
   fetchGiveaway(messageId: string) {
-    return this.giveaway
-      .findFirst({
-        where: {
-          messageId
-        }
-      })
-      .catch(() => undefined);
+    return this.giveaway.findFirst({ where: { messageId } }).catch(() => undefined);
   }
   // #endregion
 
@@ -108,32 +70,15 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getSuggestion(guildId: string) {
-    return this.suggestion
-      .findFirst({
-        where: {
-          guildId
-        }
-      })
-      .catch(() => undefined);
+    return this.suggestion.findFirst({ where: { guildId } }).catch(() => undefined);
   }
 
   deleteSuggestion(guildId: string) {
-    return this.suggestion
-      .delete({
-        where: {
-          guildId
-        }
-      })
-      .catch(() => {});
+    return this.suggestion.delete({ where: { guildId } }).catch(() => {});
   }
 
   updateSuggestion(data: SuggestionConfig) {
-    return this.suggestion.update({
-      where: {
-        guildId: data.guildId
-      },
-      data
-    });
+    return this.suggestion.update({ where: { guildId: data.guildId }, data });
   }
   // #endregion
 
@@ -143,32 +88,15 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getAfk(userId: string) {
-    return this.afk
-      .findFirst({
-        where: {
-          userId
-        }
-      })
-      .catch(() => undefined);
+    return this.afk.findFirst({ where: { userId } }).catch(() => undefined);
   }
 
   deleteAfk(userId: string) {
-    return this.afk
-      .delete({
-        where: {
-          userId
-        }
-      })
-      .catch(() => {});
+    return this.afk.delete({ where: { userId } }).catch(() => {});
   }
 
   updateAfk(data: AFKConfig) {
-    return this.afk.update({
-      where: {
-        userId: data.userId
-      },
-      data
-    });
+    return this.afk.update({ where: { userId: data.userId }, data });
   }
   // #endregion
 

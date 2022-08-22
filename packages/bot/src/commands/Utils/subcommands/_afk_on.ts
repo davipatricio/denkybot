@@ -8,12 +8,12 @@ export default class AfkOnSubCommand extends SubCommand {
       return;
     }
 
-    const originalNick = interaction.inCachedGuild() ? interaction.member.nickname ?? interaction.user.username : undefined;
+    const originalNick = interaction.inCachedGuild() ? interaction.member.nickname ?? interaction.user.username : null;
 
     await this.client.databases.createAfk({
       userId: interaction.user.id,
       guildId: interaction.guild!.id,
-      reason: interaction.options.getString('reason') ?? undefined,
+      reason: interaction.options.getString('reason'),
       originalNick,
       startTime: BigInt(Math.round(Date.now() / 1000))
     });
