@@ -119,6 +119,7 @@ export default {
   'giveaway/create/duration': 'duração',
   'giveaway/create/description': 'descrição',
   'giveaway/create/channel': 'canal',
+  'giveaway/create/requiredRole': 'cargo_necessário',
   'giveaway/end': 'encerrar',
   'giveaway/end/id': 'id_sorteio',
 

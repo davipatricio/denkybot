@@ -63,7 +63,13 @@ export default class GiveawayData extends CommandDataStructure {
               .setDescriptionLocalizations(this.localizations('commandDescriptions:giveaway/create/channel'))
               .addChannelTypes(ChannelType.GuildText, ChannelType.GuildNews, ChannelType.GuildVoice, ChannelType.GuildNewsThread, ChannelType.GuildPrivateThread, ChannelType.GuildPublicThread)
           )
-          .addRoleOption(new SlashCommandRoleOption().setName('required_role').setDescription('Qual cargo membros devem ter para conseguir participar do sorteio?'))
+          .addRoleOption(
+            new SlashCommandRoleOption()
+              .setName(this.t('commandNames:giveaway/create/requiredRole'))
+              .setNameLocalizations(this.localizations('commandNames:giveaway/create/requiredRole'))
+              .setDescription(this.t('commandNames:giveaway/create/requiredRole'))
+              .setDescriptionLocalizations(this.localizations('commandNames:giveaway/create/requiredRole'))
+          )
       )
       .addSubcommand(
         new SlashCommandSubcommandBuilder()
