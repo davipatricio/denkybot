@@ -63,3 +63,16 @@ model ButtonRole {
   roles     String[] @default([])
   type      Int      @default(0)
 }
+
+model ReactionRoleItem {
+  emojiId               String        @id @unique @default("")
+  roleId                String        @unique @default("")
+  type                  Int           @default(0)
+  ReactionRole          ReactionRole? @relation(fields: [reactionRoleMessageId], references: [messageId])
+  reactionRoleMessageId String?
+}
+
+model ReactionRole {
+  messageId String             @id @unique @default("")
+  items     ReactionRoleItem[]
+}
