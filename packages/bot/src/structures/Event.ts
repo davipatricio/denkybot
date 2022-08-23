@@ -1,9 +1,9 @@
 import type { DenkyClient } from '#types/Client';
-import type { Awaitable } from 'discord.js';
+import type { Awaitable, ClientEvents } from 'discord.js';
 
 class Event {
   /** The event name to listen to */
-  eventName: string;
+  eventName: keyof ClientEvents | '';
   constructor() {
     this.eventName = '';
   }
