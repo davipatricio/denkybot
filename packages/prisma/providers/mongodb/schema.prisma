@@ -63,3 +63,10 @@ model ButtonRole {
   roles     String[] @default([])
   type      Int      @default(0)
 }
+
+model ReactionRole {
+  id        String @id @default(uuid()) @map("_id") @db.ObjectId
+  emojiId   String @default("")
+  messageId String @default("")
+  type      Int    @default(0)
+}
