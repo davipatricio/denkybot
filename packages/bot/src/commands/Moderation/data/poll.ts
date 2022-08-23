@@ -26,8 +26,8 @@ export default class PollData extends CommandDataStructure {
       );
     }
 
-    this.setName(this.t('commandNames:poll'))
-      .setNameLocalizations(this.localizations('commandNames:poll'))
+    this.setName(this.t('commandNames:poll/name'))
+      .setNameLocalizations(this.localizations('commandNames:poll/name'))
       .setDMPermission(false)
       .setDescription(this.t('commandDescriptions:poll'))
       .setDescriptionLocalizations(this.localizations('commandDescriptions:poll'))

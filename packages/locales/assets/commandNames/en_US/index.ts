@@ -9,7 +9,8 @@ export default {
   'afk/reason': 'reason',
 
   // Poll
-  poll: 'poll',
+  poll: 'poll create',
+  'poll/name': 'poll',
   'poll/create': 'create',
   'poll/create/permanent': 'permanent',
   'poll/create/option1': 'option1',
@@ -41,7 +42,7 @@ export default {
   'server/banner': 'banner',
 
   // Bot
-  bot: 'bot info | convidar | votar',
+  bot: 'bot invite | vote',
   'bot/invite': 'invite',
   'bot/vote': 'vote',
 
@@ -56,7 +57,6 @@ export default {
   'config/suggestions': 'suggestions',
 
   // Suggestions
-  suggestions: 'suggestions',
   suggestion: 'suggestion | send | edit | accept | deny',
   'suggestion/name': 'suggestion',
   'suggestion/send': 'send',
@@ -82,7 +82,8 @@ export default {
   'ban/list': 'list',
 
   // Wikipedia
-  wikipedia: 'wikipedia',
+  wikipedia: 'wikipedia search',
+  'wikipedia/name': 'wikipedia',
   'wikipedia/search': 'search',
 
   // Mute
@@ -112,7 +113,8 @@ export default {
   'animal/fox': 'fox',
 
   // Giveaway
-  giveaway: 'giveaway',
+  giveaway: 'giveaway create | end',
+  'giveaway/name': 'giveaway',
   'giveaway/create': 'create',
   'giveaway/create/title': 'title',
   'giveaway/create/winners': 'winners',
@@ -124,7 +126,8 @@ export default {
   'giveaway/end/id': 'id_giveaway',
 
   // Lockdown
-  lockdown: 'lockdown',
+  lockdown: 'lockdown enable | disable | schedule unlock',
+  'lockdown/name': 'lockdown',
   'lockdown/enable': 'enable',
   'lockdown/disable': 'disable',
   'lockdown/schedule': 'schedule',
@@ -132,7 +135,8 @@ export default {
   'lockdown/schedule/unlockdown/duration': 'duration',
 
   // Reminder
-  remind: 'remind',
+  remind: 'remind create | delete | info',
+  'remind/name': 'remind',
   'remind/create': 'create',
   'remind/create/description': 'description',
   'remind/create/duration': 'duration',
@@ -142,7 +146,8 @@ export default {
   'remind/info/reminder': 'reminder',
 
   // Button Roles
-  buttonroles: 'buttonroles',
+  buttonroles: 'buttonroles create',
+  'buttonroles/name': 'buttonroles',
   'buttonroles/create': 'create',
   'buttonroles/create/type': 'type',
   'buttonroles/create/choice/add': 'Add - Just add the role to the user',

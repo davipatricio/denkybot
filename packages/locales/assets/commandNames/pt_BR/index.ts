@@ -9,7 +9,8 @@ export default {
   'afk/reason': 'motivo',
 
   // Poll
-  poll: 'enquete',
+  poll: 'enquete criar',
+  'poll/name': 'enquete',
   'poll/create': 'criar',
   'poll/create/permanent': 'permanente',
   'poll/create/option1': 'opcao1',
@@ -41,7 +42,7 @@ export default {
   'server/banner': 'banner',
 
   // Bot
-  bot: 'bot info | invite | vote',
+  bot: 'bot convidar | vote',
   'bot/invite': 'convidar',
   'bot/vote': 'votar',
 
@@ -56,7 +57,6 @@ export default {
   'config/suggestions': 'sugestoes',
 
   // Suggestions
-  suggestions: 'sugestoes',
   suggestion: 'sugestao | enviar | editar | aceitar | recusar',
   'suggestion/name': 'sugestao',
   'suggestion/send': 'enviar',
@@ -82,7 +82,8 @@ export default {
   'ban/list': 'lista',
 
   // Wikipedia
-  wikipedia: 'wikipedia',
+  wikipedia: 'wikipedia pesquisa',
+  'wikipedia/name': 'wikipedia',
   'wikipedia/search': 'pesquisa',
 
   // Mute
@@ -112,7 +113,8 @@ export default {
   'animal/fox': 'raposa',
 
   // Giveaway
-  giveaway: 'sorteio',
+  giveaway: 'sorteio criar | encerrar',
+  'giveaway/name': 'sorteio',
   'giveaway/create': 'criar',
   'giveaway/create/title': 'título',
   'giveaway/create/winners': 'ganhadores',
@@ -124,7 +126,8 @@ export default {
   'giveaway/end/id': 'id_sorteio',
 
   // Lockdown
-  lockdown: 'lockdown',
+  lockdown: 'lockdown ativar | desativar | agendar desbloqueio',
+  'lockdown/name': 'lockdown',
   'lockdown/enable': 'ativar',
   'lockdown/disable': 'desativar',
   'lockdown/schedule': 'agendar',
@@ -132,7 +135,8 @@ export default {
   'lockdown/schedule/unlockdown/duration': 'duração',
 
   // Reminder
-  remind: 'lembrete',
+  remind: 'lembrete criar | excluir | info',
+  'remind/name': 'lembrete',
   'remind/create': 'criar',
   'remind/create/description': 'descrição',
   'remind/create/duration': 'duração',
@@ -142,7 +146,8 @@ export default {
   'remind/info/reminder': 'lembrete',
 
   // Button Roles
-  buttonroles: 'buttonroles',
+  buttonroles: 'buttonroles criar',
+  'buttonroles/name': 'buttonroles',
   'buttonroles/create': 'criar',
   'buttonroles/create/type': 'tipo',
   'buttonroles/create/choice/add': 'Adicionar - Apenas adicionar o cargo ao usuário',

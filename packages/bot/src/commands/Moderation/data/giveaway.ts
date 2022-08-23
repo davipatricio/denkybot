@@ -6,8 +6,8 @@ export default class GiveawayData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.setName(this.t('commandNames:giveaway'))
-      .setNameLocalizations(this.localizations('commandNames:giveaway'))
+    this.setName(this.t('commandNames:giveaway/name'))
+      .setNameLocalizations(this.localizations('commandNames:giveaway/name'))
       .setDMPermission(false)
       .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
       .setDescription('commandDescriptions:giveaway')

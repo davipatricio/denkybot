@@ -11,7 +11,7 @@ export enum ButtonRoleType {
 export default class ButtonRoleCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
-    this.rawName = '';
+    this.rawName = 'BUTTONROLES';
     this.rawCategory = 'MODERATION';
     this.config = {
       autoDefer: true,

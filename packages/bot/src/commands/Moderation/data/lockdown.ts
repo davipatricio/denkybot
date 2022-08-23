@@ -6,7 +6,8 @@ export default class LockdownData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.setName('lockdown')
+    this.setName(this.t('commandNames:lockdown/name'))
+      .setNameLocalizations(this.localizations('commandNames:lockdown/name'))
       .setDMPermission(false)
       .setDefaultMemberPermissions(new PermissionsBitField().add([PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageGuild]).bitfield)
       .setDescription(this.t('commandDescriptions:lockdown'))

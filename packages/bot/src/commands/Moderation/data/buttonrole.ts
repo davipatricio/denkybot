@@ -6,7 +6,8 @@ export default class ButtonRoleData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.setName('buttonrole')
+    this.setName(this.t('commandNames:buttonroles/name'))
+      .setNameLocalizations(this.localizations('commandNames:buttonroles/name'))
       .setDMPermission(false)
       .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles)
       .setDescription(this.t('commandDescriptions:buttonroles'))

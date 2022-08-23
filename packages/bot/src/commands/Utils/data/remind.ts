@@ -6,8 +6,8 @@ export default class ReminderData extends CommandDataStructure {
   constructor(client: DenkyClient) {
     super(client);
 
-    this.setName(this.t('commandNames:remind'))
-      .setNameLocalizations(this.localizations('commandNames:remind'))
+    this.setName(this.t('commandNames:remind/name'))
+      .setNameLocalizations(this.localizations('commandNames:remind/name'))
       .setDMPermission(true)
       .setDescription(this.t('commandDescriptions:remind'))
       .setDescriptionLocalizations(this.localizations('commandDescriptions:remind'))
