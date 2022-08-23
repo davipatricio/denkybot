@@ -68,5 +68,6 @@ model ReactionRole {
   id        String @id @unique @default(uuid())
   emojiId   String @default("")
   messageId String @default("")
+  guildId   String @default("")
   type      Int    @default(0)
 }

@@ -3,6 +3,7 @@ CREATE TABLE "ReactionRole" (
     "id" STRING NOT NULL,
     "emojiId" STRING NOT NULL DEFAULT '',
     "messageId" STRING NOT NULL DEFAULT '',
+    "guildId" TEXT NOT NULL DEFAULT '',
     "type" INT4 NOT NULL DEFAULT 0,
 
     CONSTRAINT "ReactionRole_pkey" PRIMARY KEY ("id")
