@@ -45,7 +45,7 @@ export default class LockdownCommand extends Command {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:lockdown/sched/no-lockdown')}`);
       return;
     }
-    const unlockdown = await this.client.databases.unlockdownTask.findFirst({ where: { guildId: interaction.guild!.id } }).catch(() => undefined);
+    const unlockdown = await this.client.databases.unlockdownTask.findFirst({ where: { guildId: interaction.guild!.id } });
     if (unlockdown) {
       interaction.editReply(`✅ ${interaction.user} **|** ${t('command:lockdown/sched/deleted')}`);
       await this.client.databases.unlockdownTask.delete({ where: { guildId: interaction.guild!.id } }).catch(() => {});

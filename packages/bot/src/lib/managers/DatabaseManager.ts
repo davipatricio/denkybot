@@ -12,7 +12,7 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getReminder(id: string) {
-    return this.reminder.findFirst({ where: { id } }).catch(() => undefined);
+    return this.reminder.findFirst({ where: { id } });
   }
 
   getReminders(authorId: string) {
@@ -30,7 +30,7 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getLockdown(guildId: string) {
-    return this.lockdown.findFirst({ where: { guildId } }).catch(() => undefined);
+    return this.lockdown.findFirst({ where: { guildId } });
   }
 
   deleteLockdown(guildId: string) {
@@ -44,7 +44,7 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getGiveaway(messageId: string) {
-    return this.giveaway.findFirst({ where: { messageId } }).catch(() => undefined);
+    return this.giveaway.findFirst({ where: { messageId } });
   }
 
   deleteGiveaway(messageId: string) {
@@ -60,7 +60,7 @@ export class DatabaseManager extends PrismaClient {
   }
 
   fetchGiveaway(messageId: string) {
-    return this.giveaway.findFirst({ where: { messageId } }).catch(() => undefined);
+    return this.giveaway.findFirst({ where: { messageId } });
   }
   // #endregion
 
@@ -70,7 +70,7 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getSuggestion(guildId: string) {
-    return this.suggestion.findFirst({ where: { guildId } }).catch(() => undefined);
+    return this.suggestion.findFirst({ where: { guildId } });
   }
 
   deleteSuggestion(guildId: string) {
@@ -88,7 +88,7 @@ export class DatabaseManager extends PrismaClient {
   }
 
   getAfk(userId: string) {
-    return this.afk.findFirst({ where: { userId } }).catch(() => undefined);
+    return this.afk.findFirst({ where: { userId } });
   }
 
   deleteAfk(userId: string) {

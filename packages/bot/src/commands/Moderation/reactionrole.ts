@@ -59,10 +59,7 @@ export default class ReactionRoleCommand extends Command {
     collector.on('collect', async reaction => {
       await finalMessage.react(reaction.emoji.identifier);
 
-      const alreadyExists = await this.client.databases.reactionRole
-        .findFirst({ where: { emojiId: reaction.emoji.identifier, messageId: finalMessage.id } })
-        .then(() => true)
-        .catch(() => false);
+      const alreadyExists = await this.client.databases.reactionRole.findFirst({ where: { emojiId: reaction.emoji.identifier, messageId: finalMessage.id } });
       if (alreadyExists) {
         interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reactionrole/existing-emoji')}`);
         return;

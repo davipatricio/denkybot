@@ -14,7 +14,7 @@ export default class MessageReactionAddEvent extends Event {
   }
 
   async handleReactionRole(client: DenkyClient, reaction: MessageReaction, user: User) {
-    const data = await client.databases.reactionRole.findFirst({ where: { messageId: reaction.message.id } }).catch(() => undefined);
+    const data = await client.databases.reactionRole.findFirst({ where: { messageId: reaction.message.id } });
     if (!data) return;
 
     const { emojiId, roleId, type } = data;
