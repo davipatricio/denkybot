@@ -13,18 +13,12 @@ export default class MessageDeleteEvent extends Event {
   }
 
   async deleteData(client: DenkyClient, message: Message) {
-    await client.databases.buttonRole
-      .delete({
-        where: {
-          messageId: message.id
-        }
-      })
-      .catch(() => {});
-    await client.databases.giveaway
-      .delete({
-        where: {
-          messageId: message.id
-        }
+    await client.databases.buttonRole.delete({ where: { messageId: message.id } }).catch(() => {});
+    await client.databases.giveaway.delete({ where: { messageId: message.id } }).catch(() => {});
+    await client.databases.reactionRole
+      .findFirst({ where: { messageId: message.id } })
+      .then(async data => {
+        if (data) await client.databases.reactionRole.delete({ where: { id: data.id } }).catch(() => {});
       })
       .catch(() => {});
   }
