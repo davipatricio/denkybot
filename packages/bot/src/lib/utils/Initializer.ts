@@ -6,7 +6,7 @@ import type { Task } from '#structures/Task';
 import type { DenkyClient } from '#types/Client';
 import { createLogger } from '@logger';
 import { InteractionsWebserver } from '@webserver';
-import { Collection } from 'discord.js';
+import { ClientEvents, Collection } from 'discord.js';
 import { readdir, readFile } from 'node:fs/promises';
 
 type DefaultClass<T> = { default: new (...args: any[]) => T };
@@ -88,7 +88,7 @@ export class Initializer {
     for await (const event of events) {
       const { default: EventClass }: DefaultClass<Event> = await import(`../../events/${event}`);
       const evt = new EventClass();
-      this.client.on(evt.eventName, (...rest) => evt.run(this.client, ...rest));
+      this.client.on(evt.eventName as keyof ClientEvents, (...rest) => evt.run(this.client, ...rest));
     }
 
     if (global.IS_MAIN_PROCESS)
