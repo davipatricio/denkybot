@@ -18,7 +18,7 @@ export default class ReactionRoleCommand extends Command {
       ephemeral: false,
       showInHelp: true
     };
-    this.permissions = { bot: [PermissionFlagsBits.ManageRoles, PermissionFlagsBits.ManageGuild] };
+    this.permissions = { bot: [PermissionFlagsBits.ManageRoles] };
   }
 
   override run({ t, interaction }: CommandRunOptions) {
