@@ -76,6 +76,8 @@ export default class ReactionRoleCommand extends Command {
       await this.client.databases.reactionRole.create({
         data: {
           emojiId: reaction.emoji.identifier,
+          roleId: role.id,
+          guildId: interaction.guild!.id,
           messageId: finalMessage.id,
           type: ReactionRoleType[actionType]
         }
