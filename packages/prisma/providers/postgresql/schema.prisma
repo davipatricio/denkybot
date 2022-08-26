@@ -66,6 +66,7 @@ model ButtonRole {
 
 model ReactionRole {
   id        String @id @unique @default(uuid())
+  roleId    String @default("")
   emojiId   String @default("")
   messageId String @default("")
   guildId   String @default("")

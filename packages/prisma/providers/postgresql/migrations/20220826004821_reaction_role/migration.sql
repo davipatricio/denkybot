@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE "ReactionRole" (
     "id" TEXT NOT NULL,
+    "roleId" TEXT NOT NULL DEFAULT '',
     "emojiId" TEXT NOT NULL DEFAULT '',
     "messageId" TEXT NOT NULL DEFAULT '',
     "guildId" TEXT NOT NULL DEFAULT '',
