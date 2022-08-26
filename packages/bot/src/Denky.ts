@@ -13,7 +13,7 @@ config({ path: '../../prisma/.env' });
 config({ path: '../../logger/.env' });
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages],
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.GuildMessages],
   failIfNotExists: false,
   allowedMentions: {
     parse: ['users'],
