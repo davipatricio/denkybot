@@ -147,9 +147,9 @@ export default {
   'buttonroles/create/role': 'Role to add or remove when button is clicked',
 
   // Reaction Roles
-  reactionroles: 'Assign roles to users when they react to a message',
-  'reactionroles/add': 'Assign roles to users when they react to a message',
-  'reactionroles/add/type': 'What action should this reaction perform?',
-  'reactionroles/add/role': 'Reaction to add or remove when the reaction is added',
-  'reactionroles/add/message-id': 'Message id to add the reaction'
+  reactionrole: 'Assign roles to users when they react to a message',
+  'reactionrole/add': 'Assign roles to users when they react to a message',
+  'reactionrole/add/type': 'What action should this reaction perform?',
+  'reactionrole/add/role': 'Reaction to add or remove when the reaction is added',
+  'reactionrole/add/message-id': 'Message id to add the reaction'
 } as const;

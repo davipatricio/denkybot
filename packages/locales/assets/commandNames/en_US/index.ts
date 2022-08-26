@@ -167,13 +167,13 @@ export default {
   'buttonroles/create/role5': 'role5',
 
   // Reaction Roles
-  reactionroles: 'reactionroles add',
-  'reactionroles/name': 'reactionroles',
-  'reactionroles/add': 'add',
-  'reactionroles/add/type': 'type',
-  'reactionroles/add/choice/add': 'Add - Just add the role to the user',
-  'reactionroles/add/choice/remove': 'Remove - Just remove the user role',
-  'reactionroles/add/choice/toggle': 'Toggle - Add or Remove User roles',
-  'reactionroles/add/role': 'role',
-  'reactionroles/add/message-id': 'message_id'
+  reactionrole: 'reactionrole add',
+  'reactionrole/name': 'reactionrole',
+  'reactionrole/add': 'add',
+  'reactionrole/add/type': 'type',
+  'reactionrole/add/choice/add': 'Add - Just add the role to the user',
+  'reactionrole/add/choice/remove': 'Remove - Just remove the user role',
+  'reactionrole/add/choice/toggle': 'Toggle - Add or Remove User roles',
+  'reactionrole/add/role': 'role',
+  'reactionrole/add/message-id': 'message_id'
 } as const;
