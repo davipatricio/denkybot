@@ -27,16 +27,13 @@ export default class MessageReactionAddEvent extends Event {
 
     switch (type) {
       case ReactionRoleType.Add:
-        if (member.roles.cache.has(roleId)) return;
-        member.roles.add(roleId, 'Reaction Role');
+        if (!member.roles.cache.has(roleId)) member.roles.add(roleId, 'Reaction Role');
         break;
       case ReactionRoleType.Remove:
-        if (!member.roles.cache.has(roleId)) return;
-        member.roles.remove(roleId, 'Reaction Role');
+        if (member.roles.cache.has(roleId)) member.roles.remove(roleId, 'Reaction Role');
         break;
       case ReactionRoleType.Toggle:
         if (!member.roles.cache.has(roleId)) member.roles.add(roleId, 'Reaction Role');
-        else member.roles.remove(roleId, 'Reaction Role');
         break;
     }
   }

@@ -38,7 +38,7 @@ export default class ReactionRoleCommand extends Command {
       return;
     }
 
-    if (role.position > interaction.guild!.members.me!.roles.highest.position) {
+    if (role.position >= interaction.guild!.members.me!.roles.highest.position) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/higher-role')}.`);
       return;
     }
