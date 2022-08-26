@@ -25,7 +25,7 @@
     "migrate:cr": "prisma migrate dev --schema=./providers/cockroachdb/schema.prisma"
   },
   "devDependencies": {
-    "typescript": "4.7.4"
+    "typescript": "4.8.2"
   },
   "dependencies": {
     "@prisma/client": "4.2.1",
