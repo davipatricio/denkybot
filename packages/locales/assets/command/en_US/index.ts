@@ -356,10 +356,19 @@ export default {
   'reminders/delete/deleted': 'Reminder deleted successfully.',
 
   // Button Roles
-  'buttonroles/managed-role': 'Cannot add @everyone role or roles managed by integrations',
-  'buttonroles/higher-role': 'There are roles with a higher position than my highest role',
+  'buttonroles/managed-role': 'Cannot add the @everyone role or roles managed by integrations',
+  'buttonroles/higher-role': 'There are roles with higher position than my highest roles',
   'buttonroles/default-label': 'Get/remove roles',
   'buttonroles/created': 'Button role created successfully!',
   'buttonroles/warn/had-roles': 'You already have some roles that have been added to this button',
-  'buttonroles/warn/missing-roles': 'You do not have some roles that have been included in this button'
+  'buttonroles/warn/missing-roles': 'You do not have some roles that have been included in this button',
+
+  // Reaction Roles
+  'reactionrole/managed-role': 'Cannot add the @everyone role or roles managed by integrations.',
+  'reactionrole/higher-role': 'This role is above my highest role.',
+  'reactionrole/unknown-messageid': "I didn't find any messages with this ID in this channel.",
+  'reactionrole/choose-emoji': 'Now, choose an emoji to represent this role. To do this, add a reaction to the chosen message.\nTo cancel creation, do not add any emoji.',
+  'reactionrole/existing-emoji': 'This emoji is already associated with another position in the chosen message!',
+  'reactionrole/created': 'Reaction added successfully!',
+  'reactionrole/not-answered': "You haven't added any reactions."
 } as const;

@@ -34,22 +34,22 @@ export default class ReactionRoleCommand extends Command {
     const role = interaction.options.getRole('role', true);
     const messageId = interaction.options.getString('message_id', true);
     if (role.managed || role.id === interaction.guild!.id) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/managed-role')}.`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reactionrole/managed-role')}`);
       return;
     }
 
     if (role.position >= interaction.guild!.members.me!.roles.highest.position) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/higher-role')}.`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reactionrole/higher-role')}`);
       return;
     }
 
     const finalMessage = await interaction.channel!.messages.fetch(messageId).catch(() => null);
     if (!finalMessage) {
-      interaction.editReply(`❌ ${interaction.user} **|** Mensagem inexistente neste canal.`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reactionrole/unknown-messageid')}`);
       return;
     }
 
-    const message = await interaction.editReply(`➕ ${interaction.user} **|** Certo. Agora, escolha um emoji para representar este cargo. Para fazer isso, adicione uma reação na mensagem escolhida.`);
+    const message = await interaction.editReply(`➕ ${interaction.user} **|** ${t('command:reactionrole/choose-emoji')}`);
     const collector = finalMessage.createReactionCollector({
       time: 60000,
       max: 1,
@@ -60,16 +60,11 @@ export default class ReactionRoleCommand extends Command {
       await finalMessage.react(reaction.emoji.identifier);
 
       const alreadyExists = await this.client.databases.reactionRole
-        .findFirstOrThrow({
-          where: {
-            emojiId: reaction.emoji.identifier,
-            messageId: finalMessage.id
-          }
-        })
+        .findFirst({ where: { emojiId: reaction.emoji.identifier, messageId: finalMessage.id } })
         .then(() => true)
         .catch(() => false);
       if (alreadyExists) {
-        interaction.editReply(`❌ ${interaction.user} **|** Este emoji já está associado a outro cargo na mensagem escolhida.`);
+        interaction.editReply(`❌ ${interaction.user} **|** ${t('command:reactionrole/existing-emoji')}`);
         return;
       }
 
@@ -82,12 +77,12 @@ export default class ReactionRoleCommand extends Command {
           type: ReactionRoleType[actionType]
         }
       });
-      interaction.editReply(`✅ ${interaction.user} **|** Criado com sucesso.`);
+      interaction.editReply(`✅ ${interaction.user} **|** ${t('command:reactionrole/created')}`);
     });
 
     collector.on('end', collected => {
       if (!collected.size) {
-        message.edit(`❌ ${interaction.user} **|** Você não adicionou nenhuma reação.`);
+        message.edit(`❌ ${interaction.user} **|** ${t('command:reactionrole/not-answered')}`);
       }
     });
   }
