@@ -35,33 +35,10 @@ export default class GuildDeleteEvent extends Event {
   }
 
   async deleteData(client: DenkyClient, guild: Guild) {
-    await client.databases.giveaway
-      .deleteMany({
-        where: {
-          guildId: guild.id
-        }
-      })
-      .catch(() => {});
-    await client.databases.buttonRole
-      .deleteMany({
-        where: {
-          guildId: guild.id
-        }
-      })
-      .catch(() => {});
-    await client.databases.suggestion
-      .deleteMany({
-        where: {
-          guildId: guild.id
-        }
-      })
-      .catch(() => {});
-    await client.databases.unlockdownTask
-      .deleteMany({
-        where: {
-          guildId: guild.id
-        }
-      })
-      .catch(() => {});
+    await client.databases.giveaway.deleteMany({ where: { guildId: guild.id } }).catch(() => {});
+    await client.databases.buttonRole.deleteMany({ where: { guildId: guild.id } }).catch(() => {});
+    await client.databases.reactionRole.deleteMany({ where: { guildId: guild.id } }).catch(() => {});
+    await client.databases.suggestion.deleteMany({ where: { guildId: guild.id } }).catch(() => {});
+    await client.databases.unlockdownTask.deleteMany({ where: { guildId: guild.id } }).catch(() => {});
   }
 }
