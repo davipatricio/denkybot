@@ -359,10 +359,19 @@ export default {
   'reminders/delete/deleted': 'Lembrete deletado com sucesso.',
 
   // Button Roles
-  'buttonroles/managed-role': 'Não é possível adicionar o cargo @everyone ou cargos gerenciados por integrações',
-  'buttonroles/higher-role': 'Há cargos com posição superior que meu maior cargo',
+  'buttonroles/managed-role': 'Não é possível adicionar o cargo @everyone ou cargos gerenciados por integrações.',
+  'buttonroles/higher-role': 'Há cargos com posição superior que meu cargo mais alto.',
   'buttonroles/default-label': 'Obter/remover cargos',
   'buttonroles/created': 'Botão de cargos criado com sucesso!',
   'buttonroles/warn/had-roles': 'Você já possui alguns cargos que foram incluidos neste botão',
-  'buttonroles/warn/missing-roles': 'Você não possui alguns cargos que foram incluidos neste botão'
+  'buttonroles/warn/missing-roles': 'Você não possui alguns cargos que foram incluidos neste botão',
+
+  // Reaction Roles
+  'reactionrole/managed-role': 'Não é possível adicionar o cargo @everyone ou cargos gerenciados por integrações.',
+  'reactionrole/higher-role': 'Este cargo está acima que de meu cargo mais alto.',
+  'reactionrole/unknown-messageid': 'Não encontrei nenhuma mensagem com este ID neste canal.',
+  'reactionrole/choose-emoji': 'Agora, escolha um emoji para representar este cargo. Para fazer isso, adicione uma reação na mensagem escolhida.\nPara cancelar a criação, não adicione nenhum emoji.',
+  'reactionrole/existing-emoji': 'Este emoji já está associado a outro cargo na mensagem escolhida!',
+  'reactionrole/created': 'Reação adicionada com sucesso!',
+  'reactionrole/not-answered': 'Você não adicionou nenhuma reação.'
 } as const;

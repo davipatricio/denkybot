@@ -164,5 +164,16 @@ export default {
   'buttonroles/create/role2': 'cargo2',
   'buttonroles/create/role3': 'cargo3',
   'buttonroles/create/role4': 'cargo4',
-  'buttonroles/create/role5': 'cargo5'
+  'buttonroles/create/role5': 'cargo5',
+
+  // Reaction Roles
+  reactionrole: 'reactionrole adicionar',
+  'reactionrole/name': 'reactionrole',
+  'reactionrole/add': 'adicionar',
+  'reactionrole/add/type': 'tipo',
+  'reactionrole/add/choice/add': 'Adicionar - Apenas adicionar o cargo ao usuário',
+  'reactionrole/add/choice/remove': 'Remover - Apenas remover o cargo do usuário',
+  'reactionrole/add/choice/toggle': 'Alternar - Adicionar ou remover o cargo do usuário',
+  'reactionrole/add/role': 'cargo',
+  'reactionrole/add/message-id': 'id_mensagem'
 } as const;

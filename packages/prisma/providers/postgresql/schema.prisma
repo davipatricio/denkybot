@@ -63,3 +63,12 @@ model ButtonRole {
   roles     String[] @default([])
   type      Int      @default(0)
 }
+
+model ReactionRole {
+  id        String @id @unique @default(uuid())
+  roleId    String @default("")
+  emojiId   String @default("")
+  messageId String @default("")
+  guildId   String @default("")
+  type      Int    @default(0)
+}

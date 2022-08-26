@@ -144,5 +144,12 @@ export default {
   'buttonroles/create/embed/description': 'Message description',
   'buttonroles/create/button/label': 'The label of the button',
   'buttonroles/create/button/color': 'The color of the button',
-  'buttonroles/create/role': 'Role to add or remove when button is clicked'
+  'buttonroles/create/role': 'Role to add or remove when button is clicked',
+
+  // Reaction Roles
+  reactionrole: 'Assign roles to users when they react to a message',
+  'reactionrole/add': 'Assign roles to users when they react to a message',
+  'reactionrole/add/type': 'What action should this reaction perform?',
+  'reactionrole/add/role': 'Reaction to add or remove when the reaction is added',
+  'reactionrole/add/message-id': 'Message id to add the reaction'
 } as const;
