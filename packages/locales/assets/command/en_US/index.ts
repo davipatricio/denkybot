@@ -356,8 +356,8 @@ export default {
   'reminders/delete/deleted': 'Reminder deleted successfully.',
 
   // Button Roles
-  'buttonroles/managed-role': 'Cannot add the @everyone role or roles managed by integrations',
-  'buttonroles/higher-role': 'There are roles with higher position than my highest roles',
+  'buttonroles/managed-role': 'Cannot add the @everyone role or roles managed by integrations.',
+  'buttonroles/higher-role': 'There are roles with higher position than my highest roles.',
   'buttonroles/default-label': 'Get/remove roles',
   'buttonroles/created': 'Button role created successfully!',
   'buttonroles/warn/had-roles': 'You already have some roles that have been added to this button',

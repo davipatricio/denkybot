@@ -359,8 +359,8 @@ export default {
   'reminders/delete/deleted': 'Lembrete deletado com sucesso.',
 
   // Button Roles
-  'buttonroles/managed-role': 'Não é possível adicionar o cargo @everyone ou cargos gerenciados por integrações',
-  'buttonroles/higher-role': 'Há cargos com posição superior que meu cargo mais alto',
+  'buttonroles/managed-role': 'Não é possível adicionar o cargo @everyone ou cargos gerenciados por integrações.',
+  'buttonroles/higher-role': 'Há cargos com posição superior que meu cargo mais alto.',
   'buttonroles/default-label': 'Obter/remover cargos',
   'buttonroles/created': 'Botão de cargos criado com sucesso!',
   'buttonroles/warn/had-roles': 'Você já possui alguns cargos que foram incluidos neste botão',

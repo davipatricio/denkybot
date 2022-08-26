@@ -41,12 +41,12 @@ export default class ButtonRoleCommand extends Command {
     const role5 = interaction.options.getRole('role5');
     const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
     if (roles.some(r => r.managed) || roles.some(r => r.id === interaction.guild!.id)) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/managed-role')}.`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/managed-role')}`);
       return;
     }
 
     if (roles.some(r => r.position > interaction.guild!.members.me!.roles.highest.position)) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/higher-role')}.`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/higher-role')}`);
       return;
     }
 
