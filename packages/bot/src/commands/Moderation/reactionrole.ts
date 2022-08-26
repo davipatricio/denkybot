@@ -11,7 +11,7 @@ export enum ReactionRoleType {
 export default class ReactionRoleCommand extends Command {
   constructor(client: DenkyClient) {
     super(client);
-    this.rawName = '';
+    this.rawName = 'REACTIONROLES';
     this.rawCategory = 'MODERATION';
     this.config = {
       autoDefer: true,

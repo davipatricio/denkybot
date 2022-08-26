@@ -144,5 +144,12 @@ export default {
   'buttonroles/create/embed/description': 'Descrição da mensagem',
   'buttonroles/create/button/label': 'O rótulo do botão',
   'buttonroles/create/button/color': 'A cor do botão',
-  'buttonroles/create/role': 'Cargo para adicionar ou remover quando o botão for clicado'
+  'buttonroles/create/role': 'Cargo para adicionar ou remover quando o botão for clicado',
+
+  // Reaction Roles
+  reactionroles: 'Atribua cargos a usuários quando reagirem a uma mensagem',
+  'reactionroles/add': 'Atribua cargos a usuários quando reagirem a uma mensagem',
+  'reactionroles/add/type': 'Qual ação esta reação deverá realizar?',
+  'reactionroles/add/role': 'Cargo para adicionar ou remover quando a reação for adicionada',
+  'reactionroles/add/message-id': 'Id da mensagem para adicionar a reação'
 } as const;
