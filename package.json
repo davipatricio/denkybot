@@ -47,5 +47,5 @@
     "prisma": "4.2.1",
     "tslib": "2.4.0"
   },
-  "packageManager": "yarn@4.0.0-rc.14"
+  "packageManager": "yarn@4.0.0-rc.15"
 }
