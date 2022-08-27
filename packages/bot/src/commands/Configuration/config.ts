@@ -1,6 +1,6 @@
-import { PermissionFlagsBits } from 'discord.js';
 import { Command, CommandRunOptions } from '#structures/Command';
 import type { DenkyClient } from '#types/Client';
+import { PermissionFlagsBits } from 'discord.js';
 
 export default class ConfigCommand extends Command {
   constructor(client: DenkyClient) {
@@ -17,10 +17,12 @@ export default class ConfigCommand extends Command {
 
   override run({ t, interaction }: CommandRunOptions) {
     switch (interaction.options.getSubcommand()) {
-      case 'suggestions': {
+      case 'suggestions':
         this.client.commands.get('_config_suggestions')?.run({ t, interaction });
         break;
-      }
+      case 'autorole':
+        this.client.commands.get('_config_autorole')?.run({ t, interaction });
+        break;
     }
   }
 }
