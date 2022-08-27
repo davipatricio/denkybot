@@ -72,3 +72,10 @@ model ReactionRole {
   guildId   String @default("")
   type      Int    @default(0)
 }
+
+model AutoRole {
+  guildId    String   @id @unique @default("")
+  roles      String[] @default([])
+  ignoreBots Boolean  @default(false)
+  delay      BigInt   @default(0)
+}
