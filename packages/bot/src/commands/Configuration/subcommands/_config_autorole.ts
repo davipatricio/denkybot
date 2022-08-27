@@ -9,6 +9,9 @@ export default class AutoRoleSubCommand extends SubCommand {
       case 'enable':
         this.enable({ t, interaction });
         break;
+      case 'disable':
+        this.disable({ t, interaction });
+        break;
     }
   }
 
@@ -24,16 +27,16 @@ export default class AutoRoleSubCommand extends SubCommand {
 
     const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
     if (roles.some(r => r.managed) || roles.some(r => r.id === interaction.guild!.id)) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/managed-role')}`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:autoroles/managed-role')}`);
       return;
     }
 
     if (roles.some(r => r.position >= interaction.guild!.members.me!.roles.highest.position)) {
-      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/higher-role')}`);
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:autoroles/higher-role')}`);
       return;
     }
 
-    interaction.editReply(`✅ ${interaction.user} **|** Cargos automáticos habilitados com sucesso!`);
+    interaction.editReply(`✅ ${interaction.user} **|** ${t('command:autoroles/enabled')}`);
 
     await this.client.databases.createAutoRole({
       guildId: interaction.guild!.id,
@@ -41,5 +44,11 @@ export default class AutoRoleSubCommand extends SubCommand {
       delay: BigInt(ms(delay) as number),
       ignoreBots
     });
+  }
+
+  async disable({ t, interaction }: CommandRunOptions) {
+    interaction.editReply(`✅ ${interaction.user} **|** ${t('command:autoroles/disabled')}`);
+
+    await this.client.databases.deleteAutoRole(interaction.guild!.id);
   }
 }
