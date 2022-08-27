@@ -1,4 +1,4 @@
-import { Afk as AFKConfig, Giveaway as GiveawayConfig, Lockdown, PrismaClient, Reminder, Suggestion as SuggestionConfig } from '@prisma-client';
+import { Afk as AFKConfig, AutoRole as AutoRoleConfig, Giveaway as GiveawayConfig, Lockdown, PrismaClient, Reminder, Suggestion as SuggestionConfig } from '@prisma-client';
 
 export class DatabaseManager extends PrismaClient {
   constructor() {
@@ -79,6 +79,24 @@ export class DatabaseManager extends PrismaClient {
 
   updateSuggestion(data: SuggestionConfig) {
     return this.suggestion.update({ where: { guildId: data.guildId }, data });
+  }
+  // #endregion
+
+  // #region AutoRole
+  createAutoRole(data: AutoRoleConfig) {
+    return this.autoRole.create({ data });
+  }
+
+  getAutoRole(guildId: string) {
+    return this.autoRole.findFirst({ where: { guildId } });
+  }
+
+  deleteAutoRole(guildId: string) {
+    return this.autoRole.delete({ where: { guildId } }).catch(() => {});
+  }
+
+  updateAutoRole(data: AutoRoleConfig) {
+    return this.autoRole.update({ where: { guildId: data.guildId }, data });
   }
   // #endregion
 
