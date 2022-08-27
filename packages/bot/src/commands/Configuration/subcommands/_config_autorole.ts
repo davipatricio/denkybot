@@ -1,45 +1,45 @@
-import type { CommandLocale, CommandRunOptions } from '@bot/src/structures/Command';
+import type { CommandRunOptions } from '@bot/src/structures/Command';
 import { SubCommand } from '@bot/src/structures/SubCommand';
-import type { AutoRole } from '@prisma/client';
-import { ActionRowBuilder, ChatInputCommandInteraction, Colors, EmbedBuilder, Message, SelectMenuBuilder } from 'discord.js';
-
-type PageTypes = 'autorole' | 'roles' | 'delay' | 'bots';
+import type { Role } from 'discord.js';
+import ms from 'ms';
 
 export default class AutoRoleSubCommand extends SubCommand {
-  async run({ t, interaction }: CommandRunOptions) {
-    if (!interaction.inCachedGuild()) return;
-    const configStatus = (await this.client.databases.getAutoRole(interaction.guild.id)) ?? undefined;
-
-    const selectRow = new ActionRowBuilder<SelectMenuBuilder>();
-    const { embed /* , buttonRow */ } = this.updateMessage('autorole', null, selectRow, interaction, configStatus, t);
-
-    await interaction.editReply({
-      components: [selectRow /* , buttonRow */],
-      embeds: [embed]
-    });
-  }
-
-  updateMessage(page: PageTypes, message: Message | null, selectRow: ActionRowBuilder<SelectMenuBuilder>, interaction: ChatInputCommandInteraction, config: AutoRole | undefined, t: CommandLocale) {
-    const embed = this.generateEmbedPage(page, interaction, config, t);
-    // const buttonRow = this.generateButtonsFromPage(page, config, t);
-    message?.edit({ components: [selectRow /* buttonRow */], embeds: [embed] });
-    return { embed /* , buttonRow */ };
-  }
-
-  generateEmbedPage(page: PageTypes, { user }: ChatInputCommandInteraction, configStatus: AutoRole | undefined, t: CommandLocale) {
-    const embed = new EmbedBuilder({
-      timestamp: Date.now(),
-      footer: { text: user.tag, iconURL: user.displayAvatarURL() }
-    })
-      .setColor(Colors.Blurple)
-      .setTitle('🔧 AutoRole');
-    switch (page) {
-      case 'autorole':
-        return embed.setDescription(configStatus ? `✅ **|** ${t('command:config/suggestions/enabled')}` : `❌ **|** ${t('command:config/suggestions/disabled')}`);
-      default:
-        return embed;
+  run({ t, interaction }: CommandRunOptions) {
+    switch (interaction.options.getSubcommand()) {
+      case 'enable':
+        this.enable({ t, interaction });
+        break;
     }
   }
 
-  // generateButtonsFromPage(page: PageTypes, configStatus: AutoRole | undefined, t: CommandLocale) {}
+  async enable({ t, interaction }: CommandRunOptions) {
+    const role = interaction.options.getRole('role', true);
+    const role2 = interaction.options.getRole('role2');
+    const role3 = interaction.options.getRole('role3');
+    const role4 = interaction.options.getRole('role4');
+    const role5 = interaction.options.getRole('role5');
+
+    const delay = interaction.options.getString('delay') ?? '0s';
+    const ignoreBots = interaction.options.getBoolean('ignore-bots') ?? false;
+
+    const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
+    if (roles.some(r => r.managed) || roles.some(r => r.id === interaction.guild!.id)) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/managed-role')}`);
+      return;
+    }
+
+    if (roles.some(r => r.position >= interaction.guild!.members.me!.roles.highest.position)) {
+      interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/higher-role')}`);
+      return;
+    }
+
+    interaction.editReply(`✅ ${interaction.user} **|** Cargos automáticos habilitados com sucesso!`);
+
+    await this.client.databases.createAutoRole({
+      guildId: interaction.guild!.id,
+      roles: roles.map(r => r.id),
+      delay: BigInt(ms(delay) as number),
+      ignoreBots
+    });
+  }
 }
