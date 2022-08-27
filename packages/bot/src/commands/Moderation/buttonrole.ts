@@ -45,7 +45,7 @@ export default class ButtonRoleCommand extends Command {
       return;
     }
 
-    if (roles.some(r => r.position > interaction.guild!.members.me!.roles.highest.position)) {
+    if (roles.some(r => r.position >= interaction.guild!.members.me!.roles.highest.position)) {
       interaction.editReply(`❌ ${interaction.user} **|** ${t('command:buttonroles/higher-role')}`);
       return;
     }
