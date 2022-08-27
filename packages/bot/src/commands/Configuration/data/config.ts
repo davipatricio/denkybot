@@ -17,6 +17,7 @@ export default class PingData extends CommandDataStructure {
           .setNameLocalizations(this.localizations('commandNames:config/suggestions'))
           .setDescription(this.t('commandDescriptions:config/suggestions'))
           .setDescriptionLocalizations(this.localizations('commandDescriptions:config/suggestions'))
-      );
+      )
+      .addSubcommand(new SlashCommandSubcommandBuilder().setName('autorole').setDescription('Assigns a role to a user when they join the server'));
   }
 }
