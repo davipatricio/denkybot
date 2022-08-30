@@ -54,7 +54,7 @@ __metadata:
     bufferutil: "npm:4.0.6"
     dayjs: "npm:1.11.5"
     discord.js: "npm:14.3.0"
-    dotenv: "npm:16.0.1"
+    dotenv: "npm:16.0.2"
     erlpack: "npm:0.1.4"
     hh-mm-ss: "npm:1.2.0"
     module-alias: "npm:2.2.2"
@@ -1175,10 +1175,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:16.0.1":
-  version: 16.0.1
-  resolution: "dotenv@npm:16.0.1"
-  checksum: beb53488e342583049efbd1afb4488e97fbcecf2052607e512a3871239a3976fc437a01a8ed9e6fcef6adc316796895c89f95fe0a7faa08c77ba8c22794ea1fc
+"dotenv@npm:16.0.2":
+  version: 16.0.2
+  resolution: "dotenv@npm:16.0.2"
+  checksum: 5d6641fbee9e169fdea93c4952c9559230418d9de58ce7c9cb49ae8bca5445686fd8222f952a0b916baa1119eaa4be76d096c3db795395bbf3c0bb1c85e33f8c
   languageName: node
   linkType: hard
 
