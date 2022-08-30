@@ -23,7 +23,7 @@ export default class AutoRoleSubCommand extends SubCommand {
     const role5 = interaction.options.getRole('role5');
 
     const delay = interaction.options.getString('delay') ?? '0s';
-    const ignoreBots = interaction.options.getBoolean('ignore-bots') ?? false;
+    const ignoreBots = interaction.options.getBoolean('ignore_bots') ?? false;
 
     const roles = [role, role2, role3, role4, role5].filter(Boolean) as Role[];
     if (roles.some(r => r.managed) || roles.some(r => r.id === interaction.guild!.id)) {
