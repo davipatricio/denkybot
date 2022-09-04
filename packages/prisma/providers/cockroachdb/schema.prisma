@@ -79,3 +79,9 @@ model AutoRole {
   ignoreBots Boolean  @default(false)
   delay      BigInt   @default(0)
 }
+
+model Reports {
+  guildId   String  @id @unique @default("")
+  channelId String  @default("")
+  anonymous Boolean @default(false)
+}
