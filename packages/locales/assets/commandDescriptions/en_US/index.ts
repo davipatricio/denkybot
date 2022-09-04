@@ -56,6 +56,12 @@ export default {
   // Config
   config: 'Configure Denky features on your server',
   'config/suggestions': "Configure Denky's suggestion system",
+  'config/autorole': 'Assigns a role to a user when they join the server',
+  'config/autorole/enable/role': 'Role to add when members join the serverr',
+  'config/autorole/enable/ignore-bots': 'Should bots be given the role when they are added?',
+  'config/autorole/enable/delay': 'Waiting time to add the role to the user',
+  'config/autorole/enable/optional-role': 'Additional role to add when members join the server',
+  'config/autorole/disable': 'Disable automatic roles',
 
   // Suggestions
   suggestion: 'Send suggestions to the server',
