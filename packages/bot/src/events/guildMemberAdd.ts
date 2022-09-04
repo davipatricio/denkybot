@@ -17,6 +17,6 @@ export default class GuildMemberAddEvent extends Event {
     if (!config) return;
     if (config.ignoreBots && member.user.bot) return;
 
-    setTimeout(() => member.roles.add(config.roles, 'Auto Role'), Number(config.delay));
+    setTimeout(() => member.roles.add(config.roles, 'Auto Role').catch(() => {}), Number(config.delay));
   }
 }
