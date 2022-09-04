@@ -53,8 +53,21 @@ export default {
   'text/invert': 'inverter',
 
   // Config
-  config: 'config sugestoes',
+  config: 'config autorole | sugestoes',
   'config/suggestions': 'sugestoes',
+  'config/autorole': 'autorole',
+  'config/autorole/enable': 'ativar',
+  'config/autorole/disable': 'desativar',
+  'config/autorole/enable/role': 'cargo',
+  'config/autorole/enable/role2': 'cargo2',
+  'config/autorole/enable/role3': 'cargo3',
+  'config/autorole/enable/role4': 'cargo4',
+  'config/autorole/enable/role5': 'cargo5',
+  'config/autorole/enable/ignore-bots': 'ignorar_bots',
+  'config/autorole/enable/delay': 'atraso',
+  'config/autorole/enable/seconds': 'segundos',
+  'config/autorole/enable/minute': 'minuto',
+  'config/autorole/enable/minutes': 'minutos',
 
   // Suggestions
   suggestion: 'sugestao | enviar | editar | aceitar | recusar',

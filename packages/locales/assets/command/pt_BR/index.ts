@@ -373,5 +373,11 @@ export default {
   'reactionrole/choose-emoji': 'Agora, escolha um emoji para representar este cargo. Para fazer isso, adicione uma reação na mensagem escolhida.\nPara cancelar a criação, não adicione nenhum emoji.',
   'reactionrole/existing-emoji': 'Este emoji já está associado a outro cargo na mensagem escolhida!',
   'reactionrole/created': 'Reação adicionada com sucesso!',
-  'reactionrole/not-answered': 'Você não adicionou nenhuma reação.'
+  'reactionrole/not-answered': 'Você não adicionou nenhuma reação.',
+
+  // Auto Roles
+  'autoroles/managed-role': 'Não é possível adicionar o cargo @everyone ou cargos gerenciados por integrações.',
+  'autoroles/higher-role': 'Há cargos com posição superior que meu cargo mais alto.',
+  'autoroles/enabled': 'Cargos automáticos habilitados com sucesso!',
+  'autoroles/disabled': 'Cargos automáticos desativados com sucesso.'
 } as const;

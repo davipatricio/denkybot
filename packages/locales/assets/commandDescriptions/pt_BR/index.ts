@@ -56,6 +56,12 @@ export default {
   // Config
   config: 'Configure funcionalidades do Denky no seu servidor',
   'config/suggestions': 'Configure o sistema de sugestões do Denky',
+  'config/autorole': 'Atribui um cargo a um usuário quando ele entrar no servidor',
+  'config/autorole/enable/role': 'Cargo para adicionar quando membros entrarem no servidor',
+  'config/autorole/enable/ignore-bots': 'Bots deverão receber o cargo quando forem adicionados?',
+  'config/autorole/enable/delay': 'Tempo de espera para adicionar o cargo ao usuário',
+  'config/autorole/enable/optional-role': 'Cargo adicional para adicionar quando membros entrarem no servidor',
+  'config/autorole/disable': 'Desativa os cargos automáticos',
 
   // Suggestions
   suggestion: 'Envie sugestões para o servidor',

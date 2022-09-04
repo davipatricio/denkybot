@@ -370,5 +370,11 @@ export default {
   'reactionrole/choose-emoji': 'Now, choose an emoji to represent this role. To do this, add a reaction to the chosen message.\nTo cancel creation, do not add any emoji.',
   'reactionrole/existing-emoji': 'This emoji is already associated with another position in the chosen message!',
   'reactionrole/created': 'Reaction added successfully!',
-  'reactionrole/not-answered': "You haven't added any reactions."
+  'reactionrole/not-answered': "You haven't added any reactions.",
+
+  // Auto Roles
+  'autoroles/managed-role': 'Cannot add the @everyone role or roles managed by integrations.',
+  'autoroles/higher-role': 'There are roles with higher position than my highest roles.',
+  'autoroles/enabled': 'Automatic roles enabled successfully!',
+  'autoroles/disabled': 'Automatic roles disabled successfully!'
 } as const;
