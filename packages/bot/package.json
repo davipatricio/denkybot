@@ -40,25 +40,19 @@
   "devDependencies": {
     "@types/module-alias": "2.0.1",
     "@types/node": "18.0.6",
-    "@types/uuid": "8.3.4",
     "typescript": "4.8.2"
   },
   "dependencies": {
     "bufferutil": "4.0.6",
     "dayjs": "1.11.5",
     "discord.js": "14.3.0",
-    "dotenv": "16.0.1",
+    "dotenv": "16.0.2",
     "hh-mm-ss": "1.2.0",
     "module-alias": "2.2.2",
     "ms": "2.1.3",
     "tslib": "2.4.0",
     "undici": "5.10.0",
     "utf-8-validate": "5.0.9",
-    "utility-types": "3.10.0",
-    "uuid": "8.3.2"
-  },
-  "optionalDependencies": {
-    "erlpack": "0.1.4",
-    "zlib-sync": "0.1.7"
+    "utility-types": "3.10.0"
   }
 }

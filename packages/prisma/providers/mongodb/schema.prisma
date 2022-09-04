@@ -50,7 +50,7 @@ model UnlockdownTask {
 }
 
 model Reminder {
-  id           String  @id @default("") @map("_id") @db.ObjectId
+  id           String  @id @default(uuid()) @map("_id") @db.ObjectId
   channelId    String?
   authorId     String  @default("")
   text         String  @default("")
