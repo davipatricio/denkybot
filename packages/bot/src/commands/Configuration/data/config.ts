@@ -61,19 +61,31 @@ export default class PingData extends CommandDataStructure {
                   .setDescriptionLocalizations(this.localizations('commandDescriptions:config/autorole/enable/delay'))
                   .addChoices(
                     {
-                      name: '15 segundos',
+                      name: `5 ${this.t('commandNames:config/autorole/enable/seconds')}`,
+                      name_localizations: {
+                        'pt-BR': `5 ${client.languages.manager.get('pt_BR', 'commandNames:config/autorole/enable/seconds')}`
+                      },
                       value: '15s'
                     },
                     {
-                      name: '30 segundos',
+                      name: `30 ${this.t('commandNames:config/autorole/enable/seconds')}`,
+                      name_localizations: {
+                        'pt-BR': `30 ${client.languages.manager.get('pt_BR', 'commandNames:config/autorole/enable/seconds')}`
+                      },
                       value: '30s'
                     },
                     {
-                      name: '1 minuto',
+                      name: `1 ${this.t('commandNames:config/autorole/enable/minute')}`,
+                      name_localizations: {
+                        'pt-BR': `1 ${client.languages.manager.get('pt_BR', 'commandNames:config/autorole/enable/minute')}`
+                      },
                       value: '1m'
                     },
                     {
-                      name: '5 minutos',
+                      name: `5 ${this.t('commandNames:config/autorole/enable/minutes')}`,
+                      name_localizations: {
+                        'pt-BR': `5 ${client.languages.manager.get('pt_BR', 'commandNames:config/autorole/enable/minutes')}`
+                      },
                       value: '5m'
                     }
                   )

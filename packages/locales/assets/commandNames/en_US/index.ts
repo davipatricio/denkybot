@@ -65,6 +65,9 @@ export default {
   'config/autorole/enable/role5': 'role5',
   'config/autorole/enable/ignore-bots': 'ignore_bots',
   'config/autorole/enable/delay': 'delay',
+  'config/autorole/enable/seconds': 'seconds',
+  'config/autorole/enable/minute': 'minute',
+  'config/autorole/enable/minutes': 'minutes',
 
   // Suggestions
   suggestion: 'suggestion | send | edit | accept | deny',
