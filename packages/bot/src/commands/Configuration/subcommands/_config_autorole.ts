@@ -5,14 +5,7 @@ import ms from 'ms';
 
 export default class AutoRoleSubCommand extends SubCommand {
   run({ t, interaction }: CommandRunOptions) {
-    switch (interaction.options.getSubcommand()) {
-      case 'enable':
-        this.enable({ t, interaction });
-        break;
-      case 'disable':
-        this.disable({ t, interaction });
-        break;
-    }
+    this[interaction.options.getSubcommand(true) as 'enable' | 'disable']({ t, interaction });
   }
 
   async enable({ t, interaction }: CommandRunOptions) {
