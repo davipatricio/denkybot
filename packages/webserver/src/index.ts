@@ -5,9 +5,18 @@ mAlias(`${__dirname}/../package.json`);
 
 import type { DenkyClient } from '#types/Client';
 import cors from '@fastify/cors';
+import crypto from 'crypto';
+import { verify } from 'discord-verify/node';
 import { APIInteraction, InteractionResponseType, InteractionType } from 'discord.js';
 import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import nacl from 'tweetnacl';
+
+type DiscordIncomingRequest = FastifyRequest<{
+  Body: APIInteraction;
+  Headers: {
+    'x-signature-ed25519': string;
+    'x-signature-timestamp': string;
+  };
+}>;
 
 export class InteractionsWebserver {
   client: DenkyClient;
@@ -24,7 +33,7 @@ export class InteractionsWebserver {
       methods: ['GET', 'POST']
     });
     this.router.get('/', (_, res) => res.redirect('https://github.com/denkylabs/denkybot'));
-    this.router.post('/interactions', (request, response) => this.#handleInteractionRequest(request, response));
+    this.router.post('/interactions', (request: DiscordIncomingRequest, response) => this.#handleInteractionRequest(request, response));
 
     this.router.get('/stats', async (_, response) => {
       const guilds = await this.client.shard?.fetchClientValues('guilds.cache.size').then((g: number[]) => g.reduce((a, b) => a + b, 0));
@@ -60,15 +69,15 @@ export class InteractionsWebserver {
     });
   }
 
-  #handleInteractionRequest(request: FastifyRequest, response: FastifyReply) {
-    const signature = request.headers['x-signature-ed25519'] as string;
-    const timestamp = request.headers['x-signature-timestamp'] as string;
-    const body = JSON.stringify(request.body);
+  async #handleInteractionRequest(request: DiscordIncomingRequest, response: FastifyReply) {
+    const signature = request.headers['x-signature-ed25519'];
+    const timestamp = request.headers['x-signature-timestamp'];
+    const rawBody = JSON.stringify(request.body);
 
-    const isValidRequest = nacl.sign.detached.verify(Buffer.from(timestamp + body), Buffer.from(signature, 'hex'), Buffer.from(this.client.config.interactions.publicKey, 'hex'));
-    if (!isValidRequest) return response.code(401).send('Invalid signature');
+    const isValid = await verify(rawBody, signature, timestamp, this.client.config.interactions.publicKey, crypto.webcrypto.subtle);
+    if (!isValid) return response.code(401).send('Invalid signature');
 
-    const interaction = request.body as APIInteraction;
+    const interaction = request.body;
 
     switch (interaction.type) {
       case InteractionType.Ping:
