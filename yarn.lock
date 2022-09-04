@@ -105,11 +105,11 @@ __metadata:
     "@fastify/cors": "npm:8.1.0"
     "@types/module-alias": "npm:2.0.1"
     "@types/node": "npm:18.0.6"
+    discord-verify: "npm:1.0.0"
     discord.js: "npm:14.3.0"
     fastify: "npm:4.5.3"
     module-alias: "npm:2.2.2"
     tslib: "npm:2.4.0"
-    tweetnacl: "npm:1.0.3"
     typescript: "npm:4.8.2"
   languageName: unknown
   linkType: soft
@@ -1103,6 +1103,13 @@ __metadata:
   version: 0.37.5
   resolution: "discord-api-types@npm:0.37.5"
   checksum: 33e33c71672611880bd24f93357bba4e97f922b8e75c0a589ae00719c7593a97b304fea3de52ee5904d64f12fb869c8159d293577933385a49b61b9929e6a9d6
+  languageName: node
+  linkType: hard
+
+"discord-verify@npm:1.0.0":
+  version: 1.0.0
+  resolution: "discord-verify@npm:1.0.0"
+  checksum: 62f2d0b1cf7e2c9895f7d466d4f1d17b46ff000d21d84840338775094ba8141530012fb5e757b6710e598d42f3684a383258ae208ec05fa10c2f47729a2a8866
   languageName: node
   linkType: hard
 
@@ -3426,13 +3433,6 @@ __metadata:
   peerDependencies:
     typescript: ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
   checksum: 723459d516fe94cd9f798436e9424357200f0cccd2804c3240dbe3d2f51fd85207110a756bb46ae0b0b6bd9420083a048e2b3d44a6534224cc34e5821d8aba7f
-  languageName: node
-  linkType: hard
-
-"tweetnacl@npm:1.0.3":
-  version: 1.0.3
-  resolution: "tweetnacl@npm:1.0.3"
-  checksum: e6d5730951ebcb2bf67874dd9f70de3e049a3c58d0b0bc5cc70e888fbd253f77e5bab00aea42fb71b605c42807542edda807f00ecdc29324f2154049fc5a341a
   languageName: node
   linkType: hard
 
