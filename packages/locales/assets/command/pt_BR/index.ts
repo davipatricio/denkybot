@@ -86,7 +86,7 @@ export default {
   'config/suggestions/buttons/disableNotices': 'Desabilitar notificações',
 
   'config/suggestions/pages': 'Páginas',
-  'config/suggestions/pages/suggestions': 'Ative ou desativar o sistema de sugestões',
+  'config/suggestions/pages/suggestions': 'Ative ou desativa o sistema de sugestões',
   'config/suggestions/pages/categories': 'Adicione ou exclua categorias de sugestões',
   'config/suggestions/pages/reactions': 'Habilite ou desabilite reações em sugestões',
   'config/suggestions/pages/cooldowns': 'Gerencie cooldowns de sugestões',

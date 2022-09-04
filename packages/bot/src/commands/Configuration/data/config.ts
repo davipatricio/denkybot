@@ -26,6 +26,7 @@ export default class PingData extends CommandDataStructure {
           .setDescription(this.t('commandDescriptions:config/suggestions'))
           .setDescriptionLocalizations(this.localizations('commandDescriptions:config/suggestions'))
       )
+      .addSubcommand(new SlashCommandSubcommandBuilder().setName('reports').setDescription('Configura o sistema de denuncias'))
       .addSubcommandGroup(
         new SlashCommandSubcommandGroupBuilder()
           .setName(this.t('commandNames:config/autorole'))

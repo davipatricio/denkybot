@@ -23,6 +23,9 @@ export default class ConfigCommand extends Command {
       case 'autorole':
         this.client.commands.get('_config_autorole')?.run({ t, interaction });
         break;
+      case 'reports':
+        this.client.commands.get('_config_reports')?.run({ t, interaction });
+        break;
     }
   }
 }
