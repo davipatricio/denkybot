@@ -1,4 +1,4 @@
-import { Afk as AFKConfig, Giveaway as GiveawayConfig, Lockdown, PrismaClient, Reminder, Suggestion as SuggestionConfig } from '@prisma-client';
+import { Afk as AFKConfig, Giveaway as GiveawayConfig, Lockdown, PrismaClient, Suggestion as SuggestionConfig } from '@prisma-client';
 
 export class DatabaseManager extends PrismaClient {
   constructor() {
@@ -7,10 +7,6 @@ export class DatabaseManager extends PrismaClient {
   }
 
   // #region Reminder
-  createReminder(data: Reminder) {
-    return this.reminder.create({ data });
-  }
-
   getReminder(id: string) {
     return this.reminder.findFirst({ where: { id } });
   }

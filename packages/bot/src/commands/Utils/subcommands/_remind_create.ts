@@ -1,4 +1,3 @@
-import { generateUuid } from '#helpers/IdGenerator';
 import { parseTime } from '#helpers/Timestamp';
 import type { CommandRunOptions } from '#structures/Command';
 import { SubCommand } from '#structures/SubCommand';
@@ -26,12 +25,13 @@ export default class ReminderCreateSubCommand extends SubCommand {
     }
 
     interaction.editReply(`✅ ${interaction.user} **|** ${t('command:reminders/create/created', Math.round(endTimestamp / 1000))}`);
-    await this.client.databases.createReminder({
-      id: generateUuid(),
-      authorId: interaction.user.id,
-      text: interaction.options.getString('description', true),
-      channelId: interaction.channel!.id,
-      endTimestamp: BigInt(endTimestamp)
+    await this.client.databases.reminder.create({
+      data: {
+        authorId: interaction.user.id,
+        text: interaction.options.getString('description', true),
+        channelId: interaction.channel!.id,
+        endTimestamp: BigInt(endTimestamp)
+      }
     });
   }
 }
