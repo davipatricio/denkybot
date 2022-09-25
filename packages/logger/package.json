@@ -6,9 +6,6 @@
   "type": "commonjs",
   "license": "GPL-3.0",
   "author": "Davi Patricio <veric@denkylabs.com>",
-  "contributors": [
-    "Nicolas Ribeiro <niskii@denkylabs.com>"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/denkylabs/denkybot.git"

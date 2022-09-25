@@ -15,9 +15,6 @@
   },
   "homepage": "https://github.com/denkylabs/denkybot#readme",
   "author": "Davi Patricio <veric@denkylabs.com>",
-  "contributors": [
-    "Nicolas Ribeiro <niskii@denkylabs.com>"
-  ],
   "license": "GPL-3.0",
   "engines": {
     "node": ">=16.9.0"
