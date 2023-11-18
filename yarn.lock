@@ -51,7 +51,7 @@ __metadata:
     "@types/module-alias": "npm:2.0.1"
     "@types/node": "npm:18.0.6"
     bufferutil: "npm:4.0.6"
-    dayjs: "npm:1.11.5"
+    dayjs: "npm:1.11.10"
     discord.js: "npm:14.3.0"
     dotenv: "npm:16.0.2"
     hh-mm-ss: "npm:1.2.0"
@@ -1022,10 +1022,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:1.11.5":
-  version: 1.11.5
-  resolution: "dayjs@npm:1.11.5"
-  checksum: ea78d43de0ff67d65f54cd8c927908ee72421f4d73ce5aa19060e20f26b1940db2980b273427eb1813434fdb2df6731e2ac609d97e89e665d29e7b638f762894
+"dayjs@npm:1.11.10":
+  version: 1.11.10
+  resolution: "dayjs@npm:1.11.10"
+  checksum: 634d270e4c3ee09cdb9c9c0195b1963f4a2d63a0627f30650841ecec92d8804a11547bec4e513e7e4fe159bf9bb8249abddf759a1e736eb2f5bc856b653eaf07
   languageName: node
   linkType: hard
 
@@ -3464,11 +3464,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>":
   version: 4.8.2
-  resolution: "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>::version=4.8.2&hash=f456af"
+  resolution: "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d632bd295ff5b56038e321adc47aff7b606ef25d6b0b19dd43dbd18f761f349e89f95fe1f567d0876417ccdbeb36daf5fb9dff2e32a34e404acea274b0b7c076
+  checksum: d9756ca701560f13bff90b078f3641835450cab0168f6bd1cd03aa8a25440474a3b9d5df0a9d0486cc5d633b04009f505993cec175dea6142e541501c73be68e
   languageName: node
   linkType: hard
 
