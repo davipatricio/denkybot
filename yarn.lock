@@ -50,7 +50,7 @@ __metadata:
   dependencies:
     "@types/module-alias": "npm:2.0.1"
     "@types/node": "npm:18.0.6"
-    bufferutil: "npm:4.0.6"
+    bufferutil: "npm:4.0.8"
     dayjs: "npm:1.11.5"
     discord.js: "npm:14.3.0"
     dotenv: "npm:16.0.2"
@@ -828,13 +828,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bufferutil@npm:4.0.6":
-  version: 4.0.6
-  resolution: "bufferutil@npm:4.0.6"
+"bufferutil@npm:4.0.8":
+  version: 4.0.8
+  resolution: "bufferutil@npm:4.0.8"
   dependencies:
     node-gyp: "npm:latest"
     node-gyp-build: "npm:^4.3.0"
-  checksum: 678c9a1e8036f9b32a5212193874b0b12416c7ba1ea1e879dfa09830e14fd1fbf4871dbc5be44f37cbc501a7e675293f3d811a41fc24910aab0e523069fbeaef
+  checksum: b210e3b9710b32fe78fce9c876e1d6ba9624b0a458da8a623350655b49bdab53fb98b174cf9949aea2c134416a9490a670a8909780d4999b4a7f6137788c7155
   languageName: node
   linkType: hard
 
@@ -3464,11 +3464,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>":
   version: 4.8.2
-  resolution: "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>::version=4.8.2&hash=f456af"
+  resolution: "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d632bd295ff5b56038e321adc47aff7b606ef25d6b0b19dd43dbd18f761f349e89f95fe1f567d0876417ccdbeb36daf5fb9dff2e32a34e404acea274b0b7c076
+  checksum: d9756ca701560f13bff90b078f3641835450cab0168f6bd1cd03aa8a25440474a3b9d5df0a9d0486cc5d633b04009f505993cec175dea6142e541501c73be68e
   languageName: node
   linkType: hard
 
