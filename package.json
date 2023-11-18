@@ -44,5 +44,5 @@
     "discord.js": "14.3.0",
     "tslib": "2.4.0"
   },
-  "packageManager": "yarn@4.0.0-rc.15"
+  "packageManager": "yarn@4.0.2"
 }
