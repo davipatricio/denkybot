@@ -34,7 +34,7 @@
     "#types": "../bot/src/types/"
   },
   "devDependencies": {
-    "@types/module-alias": "2.0.1",
+    "@types/module-alias": "2.0.4",
     "@types/node": "18.0.6",
     "typescript": "4.8.2"
   },
@@ -44,7 +44,7 @@
     "discord.js": "14.3.0",
     "dotenv": "16.0.2",
     "hh-mm-ss": "1.2.0",
-    "module-alias": "2.2.2",
+    "module-alias": "2.2.3",
     "ms": "2.1.3",
     "tslib": "2.4.0",
     "undici": "5.10.0",

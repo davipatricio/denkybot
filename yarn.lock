@@ -48,14 +48,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@denkylabs/denkybot@workspace:packages/bot"
   dependencies:
-    "@types/module-alias": "npm:2.0.1"
+    "@types/module-alias": "npm:2.0.4"
     "@types/node": "npm:18.0.6"
     bufferutil: "npm:4.0.6"
     dayjs: "npm:1.11.5"
     discord.js: "npm:14.3.0"
     dotenv: "npm:16.0.2"
     hh-mm-ss: "npm:1.2.0"
-    module-alias: "npm:2.2.2"
+    module-alias: "npm:2.2.3"
     ms: "npm:2.1.3"
     tslib: "npm:2.4.0"
     typescript: "npm:4.8.2"
@@ -80,9 +80,9 @@ __metadata:
   resolution: "@denkylabs/logger@workspace:packages/logger"
   dependencies:
     "@sentry/node": "npm:7.12.1"
-    "@types/module-alias": "npm:2.0.1"
+    "@types/module-alias": "npm:2.0.4"
     discord.js: "npm:14.3.0"
-    module-alias: "npm:2.2.2"
+    module-alias: "npm:2.2.3"
     winston: "npm:3.8.1"
     winston-transport: "npm:4.5.0"
   languageName: unknown
@@ -103,12 +103,12 @@ __metadata:
   resolution: "@denkylabs/webserver@workspace:packages/webserver"
   dependencies:
     "@fastify/cors": "npm:8.1.0"
-    "@types/module-alias": "npm:2.0.1"
+    "@types/module-alias": "npm:2.0.4"
     "@types/node": "npm:18.0.6"
     discord-verify: "npm:1.0.0"
     discord.js: "npm:14.3.0"
     fastify: "npm:4.5.3"
-    module-alias: "npm:2.2.2"
+    module-alias: "npm:2.2.3"
     tslib: "npm:2.4.0"
     typescript: "npm:4.8.2"
   languageName: unknown
@@ -432,10 +432,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/module-alias@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@types/module-alias@npm:2.0.1"
-  checksum: f3b20ebe1c080cdc0a551ed46a41af5bb05ad00d61daacf108a6b318589d50661ab525120e20933f017db7b8e049fce3a0389bf8e7cbbd4d51315541dbdbad88
+"@types/module-alias@npm:2.0.4":
+  version: 2.0.4
+  resolution: "@types/module-alias@npm:2.0.4"
+  checksum: b0d440d3ad45b64eff1db2a0d538f5e7452c24449a5f0b36e6c1962a841107df5d43b8c3c7f761381446fae67d980d7e9293938ef074d3dd9e95441bb78d0da7
   languageName: node
   linkType: hard
 
@@ -2503,10 +2503,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"module-alias@npm:2.2.2":
-  version: 2.2.2
-  resolution: "module-alias@npm:2.2.2"
-  checksum: fa2a0b222ed20e616dd29b1cf701ff597f3b427e2786a63d919996ab72bde47a84d4fb32bd92fcf05a61284273d5cab20f83ce6c4e8a52be36fbe647ed14c7fb
+"module-alias@npm:2.2.3":
+  version: 2.2.3
+  resolution: "module-alias@npm:2.2.3"
+  checksum: c4cb6d679c1114f47353a7786b259e22ebfc20e37da9ae5cd6ceab88e6130f23207daa54f98cea7780fe432d3b855227327fa64269bf086b46e1c7e8d54e0e27
   languageName: node
   linkType: hard
 
@@ -3464,11 +3464,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>":
   version: 4.8.2
-  resolution: "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>::version=4.8.2&hash=f456af"
+  resolution: "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d632bd295ff5b56038e321adc47aff7b606ef25d6b0b19dd43dbd18f761f349e89f95fe1f567d0876417ccdbeb36daf5fb9dff2e32a34e404acea274b0b7c076
+  checksum: d9756ca701560f13bff90b078f3641835450cab0168f6bd1cd03aa8a25440474a3b9d5df0a9d0486cc5d633b04009f505993cec175dea6142e541501c73be68e
   languageName: node
   linkType: hard
 
