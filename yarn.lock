@@ -60,7 +60,7 @@ __metadata:
     tslib: "npm:2.4.0"
     typescript: "npm:4.8.2"
     undici: "npm:5.10.0"
-    utf-8-validate: "npm:5.0.9"
+    utf-8-validate: "npm:5.0.10"
     utility-types: "npm:3.10.0"
   languageName: unknown
   linkType: soft
@@ -3464,11 +3464,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>":
   version: 4.8.2
-  resolution: "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>::version=4.8.2&hash=f456af"
+  resolution: "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d632bd295ff5b56038e321adc47aff7b606ef25d6b0b19dd43dbd18f761f349e89f95fe1f567d0876417ccdbeb36daf5fb9dff2e32a34e404acea274b0b7c076
+  checksum: d9756ca701560f13bff90b078f3641835450cab0168f6bd1cd03aa8a25440474a3b9d5df0a9d0486cc5d633b04009f505993cec175dea6142e541501c73be68e
   languageName: node
   linkType: hard
 
@@ -3518,13 +3518,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"utf-8-validate@npm:5.0.9":
-  version: 5.0.9
-  resolution: "utf-8-validate@npm:5.0.9"
+"utf-8-validate@npm:5.0.10":
+  version: 5.0.10
+  resolution: "utf-8-validate@npm:5.0.10"
   dependencies:
     node-gyp: "npm:latest"
     node-gyp-build: "npm:^4.3.0"
-  checksum: 016eef046629daa847b1b53852412c7d0858a208549427eddf81ef616b933664b27c5902b9f53d736e6275f6939b676a3e4a4eee77ccbdfe267874dc337f6cb1
+  checksum: a1367352a2132efec0b492f8bf11a79b73c97258d8503fad65eb2f33d7ea7aaa61e479b47e0db3aa9a759d464626edb643c6eca79a4352c4d2392bbe28701063
   languageName: node
   linkType: hard
 
