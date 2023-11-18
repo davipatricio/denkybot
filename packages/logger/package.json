@@ -35,11 +35,11 @@
   "dependencies": {
     "@sentry/node": "7.12.1",
     "discord.js": "14.3.0",
-    "module-alias": "2.2.2",
+    "module-alias": "2.2.3",
     "winston": "3.8.1",
     "winston-transport": "4.5.0"
   },
   "devDependencies": {
-    "@types/module-alias": "2.0.1"
+    "@types/module-alias": "2.0.4"
   }
 }
