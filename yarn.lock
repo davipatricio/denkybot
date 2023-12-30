@@ -28,7 +28,7 @@ __metadata:
   resolution: "@denkylabs/denky@workspace:."
   dependencies:
     "@prisma/client": "npm:4.3.1"
-    "@types/node": "npm:18.0.6"
+    "@types/node": "npm:18.19.4"
     "@typescript-eslint/eslint-plugin": "npm:5.36.1"
     "@typescript-eslint/parser": "npm:5.36.1"
     discord.js: "npm:14.3.0"
@@ -49,7 +49,7 @@ __metadata:
   resolution: "@denkylabs/denkybot@workspace:packages/bot"
   dependencies:
     "@types/module-alias": "npm:2.0.1"
-    "@types/node": "npm:18.0.6"
+    "@types/node": "npm:18.19.4"
     bufferutil: "npm:4.0.6"
     dayjs: "npm:1.11.5"
     discord.js: "npm:14.3.0"
@@ -104,7 +104,7 @@ __metadata:
   dependencies:
     "@fastify/cors": "npm:8.1.0"
     "@types/module-alias": "npm:2.0.1"
-    "@types/node": "npm:18.0.6"
+    "@types/node": "npm:18.19.4"
     discord-verify: "npm:1.0.0"
     discord.js: "npm:14.3.0"
     fastify: "npm:4.5.3"
@@ -446,10 +446,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.0.6":
-  version: 18.0.6
-  resolution: "@types/node@npm:18.0.6"
-  checksum: 93c725b99e31b855e6a363dd26ebd99d83815f2f2e4b84cb24a492c69c437c812b216759d4715da7171c76c87b5c32e18dda81de00fa6122a9d0dfdaee128300
+"@types/node@npm:18.19.4":
+  version: 18.19.4
+  resolution: "@types/node@npm:18.19.4"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 0a561b42a8e28761b83f10fe19d57abd4f742a8e19bce1797887b0cdd71f727bc960360096d6e56b9c71b7245503b4486a725e661c2a5af13835078f9c2c0ae0
   languageName: node
   linkType: hard
 
@@ -3464,11 +3466,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>":
   version: 4.8.2
-  resolution: "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>::version=4.8.2&hash=f456af"
+  resolution: "typescript@patch:typescript@npm%3A4.8.2#optional!builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d632bd295ff5b56038e321adc47aff7b606ef25d6b0b19dd43dbd18f761f349e89f95fe1f567d0876417ccdbeb36daf5fb9dff2e32a34e404acea274b0b7c076
+  checksum: d9756ca701560f13bff90b078f3641835450cab0168f6bd1cd03aa8a25440474a3b9d5df0a9d0486cc5d633b04009f505993cec175dea6142e541501c73be68e
   languageName: node
   linkType: hard
 
@@ -3481,6 +3483,13 @@ __metadata:
     has-symbols: "npm:^1.0.3"
     which-boxed-primitive: "npm:^1.0.2"
   checksum: de21ca5e49bb56d46c7d3672d3d2900b3859ee9541903993bca02a94a317ec1c720b316f025bf5c0f51f7ff9ad383782970acae0408b900ae0537727f614c4e1
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: 7f556493e22e9023f1f9be0d516f5c3cf74d1d6a090c2701ada5117e99900e8cdf8b5540ad3ceed1a672d3532bdfcd0149c444b980731aacc840eb0660ba8587
   languageName: node
   linkType: hard
 
